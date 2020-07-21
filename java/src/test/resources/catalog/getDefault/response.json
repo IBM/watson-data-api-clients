@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "guid": "2fcaf5ea-e442-4ecc-a7a7-cbe559db2b6a",
+    "url": "/v2/catalogs/2fcaf5ea-e442-4ecc-a7a7-cbe559db2b6a",
+    "creator_id": "1000330999",
+    "create_time": "2020-06-09T07:25:58Z"
+  },
+  "entity": {
+    "name": "Default Catalog",
+    "description": "Default catalog configured for sync",
+    "generator": "Catalog-OMRS-Synced",
+    "bss_account_id": "999",
+    "capacity_limit": 0,
+    "is_governed": true,
+    "auto_profiling": true
+  },
+  "href": "/v2/catalogs/2fcaf5ea-e442-4ecc-a7a7-cbe559db2b6a"
+}

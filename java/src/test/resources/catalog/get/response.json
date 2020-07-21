@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "guid": "0f85f071-7528-4ff9-9db8-ab7c7b0244bf",
+    "url": "/v2/catalogs/0f85f071-7528-4ff9-9db8-ab7c7b0244bf",
+    "creator_id": "1000331004",
+    "create_time": "2020-07-21T14:28:20Z"
+  },
+  "entity": {
+    "name": "Test Catalog",
+    "description": "A test catalog to validate the API client works as expected.",
+    "generator": "API-Test-Suite",
+    "bss_account_id": "999",
+    "capacity_limit": 0,
+    "is_governed": true,
+    "auto_profiling": true
+  },
+  "href": "/v2/catalogs/0f85f071-7528-4ff9-9db8-ab7c7b0244bf"
+}

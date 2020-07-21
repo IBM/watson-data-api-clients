@@ -1,0 +1,10 @@
+{
+  "name": "Test Project",
+  "generator": "API-Test-Suite",
+  "description": "A test project to validate the API client works as expected.",
+  "public": true,
+  "storage": {
+    "type": "assetfiles",
+    "guid": "177766d9-9633-36b3-803f-96593343d4f9"
+  }
+}

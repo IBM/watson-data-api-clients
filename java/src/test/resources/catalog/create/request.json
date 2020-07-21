@@ -1,0 +1,6 @@
+{
+  "name": "Test Catalog",
+  "description": "A test catalog to validate the API client works as expected.",
+  "generator": "API-Test-Suite",
+  "is_governed": true
+}
