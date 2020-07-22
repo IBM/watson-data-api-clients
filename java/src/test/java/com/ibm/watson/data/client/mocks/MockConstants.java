@@ -46,6 +46,7 @@ public class MockConstants {
     public static final String EXSTUSER_NAME = "cgrote";
     public static final String NEW_USER_GUID = "1000331015";
     public static final String NEW_USER_NAME = "jsmith";
+    public static final String NEW_TYPE_NAME = "test_type";
 
     public static ApiClient getApiClient() {
         ApiClient apiClient = new ApiClient(false);

@@ -1,0 +1,15 @@
+{
+  "description": "A new asset type to test API works as expected.",
+  "fields": [
+    {
+      "key": "test_field",
+      "type": "string",
+      "is_array": false,
+      "is_searchable_across_types": true
+    }
+  ],
+  "external_asset_preview": {},
+  "relationships": [],
+  "name": "test_type",
+  "version": 1.0
+}

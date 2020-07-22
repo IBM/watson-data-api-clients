@@ -20,6 +20,10 @@ import org.mockserver.client.MockServerClient;
 import org.mockserver.client.initialize.PluginExpectationInitializer;
 
 import java.net.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.ibm.watson.data.client.mocks.MockConstants.*;
 
@@ -37,6 +41,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
 
         setAuthorizations(mockServerClient);
         setAccountManagement(mockServerClient);
+        setAssetTypes(mockServerClient);
         setCatalogs(mockServerClient);
         setCatalogMembers(mockServerClient);
         setMonitors(mockServerClient);
@@ -66,6 +71,23 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         setupTest(mockServerClient, "GET", baseUrl + "/me", area, "get");
         // TODO: endpoint currently broken (results in 500)
         setupTest(mockServerClient, "PUT", baseUrl + "/me", area, "update", 500);
+
+    }
+
+    private void setAssetTypes(MockServerClient mockServerClient) {
+
+        String baseUrl = AssetTypesApiV2.BASE_API;
+        String area = "assetTypes";
+
+        List<String> catalog = new ArrayList<>();
+        catalog.add(CATALOG_GUID);
+        Map<String, List<String>> params = new HashMap<>();
+        params.put("catalog_id", catalog);
+
+        setupTest(mockServerClient, "POST", baseUrl + "/" + NEW_TYPE_NAME + "/search", params, area, "findAssetsByType");
+        setupTest(mockServerClient, "GET", baseUrl + "/" + NEW_TYPE_NAME, params, area, "get");
+        setupTest(mockServerClient, "GET", baseUrl, params, area, "list");
+        setupTest(mockServerClient, "PUT", baseUrl + "/" + NEW_TYPE_NAME, params, area, "replace");
 
     }
 
@@ -208,6 +230,16 @@ public class MockServerExpectations implements PluginExpectationInitializer {
     private void setupTest(MockServerClient mockServerClient, String method, String endpoint, String area, String test, int code) {
         mockServerClient
                 .when(withRequest(method, endpoint, area, test))
+                .respond(withResponse(area, test).withStatusCode(code));
+    }
+
+    private void setupTest(MockServerClient mockServerClient, String method, String endpoint, Map<String, List<String>> params, String area, String test) {
+        setupTest(mockServerClient, method, endpoint, params, area, test, 200);
+    }
+
+    private void setupTest(MockServerClient mockServerClient, String method, String endpoint, Map<String, List<String>> params, String area, String test, int code) {
+        mockServerClient
+                .when(withRequest(method, endpoint, area, test).withQueryStringParameters(params))
                 .respond(withResponse(area, test).withStatusCode(code));
     }
 
