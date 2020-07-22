@@ -42,6 +42,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         setMonitors(mockServerClient);
         setProjects(mockServerClient);
         setProjectsMembers(mockServerClient);
+        setProjectsSettings(mockServerClient);
         setRoleManagement(mockServerClient);
         setUserManagement(mockServerClient);
 
@@ -134,6 +135,20 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         setupTest(mockServerClient, "GET", endpoint + "/" + EXSTUSER_NAME, area, "get");
         setupTest(mockServerClient, "GET", endpoint, area, "list");
         setupTest(mockServerClient, "PATCH", endpoint, area, "update");
+
+    }
+
+    private void setProjectsSettings(MockServerClient mockServerClient) {
+
+        String baseUrl = ProjectsSettingsApiV2.BASE_API;
+        String area = "projectSettings";
+
+        String endpoint = baseUrl.replace("{guid}", PROJECT_GUID);
+
+        setupTest(mockServerClient, "GET", endpoint + "/access_restrictions", area, "getAccessRestrictions");
+        setupTest(mockServerClient, "GET", endpoint + "/audit_events", area, "getAuditEvents");
+        setupTest(mockServerClient, "PUT", endpoint + "/access_restrictions", area, "updateAccessRestrictions");
+        setupTest(mockServerClient, "PUT", endpoint + "/audit_events", area, "updateAuditEvents");
 
     }
 
