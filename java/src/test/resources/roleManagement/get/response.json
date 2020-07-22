@@ -1,0 +1,12 @@
+{
+  "RoleInfo": {
+    "ID": "Test Role",
+    "description": "A test role to validate the API client works as expected.",
+    "permissions": [
+      "administrator"
+    ],
+    "role_name": "Test Role"
+  },
+  "_messageCode_": "200",
+  "message": "Role details fetched successfully."
+}

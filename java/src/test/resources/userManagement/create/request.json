@@ -1,0 +1,8 @@
+{
+  "displayName": "Jon Smith",
+  "email": "jsmith@example.com",
+  "user_name": "jsmith",
+  "user_roles": [
+    "Data Engineer"
+  ]
+}

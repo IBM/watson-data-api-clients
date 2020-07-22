@@ -42,8 +42,6 @@ public class ProjectsApiV2 {
     private ApiClient apiClient;
     public static final String BASE_API = "/v2/projects";
 
-    public ProjectsApiV2() { this(new ApiClient(false)); }
-
     @Autowired
     public ProjectsApiV2(ApiClient apiClient) {
         this.apiClient = apiClient;

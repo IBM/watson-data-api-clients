@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Test the Catalog API endpoints.
+ * Test the Authorization API endpoints.
  */
 public class AuthorizationTest {
 

@@ -43,8 +43,6 @@ public class TransactionalProjectsApiV2 {
     private ApiClient apiClient;
     public static final String BASE_API = "/transactional/v2/projects";
 
-    public TransactionalProjectsApiV2() { this(new ApiClient(false)); }
-
     @Autowired
     public TransactionalProjectsApiV2(ApiClient apiClient) {
         this.apiClient = apiClient;

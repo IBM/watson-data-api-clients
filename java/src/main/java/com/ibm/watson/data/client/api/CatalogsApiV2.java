@@ -41,8 +41,6 @@ public class CatalogsApiV2 {
     private ApiClient apiClient;
     public static final String BASE_API = "/v2/catalogs";
 
-    public CatalogsApiV2() { this(new ApiClient(false)); }
-
     @Autowired
     public CatalogsApiV2(ApiClient apiClient) {
         this.apiClient = apiClient;

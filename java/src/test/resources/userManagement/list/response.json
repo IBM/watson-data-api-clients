@@ -1,0 +1,74 @@
+{
+  "UsersInfo": [
+    {
+      "approval_status": "approved",
+      "authenticator": "default",
+      "created_timestamp": "1970-01-01 00:00:00 +0000 UTC",
+      "current_account_status": "enabled",
+      "displayName": "admin",
+      "email": "--",
+      "last_modified_timestamp": "2020-06-18 16:18:30.541 +0000 UTC",
+      "permissions": [
+        "administrator",
+        "can_provision",
+        "manage_catalog",
+        "manage_quality",
+        "manage_information_assets",
+        "manage_discovery",
+        "manage_metadata_import",
+        "manage_governance_workflow",
+        "manage_categories",
+        "author_governance_artifacts",
+        "virtualize_transform",
+        "access_advanced_governance_capabilities",
+        "sign_in_only",
+        "access_catalog",
+        "access_information_assets",
+        "view_quality",
+        "view_governance_artifacts"
+      ],
+      "role": "Admin",
+      "uid": "1000330999",
+      "user_roles": [
+        "Administrator",
+        "All Roles - Admin",
+        "Business Analyst",
+        "Data Engineer",
+        "Data Quality Analyst",
+        "Data Scientist",
+        "Data Steward",
+        "Developer",
+        "User"
+      ],
+      "username": "admin"
+    },
+    {
+      "approval_status": "approved",
+      "authenticator": "default",
+      "created_timestamp": "2020-07-22 10:20:22.464 +0000 UTC",
+      "current_account_status": "enabled",
+      "displayName": "Jon Smith",
+      "email": "jsmith@example.com",
+      "last_modified_timestamp": "2020-07-22 10:20:22.464 +0000 UTC",
+      "permissions": [
+        "access_catalog",
+        "view_quality",
+        "manage_information_assets",
+        "manage_metadata_import",
+        "manage_discovery",
+        "author_governance_artifacts",
+        "manage_quality",
+        "can_provision",
+        "virtualize_transform"
+      ],
+      "role": "User",
+      "uid": "1000331015",
+      "user_roles": [
+        "Data Engineer"
+      ],
+      "username": "jsmith"
+    }
+  ],
+  "_messageCode_": "200",
+  "message": "All users fetched successfully."
+}

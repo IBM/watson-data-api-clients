@@ -39,9 +39,6 @@ import reactor.core.publisher.Mono;
 public class AuthorizationApi {
 
     private ApiClient apiClient;
-    private final String publicAuthUri = "https://iam.ng.bluemix.net";
-
-    public AuthorizationApi() { this(new ApiClient(false)); }
 
     @Autowired
     public AuthorizationApi(ApiClient apiClient) {
@@ -90,6 +87,7 @@ public class AuthorizationApi {
                 "/icp4d-api/v1/authorize", HttpMethod.POST, pathParams, queryParams, loginCredentials,
                 headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
+
     }
 
     /**
@@ -105,7 +103,7 @@ public class AuthorizationApi {
      *     the API
      */
     public Mono<LoginResponse> getAuthorizationToken(String apiKey) throws RestClientException {
-        String postBody = null;
+
         // verify the required parameter 'apiKey' is set
         if (apiKey == null) {
             throw new HttpClientErrorException(
@@ -133,14 +131,16 @@ public class AuthorizationApi {
         // Capture the existing base path URL for the client
         String existingBaseUrl = apiClient.getBasePath();
         // Temporarily set the base URL to the public cloud IAM URI
+        String publicAuthUri = "https://iam.ng.bluemix.net";
         apiClient.setBasePath(publicAuthUri);
         Mono<LoginResponse> response = apiClient.invokeAPI(
-                "/identity/token", HttpMethod.POST, pathParams, queryParams, postBody,
+                "/identity/token", HttpMethod.POST, pathParams, queryParams, null,
                 headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
         // Set the client back to the original path
         apiClient.setBasePath(existingBaseUrl);
         return response;
+
     }
 
 }
