@@ -33,7 +33,6 @@ public class UserManagementTest {
 
     private UserManagementApi api;
 
-    public static final String CREATED_NAME = "jsmith";
     private static final String createdName = "Jon Smith";
     private static final String userEmail   = "jsmith@example.com";
 
@@ -51,7 +50,7 @@ public class UserManagementTest {
     @Test
     public void testCreate() {
         CreateUserParamsBody body = new CreateUserParamsBody();
-        body.setUserName(CREATED_NAME);
+        body.setUserName(MockConstants.NEW_USER_NAME);
         body.setDisplayName(createdName);
         body.setEmail(userEmail);
         body.addUserRolesItem("Data Engineer");
@@ -60,7 +59,7 @@ public class UserManagementTest {
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "User created successfully.");
         assertNotNull(response.getUser());
-        assertEquals(response.getUser().getID(), CREATED_NAME);
+        assertEquals(response.getUser().getID(), MockConstants.NEW_USER_NAME);
     }
 
     /**
@@ -68,7 +67,7 @@ public class UserManagementTest {
      */
     @Test
     public void testGet() {
-        GetUserResponse user = api.get(CREATED_NAME).block();
+        GetUserResponse user = api.get(MockConstants.NEW_USER_NAME).block();
         assertNotNull(user);
         assertEquals(user.getMessageCode(), "200");
         assertEquals(user.getMessage(), "User details fetched successfully.");
@@ -90,7 +89,7 @@ public class UserManagementTest {
         assertEquals(userInfo.getUid(), "1000331015");
         assertNotNull(userInfo.getUserRoles());
         assertTrue(userInfo.getUserRoles().contains("Data Engineer"));
-        assertEquals(userInfo.getUsername(), CREATED_NAME);
+        assertEquals(userInfo.getUsername(), MockConstants.NEW_USER_NAME);
     }
 
     /**
@@ -116,8 +115,8 @@ public class UserManagementTest {
         UpdateUserParamsBody body = new UpdateUserParamsBody();
         body.setEmail("newmail@example.com");
         // TODO: currently the API throws a 500 internal server error
-        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(CREATED_NAME, body).block());
-        /*PlatformSuccessResponse response = api.update(CREATED_NAME, body).block();
+        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_USER_NAME, body).block());
+        /*PlatformSuccessResponse response = api.update(MockConstants.NEW_USER_NAME, body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "???");*/
@@ -128,7 +127,7 @@ public class UserManagementTest {
      */
     @Test
     public void testDelete() {
-        PlatformSuccessResponse response = api.delete(CREATED_NAME).block();
+        PlatformSuccessResponse response = api.delete(MockConstants.NEW_USER_NAME).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "User deleted successfully.");

@@ -33,7 +33,6 @@ public class RoleManagementTest {
 
     private RoleManagementApi api;
 
-    public static final String CREATED_NAME = "Test Role";
     private static final String createdDesc = "A test role to validate the API client works as expected.";
     private static final String updatedDesc = "Now with an updated description.";
 
@@ -51,7 +50,7 @@ public class RoleManagementTest {
     @Test
     public void testCreate() {
         CreateRoleParamsBody body = new CreateRoleParamsBody();
-        body.setRoleName(CREATED_NAME);
+        body.setRoleName(MockConstants.NEW_ROLE_NAME);
         body.setDescription(createdDesc);
         body.addPermissionsItem("administrator");
         PlatformSuccessResponse response = api.create(body).block();
@@ -65,13 +64,13 @@ public class RoleManagementTest {
      */
     @Test
     public void testGet() {
-        GetRoleResponse role = api.get(CREATED_NAME).block();
+        GetRoleResponse role = api.get(MockConstants.NEW_ROLE_NAME).block();
         assertNotNull(role);
         assertEquals(role.getMessageCode(), "200");
         assertEquals(role.getMessage(), "Role details fetched successfully.");
         assertNotNull(role.getRoleInfo());
-        assertEquals(role.getRoleInfo().getID(), CREATED_NAME);
-        assertEquals(role.getRoleInfo().getRoleName(), CREATED_NAME);
+        assertEquals(role.getRoleInfo().getID(), MockConstants.NEW_ROLE_NAME);
+        assertEquals(role.getRoleInfo().getRoleName(), MockConstants.NEW_ROLE_NAME);
         assertEquals(role.getRoleInfo().getDescription(), createdDesc);
         assertNotNull(role.getRoleInfo().getPermissions());
         assertTrue(role.getRoleInfo().getPermissions().contains("administrator"));
@@ -117,8 +116,8 @@ public class RoleManagementTest {
         body.setDescription(updatedDesc);
         body.addPermissionsItem("manage_catalog");
         // TODO: currently the API throws a 500 internal server error
-        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(CREATED_NAME, body).block());
-        /*PlatformSuccessResponse response = api.update(createdName, body).block();
+        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_ROLE_NAME, body).block());
+        /*PlatformSuccessResponse response = api.update(MockConstants.NEW_ROLE_NAME, body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "???");*/
@@ -130,8 +129,8 @@ public class RoleManagementTest {
     @Test
     public void testDelete() {
         // TODO: currently the API throws a 500 internal server error
-        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.delete(CREATED_NAME).block());
-        /*PlatformSuccessResponse response = api.delete(CREATED_NAME).block();
+        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.delete(MockConstants.NEW_ROLE_NAME).block());
+        /*PlatformSuccessResponse response = api.delete(MockConstants.NEW_ROLE_NAME).block();
         assertNotNull(response);*/
     }
 

@@ -36,7 +36,6 @@ public class ProjectTest {
     private TransactionalProjectsApiV2 txnApi;
 
     private static final String storageGuid = "177766d9-9633-36b3-803f-96593343d4f9";
-    public static final String CREATED_GUID = "f0bd7b72-f690-4b65-9edb-7a430fa658d9";
     private static final String createdName = "Test Project";
     private static final String createdDesc = "A test project to validate the API client works as expected.";
     private static final String updatedDesc = "Now with an updated description.";
@@ -69,7 +68,7 @@ public class ProjectTest {
         CreateTransactionProjectResponse created = txnApi.create(body).block();
         assertNotNull(created);
         assertNotNull(created.getLocation());
-        assertEquals(created.getLocation(), "/v2/projects/" + CREATED_GUID);
+        assertEquals(created.getLocation(), "/v2/projects/" + MockConstants.PROJECT_GUID);
     }
 
     /**
@@ -77,10 +76,10 @@ public class ProjectTest {
      */
     @Test
     public void testGet() {
-        Project project = api.get(CREATED_GUID, null).block();
+        Project project = api.get(MockConstants.PROJECT_GUID, null).block();
         assertNotNull(project);
         assertNotNull(project.getMetadata());
-        assertEquals(project.getMetadata().getGuid(), CREATED_GUID);
+        assertEquals(project.getMetadata().getGuid(), MockConstants.PROJECT_GUID);
         assertNotNull(project.getEntity());
         assertEquals(project.getEntity().getName(), createdName);
         assertEquals(project.getEntity().getDescription(), createdDesc);
@@ -109,7 +108,7 @@ public class ProjectTest {
     public void testUpdate() {
         UpdateProjectBody body = new UpdateProjectBody();
         body.setDescription(updatedDesc);
-        Project updated = api.update(CREATED_GUID, body).block();
+        Project updated = api.update(MockConstants.PROJECT_GUID, body).block();
         assertNotNull(updated);
         assertNotNull(updated.getEntity());
         assertEquals(updated.getEntity().getDescription(), updatedDesc);
@@ -120,7 +119,7 @@ public class ProjectTest {
      */
     @Test
     public void testDelete() {
-        txnApi.delete(CREATED_GUID).block();
+        txnApi.delete(MockConstants.PROJECT_GUID).block();
     }
 
 }

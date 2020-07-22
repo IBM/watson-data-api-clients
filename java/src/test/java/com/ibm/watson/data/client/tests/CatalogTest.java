@@ -37,7 +37,6 @@ public class CatalogTest {
 
     private CatalogsApiV2 api;
 
-    public static final String CREATED_GUID = "0f85f071-7528-4ff9-9db8-ab7c7b0244bf";
     private static final String createdName = "Test Catalog";
     private static final String createdDesc = "A test catalog to validate the API client works as expected.";
     private static final String createdGen  = "API-Test-Suite";
@@ -74,7 +73,7 @@ public class CatalogTest {
         Catalog created = api.create(body, false).block();
         assertNotNull(created);
         assertNotNull(created.getMetadata());
-        assertEquals(created.getMetadata().getGuid(), CREATED_GUID);
+        assertEquals(created.getMetadata().getGuid(), MockConstants.CATALOG_GUID);
         assertNotNull(created.getEntity());
         assertEquals(created.getEntity().getName(), createdName);
         assertEquals(created.getEntity().getDescription(), createdDesc);
@@ -85,10 +84,10 @@ public class CatalogTest {
      */
     @Test
     public void testGet() {
-        Catalog catalog = api.get(CREATED_GUID).block();
+        Catalog catalog = api.get(MockConstants.CATALOG_GUID).block();
         assertNotNull(catalog);
         assertNotNull(catalog.getMetadata());
-        assertEquals(catalog.getMetadata().getGuid(), CREATED_GUID);
+        assertEquals(catalog.getMetadata().getGuid(), MockConstants.CATALOG_GUID);
         assertNotNull(catalog.getEntity());
         assertEquals(catalog.getEntity().getName(), createdName);
         assertEquals(catalog.getEntity().getDescription(), createdDesc);
@@ -104,7 +103,7 @@ public class CatalogTest {
         assertNotNull(catalogs.getCatalogs());
         Catalog one = catalogs.getCatalogs().get(0);
         assertNotNull(one.getMetadata());
-        assertEquals(one.getMetadata().getGuid(), CREATED_GUID);
+        assertEquals(one.getMetadata().getGuid(), MockConstants.CATALOG_GUID);
         assertNotNull(one.getEntity());
         assertEquals(one.getEntity().getName(), createdName);
         assertEquals(one.getEntity().getDescription(), createdDesc);
@@ -129,11 +128,11 @@ public class CatalogTest {
         descChange.setValue(updatedDesc);
         jsonPatch.add(descChange);
         // TODO: currently the API throws a 500 internal server error, despite actually applying the update
-        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(CREATED_GUID, jsonPatch).block());
-        /*Catalog updated = api.update(CREATED_GUID, jsonPatch).block();
+        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.CATALOG_GUID, jsonPatch).block());
+        /*Catalog updated = api.update(MockConstants.CATALOG_GUID, jsonPatch).block();
         assertNotNull(updated);
         assertNotNull(updated.getMetadata());
-        assertEquals(updated.getMetadata().getGuid(), CREATED_GUID);
+        assertEquals(updated.getMetadata().getGuid(), MockConstants.CATALOG_GUID);
         assertNotNull(updated.getEntity());
         assertEquals(updated.getEntity().getName(), updatedName);
         assertEquals(updated.getEntity().getDescription(), updatedDesc);*/
@@ -144,7 +143,7 @@ public class CatalogTest {
      */
     @Test
     public void testDelete() {
-        api.delete(CREATED_GUID, null).block();
+        api.delete(MockConstants.CATALOG_GUID, null).block();
     }
 
 }

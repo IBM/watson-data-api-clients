@@ -16,7 +16,6 @@
 package com.ibm.watson.data.client.mocks;
 
 import com.ibm.watson.data.client.api.*;
-import com.ibm.watson.data.client.tests.*;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.client.initialize.PluginExpectationInitializer;
 
@@ -42,6 +41,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         setCatalogMembers(mockServerClient);
         setMonitors(mockServerClient);
         setProjects(mockServerClient);
+        setProjectsMembers(mockServerClient);
         setRoleManagement(mockServerClient);
         setUserManagement(mockServerClient);
 
@@ -74,12 +74,12 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         String area = "catalog";
 
         setupTest(mockServerClient, "POST", baseUrl, area, "create", 201);
-        setupTest(mockServerClient, "DELETE", baseUrl + "/" + CatalogTest.CREATED_GUID, area, "delete", 204);
-        setupTest(mockServerClient, "GET", baseUrl + "/" + CatalogTest.CREATED_GUID, area, "get");
+        setupTest(mockServerClient, "DELETE", baseUrl + "/" + CATALOG_GUID, area, "delete", 204);
+        setupTest(mockServerClient, "GET", baseUrl + "/" + CATALOG_GUID, area, "get");
         setupTest(mockServerClient, "GET", baseUrl + "/default", area, "getDefault");
         setupTest(mockServerClient, "GET", baseUrl, area, "list");
         // TODO: endpoint currently broken (results in 500)
-        setupTest(mockServerClient, "PATCH", baseUrl + "/" + CatalogTest.CREATED_GUID, area, "update", 500);
+        setupTest(mockServerClient, "PATCH", baseUrl + "/" + CATALOG_GUID, area, "update", 500);
 
     }
 
@@ -88,13 +88,13 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         String baseUrl = CatalogMembersApiV2.BASE_API;
         String area = "catalogMembers";
 
-        String endpoint = baseUrl.replace("{catalog_id}", CatalogMembersTest.CATALOG_GUID);
+        String endpoint = baseUrl.replace("{catalog_id}", CATALOG_GUID);
 
         setupTest(mockServerClient, "POST", endpoint, area, "add", 201);
-        setupTest(mockServerClient, "DELETE", endpoint + "/" + CatalogMembersTest.NEW_USER_ID, area, "delete", 204);
-        setupTest(mockServerClient, "GET", endpoint + "/" + CatalogMembersTest.NEW_USER_ID, area, "get");
+        setupTest(mockServerClient, "DELETE", endpoint + "/" + NEW_USER_GUID, area, "delete", 204);
+        setupTest(mockServerClient, "GET", endpoint + "/" + NEW_USER_GUID, area, "get");
         setupTest(mockServerClient, "GET", endpoint, area, "list");
-        setupTest(mockServerClient, "PATCH", endpoint + "/" + CatalogMembersTest.NEW_USER_ID, area, "updateRole");
+        setupTest(mockServerClient, "PATCH", endpoint + "/" + NEW_USER_GUID, area, "updateRole");
 
     }
 
@@ -115,10 +115,25 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         String area = "project";
 
         setupTest(mockServerClient, "POST", baseUrlTxn, area, "create", 201);
-        setupTest(mockServerClient, "DELETE", baseUrlTxn + "/" + ProjectTest.CREATED_GUID, area, "delete", 204);
-        setupTest(mockServerClient, "GET", baseUrl + "/" + ProjectTest.CREATED_GUID, area, "get");
+        setupTest(mockServerClient, "DELETE", baseUrlTxn + "/" + PROJECT_GUID, area, "delete", 204);
+        setupTest(mockServerClient, "GET", baseUrl + "/" + PROJECT_GUID, area, "get");
         setupTest(mockServerClient, "GET", baseUrl, area, "list");
-        setupTest(mockServerClient, "PATCH", baseUrl + "/" + ProjectTest.CREATED_GUID, area, "update");
+        setupTest(mockServerClient, "PATCH", baseUrl + "/" + PROJECT_GUID, area, "update");
+
+    }
+
+    private void setProjectsMembers(MockServerClient mockServerClient) {
+
+        String baseUrl = ProjectsMembersApiV2.BASE_API;
+        String area = "projectMembers";
+
+        String endpoint = baseUrl.replace("{guid}", PROJECT_GUID);
+
+        setupTest(mockServerClient, "POST", endpoint, area, "add");
+        setupTest(mockServerClient, "DELETE", endpoint + "/" + NEW_USER_NAME, area, "delete", 204);
+        setupTest(mockServerClient, "GET", endpoint + "/" + EXSTUSER_NAME, area, "get");
+        setupTest(mockServerClient, "GET", endpoint, area, "list");
+        setupTest(mockServerClient, "PATCH", endpoint, area, "update");
 
     }
 
@@ -127,7 +142,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         String baseUrl = RoleManagementApi.BASE_API;
         String area = "roleManagement";
 
-        String encodedEndpoint = baseUrl + "/" + RoleManagementTest.CREATED_NAME;
+        String encodedEndpoint = baseUrl + "/" + NEW_ROLE_NAME;
         try {
             URI roleEndpoint = new URI(null, null, encodedEndpoint, null);
             encodedEndpoint = roleEndpoint.toString();
@@ -153,7 +168,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         String baseUrl = UserManagementApi.BASE_API;
         String area = "userManagement";
 
-        String encodedEndpoint = baseUrl + "/" + UserManagementTest.CREATED_NAME;
+        String encodedEndpoint = baseUrl + "/" + NEW_USER_NAME;
         try {
             URI roleEndpoint = new URI(null, null, encodedEndpoint, null);
             encodedEndpoint = roleEndpoint.toString();

@@ -32,9 +32,6 @@ public class CatalogMembersTest {
 
     private CatalogMembersApiV2 api;
 
-    public static final String CATALOG_GUID = "0f85f071-7528-4ff9-9db8-ab7c7b0244bf";
-    public static final String NEW_USER_ID  = "1000331015";
-
     /**
      * Setup the API for testing.
      */
@@ -50,16 +47,16 @@ public class CatalogMembersTest {
     public void testAdd() {
         MemberSet body = new MemberSet();
         Member member = new Member();
-        member.setUserIamId(NEW_USER_ID);
+        member.setUserIamId(MockConstants.NEW_USER_GUID);
         member.setRole("admin");
         body.addMembersItem(member);
-        MemberSetPartialResult response = api.add(CATALOG_GUID, body).block();
+        MemberSetPartialResult response = api.add(MockConstants.CATALOG_GUID, body).block();
         assertNotNull(response);
         assertNotNull(response.getMembers());
         Member one = response.getMembers().get(0);
         assertNotNull(one);
         assertEquals(one.getRole(), "admin");
-        assertEquals(one.getUserIamId(), NEW_USER_ID);
+        assertEquals(one.getUserIamId(), MockConstants.NEW_USER_GUID);
         assertNotNull(response.getFailures());
         assertEquals(response.getFailures().size(), 0);
     }
@@ -69,12 +66,12 @@ public class CatalogMembersTest {
      */
     @Test
     public void testGet() {
-        MemberSet response = api.get(CATALOG_GUID, NEW_USER_ID).block();
+        MemberSet response = api.get(MockConstants.CATALOG_GUID, MockConstants.NEW_USER_GUID).block();
         assertNotNull(response);
         assertNotNull(response.getMembers());
         Member one = response.getMembers().get(0);
         assertNotNull(one);
-        assertEquals(one.getUserIamId(), NEW_USER_ID);
+        assertEquals(one.getUserIamId(), MockConstants.NEW_USER_GUID);
         assertEquals(one.getRole(), "admin");
     }
 
@@ -83,14 +80,14 @@ public class CatalogMembersTest {
      */
     @Test
     public void testList() {
-        MemberSearchResult response = api.list(CATALOG_GUID, null, null, null).block();
+        MemberSearchResult response = api.list(MockConstants.CATALOG_GUID, null, null, null).block();
         assertNotNull(response);
         assertEquals(response.getTotalResults(), Long.valueOf(1));
         List<Member> memberList = response.getMembers();
         assertNotNull(memberList);
         assertEquals(memberList.size(), 1);
         Member one = memberList.get(0);
-        assertEquals(one.getUserIamId(), "1000331004");
+        assertEquals(one.getUserIamId(), MockConstants.EXSTUSER_GUID);
         assertEquals(one.getCreateTime(), "2020-07-22T11:27:03Z");
         assertEquals(one.getRole(), "admin");
     }
@@ -102,10 +99,10 @@ public class CatalogMembersTest {
     public void testUpdateRole() {
         MemberRole role = new MemberRole();
         role.setRole("viewer");
-        Member member = api.updateRole(CATALOG_GUID, NEW_USER_ID, role).block();
+        Member member = api.updateRole(MockConstants.CATALOG_GUID, MockConstants.NEW_USER_GUID, role).block();
         assertNotNull(member);
         assertEquals(member.getRole(), "viewer");
-        assertEquals(member.getUserIamId(), NEW_USER_ID);
+        assertEquals(member.getUserIamId(), MockConstants.NEW_USER_GUID);
     }
 
     /**
@@ -113,7 +110,7 @@ public class CatalogMembersTest {
      */
     @Test
     public void testDelete() {
-        api.delete(CATALOG_GUID, NEW_USER_ID).block();
+        api.delete(MockConstants.CATALOG_GUID, MockConstants.NEW_USER_GUID).block();
     }
 
 }
