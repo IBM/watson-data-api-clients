@@ -1,0 +1,11 @@
+{
+  "members": [
+    {
+      "user_iam_id": "1000331015",
+      "role": "admin",
+      "href": "/v2/catalogs/0f85f071-7528-4ff9-9db8-ab7c7b0244bf/members/1000331015",
+      "create_time": "2020-07-22T11:36:25Z",
+      "memberUniqueId": "1000331015"
+    }
+  ]
+}

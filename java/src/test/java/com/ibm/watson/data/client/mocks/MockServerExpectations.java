@@ -16,10 +16,7 @@
 package com.ibm.watson.data.client.mocks;
 
 import com.ibm.watson.data.client.api.*;
-import com.ibm.watson.data.client.tests.CatalogTest;
-import com.ibm.watson.data.client.tests.ProjectTest;
-import com.ibm.watson.data.client.tests.RoleManagementTest;
-import com.ibm.watson.data.client.tests.UserManagementTest;
+import com.ibm.watson.data.client.tests.*;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.client.initialize.PluginExpectationInitializer;
 
@@ -42,6 +39,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         setAuthorizations(mockServerClient);
         setAccountManagement(mockServerClient);
         setCatalogs(mockServerClient);
+        setCatalogMembers(mockServerClient);
         setMonitors(mockServerClient);
         setProjects(mockServerClient);
         setRoleManagement(mockServerClient);
@@ -82,6 +80,21 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         setupTest(mockServerClient, "GET", baseUrl, area, "list");
         // TODO: endpoint currently broken (results in 500)
         setupTest(mockServerClient, "PATCH", baseUrl + "/" + CatalogTest.CREATED_GUID, area, "update", 500);
+
+    }
+
+    private void setCatalogMembers(MockServerClient mockServerClient) {
+
+        String baseUrl = CatalogMembersApiV2.BASE_API;
+        String area = "catalogMembers";
+
+        String endpoint = baseUrl.replace("{catalog_id}", CatalogMembersTest.CATALOG_GUID);
+
+        setupTest(mockServerClient, "POST", endpoint, area, "add", 201);
+        setupTest(mockServerClient, "DELETE", endpoint + "/" + CatalogMembersTest.NEW_USER_ID, area, "delete", 204);
+        setupTest(mockServerClient, "GET", endpoint + "/" + CatalogMembersTest.NEW_USER_ID, area, "get");
+        setupTest(mockServerClient, "GET", endpoint, area, "list");
+        setupTest(mockServerClient, "PATCH", endpoint + "/" + CatalogMembersTest.NEW_USER_ID, area, "updateRole");
 
     }
 
