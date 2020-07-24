@@ -15,44 +15,43 @@
  */
 package com.ibm.watson.data.client.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ibm.watson.data.client.api.ProjectsMembersApiV2;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
-import org.testng.annotations.BeforeTest;
+import org.mockserver.client.MockServerClient;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.ibm.watson.data.client.mocks.MockConstants.*;
 import static org.testng.Assert.*;
 
 /**
  * Test the Project Members API endpoints.
  */
-public class ProjectsMembersTest {
+public class ProjectsMembersTest extends AbstractExpectations {
 
-    private ProjectsMembersApiV2 api;
+    private final ProjectsMembersApiV2 api = new ProjectsMembersApiV2(MockConstants.getApiClient());
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new ProjectsMembersApiV2(MockConstants.getApiClient());
+    public ProjectsMembersTest() {
+        super(ProjectsMembersApiV2.BASE_API, "projectMembers");
     }
 
-    /**
-     * Test addition of a member to a project.
-     */
+    @Override
+    public void init(MockServerClient client) {
+        injectIntoBaseUrl("{guid}", PROJECT_GUID);
+        setupTest(client, "POST", "", "add");
+        setupTest(client, "DELETE", "/" + NEW_USER_NAME, "delete", 204);
+        setupTest(client, "GET", "/" + EXSTUSER_NAME, "get");
+        setupTest(client, "GET", "", "list");
+        setupTest(client, "PATCH", "", "update");
+    }
+
     @Test
     public void testAdd() {
-        ProjectMembers body = new ProjectMembers();
-        ProjectMember member = new ProjectMember();
-        member.setId(MockConstants.NEW_USER_GUID);
-        member.setUserName(MockConstants.NEW_USER_NAME);
-        member.setRole("admin");
-        member.setType(MemberType.USER);
-        member.setState(MemberState.ACTIVE);
-        body.addMembersItem(member);
+        ProjectMembers body = readRequestFromFile("add", new TypeReference<ProjectMembers>() {});
         ProjectMembers response = api.add(MockConstants.PROJECT_GUID, body).block();
         assertNotNull(response);
         assertNotNull(response.getMembers());
@@ -74,18 +73,12 @@ public class ProjectsMembersTest {
         assertEquals(member.getId(), MockConstants.EXSTUSER_GUID);
     }
 
-    /**
-     * Test retrieval of membership details for a given user on a given project.
-     */
     @Test
     public void testGet() {
         ProjectMember response = api.get(MockConstants.PROJECT_GUID, MockConstants.EXSTUSER_NAME).block();
         validateExistingUser(response);
     }
 
-    /**
-     * Test retrieval of all membership details on a project.
-     */
     @Test
     public void testList() {
         ProjectMembers response = api.list(MockConstants.PROJECT_GUID, null, null).block();
@@ -96,17 +89,9 @@ public class ProjectsMembersTest {
         validateExistingUser(projectMembers.get(0));
     }
 
-    /**
-     * Test update of the role of a member on a project.
-     */
     @Test
     public void testUpdate() {
-        UpdateMembersBody body = new UpdateMembersBody();
-        UpdateMemberBody single = new UpdateMemberBody();
-        single.setId(MockConstants.NEW_USER_GUID);
-        single.setRole("viewer");
-        single.setUserName(MockConstants.NEW_USER_NAME);
-        body.addMembersItem(single);
+        UpdateMembersBody body = readRequestFromFile("update", new TypeReference<UpdateMembersBody>() {});
         ProjectMembers response = api.update(MockConstants.PROJECT_GUID, body).block();
         assertNotNull(response);
         List<ProjectMember> projectMembers = response.getMembers();
@@ -121,9 +106,6 @@ public class ProjectsMembersTest {
         assertEquals(one.getState(), MemberState.ACTIVE);
     }
 
-    /**
-     * Test removal of a member from a project.
-     */
     @Test
     public void testDelete() {
         api.delete(MockConstants.PROJECT_GUID, MockConstants.NEW_USER_NAME).block();

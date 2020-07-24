@@ -15,45 +15,47 @@
  */
 package com.ibm.watson.data.client.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ibm.watson.data.client.api.UserManagementApi;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
+import org.mockserver.client.MockServerClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.ibm.watson.data.client.mocks.MockConstants.*;
 import static org.testng.Assert.*;
 
 /**
  * Test the User Management API endpoints.
  */
-public class UserManagementTest {
+public class UserManagementTest extends AbstractExpectations {
 
-    private UserManagementApi api;
+    private final UserManagementApi api = new UserManagementApi(MockConstants.getApiClient());
+
+    public UserManagementTest() {
+        super(UserManagementApi.BASE_API, "userManagement");
+    }
+
+    @Override
+    public void init(MockServerClient client) {
+        setupTest(client, "POST", "", "create");
+        setupTest(client, "DELETE", "/" + NEW_USER_NAME, "delete");
+        setupTest(client, "GET", "/" + NEW_USER_NAME, "get");
+        setupTest(client, "GET", "", "list");
+        // TODO: endpoint currently broken (results in 500)
+        setupTest(client, "PUT", "/" + NEW_USER_NAME, "update", 500);
+    }
 
     private static final String createdName = "Jon Smith";
     private static final String userEmail   = "jsmith@example.com";
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new UserManagementApi(MockConstants.getApiClient());
-    }
-
-    /**
-     * Test creation of a user.
-     */
     @Test
     public void testCreate() {
-        CreateUserParamsBody body = new CreateUserParamsBody();
-        body.setUserName(MockConstants.NEW_USER_NAME);
-        body.setDisplayName(createdName);
-        body.setEmail(userEmail);
-        body.addUserRolesItem("Data Engineer");
+        CreateUserParamsBody body = readRequestFromFile("create", new TypeReference<CreateUserParamsBody>() {});
         CreateUserSuccessResponse response = api.create(body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
@@ -62,9 +64,6 @@ public class UserManagementTest {
         assertEquals(response.getUser().getID(), MockConstants.NEW_USER_NAME);
     }
 
-    /**
-     * Test retrieval of a user.
-     */
     @Test
     public void testGet() {
         GetUserResponse user = api.get(MockConstants.NEW_USER_NAME).block();
@@ -92,9 +91,6 @@ public class UserManagementTest {
         assertEquals(userInfo.getUsername(), MockConstants.NEW_USER_NAME);
     }
 
-    /**
-     * Test retrieval of all users.
-     */
     @Test
     public void testList() {
         GetAllUsersResponse response = api.list().block();
@@ -107,13 +103,9 @@ public class UserManagementTest {
         validateUser(users.get(1));
     }
 
-    /**
-     * Test update of a user.
-     */
     @Test
     public void testUpdate() {
-        UpdateUserParamsBody body = new UpdateUserParamsBody();
-        body.setEmail("newmail@example.com");
+        UpdateUserParamsBody body = readRequestFromFile("update", new TypeReference<UpdateUserParamsBody>() {});
         // TODO: currently the API throws a 500 internal server error
         assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_USER_NAME, body).block());
         /*PlatformSuccessResponse response = api.update(MockConstants.NEW_USER_NAME, body).block();
@@ -122,9 +114,6 @@ public class UserManagementTest {
         assertEquals(response.getMessage(), "???");*/
     }
 
-    /**
-     * Test deletion of a user.
-     */
     @Test
     public void testDelete() {
         PlatformSuccessResponse response = api.delete(MockConstants.NEW_USER_NAME).block();

@@ -1194,7 +1194,7 @@ public class CatalogsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Catalog> update(String catalogId, Object body) throws RestClientException {
+    public Mono<Catalog> update(String catalogId, List<JSONResourcePatchModel> body) throws RestClientException {
 
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {

@@ -50,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <client-version>0.1-SNAPSHOT</client-version>
         <swagger-annotations-version>1.6.2</swagger-annotations-version>
-        <spring-web-version>5.2.7.RELEASE</spring-web-version>
+        <spring-web-version>5.2.8.RELEASE</spring-web-version>
         <jackson-version>2.11.1</jackson-version>
         <jackson-databind-version>2.11.1</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.1</jackson-databind-nullable-version>
@@ -61,7 +61,7 @@
         <reactor-netty-ipc-version>0.7.15.RELEASE</reactor-netty-ipc-version>
         <netty-version>4.1.51.Final</netty-version>
         <testng.version>7.1.0</testng.version>
-        <mock-server.version>5.10.0</mock-server.version>
+        <mock-server.version>5.11.1</mock-server.version>
     </properties>
 
     <dependencies>
@@ -84,7 +84,7 @@
             <version>${reactor-version}</version>
         </dependency>
 
-        <!-- HTTP client: Spring RestTemplate -->
+        <!-- HTTP client: Spring WebClient -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webflux</artifactId>
@@ -158,6 +158,20 @@
 
     <build>
 
+        <!-- Should be default, but needed to keep IntelliJ happy -->
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -170,6 +184,9 @@
                         <systemPropertyVariables>
                             <org.slf4j.simpleLogger.defaultLogLevel>INFO</org.slf4j.simpleLogger.defaultLogLevel>
                         </systemPropertyVariables>
+                        <includes>
+                            <include>**/*Test.java</include>
+                        </includes>
                     </configuration>
                 </plugin>
                 <plugin>

@@ -15,32 +15,49 @@
  */
 package com.ibm.watson.data.client.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ibm.watson.data.client.api.ProjectsSettingsApiV2;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
-import org.testng.annotations.BeforeTest;
+import org.mockserver.client.MockServerClient;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.ibm.watson.data.client.mocks.MockConstants.*;
 import static org.testng.Assert.*;
 
 /**
  * Test the Project Settings API endpoints.
  */
-public class ProjectsSettingsTest {
+public class ProjectsSettingsTest extends AbstractExpectations {
 
-    private ProjectsSettingsApiV2 api;
+    private final ProjectsSettingsApiV2 api = new ProjectsSettingsApiV2(MockConstants.getApiClient());
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new ProjectsSettingsApiV2(MockConstants.getApiClient());
+    public ProjectsSettingsTest() {
+        super(ProjectsSettingsApiV2.BASE_API, "projectSettings");
     }
 
-    /**
-     * Test retrieval of access restriction settings.
-     */
+    private final Map<String, List<String>> params = new HashMap<>();
+    private void setupParams() {
+        List<String> catalog = new ArrayList<>();
+        catalog.add(CATALOG_GUID);
+        params.put("catalog_id", catalog);
+    }
+
+    @Override
+    public void init(MockServerClient client) {
+        injectIntoBaseUrl("{guid}", PROJECT_GUID);
+        setupTest(client, "GET", "/access_restrictions", "getAccessRestrictions");
+        setupTest(client, "GET", "/audit_events", "getAuditEvents");
+        setupTest(client, "PUT", "/access_restrictions", "updateAccessRestrictions");
+        setupTest(client, "PUT", "/audit_events", "updateAuditEvents");
+    }
+
     @Test
     public void testGetAccessRestrictions() {
         SettingsGroupAccessRestrictions settings = api.getAccessRestrictions(MockConstants.PROJECT_GUID).block();
@@ -48,9 +65,6 @@ public class ProjectsSettingsTest {
         assertFalse(settings.getData());
     }
 
-    /**
-     * Test retrieval of audit event settings.
-     */
     @Test
     public void testGetAuditEvents() {
         SettingsGroupAuditEvents settings = api.getAuditEvents(MockConstants.PROJECT_GUID).block();
@@ -58,25 +72,17 @@ public class ProjectsSettingsTest {
         assertFalse(settings.getEnabled());
     }
 
-    /**
-     * Test update of access restriction settings.
-     */
     @Test
-    public void updateAccessRestrictions() {
-        SettingsGroupAccessRestrictions settings = new SettingsGroupAccessRestrictions();
-        settings.setData(true);
+    public void testUpdateAccessRestrictions() {
+        SettingsGroupAccessRestrictions settings = readRequestFromFile("updateAccessRestrictions", new TypeReference<SettingsGroupAccessRestrictions>() {});
         SettingsGroupAccessRestrictions response = api.updateAccessRestrictions(MockConstants.PROJECT_GUID, settings).block();
         assertNotNull(response);
         assertTrue(response.getData());
     }
 
-    /**
-     * Test update of audit event settings.
-     */
     @Test
     public void testUpdateAuditEvents() {
-        SettingsGroupAuditEvents settings = new SettingsGroupAuditEvents();
-        settings.setEnabled(true);
+        SettingsGroupAuditEvents settings = readRequestFromFile("updateAuditEvents", new TypeReference<SettingsGroupAuditEvents>() {});
         SettingsGroupAuditEvents response = api.updateAuditEvents(MockConstants.PROJECT_GUID, settings).block();
         assertNotNull(response);
         assertTrue(response.getEnabled());

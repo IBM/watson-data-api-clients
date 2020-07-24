@@ -15,41 +15,44 @@
  */
 package com.ibm.watson.data.client.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ibm.watson.data.client.api.CatalogMembersApiV2;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
-import org.testng.annotations.BeforeTest;
+import org.mockserver.client.MockServerClient;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.ibm.watson.data.client.mocks.MockConstants.*;
+import static com.ibm.watson.data.client.mocks.MockConstants.NEW_USER_GUID;
 import static org.testng.Assert.*;
 
 /**
  * Test the Catalog Members API endpoints.
  */
-public class CatalogMembersTest {
+public class CatalogMembersTest extends AbstractExpectations {
 
-    private CatalogMembersApiV2 api;
+    private final CatalogMembersApiV2 api = new CatalogMembersApiV2(MockConstants.getApiClient());
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new CatalogMembersApiV2(MockConstants.getApiClient());
+    public CatalogMembersTest() {
+        super(CatalogMembersApiV2.BASE_API, "catalogMembers");
     }
 
-    /**
-     * Test addition of a member to a catalog.
-     */
+    @Override
+    public void init(MockServerClient client) {
+        injectIntoBaseUrl("{catalog_id}", CATALOG_GUID);
+        setupTest(client, "POST", "", "add", 201);
+        setupTest(client, "DELETE", "/" + NEW_USER_GUID, "delete", 204);
+        setupTest(client, "GET", "/" + NEW_USER_GUID, "get");
+        setupTest(client, "GET", "", "list");
+        setupTest(client, "PATCH", "/" + NEW_USER_GUID, "updateRole");
+    }
+
     @Test
     public void testAdd() {
-        MemberSet body = new MemberSet();
-        Member member = new Member();
-        member.setUserIamId(MockConstants.NEW_USER_GUID);
-        member.setRole("admin");
-        body.addMembersItem(member);
+        MemberSet body = readRequestFromFile("add", new TypeReference<MemberSet>() {});
         MemberSetPartialResult response = api.add(MockConstants.CATALOG_GUID, body).block();
         assertNotNull(response);
         assertNotNull(response.getMembers());
@@ -61,9 +64,6 @@ public class CatalogMembersTest {
         assertEquals(response.getFailures().size(), 0);
     }
 
-    /**
-     * Test retrieval of membership details for a given user on a given catalog.
-     */
     @Test
     public void testGet() {
         MemberSet response = api.get(MockConstants.CATALOG_GUID, MockConstants.NEW_USER_GUID).block();
@@ -75,9 +75,6 @@ public class CatalogMembersTest {
         assertEquals(one.getRole(), "admin");
     }
 
-    /**
-     * Test retrieval of all membership details on a catalog.
-     */
     @Test
     public void testList() {
         MemberSearchResult response = api.list(MockConstants.CATALOG_GUID, null, null, null).block();
@@ -92,22 +89,15 @@ public class CatalogMembersTest {
         assertEquals(one.getRole(), "admin");
     }
 
-    /**
-     * Test update of the role of a member on a catalog.
-     */
     @Test
     public void testUpdateRole() {
-        MemberRole role = new MemberRole();
-        role.setRole("viewer");
+        MemberRole role = readRequestFromFile("updateRole", new TypeReference<MemberRole>() {});
         Member member = api.updateRole(MockConstants.CATALOG_GUID, MockConstants.NEW_USER_GUID, role).block();
         assertNotNull(member);
         assertEquals(member.getRole(), "viewer");
         assertEquals(member.getUserIamId(), MockConstants.NEW_USER_GUID);
     }
 
-    /**
-     * Test removal of a member from a catalog.
-     */
     @Test
     public void testDelete() {
         api.delete(MockConstants.CATALOG_GUID, MockConstants.NEW_USER_GUID).block();

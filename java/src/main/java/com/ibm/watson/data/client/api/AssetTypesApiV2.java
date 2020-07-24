@@ -16,10 +16,8 @@
 package com.ibm.watson.data.client.api;
 
 import com.ibm.watson.data.client.ApiClient;
-import com.ibm.watson.data.client.model.CatalogSearch;
-import com.ibm.watson.data.client.model.Type;
-import com.ibm.watson.data.client.model.TypesResponse;
-import com.ibm.watson.data.client.model.UpdateType;
+import com.ibm.watson.data.client.model.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -250,11 +248,11 @@ public class AssetTypesApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> findAssetsByType(String typeName,
-                                       CatalogSearch catalogSearch,
-                                       String catalogId,
-                                       String projectId,
-                                       String spaceId) throws RestClientException {
+    public Mono<FindAssetsResponse> findAssetsByType(String typeName,
+                                                     CatalogSearch catalogSearch,
+                                                     String catalogId,
+                                                     String projectId,
+                                                     String spaceId) throws RestClientException {
 
         // verify the required parameter 'typeName' is set
         if (typeName == null) {
@@ -287,7 +285,7 @@ public class AssetTypesApiV2 {
         final String[] localVarContentTypes = {"application/json"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<Void> localVarReturnType = new ParameterizedTypeReference<Void>() {};
+        ParameterizedTypeReference<FindAssetsResponse> localVarReturnType = new ParameterizedTypeReference<FindAssetsResponse>() {};
         return apiClient.invokeAPI(BASE_API + "/{type_name}/search",
                 HttpMethod.POST, pathParams, queryParams,
                 catalogSearch, headerParams, cookieParams, formParams,

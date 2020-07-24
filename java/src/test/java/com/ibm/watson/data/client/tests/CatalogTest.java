@@ -15,43 +15,49 @@
  */
 package com.ibm.watson.data.client.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ibm.watson.data.client.api.CatalogsApiV2;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.Catalog;
 import com.ibm.watson.data.client.model.CatalogEntity;
 import com.ibm.watson.data.client.model.Catalogs;
 import com.ibm.watson.data.client.model.JSONResourcePatchModel;
+import org.mockserver.client.MockServerClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static com.ibm.watson.data.client.mocks.MockConstants.CATALOG_GUID;
 import static org.testng.Assert.*;
 
 /**
  * Test the Catalog API endpoints.
  */
-public class CatalogTest {
+public class CatalogTest extends AbstractExpectations {
 
-    private CatalogsApiV2 api;
+    private final CatalogsApiV2 api = new CatalogsApiV2(MockConstants.getApiClient());
+
+    public CatalogTest() {
+        super(CatalogsApiV2.BASE_API, "catalog");
+    }
+
+    @Override
+    public void init(MockServerClient client) {
+        setupTest(client, "POST", "", "create", 201);
+        setupTest(client, "DELETE", "/" + CATALOG_GUID, "delete", 204);
+        setupTest(client, "GET", "/" + CATALOG_GUID, "get");
+        setupTest(client, "GET", "/default", "getDefault");
+        setupTest(client, "GET", "", "list");
+        // TODO: endpoint currently broken (results in 500)
+        setupTest(client, "PATCH", "/" + CATALOG_GUID, "update", 500);
+    }
 
     private static final String createdName = "Test Catalog";
     private static final String createdDesc = "A test catalog to validate the API client works as expected.";
     private static final String createdGen  = "API-Test-Suite";
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new CatalogsApiV2(MockConstants.getApiClient());
-    }
-
-    /**
-     * Test retrieval of the default (OMRS-synced) catalog.
-     */
     @Test
     public void testGetDefault() {
         Catalog omrsCatalog = api.getCatalogOnOmrsOneCatalogCohort().block();
@@ -60,16 +66,9 @@ public class CatalogTest {
         assertEquals(omrsCatalog.getEntity().getName(), "Default Catalog");
     }
 
-    /**
-     * Test creation of a catalog.
-     */
     @Test
     public void testCreate() {
-        CatalogEntity body = new CatalogEntity();
-        body.setName(createdName);
-        body.setDescription(createdDesc);
-        body.setGenerator(createdGen);
-        body.setIsGoverned(true);
+        CatalogEntity body = readRequestFromFile("create", new TypeReference<CatalogEntity>() {});
         Catalog created = api.create(body, false).block();
         assertNotNull(created);
         assertNotNull(created.getMetadata());
@@ -79,9 +78,6 @@ public class CatalogTest {
         assertEquals(created.getEntity().getDescription(), createdDesc);
     }
 
-    /**
-     * Test retrieval of a catalog.
-     */
     @Test
     public void testGet() {
         Catalog catalog = api.get(MockConstants.CATALOG_GUID).block();
@@ -93,9 +89,6 @@ public class CatalogTest {
         assertEquals(catalog.getEntity().getDescription(), createdDesc);
     }
 
-    /**
-     * Test listing of catalogs.
-     */
     @Test
     public void testList() {
         Catalogs catalogs = api.list(null, null, null, null, null).block();
@@ -109,24 +102,9 @@ public class CatalogTest {
         assertEquals(one.getEntity().getDescription(), createdDesc);
     }
 
-    /**
-     * Test update of a catalog.
-     */
     @Test
     public void testUpdate() {
-        String updatedName = "New Name";
-        String updatedDesc = "New description.";
-        List<JSONResourcePatchModel> jsonPatch = new ArrayList<>();
-        JSONResourcePatchModel nameChange = new JSONResourcePatchModel();
-        nameChange.setPath("/entity/name");
-        nameChange.setOp(JSONResourcePatchModel.OpEnum.REPLACE);
-        nameChange.setValue(updatedName);
-        jsonPatch.add(nameChange);
-        JSONResourcePatchModel descChange = new JSONResourcePatchModel();
-        descChange.setPath("/entity/description");
-        descChange.setOp(JSONResourcePatchModel.OpEnum.REPLACE);
-        descChange.setValue(updatedDesc);
-        jsonPatch.add(descChange);
+        List<JSONResourcePatchModel> jsonPatch = readRequestFromFile("update", new TypeReference<List<JSONResourcePatchModel>>() {});
         // TODO: currently the API throws a 500 internal server error, despite actually applying the update
         assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.CATALOG_GUID, jsonPatch).block());
         /*Catalog updated = api.update(MockConstants.CATALOG_GUID, jsonPatch).block();
@@ -138,9 +116,6 @@ public class CatalogTest {
         assertEquals(updated.getEntity().getDescription(), updatedDesc);*/
     }
 
-    /**
-     * Test deletion of a catalog.
-     */
     @Test
     public void testDelete() {
         api.delete(MockConstants.CATALOG_GUID, null).block();

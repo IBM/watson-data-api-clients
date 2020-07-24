@@ -16,9 +16,10 @@
 package com.ibm.watson.data.client.tests;
 
 import com.ibm.watson.data.client.api.MonitorApi;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
+import org.mockserver.client.MockServerClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -26,21 +27,20 @@ import static org.testng.Assert.*;
 /**
  * Test the Monitor API endpoints.
  */
-public class MonitorTest {
+public class MonitorTest extends AbstractExpectations {
 
-    private MonitorApi api;
+    private final MonitorApi api = new MonitorApi(MockConstants.getApiClient());
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new MonitorApi(MockConstants.getApiClient());
+    public MonitorTest() {
+        super("/icp4d-api/v1/monitor", "monitor");
     }
 
-    /**
-     * Test retrieval of my own details.
-     */
+    @Override
+    public void init(MockServerClient client) {
+        // TODO: endpoint currently broken (results in 404)
+        setupTest(client, "GET", "", "get", 404);
+    }
+
     @Test
     public void testGet() {
         // TODO: currently the API throws a 404 not found error

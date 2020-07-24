@@ -39,14 +39,19 @@ import static org.mockserver.model.JsonBody.json;
 public class MockConstants {
 
     // Set some constants that we can re-use throughout
-    public static final String PROJECT_GUID  = "f0bd7b72-f690-4b65-9edb-7a430fa658d9";
-    public static final String CATALOG_GUID  = "0f85f071-7528-4ff9-9db8-ab7c7b0244bf";
-    public static final String NEW_ROLE_NAME = "Test Role";
-    public static final String EXSTUSER_GUID = "1000331004";
-    public static final String EXSTUSER_NAME = "cgrote";
-    public static final String NEW_USER_GUID = "1000331015";
-    public static final String NEW_USER_NAME = "jsmith";
-    public static final String NEW_TYPE_NAME = "test_type";
+    public static final String PROJECT_GUID   = "f0bd7b72-f690-4b65-9edb-7a430fa658d9";
+    public static final String CATALOG_GUID   = "0f85f071-7528-4ff9-9db8-ab7c7b0244bf";
+    public static final String NEW_ROLE_NAME  = "Test Role";
+    public static final String EXSTUSER_GUID  = "1000331004";
+    public static final String EXSTUSER_NAME  = "cgrote";
+    public static final String NEW_USER_GUID  = "1000331015";
+    public static final String NEW_USER_NAME  = "jsmith";
+    public static final String NEW_TYPE_NAME  = "test_type";
+    public static final String NEW_PROP_NAME  = "test_field";
+    public static final String NEW_ASSET_NAME = "Test Asset";
+    public static final String NEW_ASSET_GUID = "fdbf3f03-545b-497b-a2ea-3353aaed7dd1";
+    public static final String ASSET_RATING_G = MockConstants.NEW_ASSET_GUID + "_" + MockConstants.EXSTUSER_GUID;
+    public static final String CLONED_ASTGUID = "6482aa36-d979-48d0-a036-d7da6fbc4eff";
 
     public static ApiClient getApiClient() {
         ApiClient apiClient = new ApiClient(false);

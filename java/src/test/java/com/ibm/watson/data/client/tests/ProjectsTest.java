@@ -15,65 +15,41 @@
  */
 package com.ibm.watson.data.client.tests;
 
-import com.ibm.watson.data.client.ApiClient;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ibm.watson.data.client.api.ProjectsApiV2;
-import com.ibm.watson.data.client.api.TransactionalProjectsApiV2;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
-import org.testng.annotations.BeforeTest;
+import org.mockserver.client.MockServerClient;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.ibm.watson.data.client.mocks.MockConstants.PROJECT_GUID;
 import static org.testng.Assert.*;
 
 /**
  * Test the Project API endpoints.
  */
-public class ProjectTest {
+public class ProjectsTest extends AbstractExpectations {
 
-    private ProjectsApiV2 api;
-    private TransactionalProjectsApiV2 txnApi;
+    private final ProjectsApiV2 api = new ProjectsApiV2(MockConstants.getApiClient());
 
-    private static final String storageGuid = "177766d9-9633-36b3-803f-96593343d4f9";
+    public ProjectsTest() {
+        super(ProjectsApiV2.BASE_API, "project");
+    }
+
+    @Override
+    public void init(MockServerClient client) {
+        setupTest(client, "GET", "/" + PROJECT_GUID, "get");
+        setupTest(client, "GET", "", "list");
+        setupTest(client, "PATCH", "/" + PROJECT_GUID, "update");
+    }
+
     private static final String createdName = "Test Project";
     private static final String createdDesc = "A test project to validate the API client works as expected.";
     private static final String updatedDesc = "Now with an updated description.";
-    private static final String createdGen  = "API-Test-Suite";
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        ApiClient client = MockConstants.getApiClient();
-        api = new ProjectsApiV2(client);
-        txnApi = new TransactionalProjectsApiV2(client);
-    }
-
-    /**
-     * Test creation of a project.
-     */
-    @Test
-    public void testCreate() {
-        TransactionalProjectCreate body = new TransactionalProjectCreate();
-        body.setName(createdName);
-        body.setGenerator(createdGen);
-        body.setDescription(createdDesc);
-        body.setPublic(true);
-        TransactionalProjectStorageObject storage = new TransactionalProjectStorageObject();
-        storage.setType(TransactionalProjectStorageObject.TypeEnum.ASSETFILES);
-        storage.setGuid(storageGuid);
-        body.setStorage(storage);
-        CreateTransactionProjectResponse created = txnApi.create(body).block();
-        assertNotNull(created);
-        assertNotNull(created.getLocation());
-        assertEquals(created.getLocation(), "/v2/projects/" + MockConstants.PROJECT_GUID);
-    }
-
-    /**
-     * Test retrieval of a project.
-     */
     @Test
     public void testGet() {
         Project project = api.get(MockConstants.PROJECT_GUID, null).block();
@@ -85,9 +61,6 @@ public class ProjectTest {
         assertEquals(project.getEntity().getDescription(), createdDesc);
     }
 
-    /**
-     * Test listing of all projects.
-     */
     @Test
     public void testList() {
         Projects projects = api.list(null, null, null, null, null, null, null, null).block();
@@ -101,25 +74,13 @@ public class ProjectTest {
         assertEquals(one.getEntity().getName(), createdName);
     }
 
-    /**
-     * Test update of a project.
-     */
     @Test
     public void testUpdate() {
-        UpdateProjectBody body = new UpdateProjectBody();
-        body.setDescription(updatedDesc);
+        UpdateProjectBody body = readRequestFromFile("update", new TypeReference<UpdateProjectBody>() {});
         Project updated = api.update(MockConstants.PROJECT_GUID, body).block();
         assertNotNull(updated);
         assertNotNull(updated.getEntity());
         assertEquals(updated.getEntity().getDescription(), updatedDesc);
-    }
-
-    /**
-     * Test deletion of a project.
-     */
-    @Test
-    public void testDelete() {
-        txnApi.delete(MockConstants.PROJECT_GUID).block();
     }
 
 }

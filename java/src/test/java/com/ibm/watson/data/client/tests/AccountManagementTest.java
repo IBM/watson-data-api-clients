@@ -16,10 +16,11 @@
 package com.ibm.watson.data.client.tests;
 
 import com.ibm.watson.data.client.api.AccountManagementApi;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
+import org.mockserver.client.MockServerClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -27,21 +28,22 @@ import static org.testng.Assert.*;
 /**
  * Test the Account Management API endpoints.
  */
-public class AccountManagementTest {
+public class AccountManagementTest extends AbstractExpectations {
 
-    private AccountManagementApi api;
+    private final AccountManagementApi api = new AccountManagementApi(MockConstants.getApiClient());
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new AccountManagementApi(MockConstants.getApiClient());
+    public AccountManagementTest() {
+        super(AccountManagementApi.API_BASE, "accountManagement");
     }
 
-    /**
-     * Test retrieval of my own details.
-     */
+    @Override
+    public void init(MockServerClient client) {
+        setupTest(client, "POST", "/changepassword", "password");
+        setupTest(client, "GET", "/me", "get");
+        // TODO: endpoint currently broken (results in 500)
+        setupTest(client, "PUT", "/me", "update", 500);
+    }
+
     @Test
     public void testGetMe() {
         GetMeResponse me = api.getMe().block();
@@ -53,9 +55,6 @@ public class AccountManagementTest {
         assertEquals(me.getMessageCode(), "200");
     }
 
-    /**
-     * Test update of my own password.
-     */
     @Test
     public void testChangePassword() {
         PlatformSuccessResponse response = api.changePassword("abc123", "def456").block();
@@ -64,9 +63,6 @@ public class AccountManagementTest {
         assertEquals(response.getMessage(), "Password changed successfully.");
     }
 
-    /**
-     * Test update of my own details.
-     */
     @Test
     public void testUpdateMe() {
         UpdateMeParamsBody body = new UpdateMeParamsBody();
@@ -74,8 +70,8 @@ public class AccountManagementTest {
         body.setEmail("newmail@example.com");
         // TODO: currently the API throws a 500 internal server error
         assertThrows(WebClientResponseException.InternalServerError.class, () -> api.updateMe(body).block());
-        /*assertNotNull(response);
-        assertEquals(response.getMessageCode(), "200");*/
+        //assertNotNull(response);
+        //assertEquals(response.getMessageCode(), "200");
     }
 
 }

@@ -15,53 +15,56 @@
  */
 package com.ibm.watson.data.client.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ibm.watson.data.client.api.RoleManagementApi;
+import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
+import org.mockserver.client.MockServerClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.ibm.watson.data.client.mocks.MockConstants.*;
 import static org.testng.Assert.*;
 
 /**
  * Test the Role Management API endpoints.
  */
-public class RoleManagementTest {
+public class RoleManagementTest extends AbstractExpectations {
 
-    private RoleManagementApi api;
+    private final RoleManagementApi api = new RoleManagementApi(MockConstants.getApiClient());
+
+    public RoleManagementTest() {
+        super(RoleManagementApi.BASE_API, "roleManagement");
+    }
+
+    @Override
+    public void init(MockServerClient client) {
+        setupTest(client, "POST", "", "create");
+        // TODO: endpoint currently broken (results in 500)
+        setupTest(client, "DELETE", "/" + NEW_ROLE_NAME, "delete", 500);
+        setupTest(client, "GET", "/" + NEW_ROLE_NAME, "get");
+        setupTest(client, "GET", "", "listRoles");
+        // TODO: endpoint currently broken (results in 404)
+        setupTest(client, "GET", "/permissions", "listPermissions", 404);
+        // TODO: endpoint currently broken (results in 500)
+        setupTest(client, "PUT", "/" + NEW_ROLE_NAME, "update", 500);
+    }
 
     private static final String createdDesc = "A test role to validate the API client works as expected.";
     private static final String updatedDesc = "Now with an updated description.";
 
-    /**
-     * Setup the API for testing.
-     */
-    @BeforeTest
-    public void setupApi() {
-        api = new RoleManagementApi(MockConstants.getApiClient());
-    }
-
-    /**
-     * Test creation of a role.
-     */
     @Test
     public void testCreate() {
-        CreateRoleParamsBody body = new CreateRoleParamsBody();
-        body.setRoleName(MockConstants.NEW_ROLE_NAME);
-        body.setDescription(createdDesc);
-        body.addPermissionsItem("administrator");
+        CreateRoleParamsBody body = readRequestFromFile("create", new TypeReference<CreateRoleParamsBody>() {});
         PlatformSuccessResponse response = api.create(body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "Role created successfully.");
     }
 
-    /**
-     * Test retrieval of a role.
-     */
     @Test
     public void testGet() {
         GetRoleResponse role = api.get(MockConstants.NEW_ROLE_NAME).block();
@@ -76,9 +79,6 @@ public class RoleManagementTest {
         assertTrue(role.getRoleInfo().getPermissions().contains("administrator"));
     }
 
-    /**
-     * Test retrieval of all permissions available for roles.
-     */
     @Test
     public void testListPermissions() {
         // TODO: currently the API throws a 404 not found error
@@ -87,9 +87,6 @@ public class RoleManagementTest {
         assertNotNull(response);*/
     }
 
-    /**
-     * Test retrieval of all roles.
-     */
     @Test
     public void testListRoles() {
         GetAllRolesResponse response = api.listRoles().block();
@@ -107,14 +104,9 @@ public class RoleManagementTest {
         assertEquals(one.getPermissions().get(0), "administrator");
     }
 
-    /**
-     * Test update of a role.
-     */
     @Test
     public void testUpdate() {
-        UpdateRoleParamsBody body = new UpdateRoleParamsBody();
-        body.setDescription(updatedDesc);
-        body.addPermissionsItem("manage_catalog");
+        UpdateRoleParamsBody body = readRequestFromFile("update", new TypeReference<UpdateRoleParamsBody>() {});
         // TODO: currently the API throws a 500 internal server error
         assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_ROLE_NAME, body).block());
         /*PlatformSuccessResponse response = api.update(MockConstants.NEW_ROLE_NAME, body).block();
@@ -123,9 +115,6 @@ public class RoleManagementTest {
         assertEquals(response.getMessage(), "???");*/
     }
 
-    /**
-     * Test deletion of a role.
-     */
     @Test
     public void testDelete() {
         // TODO: currently the API throws a 500 internal server error
