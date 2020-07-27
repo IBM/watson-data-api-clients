@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "rov": {
+      "mode": 0,
+      "collaborator_ids": {}
+    },
+    "usage": {
+      "last_updated_at": "2020-07-27T12:19:51Z",
+      "last_updater_id": "1000331004",
+      "last_update_time": 1595852391728,
+      "last_accessed_at": "2020-07-27T12:19:51Z",
+      "last_access_time": 1595852391728,
+      "last_accessor_id": "1000331004",
+      "access_count": 0
+    },
+    "name": "Test Asset",
+    "description": "An updated test asset description.",
+    "tags": [],
+    "asset_type": "test_type",
+    "origin_country": "gb",
+    "delete_processing_state": "complete",
+    "delete_reason": "Delete explicitly requested by user.  ",
+    "rating": 0.0,
+    "total_ratings": 0,
+    "catalog_id": "0f85f071-7528-4ff9-9db8-ab7c7b0244bf",
+    "created": 1595849636334,
+    "created_at": "2020-07-27T11:33:56Z",
+    "owner_id": "1000331004",
+    "size": 0,
+    "version": 2.0,
+    "asset_state": "deleted",
+    "asset_attributes": [
+      "test_type"
+    ],
+    "asset_id": "fdbf3f03-545b-497b-a2ea-3353aaed7dd1",
+    "asset_category": "USER"
+  },
+  "entity": {
+    "test_type": {
+      "test_field": "Sample value for the asset's custom field."
+    }
+  },
+  "href": "/v2/trashed_assets/fdbf3f03-545b-497b-a2ea-3353aaed7dd1?catalog_id=0f85f071-7528-4ff9-9db8-ab7c7b0244bf"
+}

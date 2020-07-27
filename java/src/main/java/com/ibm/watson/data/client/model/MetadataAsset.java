@@ -31,6 +31,9 @@ public class MetadataAsset extends MetadataHeader {
     private String projectId;
     private String sandboxId;
     private MetadataUsage usage;
+    // TODO: this is probably an enum rather than a String?
+    private String deleteProcessingState;
+    private String deleteReason;
     private Double rating;
     private Long totalRatings;
     private String catalogId;
@@ -40,7 +43,7 @@ public class MetadataAsset extends MetadataHeader {
     private Long size;
     private Double version;
     // TODO: this is probably an enum rather than a String?
-    private String assetState;
+    private String assetState; // available, deleted
     private List<String> assetAttributes;
     private String assetId;
     private SourceAsset sourceAsset;
@@ -90,6 +93,28 @@ public class MetadataAsset extends MetadataHeader {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public MetadataUsage getUsage() { return usage; }
     public void setUsage(MetadataUsage usage) { this.usage = usage; }
+
+    private MetadataAsset deleteProcessingState(String deleteProcessingState) {
+        this.deleteProcessingState = deleteProcessingState;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("delete_processing_state")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDeleteProcessingState() { return deleteProcessingState; }
+    public void setDeleteProcessingState(String deleteProcessingState) { this.deleteProcessingState = deleteProcessingState; }
+
+    private MetadataAsset deleteReason(String deleteReason) {
+        this.deleteReason = deleteReason;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("delete_reason")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDeleteReason() { return deleteReason; }
+    public void setDeleteReason(String deleteReason) { this.deleteReason = deleteReason; }
 
     public MetadataAsset rating(Double rating) {
         this.rating = rating;
@@ -255,6 +280,8 @@ public class MetadataAsset extends MetadataHeader {
                 Objects.equals(this.projectId, that.projectId) &&
                 Objects.equals(this.sandboxId, that.sandboxId) &&
                 Objects.equals(this.usage, that.usage) &&
+                Objects.equals(this.deleteProcessingState, that.deleteProcessingState) &&
+                Objects.equals(this.deleteReason, that.deleteReason) &&
                 Objects.equals(this.rating, that.rating) &&
                 Objects.equals(this.totalRatings, that.totalRatings) &&
                 Objects.equals(this.catalogId, that.catalogId) &&
@@ -273,9 +300,9 @@ public class MetadataAsset extends MetadataHeader {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), rov, projectId, sandboxId, usage, rating, totalRatings, catalogId,
-                created, createdAt, ownerId, size, version, assetState, assetAttributes, assetId, sourceAsset,
-                revisionId, commitInfo);
+        return Objects.hash(super.hashCode(), rov, projectId, sandboxId, usage, deleteProcessingState, deleteReason,
+                rating, totalRatings, catalogId, created, createdAt, ownerId, size, version, assetState,
+                assetAttributes, assetId, sourceAsset, revisionId, commitInfo);
     }
 
     @Override
@@ -287,6 +314,8 @@ public class MetadataAsset extends MetadataHeader {
         sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
         sb.append("    sandboxId: ").append(toIndentedString(sandboxId)).append("\n");
         sb.append("    usage: ").append(toIndentedString(usage)).append("\n");
+        sb.append("    deleteProcessingState: ").append(toIndentedString(deleteProcessingState)).append("\n");
+        sb.append("    deleteReason: ").append(toIndentedString(deleteReason)).append("\n");
         sb.append("    rating: ").append(toIndentedString(rating)).append("\n");
         sb.append("    totalRatings: ").append(toIndentedString(totalRatings)).append("\n");
         sb.append("    catalogId: ").append(toIndentedString(catalogId)).append("\n");

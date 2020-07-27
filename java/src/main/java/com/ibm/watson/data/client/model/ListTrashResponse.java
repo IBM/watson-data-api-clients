@@ -21,14 +21,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * List of results for a find assets by type request
+ * List of results for a getting the contents of asset trash
  */
-public class FindAssetsResponse {
+public class ListTrashResponse {
 
     private Integer totalRows;
-    private List<MetadataAssetResult> results;
+    private List<MetadataAssetResult> resources;
+    private String bookmark;
 
-    public FindAssetsResponse totalRows(Integer totalRows) {
+    public ListTrashResponse totalRows(Integer totalRows) {
         this.totalRows = totalRows;
         return this;
     }
@@ -43,8 +44,8 @@ public class FindAssetsResponse {
     public Integer getTotalRows() { return totalRows; }
     public void setTotalRows(Integer totalRows) { this.totalRows = totalRows; }
 
-    public FindAssetsResponse results(List<MetadataAssetResult> results) {
-        this.results = results;
+    public ListTrashResponse resources(List<MetadataAssetResult> resources) {
+        this.resources = resources;
         return this;
     }
 
@@ -53,23 +54,35 @@ public class FindAssetsResponse {
      * @return results
      **/
     @javax.annotation.Nullable
-    @JsonProperty("results")
+    @JsonProperty("resources")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<MetadataAssetResult> getResults() { return results; }
-    public void setResults(List<MetadataAssetResult> results) { this.results = results; }
+    public List<MetadataAssetResult> getResources() { return resources; }
+    public void setResources(List<MetadataAssetResult> resources) { this.resources = resources; }
+
+    public ListTrashResponse bookmark(String bookmark) {
+        this.bookmark = bookmark;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("bookmark")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getBookmark() { return bookmark; }
+    public void setBookmark(String bookmark) { this.bookmark = bookmark; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        FindAssetsResponse findAssetsResponse = (FindAssetsResponse)o;
-        return Objects.equals(this.totalRows, findAssetsResponse.totalRows) &&
-                Objects.equals(this.results, findAssetsResponse.results);
+        ListTrashResponse that = (ListTrashResponse)o;
+        return Objects.equals(this.totalRows, that.totalRows) &&
+                Objects.equals(this.resources, that.resources) &&
+                Objects.equals(this.bookmark, that.bookmark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalRows, results);
+        return Objects.hash(totalRows, resources, bookmark);
     }
 
     @Override
@@ -77,7 +90,8 @@ public class FindAssetsResponse {
         StringBuilder sb = new StringBuilder();
         sb.append("class FindAssetsResponse {\n");
         sb.append("    totalRows: ").append(toIndentedString(totalRows)).append("\n");
-        sb.append("    results: ").append(toIndentedString(results)).append("\n");
+        sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
+        sb.append("    bookmark: ").append(toIndentedString(bookmark)).append("\n");
         sb.append("}");
         return sb.toString();
     }
