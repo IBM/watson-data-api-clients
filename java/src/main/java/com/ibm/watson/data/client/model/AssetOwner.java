@@ -17,67 +17,66 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Metadata rules of visibility information about an asset
+ * AssetOwner
  */
-public class MetadataRov {
+public class AssetOwner {
 
-    private Integer mode;
-    private Map<String, MemberHeader> collaboratorIds;
+    private String owner;
+    private String ownerId;
 
-    public MetadataRov mode(Integer mode) {
-        this.mode = mode;
+    public AssetOwner owner(String owner) {
+        this.owner = owner;
         return this;
     }
 
     /**
-     * Access mode of metadata asset
-     * @return mode
-     **/
-    @JsonProperty("mode")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public Integer getMode() { return mode; }
-    public void setMode(Integer mode) { this.mode = mode; }
-
-    public MetadataRov collaboratorIds(Map<String, MemberHeader> collaboratorIds) {
-        this.collaboratorIds = collaboratorIds;
-        return this;
-    }
-
-    /**
-     * List of collaborators that can access metadata asset
-     * @return collaboratorIds
+     * Get owner username (example: test@us.ibm.com)
+     * @return owner
      **/
     @javax.annotation.Nullable
-    @JsonProperty("collaborator_ids")
+    @JsonProperty("owner")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, MemberHeader> getCollaboratorIds() { return collaboratorIds; }
-    public void setCollaboratorIds(Map<String, MemberHeader> collaboratorIds) { this.collaboratorIds = collaboratorIds; }
+    public String getOwner() { return owner; }
+    public void setOwner(String owner) { this.owner = owner; }
+
+    public AssetOwner ownerId(String ownerId) {
+        this.ownerId = ownerId;
+        return this;
+    }
+
+    /**
+     * Get ownerId (example: IBMid-310002980)
+     * @return ownerId
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("owner_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getOwnerId() { return ownerId; }
+    public void setOwnerId(String ownerId) { this.ownerId = ownerId; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataRov metadataUsage = (MetadataRov)o;
-        return Objects.equals(this.mode, metadataUsage.mode) &&
-                Objects.equals(this.collaboratorIds, metadataUsage.collaboratorIds);
+        AssetOwner assetOwner = (AssetOwner)o;
+        return Objects.equals(this.owner, assetOwner.owner) &&
+                Objects.equals(this.ownerId, assetOwner.ownerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mode, collaboratorIds);
+        return Objects.hash(owner, ownerId);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataRov {\n");
-        sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
-        sb.append("    collaboratorIds: ").append(toIndentedString(collaboratorIds)).append("\n");
+        sb.append("class AssetOwner {\n");
+        sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+        sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -17,67 +17,66 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Metadata rules of visibility information about an asset
+ * AssetRatingCount
  */
-public class MetadataRov {
+public class AssetRatingCount {
 
-    private Integer mode;
-    private Map<String, MemberHeader> collaboratorIds;
+    private Integer rating;
+    private Long count;
 
-    public MetadataRov mode(Integer mode) {
-        this.mode = mode;
+    public AssetRatingCount rating(Integer rating) {
+        this.rating = rating;
         return this;
     }
 
     /**
-     * Access mode of metadata asset
-     * @return mode
-     **/
-    @JsonProperty("mode")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public Integer getMode() { return mode; }
-    public void setMode(Integer mode) { this.mode = mode; }
-
-    public MetadataRov collaboratorIds(Map<String, MemberHeader> collaboratorIds) {
-        this.collaboratorIds = collaboratorIds;
-        return this;
-    }
-
-    /**
-     * List of collaborators that can access metadata asset
-     * @return collaboratorIds
+     * rating of an asset
+     * @return rating
      **/
     @javax.annotation.Nullable
-    @JsonProperty("collaborator_ids")
+    @JsonProperty("rating")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, MemberHeader> getCollaboratorIds() { return collaboratorIds; }
-    public void setCollaboratorIds(Map<String, MemberHeader> collaboratorIds) { this.collaboratorIds = collaboratorIds; }
+    public Integer getRating() { return rating; }
+    public void setRating(Integer rating) { this.rating = rating; }
+
+    public AssetRatingCount count(Long count) {
+        this.count = count;
+        return this;
+    }
+
+    /**
+     * number of ratings with rating value
+     * @return count
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("count")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Long getCount() { return count; }
+    public void setCount(Long count) { this.count = count; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataRov metadataUsage = (MetadataRov)o;
-        return Objects.equals(this.mode, metadataUsage.mode) &&
-                Objects.equals(this.collaboratorIds, metadataUsage.collaboratorIds);
+        AssetRatingCount assetRatingCount = (AssetRatingCount)o;
+        return Objects.equals(this.rating, assetRatingCount.rating) &&
+                Objects.equals(this.count, assetRatingCount.count);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mode, collaboratorIds);
+        return Objects.hash(rating, count);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataRov {\n");
-        sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
-        sb.append("    collaboratorIds: ").append(toIndentedString(collaboratorIds)).append("\n");
+        sb.append("class AssetRatingCount {\n");
+        sb.append("    rating: ").append(toIndentedString(rating)).append("\n");
+        sb.append("    count: ").append(toIndentedString(count)).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -26,8 +26,9 @@ import java.util.Objects;
 public class SourceAsset {
 
     // TODO: this should probably be an enumeration?
-    private String action;
+    private String action;  // clone, publish
     private String catalogId;
+    private String projectId;
     private String assetId;
     private String bssAccountId;
     private String assetName;
@@ -38,7 +39,7 @@ public class SourceAsset {
     }
 
     @JsonProperty("action")
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getAction() { return action; }
     public void setAction(String action) { this.action = action; }
 
@@ -48,9 +49,19 @@ public class SourceAsset {
     }
 
     @JsonProperty("catalog_id")
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getCatalogId() { return catalogId; }
     public void setCatalogId(String catalogId) { this.catalogId = catalogId; }
+
+    public SourceAsset projectId(String projectId) {
+        this.projectId = projectId;
+        return this;
+    }
+
+    @JsonProperty("project_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getProjectId() { return projectId; }
+    public void setProjectId(String projectId) { this.projectId = projectId; }
 
     public SourceAsset assetId(String assetId) {
         this.assetId = assetId;
@@ -58,7 +69,7 @@ public class SourceAsset {
     }
 
     @JsonProperty("asset_id")
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getAssetId() { return assetId; }
     public void setAssetId(String assetId) { this.assetId = assetId; }
 
@@ -68,7 +79,7 @@ public class SourceAsset {
     }
 
     @JsonProperty("bss_account_id")
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getBssAccountId() { return bssAccountId; }
     public void setBssAccountId(String bssAccountId) { this.bssAccountId = bssAccountId; }
 
@@ -78,7 +89,7 @@ public class SourceAsset {
     }
 
     @JsonProperty("asset_name")
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getAssetName() { return assetName; }
     public void setAssetName(String assetName) { this.assetName = assetName; }
 
@@ -117,9 +128,7 @@ public class SourceAsset {
      * (except the first line).
      */
     protected String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

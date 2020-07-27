@@ -44,6 +44,8 @@ public class MetadataAsset extends MetadataHeader {
     private List<String> assetAttributes;
     private String assetId;
     private SourceAsset sourceAsset;
+    private Long revisionId;
+    private CommitInfo commitInfo;
 
     public MetadataAsset rov(MetadataRov rov) {
         this.rov = rov;
@@ -221,6 +223,28 @@ public class MetadataAsset extends MetadataHeader {
     public SourceAsset getSourceAsset() { return sourceAsset; }
     public void setSourceAsset(SourceAsset sourceAsset) { this.sourceAsset = sourceAsset; }
 
+    public MetadataAsset revisionId(Long revisionId) {
+        this.revisionId = revisionId;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("revision_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Long getRevisionId() { return revisionId; }
+    public void setRevisionId(Long revisionId) { this.revisionId = revisionId; }
+
+    public MetadataAsset commitInfo(CommitInfo commitInfo) {
+        this.commitInfo = commitInfo;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("commit_info")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public CommitInfo getCommitInfo() { return commitInfo; }
+    public void setCommitInfo(CommitInfo commitInfo) { this.commitInfo = commitInfo; }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
@@ -242,13 +266,16 @@ public class MetadataAsset extends MetadataHeader {
                 Objects.equals(this.assetState, that.assetState) &&
                 Objects.equals(this.assetAttributes, that.assetAttributes) &&
                 Objects.equals(this.assetId, that.assetId) &&
-                Objects.equals(this.sourceAsset, that.sourceAsset);
+                Objects.equals(this.sourceAsset, that.sourceAsset) &&
+                Objects.equals(this.revisionId, that.revisionId) &&
+                Objects.equals(this.commitInfo, that.commitInfo);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), rov, projectId, sandboxId, usage, rating, totalRatings, catalogId,
-                created, createdAt, ownerId, size, version, assetState, assetAttributes, assetId, sourceAsset);
+                created, createdAt, ownerId, size, version, assetState, assetAttributes, assetId, sourceAsset,
+                revisionId, commitInfo);
     }
 
     @Override
@@ -272,6 +299,8 @@ public class MetadataAsset extends MetadataHeader {
         sb.append("    assetAttributes: ").append(toIndentedString(assetAttributes)).append("\n");
         sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
         sb.append("    sourceAsset: ").append(toIndentedString(sourceAsset)).append("\n");
+        sb.append("    revisionId: ").append(toIndentedString(revisionId)).append("\n");
+        sb.append("    commitInfo: ").append(toIndentedString(commitInfo)).append("\n");
         sb.append("}");
         return sb.toString();
     }

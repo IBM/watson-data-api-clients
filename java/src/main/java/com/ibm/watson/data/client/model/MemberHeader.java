@@ -20,61 +20,69 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Metadata about an asset, as a result
+ * Headline member information for referential purposes
  */
-public class MetadataAssetResult {
+public class MemberHeader {
 
-    private MetadataAsset metadata;
-    private String href;
+    private String userId;
+    private String userIamId;
 
-    public MetadataAssetResult metadata(MetadataAsset metadata) {
-        this.metadata = metadata;
+    @Deprecated
+    public MemberHeader userId(String userId) {
+        this.userId = userId;
         return this;
     }
 
+    /**
+     * (Deprecated) User id like user email address of the member.
+     * @return userId
+     **/
     @javax.annotation.Nullable
-    @JsonProperty("metadata")
+    @JsonProperty("user_id")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public MetadataAsset getMetadata() { return metadata; }
-    public void setMetadata(MetadataAsset metadata) { this.metadata = metadata; }
+    @Deprecated
+    public String getUserId() { return userId; }
+    @Deprecated
+    public void setUserId(String userId) { this.userId = userId; }
 
-    public MetadataAssetResult href(String href) {
-        this.href = href;
+    public MemberHeader userIamId(String userIamId) {
+        this.userIamId = userIamId;
         return this;
     }
 
-    @javax.annotation.Nullable
-    @JsonProperty("href")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getHref() { return href; }
-    public void setHref(String href) { this.href = href; }
+    /**
+     * Identity and Access Management ID (IAM) of the member
+     * @return userIamId
+     **/
+    @JsonProperty("user_iam_id")
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
+    public String getUserIamId() { return userIamId; }
+    public void setUserIamId(String userIamId) { this.userIamId = userIamId; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataAssetResult metadataAsset = (MetadataAssetResult)o;
-        return Objects.equals(this.metadata, metadataAsset.metadata) &&
-                Objects.equals(this.href, metadataAsset.href);
+        MemberHeader that = (MemberHeader)o;
+        return Objects.equals(this.userId, that.userId) &&
+                Objects.equals(this.userIamId, that.userIamId);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(metadata, href);
-    }
+    public int hashCode() { return Objects.hash(userId, userIamId); }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataAssetResult {\n");
+        sb.append("class MemberHeader {\n");
         toString(sb);
         sb.append("}");
         return sb.toString();
     }
 
     protected void toString(StringBuilder sb) {
-        sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
-        sb.append("    href: ").append(toIndentedString(href)).append("\n");
+        sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+        sb.append("    userIamId: ").append(toIndentedString(userIamId)).append("\n");
     }
 
     /**

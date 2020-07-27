@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "name": "Test Asset",
+    "asset_type": "test_type",
+    "origin_country": "gb",
+    "published_to": {
+      "catalog_id": "0f85f071-7528-4ff9-9db8-ab7c7b0244bf"
+    },
+    "published_from": {
+      "project_id": "f0bd7b72-f690-4b65-9edb-7a430fa658d9",
+      "source_url": "/v2/projects/f0bd7b72-f690-4b65-9edb-7a430fa658d9"
+    }
+  }
+}

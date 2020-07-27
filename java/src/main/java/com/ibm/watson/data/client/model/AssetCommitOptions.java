@@ -17,67 +17,48 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Metadata rules of visibility information about an asset
+ * Asset Commit Options
  */
-public class MetadataRov {
+public class AssetCommitOptions {
 
-    private Integer mode;
-    private Map<String, MemberHeader> collaboratorIds;
+    private String commitMessage;
 
-    public MetadataRov mode(Integer mode) {
-        this.mode = mode;
+    public AssetCommitOptions commitMessage(String commitMessage) {
+        this.commitMessage = commitMessage;
         return this;
     }
 
     /**
-     * Access mode of metadata asset
-     * @return mode
-     **/
-    @JsonProperty("mode")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public Integer getMode() { return mode; }
-    public void setMode(Integer mode) { this.mode = mode; }
-
-    public MetadataRov collaboratorIds(Map<String, MemberHeader> collaboratorIds) {
-        this.collaboratorIds = collaboratorIds;
-        return this;
-    }
-
-    /**
-     * List of collaborators that can access metadata asset
-     * @return collaboratorIds
+     * Get commitMessage
+     * @return commitMessage
      **/
     @javax.annotation.Nullable
-    @JsonProperty("collaborator_ids")
+    @JsonProperty("commit_message")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, MemberHeader> getCollaboratorIds() { return collaboratorIds; }
-    public void setCollaboratorIds(Map<String, MemberHeader> collaboratorIds) { this.collaboratorIds = collaboratorIds; }
+    public String getCommitMessage() { return commitMessage; }
+    public void setCommitMessage(String commitMessage) { this.commitMessage = commitMessage; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataRov metadataUsage = (MetadataRov)o;
-        return Objects.equals(this.mode, metadataUsage.mode) &&
-                Objects.equals(this.collaboratorIds, metadataUsage.collaboratorIds);
+        AssetCommitOptions assetCommitOptions = (AssetCommitOptions)o;
+        return Objects.equals(this.commitMessage, assetCommitOptions.commitMessage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mode, collaboratorIds);
+        return Objects.hash(commitMessage);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataRov {\n");
-        sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
-        sb.append("    collaboratorIds: ").append(toIndentedString(collaboratorIds)).append("\n");
+        sb.append("class AssetCommitOptions {\n");
+        sb.append("    commitMessage: ").append(toIndentedString(commitMessage)).append("\n");
         sb.append("}");
         return sb.toString();
     }

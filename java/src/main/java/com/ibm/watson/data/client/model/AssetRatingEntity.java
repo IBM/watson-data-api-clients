@@ -17,67 +17,65 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Metadata rules of visibility information about an asset
+ * AssetRatingEntity
  */
-public class MetadataRov {
+public class AssetRatingEntity {
 
-    private Integer mode;
-    private Map<String, MemberHeader> collaboratorIds;
+    private Integer rating;
+    private String review;
 
-    public MetadataRov mode(Integer mode) {
-        this.mode = mode;
+    public AssetRatingEntity rating(Integer rating) {
+        this.rating = rating;
         return this;
     }
 
     /**
-     * Access mode of metadata asset
-     * @return mode
+     * user&#39;s rating of an asset
+     * @return rating
      **/
-    @JsonProperty("mode")
+    @JsonProperty("rating")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public Integer getMode() { return mode; }
-    public void setMode(Integer mode) { this.mode = mode; }
+    public Integer getRating() { return rating; }
+    public void setRating(Integer rating) { this.rating = rating; }
 
-    public MetadataRov collaboratorIds(Map<String, MemberHeader> collaboratorIds) {
-        this.collaboratorIds = collaboratorIds;
+    public AssetRatingEntity review(String review) {
+        this.review = review;
         return this;
     }
 
     /**
-     * List of collaborators that can access metadata asset
-     * @return collaboratorIds
+     * user&#39;s review of an asset
+     * @return review
      **/
     @javax.annotation.Nullable
-    @JsonProperty("collaborator_ids")
+    @JsonProperty("review")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, MemberHeader> getCollaboratorIds() { return collaboratorIds; }
-    public void setCollaboratorIds(Map<String, MemberHeader> collaboratorIds) { this.collaboratorIds = collaboratorIds; }
+    public String getReview() { return review; }
+    public void setReview(String review) { this.review = review; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataRov metadataUsage = (MetadataRov)o;
-        return Objects.equals(this.mode, metadataUsage.mode) &&
-                Objects.equals(this.collaboratorIds, metadataUsage.collaboratorIds);
+        AssetRatingEntity assetRatingEntity = (AssetRatingEntity)o;
+        return Objects.equals(this.rating, assetRatingEntity.rating) &&
+                Objects.equals(this.review, assetRatingEntity.review);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mode, collaboratorIds);
+        return Objects.hash(rating, review);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataRov {\n");
-        sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
-        sb.append("    collaboratorIds: ").append(toIndentedString(collaboratorIds)).append("\n");
+        sb.append("class AssetRatingEntity {\n");
+        sb.append("    rating: ").append(toIndentedString(rating)).append("\n");
+        sb.append("    review: ").append(toIndentedString(review)).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -17,21 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * List of results for a find assets by type request
  */
-@ApiModel(description = "List of results for a find assets by type request")
 public class FindAssetsResponse {
 
-    public static final String JSON_PROPERTY_TOTAL_ROWS = "total_rows";
     private Integer totalRows;
-
-    public static final String JSON_PROPERTY_RESULTS = "results";
     private List<MetadataAssetResult> results;
 
     public FindAssetsResponse totalRows(Integer totalRows) {
@@ -44,9 +38,8 @@ public class FindAssetsResponse {
      * @return totalRows
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_TOTAL_ROWS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonProperty("total_rows")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
 
     public Integer getTotalRows() { return totalRows; }
 
@@ -62,9 +55,8 @@ public class FindAssetsResponse {
      * @return results
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_RESULTS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonProperty("results")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
 
     public List<MetadataAssetResult> getResults() { return results; }
 
@@ -72,12 +64,8 @@ public class FindAssetsResponse {
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         FindAssetsResponse findAssetsResponse = (FindAssetsResponse)o;
         return Objects.equals(this.totalRows, findAssetsResponse.totalRows) &&
                 Objects.equals(this.results, findAssetsResponse.results);
@@ -103,9 +91,7 @@ public class FindAssetsResponse {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

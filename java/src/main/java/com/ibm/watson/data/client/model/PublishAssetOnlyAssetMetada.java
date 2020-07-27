@@ -17,67 +17,66 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Metadata rules of visibility information about an asset
+ * Publish Asset Model to publish an Asset in project which are actually not
+ * created in project
  */
-public class MetadataRov {
+public class PublishAssetOnlyAssetMetada {
 
-    private Integer mode;
-    private Map<String, MemberHeader> collaboratorIds;
+    private PublishAssetMetadata metadata;
+    private Object entity;
 
-    public MetadataRov mode(Integer mode) {
-        this.mode = mode;
+    public PublishAssetOnlyAssetMetada metadata(PublishAssetMetadata metadata) {
+        this.metadata = metadata;
         return this;
     }
 
     /**
-     * Access mode of metadata asset
-     * @return mode
+     * Get metadata
+     * @return metadata
      **/
-    @JsonProperty("mode")
+    @JsonProperty("metadata")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public Integer getMode() { return mode; }
-    public void setMode(Integer mode) { this.mode = mode; }
+    public PublishAssetMetadata getMetadata() { return metadata; }
+    public void setMetadata(PublishAssetMetadata metadata) { this.metadata = metadata; }
 
-    public MetadataRov collaboratorIds(Map<String, MemberHeader> collaboratorIds) {
-        this.collaboratorIds = collaboratorIds;
+    public PublishAssetOnlyAssetMetada entity(Object entity) {
+        this.entity = entity;
         return this;
     }
 
     /**
-     * List of collaborators that can access metadata asset
-     * @return collaboratorIds
+     * Get entity
+     * @return entity
      **/
     @javax.annotation.Nullable
-    @JsonProperty("collaborator_ids")
+    @JsonProperty("entity")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, MemberHeader> getCollaboratorIds() { return collaboratorIds; }
-    public void setCollaboratorIds(Map<String, MemberHeader> collaboratorIds) { this.collaboratorIds = collaboratorIds; }
+    public Object getEntity() { return entity; }
+    public void setEntity(Object entity) { this.entity = entity; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataRov metadataUsage = (MetadataRov)o;
-        return Objects.equals(this.mode, metadataUsage.mode) &&
-                Objects.equals(this.collaboratorIds, metadataUsage.collaboratorIds);
+        PublishAssetOnlyAssetMetada publishAssetOnlyAssetMetada = (PublishAssetOnlyAssetMetada)o;
+        return Objects.equals(this.metadata, publishAssetOnlyAssetMetada.metadata) &&
+                Objects.equals(this.entity, publishAssetOnlyAssetMetada.entity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mode, collaboratorIds);
+        return Objects.hash(metadata, entity);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataRov {\n");
-        sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
-        sb.append("    collaboratorIds: ").append(toIndentedString(collaboratorIds)).append("\n");
+        sb.append("class PublishAssetOnlyAssetMetada {\n");
+        sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+        sb.append("    entity: ").append(toIndentedString(entity)).append("\n");
         sb.append("}");
         return sb.toString();
     }

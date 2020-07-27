@@ -18,66 +18,64 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Metadata rules of visibility information about an asset
+ * Asset metadata where its published from
  */
-public class MetadataRov {
+public class AssetPublishedFrom {
 
-    private Integer mode;
-    private Map<String, MemberHeader> collaboratorIds;
+    private String projectId;
+    private String sourceUrl;
 
-    public MetadataRov mode(Integer mode) {
-        this.mode = mode;
+    public AssetPublishedFrom projectId(String projectId) {
+        this.projectId = projectId;
         return this;
     }
 
     /**
-     * Access mode of metadata asset
-     * @return mode
+     * Get projectId
+     * @return projectId
      **/
-    @JsonProperty("mode")
+    @JsonProperty("project_id")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public Integer getMode() { return mode; }
-    public void setMode(Integer mode) { this.mode = mode; }
+    public String getProjectId() { return projectId; }
+    public void setProjectId(String projectId) { this.projectId = projectId; }
 
-    public MetadataRov collaboratorIds(Map<String, MemberHeader> collaboratorIds) {
-        this.collaboratorIds = collaboratorIds;
+    public AssetPublishedFrom sourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
         return this;
     }
 
     /**
-     * List of collaborators that can access metadata asset
-     * @return collaboratorIds
+     * Get sourceUrl
+     * @return sourceUrl
      **/
-    @javax.annotation.Nullable
-    @JsonProperty("collaborator_ids")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, MemberHeader> getCollaboratorIds() { return collaboratorIds; }
-    public void setCollaboratorIds(Map<String, MemberHeader> collaboratorIds) { this.collaboratorIds = collaboratorIds; }
+    @JsonProperty("source_url")
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
+    public String getSourceUrl() { return sourceUrl; }
+    public void setSourceUrl(String sourceUrl) { this.sourceUrl = sourceUrl; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataRov metadataUsage = (MetadataRov)o;
-        return Objects.equals(this.mode, metadataUsage.mode) &&
-                Objects.equals(this.collaboratorIds, metadataUsage.collaboratorIds);
+        AssetPublishedFrom assetPublisedFrom = (AssetPublishedFrom)o;
+        return Objects.equals(this.projectId, assetPublisedFrom.projectId) &&
+                Objects.equals(this.sourceUrl, assetPublisedFrom.sourceUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mode, collaboratorIds);
+        return Objects.hash(projectId, sourceUrl);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataRov {\n");
-        sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
-        sb.append("    collaboratorIds: ").append(toIndentedString(collaboratorIds)).append("\n");
+        sb.append("class AssetPublishedFrom {\n");
+        sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
+        sb.append("    sourceUrl: ").append(toIndentedString(sourceUrl)).append("\n");
         sb.append("}");
         return sb.toString();
     }
