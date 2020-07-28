@@ -13,24 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ibm.watson.data.client.model;
+package com.ibm.watson.data.client.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * The associated project storage type.
- */
-public enum StorageType {
+public enum SecureGateway {
 
-    // TODO: check the actual value of this enumeration (asset files below needed to be corrected)
-    BMCOS_OBJECT_STORAGE("bmcos_object_storage"),
+    OPTIONAL("optional"),
 
-    ASSET_FILES_STORAGE("assetfiles");
+    REQUIRED("required"),
+
+    NOT_APPLICABLE("not_applicable");
 
     private String value;
 
-    StorageType(String value) { this.value = value; }
+    SecureGateway(String value) { this.value = value; }
 
     @JsonValue
     public String getValue() {
@@ -43,8 +41,8 @@ public enum StorageType {
     }
 
     @JsonCreator
-    public static StorageType fromValue(String value) {
-        for (StorageType b : StorageType.values()) {
+    public static SecureGateway fromValue(String value) {
+        for (SecureGateway b : SecureGateway.values()) {
             if (b.value.equals(value)) {
                 return b;
             }

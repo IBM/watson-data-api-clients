@@ -104,13 +104,18 @@ public class AssetMetadata extends MetadataHeader {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class AssetMetadata {\n");
+        this.toString(sb);
+        sb.append("}");
+        return sb.toString();
+    }
+
+    @Override
+    protected void toString(StringBuilder sb) {
         super.toString(sb);
         sb.append("    resourceKey: ").append(toIndentedString(resourceKey)).append("\n");
         sb.append("    rov: ").append(toIndentedString(rov)).append("\n");
         sb.append("    sourceSystem: ").append(toIndentedString(sourceSystem)).append("\n");
         sb.append("    childSourceSystems: ").append(toIndentedString(childSourceSystems)).append("\n");
-        sb.append("}");
-        return sb.toString();
     }
 
 }

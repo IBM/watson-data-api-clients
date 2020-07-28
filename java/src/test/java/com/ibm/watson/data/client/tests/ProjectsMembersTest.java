@@ -20,6 +20,8 @@ import com.ibm.watson.data.client.api.ProjectsMembersApiV2;
 import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
+import com.ibm.watson.data.client.model.enums.MemberState;
+import com.ibm.watson.data.client.model.enums.MemberType;
 import org.mockserver.client.MockServerClient;
 import org.testng.annotations.Test;
 

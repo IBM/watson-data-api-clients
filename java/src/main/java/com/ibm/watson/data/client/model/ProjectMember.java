@@ -17,37 +17,19 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.ibm.watson.data.client.model.enums.MemberState;
+import com.ibm.watson.data.client.model.enums.MemberType;
 import java.util.Objects;
 
 /**
  * A project member.
  */
-@ApiModel(description = "A project member.")
-@JsonPropertyOrder({
-        ProjectMember.JSON_PROPERTY_ID,
-        ProjectMember.JSON_PROPERTY_ROLE,
-        ProjectMember.JSON_PROPERTY_STATE,
-        ProjectMember.JSON_PROPERTY_TYPE,
-        ProjectMember.JSON_PROPERTY_USER_NAME
-})
 public class ProjectMember {
 
-    public static final String JSON_PROPERTY_ID = "id";
     private String id;
-
-    public static final String JSON_PROPERTY_ROLE = "role";
     private String role;
-
-    public static final String JSON_PROPERTY_STATE = "state";
     private MemberState state = MemberState.ACTIVE;
-
-    public static final String JSON_PROPERTY_TYPE = "type";
     private MemberType type = MemberType.USER;
-
-    public static final String JSON_PROPERTY_USER_NAME = "user_name";
     private String userName;
 
     public ProjectMember id(String id) {
@@ -61,17 +43,9 @@ public class ProjectMember {
      * @return id
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example = "IBMid-55000353XF",
-            value =
-                    "The IAM ID of the project member. This field is required for project members with the 'ACTIVE' state.")
-    @JsonProperty(JSON_PROPERTY_ID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getId() {
-        return id;
-    }
-
+    @JsonProperty("id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
     public ProjectMember role(String role) {
@@ -83,14 +57,9 @@ public class ProjectMember {
      * Get role
      * @return role
      **/
-    @ApiModelProperty(required = true, value = "")
-    @JsonProperty(JSON_PROPERTY_ROLE)
+    @JsonProperty("role")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getRole() {
-        return role;
-    }
-
+    public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
     public ProjectMember state(MemberState state) {
@@ -103,14 +72,9 @@ public class ProjectMember {
      * @return state
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_STATE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public MemberState getState() {
-        return state;
-    }
-
+    @JsonProperty("state")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public MemberState getState() { return state; }
     public void setState(MemberState state) { this.state = state; }
 
     public ProjectMember type(MemberType type) {
@@ -123,14 +87,9 @@ public class ProjectMember {
      * @return type
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_TYPE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public MemberType getType() {
-        return type;
-    }
-
+    @JsonProperty("type")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public MemberType getType() { return type; }
     public void setType(MemberType type) { this.type = type; }
 
     public ProjectMember userName(String userName) {
@@ -144,27 +103,15 @@ public class ProjectMember {
      *match.
      * @return userName
      **/
-    @ApiModelProperty(
-            example = "zapp.brannigan@ibm.com", required = true,
-            value =
-                    "The username of the project member. If the member type is 'service', then the 'user_name' and 'id' fields must match.")
-    @JsonProperty(JSON_PROPERTY_USER_NAME)
+    @JsonProperty("user_name")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getUserName() {
-        return userName;
-    }
-
+    public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ProjectMember projectMember = (ProjectMember)o;
         return Objects.equals(this.id, projectMember.id) &&
                 Objects.equals(this.role, projectMember.role) &&
@@ -196,9 +143,7 @@ public class ProjectMember {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

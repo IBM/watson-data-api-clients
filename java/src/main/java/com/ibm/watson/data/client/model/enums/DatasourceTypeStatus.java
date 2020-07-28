@@ -13,24 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ibm.watson.data.client.model;
+package com.ibm.watson.data.client.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * The state of the project member. This field is only supported for members of
- * type &#39;user&#39;.
- */
-public enum MemberState {
+public enum DatasourceTypeStatus {
 
-    ACTIVE("ACTIVE"),
+    ACTIVE("active"),
 
-    PENDING("PENDING");
+    DEPRECATED("deprecated"),
+
+    INACTIVE("inactive"),
+
+    INTERNAL("internal"),
+
+    PENDING("pending"),
+
+    SYSTEM("system");
 
     private String value;
 
-    MemberState(String value) { this.value = value; }
+    DatasourceTypeStatus(String value) { this.value = value; }
 
     @JsonValue
     public String getValue() {
@@ -43,8 +47,8 @@ public enum MemberState {
     }
 
     @JsonCreator
-    public static MemberState fromValue(String value) {
-        for (MemberState b : MemberState.values()) {
+    public static DatasourceTypeStatus fromValue(String value) {
+        for (DatasourceTypeStatus b : DatasourceTypeStatus.values()) {
             if (b.value.equals(value)) {
                 return b;
             }

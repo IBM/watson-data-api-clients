@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ibm.watson.data.client.model;
+package com.ibm.watson.data.client.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * The category of an asset.
- */
-public enum AssetCategory {
+public enum DataShape {
 
-    USER("USER"),
+    RECTANGULAR("rectangular"),
 
-    SYSTEM("SYSTEM");
+    STRUCTURED("structured"),
+
+    UNSTRUCTURED("unstructured");
 
     private String value;
 
-    AssetCategory(String value) { this.value = value; }
+    DataShape(String value) { this.value = value; }
 
     @JsonValue
     public String getValue() {
@@ -42,8 +41,8 @@ public enum AssetCategory {
     }
 
     @JsonCreator
-    public static AssetCategory fromValue(String value) {
-        for (AssetCategory b : AssetCategory.values()) {
+    public static DataShape fromValue(String value) {
+        for (DataShape b : DataShape.values()) {
             if (b.value.equals(value)) {
                 return b;
             }

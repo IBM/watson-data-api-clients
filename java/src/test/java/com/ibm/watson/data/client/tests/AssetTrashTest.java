@@ -19,6 +19,7 @@ import com.ibm.watson.data.client.api.AssetTrashApiV2;
 import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
+import com.ibm.watson.data.client.model.enums.AssetCategory;
 import org.mockserver.client.MockServerClient;
 import org.testng.annotations.Test;
 
