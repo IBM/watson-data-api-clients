@@ -44,6 +44,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         new ProjectsTest().init(mockServerClient);
         new ProjectsIntegrationsTest().init(mockServerClient);
         new ProjectsSettingsTest().init(mockServerClient);
+        new ProjectsTokensTest().init(mockServerClient);
         new RoleManagementTest().init(mockServerClient);
         new TransactionalProjectsTest().init(mockServerClient);
         new UserManagementTest().init(mockServerClient);

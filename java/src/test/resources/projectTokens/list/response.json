@@ -1,0 +1,18 @@
+{
+  "tokens": [
+    {
+      "token": "p-f366bec7608543540078247a3cdfb2775bc10cc6",
+      "guid": "d1126bf1-6617-41f8-984b-750ea6e96c2f",
+      "name": "Test Token",
+      "scopes": [
+        {
+          "audience": "project",
+          "guid": "f0bd7b72-f690-4b65-9edb-7a430fa658d9",
+          "role": "viewer"
+        }
+      ],
+      "created_at": "2020-07-29T11:05:48.537Z",
+      "last_used_at": "2020-07-29T11:05:48.537Z"
+    }
+  ]
+}
