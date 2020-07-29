@@ -42,13 +42,6 @@ public class ProjectsSettingsTest extends AbstractExpectations {
         super(ProjectsSettingsApiV2.BASE_API, "projectSettings");
     }
 
-    private final Map<String, List<String>> params = new HashMap<>();
-    private void setupParams() {
-        List<String> catalog = new ArrayList<>();
-        catalog.add(CATALOG_GUID);
-        params.put("catalog_id", catalog);
-    }
-
     @Override
     public void init(MockServerClient client) {
         injectIntoBaseUrl("{guid}", PROJECT_GUID);
