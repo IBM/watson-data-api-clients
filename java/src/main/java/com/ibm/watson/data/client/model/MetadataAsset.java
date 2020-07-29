@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +28,7 @@ import java.util.Objects;
  */
 public class MetadataAsset extends MetadataHeader {
 
+    private String resourceKey;
     private MetadataRov rov;
     private String projectId;
     private String sandboxId;
@@ -47,8 +49,21 @@ public class MetadataAsset extends MetadataHeader {
     private List<String> assetAttributes;
     private String assetId;
     private SourceAsset sourceAsset;
+    private SourceSystem sourceSystem;
+    private List<SourceSystem> childSourceSystems = null;
     private Long revisionId;
     private CommitInfo commitInfo;
+
+    public MetadataAsset resourceKey(String resourceKey) {
+        this.resourceKey = resourceKey;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("resource_key")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getResourceKey() { return resourceKey; }
+    public void setResourceKey(String resourceKey) { this.resourceKey = resourceKey; }
 
     public MetadataAsset rov(MetadataRov rov) {
         this.rov = rov;
@@ -248,6 +263,36 @@ public class MetadataAsset extends MetadataHeader {
     public SourceAsset getSourceAsset() { return sourceAsset; }
     public void setSourceAsset(SourceAsset sourceAsset) { this.sourceAsset = sourceAsset; }
 
+    public MetadataAsset sourceSystem(SourceSystem sourceSystem) {
+        this.sourceSystem = sourceSystem;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("source_system")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public SourceSystem getSourceSystem() { return sourceSystem; }
+    public void setSourceSystem(SourceSystem sourceSystem) { this.sourceSystem = sourceSystem; }
+
+    public MetadataAsset childSourceSystems(List<SourceSystem> childSourceSystems) {
+        this.childSourceSystems = childSourceSystems;
+        return this;
+    }
+
+    public MetadataAsset addChildSourceSystemsItem(SourceSystem childSourceSystemsItem) {
+        if (this.childSourceSystems == null) {
+            this.childSourceSystems = new ArrayList<>();
+        }
+        this.childSourceSystems.add(childSourceSystemsItem);
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("child_source_systems")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<SourceSystem> getChildSourceSystems() { return childSourceSystems; }
+    public void setChildSourceSystems(List<SourceSystem> childSourceSystems) { this.childSourceSystems = childSourceSystems; }
+
     public MetadataAsset revisionId(Long revisionId) {
         this.revisionId = revisionId;
         return this;
@@ -276,6 +321,7 @@ public class MetadataAsset extends MetadataHeader {
         if (o == null || getClass() != o.getClass()) { return false; }
         MetadataAsset that = (MetadataAsset)o;
         return super.equals(o) &&
+                Objects.equals(this.resourceKey, that.resourceKey) &&
                 Objects.equals(this.rov, that.rov) &&
                 Objects.equals(this.projectId, that.projectId) &&
                 Objects.equals(this.sandboxId, that.sandboxId) &&
@@ -294,22 +340,32 @@ public class MetadataAsset extends MetadataHeader {
                 Objects.equals(this.assetAttributes, that.assetAttributes) &&
                 Objects.equals(this.assetId, that.assetId) &&
                 Objects.equals(this.sourceAsset, that.sourceAsset) &&
+                Objects.equals(this.sourceSystem, that.sourceSystem) &&
+                Objects.equals(this.childSourceSystems, that.childSourceSystems) &&
                 Objects.equals(this.revisionId, that.revisionId) &&
                 Objects.equals(this.commitInfo, that.commitInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), rov, projectId, sandboxId, usage, deleteProcessingState, deleteReason,
-                rating, totalRatings, catalogId, created, createdAt, ownerId, size, version, assetState,
-                assetAttributes, assetId, sourceAsset, revisionId, commitInfo);
+        return Objects.hash(super.hashCode(), resourceKey, rov, projectId, sandboxId, usage, deleteProcessingState,
+                deleteReason, rating, totalRatings, catalogId, created, createdAt, ownerId, size, version, assetState,
+                assetAttributes, assetId, sourceAsset, sourceSystem, childSourceSystems, revisionId, commitInfo);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class MetadataAsset {\n");
+        this.toString(sb);
+        sb.append("}");
+        return sb.toString();
+    }
+
+    @Override
+    public void toString(StringBuilder sb) {
         super.toString(sb);
+        sb.append("    resourceKey: ").append(toIndentedString(resourceKey)).append("\n");
         sb.append("    rov: ").append(toIndentedString(rov)).append("\n");
         sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
         sb.append("    sandboxId: ").append(toIndentedString(sandboxId)).append("\n");
@@ -328,10 +384,10 @@ public class MetadataAsset extends MetadataHeader {
         sb.append("    assetAttributes: ").append(toIndentedString(assetAttributes)).append("\n");
         sb.append("    assetId: ").append(toIndentedString(assetId)).append("\n");
         sb.append("    sourceAsset: ").append(toIndentedString(sourceAsset)).append("\n");
+        sb.append("    sourceSystem: ").append(toIndentedString(sourceSystem)).append("\n");
+        sb.append("    childSourceSystems: ").append(toIndentedString(childSourceSystems)).append("\n");
         sb.append("    revisionId: ").append(toIndentedString(revisionId)).append("\n");
         sb.append("    commitInfo: ").append(toIndentedString(commitInfo)).append("\n");
-        sb.append("}");
-        return sb.toString();
     }
 
 }

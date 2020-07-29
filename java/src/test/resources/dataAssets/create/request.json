@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "name": "test_file.csv",
+    "description": "",
+    "asset_type": "data_asset",
+    "origin_country": "GB"
+  },
+  "entity": {
+    "data_asset": {
+      "mime_type": "text/csv",
+      "dataset": true,
+      "columns": []
+    }
+  }
+}

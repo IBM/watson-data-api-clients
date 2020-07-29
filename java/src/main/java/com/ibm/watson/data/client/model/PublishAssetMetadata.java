@@ -22,7 +22,7 @@ import java.util.Objects;
 /**
  * Publish Asset Metadata
  */
-public class PublishAssetMetadata extends AssetMetadata {
+public class PublishAssetMetadata extends MetadataAsset {
 
     private AssetPublishedFrom publishedFrom;
     private AssetPublishedTo publishedTo;

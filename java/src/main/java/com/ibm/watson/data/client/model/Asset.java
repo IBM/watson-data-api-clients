@@ -17,9 +17,8 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+
+import java.util.*;
 
 /**
  * Asset Model
@@ -27,7 +26,7 @@ import java.util.Objects;
 public class Asset {
 
     private MetadataAsset metadata;
-    private Object entity;
+    private Map<String, Object> entity = null;
     private List<Attachment> attachments = null;
 
     public Asset metadata(MetadataAsset metadata) {
@@ -40,16 +39,24 @@ public class Asset {
     public MetadataAsset getMetadata() { return metadata; }
     public void setMetadata(MetadataAsset metadata) { this.metadata = metadata; }
 
-    public Asset entity(Object entity) {
+    public Asset entity(Map<String, Object> entity) {
         this.entity = entity;
+        return this;
+    }
+
+    public Asset putEntityItem(String key, Object entityItem) {
+        if (this.entity == null) {
+            this.entity = new HashMap<>();
+        }
+        this.entity.put(key, entityItem);
         return this;
     }
 
     @javax.annotation.Nullable
     @JsonProperty("entity")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Object getEntity() { return entity; }
-    public void setEntity(Object entity) { this.entity = entity; }
+    public Map<String, Object> getEntity() { return entity; }
+    public void setEntity(Map<String, Object> entity) { this.entity = entity; }
 
     public Asset attachments(List<Attachment> attachments) {
         this.attachments = attachments;
