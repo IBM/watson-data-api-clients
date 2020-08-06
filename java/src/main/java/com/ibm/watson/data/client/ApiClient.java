@@ -39,10 +39,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -455,6 +452,33 @@ public class ApiClient {
                 path, method, pathParams, queryParams, body, headerParams, cookieParams,
                 formParams, accept, contentType);
         return requestBuilder.retrieve().bodyToMono(returnType);
+    }
+
+    /**
+     * Invoke API by sending HTTP request with the given options, where no response is expected (but other details
+     * like headers are of relevance).
+     *
+     * @param path The sub-path of the HTTP URL
+     * @param method The request method
+     * @param pathParams The path parameters
+     * @param queryParams The query parameters
+     * @param body The request body object
+     * @param headerParams The header parameters
+     * @param formParams The form parameters
+     * @param accept The request's Accept header
+     * @param contentType The request's Content-Type header
+     * @return The response body in chosen type
+     */
+    public Mono<ResponseEntity<Void>> invokeAPI(
+            String path, HttpMethod method, Map<String, Object> pathParams,
+            MultiValueMap<String, String> queryParams, Object body,
+            HttpHeaders headerParams, MultiValueMap<String, String> cookieParams,
+            MultiValueMap<String, Object> formParams, List<MediaType> accept,
+            MediaType contentType) throws RestClientException {
+        final WebClient.RequestBodySpec requestBuilder = prepareRequest(
+                path, method, pathParams, queryParams, body, headerParams, cookieParams,
+                formParams, accept, contentType);
+        return requestBuilder.retrieve().toBodilessEntity();
     }
 
     /**

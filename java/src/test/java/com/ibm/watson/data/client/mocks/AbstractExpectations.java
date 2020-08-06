@@ -55,6 +55,18 @@ public abstract class AbstractExpectations {
     public abstract void init(MockServerClient client);
 
     /**
+     * Retrieve the base URL of the expectations.
+     * @return baseUrl
+     */
+    public String getBaseUrl() { return baseUrl; }
+
+    /**
+     * Retrieve the area of the expectations
+     * @return area
+     */
+    public String getArea() { return area; }
+
+    /**
      * Inject the provided parameter name into the base URL by replacing it with the replacement string.
      * @param name of the parameter
      * @param replacement for the parameter
@@ -108,7 +120,7 @@ public abstract class AbstractExpectations {
 
     }
 
-    private String getEncodedURI(String endpoint) {
+    protected String getEncodedURI(String endpoint) {
         String encoded = null;
         try {
             URI roleEndpoint = new URI(null, null, endpoint, null);

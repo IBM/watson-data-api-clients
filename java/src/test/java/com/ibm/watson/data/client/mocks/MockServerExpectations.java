@@ -31,13 +31,16 @@ public class MockServerExpectations implements PluginExpectationInitializer {
     @Override
     public void initializeExpectations(MockServerClient mockServerClient) {
 
-        new AuthorizationTest().init(mockServerClient);
         new AccountManagementTest().init(mockServerClient);
+        new AssetAttachmentsTest().init(mockServerClient);
+        new AssetFilesTest().init(mockServerClient);
         new AssetsTest().init(mockServerClient);
         new AssetTrashTest().init(mockServerClient);
         new AssetTypesTest().init(mockServerClient);
+        new AuthorizationTest().init(mockServerClient);
         new CatalogTest().init(mockServerClient);
         new CatalogMembersTest().init(mockServerClient);
+        new ConnectionsTest().init(mockServerClient);
         new DataAssetsTest().init(mockServerClient);
         new DatasourceTypesTest().init(mockServerClient);
         new MonitorTest().init(mockServerClient);

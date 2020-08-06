@@ -53,6 +53,7 @@ public class MockConstants {
     public static final String ASSET_RATING_G = MockConstants.NEW_ASSET_GUID + "_" + MockConstants.EXSTUSER_GUID;
     public static final String CLONED_ASTGUID = "6482aa36-d979-48d0-a036-d7da6fbc4eff";
     public static final String DATAASSET_GUID = "ec9f4f72-5af0-476e-a69c-3124a06fb6eb";
+    public static final String CONNECTION_GUID = "99845973-050b-482b-b900-a13a75865258";
 
     public static ApiClient getApiClient() {
         ApiClient apiClient = new ApiClient(false);
