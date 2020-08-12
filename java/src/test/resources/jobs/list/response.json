@@ -1,0 +1,29 @@
+{
+  "total_rows": 1,
+  "results": [
+    {
+      "metadata": {
+        "name": "Test Job",
+        "description": "",
+        "asset_id": "3bb8f0ac-5eea-4c4a-b94b-a53a6fffdec9",
+        "owner_id": "1000331004",
+        "version": 0
+      },
+      "entity": {
+        "job": {
+          "asset_ref": "046a6b3c-fc32-4905-a287-fac2486c6b20",
+          "asset_ref_type": "data_flow",
+          "configuration": {
+            "env_id": "shaper_rruntime",
+            "env_type": "shaper_rruntime",
+            "env_variables": []
+          },
+          "last_run_initiator": "None",
+          "last_run_time": "",
+          "last_run_status": "None",
+          "last_run_status_timestamp": 0
+        }
+      }
+    }
+  ]
+}

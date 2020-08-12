@@ -1,0 +1,9 @@
+{
+  "job": {
+    "asset_ref": "046a6b3c-fc32-4905-a287-fac2486c6b20",
+    "name": "Test Job",
+    "configuration": {
+      "env_id": "shaper_rruntime"
+    }
+  }
+}

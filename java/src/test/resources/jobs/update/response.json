@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "rov": {
+      "mode": 0,
+      "collaborator_ids": {}
+    },
+    "project_id": "f0bd7b72-f690-4b65-9edb-7a430fa658d9",
+    "sandbox_id": "f0bd7b72-f690-4b65-9edb-7a430fa658d9",
+    "usage": {
+      "last_updated_at": "2020-08-12T20:19:24Z",
+      "last_updater_id": "1000331004",
+      "last_update_time": 1597263564418,
+      "last_accessed_at": "2020-08-12T20:19:24Z",
+      "last_access_time": 1597263564418,
+      "last_accessor_id": "1000331004",
+      "access_count": 0
+    },
+    "name": "Test Job",
+    "description": "New description of the job.",
+    "tags": [],
+    "asset_type": "job",
+    "origin_country": "us",
+    "rating": 0,
+    "total_ratings": 0,
+    "catalog_id": "2ea819ce-95b5-4e11-8d46-dd1ba8865f14",
+    "created": 1597240856908,
+    "created_at": "2020-08-12T14:00:56Z",
+    "owner_id": "1000331004",
+    "size": 0,
+    "version": 2,
+    "asset_state": "available",
+    "asset_attributes": [
+      "job"
+    ],
+    "asset_id": "3bb8f0ac-5eea-4c4a-b94b-a53a6fffdec9",
+    "asset_category": "USER"
+  },
+  "entity": {
+    "job": {
+      "asset_ref": "046a6b3c-fc32-4905-a287-fac2486c6b20",
+      "asset_ref_type": "data_flow",
+      "configuration": {
+        "env_id": "shaper_rruntime",
+        "env_type": "shaper_rruntime",
+        "env_variables": []
+      },
+      "last_run_initiator": "None",
+      "last_run_time": "",
+      "last_run_status": "None",
+      "last_run_status_timestamp": 0
+    }
+  },
+  "href": "/v2/assets/3bb8f0ac-5eea-4c4a-b94b-a53a6fffdec9?project_id=f0bd7b72-f690-4b65-9edb-7a430fa658d9"
+}

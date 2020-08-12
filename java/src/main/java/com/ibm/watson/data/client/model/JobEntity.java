@@ -17,49 +17,59 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * Metadata rules of visibility information about an asset
+ * The underlying job definition.
  */
-public class MetadataRov extends BaseRov {
+public class JobEntity {
 
-    private Map<String, MemberHeader> collaboratorIds;
+    private JobEntityJob job;
+
+    public JobEntity job(JobEntityJob job) {
+        this.job = job;
+        return this;
+    }
 
     /**
-     * List of collaborators that can access metadata asset
-     * @return collaboratorIds
+     * Get job
+     * @return job
      **/
     @javax.annotation.Nullable
-    @JsonProperty("collaborator_ids")
+    @JsonProperty("job")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, MemberHeader> getCollaboratorIds() { return collaboratorIds; }
-    public void setCollaboratorIds(Map<String, MemberHeader> collaboratorIds) { this.collaboratorIds = collaboratorIds; }
+    public JobEntityJob getJob() { return job; }
+    public void setJob(JobEntityJob job) { this.job = job; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataRov metadataUsage = (MetadataRov)o;
-        return super.equals(o) &&
-                Objects.equals(this.collaboratorIds, metadataUsage.collaboratorIds);
+        JobEntity jobEntity = (JobEntity)o;
+        return Objects.equals(this.job, jobEntity.job);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), collaboratorIds);
+        return Objects.hash(job);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataRov {\n");
-        super.toString(sb);
-        sb.append("    collaboratorIds: ").append(toIndentedString(collaboratorIds)).append("\n");
+        sb.append("class JobEntity {\n");
+        sb.append("    job: ").append(toIndentedString(job)).append("\n");
         sb.append("}");
         return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) { return "null"; }
+        return o.toString().replace("\n", "\n    ");
     }
 
 }
