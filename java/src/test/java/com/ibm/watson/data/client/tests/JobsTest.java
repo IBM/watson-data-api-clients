@@ -33,7 +33,7 @@ import static com.ibm.watson.data.client.mocks.MockConstants.*;
 import static org.testng.Assert.*;
 
 /**
- * Test the Asset Trash API endpoints.
+ * Test the Jobs API endpoints.
  */
 public class JobsTest extends AbstractExpectations {
 
