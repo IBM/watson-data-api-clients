@@ -1,0 +1,12 @@
+{
+  "resources": [
+    {
+      "href": "/v3/glossary_terms/57904012-45da-4995-9dfb-84daa372ce7a/versions/e0c87bc9-93eb-4c84-a3e3-e5fd309d3c6b/relationships/34b4ace9-f337-4ec3-8689-5bf14dd71375/57904012-45da-4995-9dfb-84daa372ce7a/versions/e0c87bc9-93eb-4c84-a3e3-e5fd309d3c6b",
+      "artifact_id": "57904012-45da-4995-9dfb-84daa372ce7a",
+      "version_id": "e0c87bc9-93eb-4c84-a3e3-e5fd309d3c6b",
+      "workflow_id": "937c841f-e083-11ea-8c06-0a580a810041",
+      "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_57904012-45da-4995-9dfb-84daa372ce7a",
+      "entity_type": "glossary_term"
+    }
+  ]
+}

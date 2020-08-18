@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "artifact_type": "glossary_term",
+    "artifact_id": "57904012-45da-4995-9dfb-84daa372ce7a",
+    "version_id": "e0c87bc9-93eb-4c84-a3e3-e5fd309d3c6b",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_57904012-45da-4995-9dfb-84daa372ce7a",
+    "workflow_id": "937c841f-e083-11ea-8c06-0a580a810041",
+    "draft_mode": "created",
+    "created_by": "1000331004",
+    "created_at": "2020-08-17T12:17:11.749Z",
+    "modified_by": "1000331004",
+    "modified_at": "2020-08-18T13:44:58.012Z",
+    "revision": "1",
+    "name": "Test Term",
+    "short_description": "A new term to test the API.",
+    "state": "DRAFT",
+    "tags": [],
+    "steward_ids": [],
+    "workflow_state": "Not started",
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "abbreviation": "TT",
+    "abbreviations": [
+      "TT"
+    ],
+    "long_description": "This is an updated term description.",
+    "state": "DRAFT",
+    "default_locale_id": "en-US",
+    "custom_attributes": [
+      {
+        "custom_attribute_definition_id": "8a0b793d-5f40-4c4e-8a2e-ae05f23cf4f4",
+        "name": "My Custom Attribute 1",
+        "values": []
+      }
+    ]
+  }
+}

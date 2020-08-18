@@ -56,6 +56,9 @@ public class MockConstants {
     public static final String CONNECTION_GUID = "99845973-050b-482b-b900-a13a75865258";
     public static final String NEW_JOB_GUID   = "3bb8f0ac-5eea-4c4a-b94b-a53a6fffdec9";
     public static final String JOB_RUN_GUID   = "d1198807-fd02-4725-b571-7059c604cba4";
+    public static final String NEW_TERM_GUID  = "57904012-45da-4995-9dfb-84daa372ce7a";
+    public static final String WORKFLOW_GUID  = "937c841f-e083-11ea-8c06-0a580a810041";
+    public static final String REPOSITORY_ID  = "5d2d5419-0032-4c64-90e2-ce68c6997bb5";
 
     public static ApiClient getApiClient() {
         ApiClient apiClient = new ApiClient(false);

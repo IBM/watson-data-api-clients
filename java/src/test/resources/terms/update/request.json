@@ -1,0 +1,7 @@
+{
+  "name": "Test Term",
+  "short_description": "A new term to test the API.",
+  "long_description": "This is an updated term description.",
+  "abbreviations": [ "TT" ],
+  "revision": "0"
+}

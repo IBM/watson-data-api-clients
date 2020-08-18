@@ -38,6 +38,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         new AssetTrashTest().init(mockServerClient);
         new AssetTypesTest().init(mockServerClient);
         new AuthorizationTest().init(mockServerClient);
+        new BusinessTermsTest().init(mockServerClient);
         new CatalogTest().init(mockServerClient);
         new CatalogMembersTest().init(mockServerClient);
         new ConnectionsTest().init(mockServerClient);
@@ -54,6 +55,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         new RoleManagementTest().init(mockServerClient);
         new TransactionalProjectsTest().init(mockServerClient);
         new UserManagementTest().init(mockServerClient);
+        new WorkflowsTest().init(mockServerClient);
 
     }
 

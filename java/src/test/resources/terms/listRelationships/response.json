@@ -1,0 +1,43 @@
+{
+  "classifications": {
+    "offset": 0,
+    "last": {
+      "href": "/v3/glossary_terms/57904012-45da-4995-9dfb-84daa372ce7a/versions/e0c87bc9-93eb-4c84-a3e3-e5fd309d3c6b/relationships?offset=0&type=classifications"
+    },
+    "resources": [
+      {
+        "metadata": {
+          "artifact_type": "relationship",
+          "artifact_id": "34b4ace9-f337-4ec3-8689-5bf14dd71375",
+          "version_id": "d58daba2-e1f3-48d8-96f0-8fc9c7a4a269",
+          "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_34b4ace9-f337-4ec3-8689-5bf14dd71375",
+          "workflow_id": "937c841f-e083-11ea-8c06-0a580a810041",
+          "draft_mode": "created",
+          "created_by": "1000331004",
+          "created_at": "2020-08-18T11:21:39.640Z",
+          "modified_by": "1000331004",
+          "modified_at": "2020-08-18T11:21:39.640Z",
+          "revision": "0",
+          "state": "DRAFT",
+          "read_only": false,
+          "remove_start_date": false,
+          "remove_end_date": false
+        },
+        "entity": {
+          "target_id": "d5678989-476e-4c1c-ba94-4396e5c95567",
+          "target_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_d5678989-476e-4c1c-ba94-4396e5c95567",
+          "target_name": "Confidential",
+          "relationship_type": "related",
+          "source_type": "glossary_term",
+          "target_type": "classification"
+        }
+      }
+    ],
+    "limit": 10,
+    "count": 1,
+    "first": {
+      "href": "/v3/glossary_terms/57904012-45da-4995-9dfb-84daa372ce7a/versions/e0c87bc9-93eb-4c84-a3e3-e5fd309d3c6b/relationships?offset=0&type=classifications"
+    }
+  }
+}
