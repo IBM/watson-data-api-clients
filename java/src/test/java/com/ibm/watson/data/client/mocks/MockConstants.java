@@ -59,6 +59,8 @@ public class MockConstants {
     public static final String NEW_TERM_GUID  = "57904012-45da-4995-9dfb-84daa372ce7a";
     public static final String WORKFLOW_GUID  = "937c841f-e083-11ea-8c06-0a580a810041";
     public static final String REPOSITORY_ID  = "5d2d5419-0032-4c64-90e2-ce68c6997bb5";
+    public static final String UNCATEGORY_ID  = "e39ada11-8338-3704-90e3-681a71e7c839";
+    public static final String CUSTOM_ATTR_ID = "15c217fd-d8bf-4f88-a80c-92645d3613f4";
 
     public static ApiClient getApiClient() {
         ApiClient apiClient = new ApiClient(false);
@@ -137,6 +139,7 @@ public class MockConstants {
 
     /**
      * Retrieve the contents of a test resource file.
+     * @param filename of the resource file
      * @return String
      */
     public static String getResourceFileContents(String filename) {
@@ -156,6 +159,24 @@ public class MockConstants {
         }
         return null;
 
+    }
+
+    /**
+     * Retrieve a test resource file.
+     * @param filename of the resource file
+     * @return File
+     */
+    public static File getFileFromResources(String filename) {
+        ClassPathResource resource = new ClassPathResource(filename);
+        if (resource.exists()) {
+            try {
+                return resource.getFile();
+            } catch (IOException e) {
+                System.err.println("Unable to convert resource file into a File object: " + filename);
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 }

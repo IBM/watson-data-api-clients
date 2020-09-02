@@ -1,0 +1,118 @@
+{
+  "offset": 0,
+  "last": {
+    "href": "/v3/governance_artifact_types/glossary_term/57904012-45da-4995-9dfb-84daa372ce7a/versions/de8db9ee-4319-48c6-983f-8fd0b419a135/aggregated_logs?offset=0"
+  },
+  "resources": [
+    {
+      "log_status": "COMMENTED",
+      "metadata": {
+        "day_of_event": "2020-09-02"
+      },
+      "entities": [
+        {
+          "metadata": {
+            "id": "c2dfe1a5-0f9c-4f1c-ad07-386eed171377",
+            "asset_version_id": "de8db9ee-4319-48c6-983f-8fd0b419a135",
+            "modified_by": "1000331004",
+            "modified_at": "2020-09-02T08:47:52.119Z",
+            "created_at": "2020-09-02T08:47:52.119Z"
+          },
+          "entity": {
+            "comment": "This is a test comment.",
+            "log_status": "COMMENTED",
+            "action": "Commented",
+            "modification_details": []
+          }
+        }
+      ]
+    },
+    {
+      "log_status": "MODIFIED",
+      "metadata": {
+        "day_of_event": "2020-09-02"
+      },
+      "entities": [
+        {
+          "metadata": {
+            "id": "5252d5cf-9c7b-4dc5-b180-dd6228777277",
+            "asset_version_id": "de8db9ee-4319-48c6-983f-8fd0b419a135",
+            "modified_by": "1000331004",
+            "modified_at": "2020-09-02T08:42:57.542Z",
+            "created_at": "2020-09-02T08:42:57.542Z"
+          },
+          "entity": {
+            "log_status": "MODIFIED",
+            "modification_details": [
+              {
+                "property_name": "parent_category",
+                "property_type": "Relationship",
+                "number_of_elements": 1,
+                "additional_info": "category",
+                "action": "Added",
+                "mod_id": "5252d5cf-9c7b-4dc5-b180-dd6228777277",
+                "initial_values": [
+                  {
+                    "metadata": {
+                      "id": "5252d5cf-9c7b-4dc5-b180-dd6228777277",
+                      "modified_by": "1000331004",
+                      "modified_at": "2020-09-02T08:42:57.544Z"
+                    },
+                    "entity": {
+                      "modification_details": {
+                        "property_name": "parent_category",
+                        "new_value": "[uncategorized]",
+                        "property_type": "Relationship",
+                        "additional_info": "category",
+                        "action": "Added"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "log_status": "CREATED",
+      "metadata": {
+        "day_of_event": "2020-09-02"
+      },
+      "entities": [
+        {
+          "metadata": {
+            "id": "ba9ed1e2-fb8c-40a7-b5c3-f55354d3614d",
+            "asset_version_id": "de8db9ee-4319-48c6-983f-8fd0b419a135",
+            "modified_by": "1000331004",
+            "modified_at": "2020-09-02T08:42:57.328Z",
+            "created_at": "2020-09-02T08:42:57.328Z"
+          },
+          "entity": {
+            "log_status": "CREATED",
+            "modification_details": [
+              {
+                "property_name": "name",
+                "new_value": "Test Term",
+                "property_type": "String",
+                "action": "Added"
+              },
+              {
+                "property_name": "longDescription",
+                "new_value": "A term for testing APIs.",
+                "property_type": "String",
+                "action": "Added"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "limit": 10,
+  "count": 3,
+  "first": {
+    "href": "/v3/governance_artifact_types/glossary_term/57904012-45da-4995-9dfb-84daa372ce7a/versions/de8db9ee-4319-48c6-983f-8fd0b419a135/aggregated_logs?offset=0"
+  }
+}

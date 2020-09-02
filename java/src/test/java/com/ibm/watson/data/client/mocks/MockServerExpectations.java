@@ -44,6 +44,7 @@ public class MockServerExpectations implements PluginExpectationInitializer {
         new ConnectionsTest().init(mockServerClient);
         new DataAssetsTest().init(mockServerClient);
         new DatasourceTypesTest().init(mockServerClient);
+        new GovernanceArtifactTypesTest().init(mockServerClient);
         new JobsTest().init(mockServerClient);
         new JobRunsTest().init(mockServerClient);
         new MonitorTest().init(mockServerClient);

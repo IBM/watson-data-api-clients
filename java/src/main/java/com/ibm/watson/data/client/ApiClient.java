@@ -21,11 +21,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ibm.watson.data.client.api.AuthorizationApi;
 import com.ibm.watson.data.client.auth.Authentication;
 import com.ibm.watson.data.client.auth.HttpBearerAuth;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.Map.Entry;
@@ -39,6 +40,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -48,12 +50,15 @@ import org.springframework.http.client.reactive.ClientHttpRequest;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.codec.json.Jackson2JsonEncoder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -61,12 +66,14 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
-import javax.net.ssl.SSLException;
+import javax.net.ssl.*;
 
 /**
  * Base client for invoking API endpoints.
  */
 public class ApiClient {
+
+    private static final Log log = LogFactory.getLog(ApiClient.class);
 
     public enum CollectionFormat {
         CSV(","),
@@ -89,6 +96,8 @@ public class ApiClient {
 
     private String basePath = "http://localhost";
 
+    // We need RestTemplate for uploading files, just far too complicated with WebClient
+    private final RestTemplate restTemplate;
     private final WebClient webClient;
     private final DateFormat dateFormat;
 
@@ -108,25 +117,27 @@ public class ApiClient {
         mapper.registerModule(jnm);
 
         this.webClient = buildWebClient(mapper, disableSSLVerification);
+        this.restTemplate = buildRestTemplate(mapper, disableSSLVerification);
         this.init();
     }
 
-    public ApiClient(ObjectMapper mapper, DateFormat format, boolean disableSSLVerification) {
-        this(buildWebClient(mapper.copy(), disableSSLVerification), format);
-    }
+    /*public ApiClient(ObjectMapper mapper, DateFormat format, boolean disableSSLVerification) {
+        this(buildWebClient(mapper.copy(), disableSSLVerification), buildRestTemplate(mapper.copy(), disableSSLVerification), format);
+    }*/
 
-    public ApiClient(WebClient webClient, ObjectMapper mapper,
+/*    public ApiClient(WebClient webClient, ObjectMapper mapper,
                      DateFormat format, boolean disableSSLVerification) {
         this(Optional.ofNullable(webClient).orElseGet(
                 () -> buildWebClient(mapper.copy(), disableSSLVerification)),
                 format);
-    }
+    }*/
 
-    private ApiClient(WebClient webClient, DateFormat format) {
+    /*private ApiClient(WebClient webClient, RestTemplate restTemplate, DateFormat format) {
         this.webClient = webClient;
+        this.restTemplate = restTemplate;
         this.dateFormat = format;
         this.init();
-    }
+    }*/
 
     public DateFormat createDefaultDateFormat() {
         DateFormat dateFormat = new RFC3339DateFormat();
@@ -139,10 +150,10 @@ public class ApiClient {
     }
 
     /**
-     * Build the RestTemplate used to make HTTP requests.
+     * Build the WebClient used to make HTTP requests.
      * @param mapper object mapper
      * @param disableSSLVerification set to true to disable SSL verification
-     * @return RestTemplate
+     * @return WebClient
      */
     public static WebClient buildWebClient(ObjectMapper mapper, boolean disableSSLVerification) {
         ExchangeStrategies strategies =
@@ -172,7 +183,44 @@ public class ApiClient {
             webClient = WebClient.builder();
         }
         webClient.exchangeStrategies(strategies);
-        return webClient.build();
+        return webClient
+                //.filter(logRequest())
+                //.filter(logResponse())
+                .build();
+    }
+
+    /**
+     * Build the RestTemplate used to make multi-part (file-inclusive) HTTP requests.
+     * @param mapper object mapper
+     * @param disableSSLVerification set to true to disable SSL verification
+     * @return RestTemplate
+     */
+    public static RestTemplate buildRestTemplate(ObjectMapper mapper, boolean disableSSLVerification) {
+        if (disableSSLVerification) {
+            // Create a trust manager that does not validate certificate chains
+            TrustManager[] trustAllCerts = new TrustManager[] {
+                    new X509TrustManager() {
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) { }
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) { }
+                    }
+            };
+            // Install the all-trusting trust manager
+            try {
+                SSLContext sc = SSLContext.getInstance("SSL");
+                sc.init(null, trustAllCerts, new java.security.SecureRandom());
+                HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+                HttpsURLConnection.setDefaultHostnameVerifier ((hostname, session) -> true);
+            } catch (GeneralSecurityException e) {
+                System.err.println("Something went wrong trying to disable SSL.");
+                e.printStackTrace();
+            }
+        }
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(mapper);
+        RestTemplate template = new RestTemplate();
+        template.getMessageConverters().add(0, converter);
+        return template;
     }
 
     /**
@@ -482,6 +530,55 @@ public class ApiClient {
     }
 
     /**
+     * Invoke API by sending HTTP request with the given options, when a file needs to be uploaded as part of
+     * the request.
+     *
+     * @param path the sub-path of the HTTP URL
+     * @param method the request method
+     * @param pathParams the path parameters
+     * @param queryParams the query parameters
+     * @param file the file to be uploaded
+     * @param headerParams the header parameters
+     * @param cookieParams the cookies
+     * @param formParams the form parameters
+     * @param accept the request's Accept header
+     * @param contentType the request's Content-Type header
+     * @param returnType the return type into which to deserialize the response
+     * @param <T> the type of the response
+     * @return The response body in chosen type
+     */
+    public <T> ResponseEntity<T> invokeFileUploadAPI(
+            String path, HttpMethod method, Map<String, Object> pathParams,
+            MultiValueMap<String, String> queryParams, File file,
+            HttpHeaders headerParams, MultiValueMap<String, String> cookieParams,
+            MultiValueMap<String, Object> formParams, List<MediaType> accept,
+            MediaType contentType, ParameterizedTypeReference<T> returnType) {
+
+        updateParamsForAuth(queryParams, headerParams, cookieParams);
+
+        headerParams.setContentType(contentType);
+        headerParams.setAccept(accept);
+        // TODO: not sure if this is how cookies should really be added?
+        headerParams.addAll(cookieParams);
+
+        // Add the file to the multi-part form request
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("file", new FileSystemResource(file));
+
+        // TODO: not sure if this is how form parameters should really be added?
+        for (Entry<String, List<Object>> entry : formParams.entrySet()) {
+            String key = entry.getKey();
+            List<Object> values = entry.getValue();
+            body.add(key, values);
+        }
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headerParams);
+        String url = expandPathForRestTemplate(path, pathParams, queryParams);
+        return restTemplate.exchange(url, method, requestEntity, returnType);
+
+    }
+
+    /**
      * Invoke API by sending HTTP request with the given options.
      *
      * @param <T> the return type to use
@@ -591,61 +688,53 @@ public class ApiClient {
         }
     }
 
-    private class ApiClientHttpRequestInterceptor
-            implements ClientHttpRequestInterceptor {
-        private final Log log =
-                LogFactory.getLog(ApiClientHttpRequestInterceptor.class);
-
-        @Override
-        public ClientHttpResponse intercept(HttpRequest request, byte[] body,
-                                            ClientHttpRequestExecution execution)
-                throws IOException {
-            logRequest(request, body);
-            ClientHttpResponse response = execution.execute(request, body);
-            logResponse(response);
-            return response;
+    /**
+     * Expand path template with variables
+     * @param pathTemplate path template with placeholders
+     * @param variables variables to replace
+     * @param queryParams any query parameters to include in the URL
+     * @return path with placeholders replaced by variables
+     */
+    private String expandPathForRestTemplate(String pathTemplate,
+                                             Map<String, Object> variables,
+                                             MultiValueMap<String, String> queryParams) {
+        final UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(basePath).path(pathTemplate);
+        if (queryParams != null) {
+            builder.queryParams(queryParams);
         }
+        return restTemplate.getUriTemplateHandler().expand(builder.build(false).toUriString(), variables).toString();
+    }
 
-        private void logRequest(HttpRequest request, byte[] body) {
-            log.info("URI: " + request.getURI());
-            log.info("HTTP Method: " + request.getMethod());
-            log.info("HTTP Headers: " + headersToString(request.getHeaders()));
-            log.info("Request Body: " + new String(body, StandardCharsets.UTF_8));
-        }
+    private static ExchangeFilterFunction logRequest() {
+        return (clientRequest, next) -> {
+            log.info("Request - URI: " + clientRequest.url());
+            log.info("Request - method:" + clientRequest.method());
+            log.info("Request - headers: " + headersToString(clientRequest.headers()));
+            log.info("Request - body: " + clientRequest.body());
+            return next.exchange(clientRequest);
+        };
+    }
 
-        private void logResponse(ClientHttpResponse response) throws IOException {
-            log.info("HTTP Status Code: " + response.getRawStatusCode());
-            log.info("Status Text: " + response.getStatusText());
-            log.info("HTTP Headers: " + headersToString(response.getHeaders()));
-            log.info("Response Body: " + bodyToString(response.getBody()));
-        }
+    private static ExchangeFilterFunction logResponse() {
+        return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
+            log.info("Response - status: " + clientResponse.statusCode());
+            log.info("Response - headers: " + headersToString(clientResponse.headers().asHttpHeaders()));
+            return Mono.just(clientResponse);
+        });
+    }
 
-        private String headersToString(HttpHeaders headers) {
-            StringBuilder builder = new StringBuilder();
-            for (Entry<String, List<String>> entry : headers.entrySet()) {
-                builder.append(entry.getKey()).append("=[");
-                for (String value : entry.getValue()) {
-                    builder.append(value).append(",");
-                }
-                builder.setLength(builder.length() - 1); // Get rid of trailing comma
-                builder.append("],");
+    private static String headersToString(HttpHeaders headers) {
+        StringBuilder builder = new StringBuilder();
+        for (Entry<String, List<String>> entry : headers.entrySet()) {
+            builder.append(entry.getKey()).append("=[");
+            for (String value : entry.getValue()) {
+                builder.append(value).append(",");
             }
             builder.setLength(builder.length() - 1); // Get rid of trailing comma
-            return builder.toString();
+            builder.append("],");
         }
-
-        private String bodyToString(InputStream body) throws IOException {
-            StringBuilder builder = new StringBuilder();
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(body, StandardCharsets.UTF_8));
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                builder.append(line).append(System.lineSeparator());
-                line = bufferedReader.readLine();
-            }
-            bufferedReader.close();
-            return builder.toString();
-        }
+        builder.setLength(builder.length() - 1); // Get rid of trailing comma
+        return builder.toString();
     }
 
 }
