@@ -17,6 +17,8 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ibm.watson.data.client.model.enums.GlossaryObjectState;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +30,8 @@ public class CategoryEntity {
 
     private String longDescription;
     private List<String> stewardIds = null;
+    private GlossaryObjectState state;
+    private String defaultLocaleId;
     private List<CustomAttribute> customAttributes = null;
     private String parentCategoryId;
     private List<RelationshipObject> hasTypesCategoryRels = null;
@@ -71,6 +75,32 @@ public class CategoryEntity {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public List<String> getStewardIds() { return stewardIds; }
     public void setStewardIds(List<String> stewardIds) { this.stewardIds = stewardIds; }
+
+    public CategoryEntity state(GlossaryObjectState state) {
+        this.state = state;
+        return this;
+    }
+
+    /**
+     * State of the artifact
+     * @return state
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("state")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public GlossaryObjectState getState() { return state; }
+    public void setState(GlossaryObjectState state) { this.state = state; }
+
+    public CategoryEntity defaultLocaleId(String defaultLocaleId) {
+        this.defaultLocaleId = defaultLocaleId;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("default_locale_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDefaultLocaleId() { return defaultLocaleId; }
+    public void setDefaultLocaleId(String defaultLocaleId) { this.defaultLocaleId = defaultLocaleId; }
 
     public CategoryEntity customAttributes(List<CustomAttribute> customAttributes) {
         this.customAttributes = customAttributes;
@@ -189,6 +219,8 @@ public class CategoryEntity {
         CategoryEntity categoryEntity = (CategoryEntity)o;
         return Objects.equals(this.longDescription, categoryEntity.longDescription) &&
                 Objects.equals(this.stewardIds, categoryEntity.stewardIds) &&
+                Objects.equals(this.state, categoryEntity.state) &&
+                Objects.equals(this.defaultLocaleId, categoryEntity.defaultLocaleId) &&
                 Objects.equals(this.customAttributes, categoryEntity.customAttributes) &&
                 Objects.equals(this.parentCategoryId, categoryEntity.parentCategoryId) &&
                 Objects.equals(this.hasTypesCategoryRels, categoryEntity.hasTypesCategoryRels) &&
@@ -198,8 +230,8 @@ public class CategoryEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(longDescription, stewardIds, customAttributes,
-                parentCategoryId, hasTypesCategoryRels,
+        return Objects.hash(longDescription, stewardIds, state, defaultLocaleId,
+                customAttributes, parentCategoryId, hasTypesCategoryRels,
                 groupedAssetsRels, parentCategoryFor);
     }
 
@@ -209,6 +241,8 @@ public class CategoryEntity {
         sb.append("class CategoryEntity {\n");
         sb.append("    longDescription: ").append(toIndentedString(longDescription)).append("\n");
         sb.append("    stewardIds: ").append(toIndentedString(stewardIds)).append("\n");
+        sb.append("    state: ").append(toIndentedString(state)).append("\n");
+        sb.append("    defaultLocaleId: ").append(toIndentedString(defaultLocaleId)).append("\n");
         sb.append("    customAttributes: ").append(toIndentedString(customAttributes)).append("\n");
         sb.append("    parentCategoryId: ").append(toIndentedString(parentCategoryId)).append("\n");
         sb.append("    hasTypesCategoryRels: ").append(toIndentedString(hasTypesCategoryRels)).append("\n");
