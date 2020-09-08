@@ -32,9 +32,6 @@ public class RelationshipEntity extends AbstractRelationshipEntity {
     private String targetGlobalId;
     private String targetName;
     private String targetHref;
-    private String relationshipType;
-    private String sourceType;
-    private String targetType;
 
     public RelationshipEntity targetId(String targetId) {
         this.targetId = targetId;
@@ -96,39 +93,6 @@ public class RelationshipEntity extends AbstractRelationshipEntity {
     public String getTargetHref() { return targetHref; }
     public void setTargetHref(String targetHref) { this.targetHref = targetHref; }
 
-    public RelationshipEntity relationshipType(String relationshipType) {
-        this.relationshipType = relationshipType;
-        return this;
-    }
-
-    @javax.annotation.Nullable
-    @JsonProperty("relationship_type")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getRelationshipType() { return relationshipType; }
-    public void setRelationshipType(String relationshipType) { this.relationshipType = relationshipType; }
-
-    public RelationshipEntity sourceType(String sourceType) {
-        this.sourceType = sourceType;
-        return this;
-    }
-
-    @javax.annotation.Nullable
-    @JsonProperty("source_type")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getSourceType() { return sourceType; }
-    public void setSourceType(String sourceType) { this.sourceType = sourceType; }
-
-    public RelationshipEntity targetType(String targetType) {
-        this.targetType = targetType;
-        return this;
-    }
-
-    @javax.annotation.Nullable
-    @JsonProperty("target_type")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getTargetType() { return targetType; }
-    public void setTargetType(String targetType) { this.targetType = targetType; }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
@@ -138,16 +102,13 @@ public class RelationshipEntity extends AbstractRelationshipEntity {
                 Objects.equals(this.targetId, relationshipEntity.targetId) &&
                 Objects.equals(this.targetGlobalId, relationshipEntity.targetGlobalId) &&
                 Objects.equals(this.targetName, relationshipEntity.targetName) &&
-                Objects.equals(this.targetHref, relationshipEntity.targetHref) &&
-                Objects.equals(this.relationshipType, relationshipEntity.relationshipType) &&
-                Objects.equals(this.sourceType, relationshipEntity.sourceType) &&
-                Objects.equals(this.targetType, relationshipEntity.targetType);
+                Objects.equals(this.targetHref, relationshipEntity.targetHref);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), targetId, targetGlobalId, targetName,
-                targetHref, relationshipType, sourceType, targetType);
+                targetHref);
     }
 
     @Override
@@ -159,9 +120,6 @@ public class RelationshipEntity extends AbstractRelationshipEntity {
         sb.append("    targetGlobalId: ").append(toIndentedString(targetGlobalId)).append("\n");
         sb.append("    targetName: ").append(toIndentedString(targetName)).append("\n");
         sb.append("    targetHref: ").append(toIndentedString(targetHref)).append("\n");
-        sb.append("    relationshipType: ").append(toIndentedString(relationshipType)).append("\n");
-        sb.append("    sourceType: ").append(toIndentedString(sourceType)).append("\n");
-        sb.append("    targetType: ").append(toIndentedString(targetType)).append("\n");
         sb.append("}");
         return sb.toString();
     }

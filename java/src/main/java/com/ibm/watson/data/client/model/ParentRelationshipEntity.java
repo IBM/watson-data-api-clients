@@ -32,6 +32,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
     private String parentGlobalId;
     private String parentName;
     private String parentHref;
+    private Boolean parentEnabled;
     private String childId;
     private String childGlobalId;
     private String childName;
@@ -47,7 +48,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return parentId
      **/
     @javax.annotation.Nullable
-    @JsonProperty("parentId")
+    @JsonProperty("parent_id")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getParentId() { return parentId; }
     public void setParentId(String parentId) { this.parentId = parentId; }
@@ -62,7 +63,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return parentGlobalId
      **/
     @javax.annotation.Nullable
-    @JsonProperty("parentGlobalId")
+    @JsonProperty("parent_global_id")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getParentGlobalId() { return parentGlobalId; }
     public void setParentGlobalId(String parentGlobalId) { this.parentGlobalId = parentGlobalId; }
@@ -77,7 +78,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return parentName
      **/
     @javax.annotation.Nullable
-    @JsonProperty("parentName")
+    @JsonProperty("parent_name")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getParentName() { return parentName; }
     public void setParentName(String parentName) { this.parentName = parentName; }
@@ -92,10 +93,21 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return parentHref
      **/
     @javax.annotation.Nullable
-    @JsonProperty("parentHref")
+    @JsonProperty("parent_href")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getParentHref() { return parentHref; }
     public void setParentHref(String parentHref) { this.parentHref = parentHref; }
+
+    public ParentRelationshipEntity parentEnabled(Boolean parentEnabled) {
+        this.parentEnabled = parentEnabled;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("parent_enabled")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getParentEnabled() { return parentEnabled; }
+    public void setParentEnabled(Boolean parentEnabled) { this.parentEnabled = parentEnabled; }
 
     public ParentRelationshipEntity childId(String childId) {
         this.childId = childId;
@@ -107,7 +119,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return childId
      **/
     @javax.annotation.Nullable
-    @JsonProperty("childId")
+    @JsonProperty("child_id")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getChildId() { return childId; }
     public void setChildId(String childId) { this.childId = childId; }
@@ -122,7 +134,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return childGlobalId
      **/
     @javax.annotation.Nullable
-    @JsonProperty("childGlobalId")
+    @JsonProperty("child_global_id")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getChildGlobalId() { return childGlobalId; }
     public void setChildGlobalId(String childGlobalId) { this.childGlobalId = childGlobalId; }
@@ -137,7 +149,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return childName
      **/
     @javax.annotation.Nullable
-    @JsonProperty("childName")
+    @JsonProperty("child_name")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getChildName() { return childName; }
     public void setChildName(String childName) { this.childName = childName; }
@@ -152,7 +164,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
      * @return childHref
      **/
     @javax.annotation.Nullable
-    @JsonProperty("childHref")
+    @JsonProperty("child_href")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getChildHref() { return childHref; }
     public void setChildHref(String childHref) { this.childHref = childHref; }
@@ -167,6 +179,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
                 Objects.equals(this.parentGlobalId, parentRelationshipEntity.parentGlobalId) &&
                 Objects.equals(this.parentName, parentRelationshipEntity.parentName) &&
                 Objects.equals(this.parentHref, parentRelationshipEntity.parentHref) &&
+                Objects.equals(this.parentEnabled, parentRelationshipEntity.parentEnabled) &&
                 Objects.equals(this.childId, parentRelationshipEntity.childId) &&
                 Objects.equals(this.childGlobalId, parentRelationshipEntity.childGlobalId) &&
                 Objects.equals(this.childName, parentRelationshipEntity.childName) &&
@@ -176,7 +189,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), parentId, parentGlobalId, parentName,
-                parentHref, childId, childGlobalId, childName,
+                parentHref, parentEnabled, childId, childGlobalId, childName,
                 childHref);
     }
 
@@ -189,6 +202,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
         sb.append("    parentGlobalId: ").append(toIndentedString(parentGlobalId)).append("\n");
         sb.append("    parentName: ").append(toIndentedString(parentName)).append("\n");
         sb.append("    parentHref: ").append(toIndentedString(parentHref)).append("\n");
+        sb.append("    parentEnabled: ").append(toIndentedString(parentEnabled)).append("\n");
         sb.append("    childId: ").append(toIndentedString(childId)).append("\n");
         sb.append("    childGlobalId: ").append(toIndentedString(childGlobalId)).append("\n");
         sb.append("    childName: ").append(toIndentedString(childName)).append("\n");

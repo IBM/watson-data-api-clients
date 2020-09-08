@@ -1,0 +1,47 @@
+{
+  "parent_category": {
+    "offset": 0,
+    "last": {
+      "href": "/v3/data_classes/f1c8cd84-ce0d-435f-8613-970f6970c452/versions/ebd1af9b-8d03-414d-99e9-79dd8016900c/relationships?offset=0&type=parent_category"
+    },
+    "resources": [
+      {
+        "metadata": {
+          "artifact_type": "relationship",
+          "artifact_id": "8ca37291-f1b9-4122-8f2b-2aae230a306b",
+          "version_id": "b302cef9-4c69-414e-9d7c-b798e4132b5a",
+          "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_8ca37291-f1b9-4122-8f2b-2aae230a306b",
+          "workflow_id": "5d5ff9ae-f1ca-11ea-995d-0a580a830010",
+          "draft_mode": "created",
+          "created_by": "1000331004",
+          "created_at": "2020-09-08T13:32:22.646Z",
+          "modified_by": "1000331004",
+          "modified_at": "2020-09-08T13:32:22.646Z",
+          "revision": "0",
+          "state": "DRAFT",
+          "read_only": false,
+          "remove_start_date": false,
+          "remove_end_date": false
+        },
+        "entity": {
+          "parent_id": "a06c6237-32a4-468b-bdfe-9a09ab9bf06b",
+          "parent_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_a06c6237-32a4-468b-bdfe-9a09ab9bf06b",
+          "parent_name": "Test Category",
+          "parent_enabled": true,
+          "child_id": "f1c8cd84-ce0d-435f-8613-970f6970c452",
+          "child_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_f1c8cd84-ce0d-435f-8613-970f6970c452",
+          "child_name": "Test DataClass",
+          "relationship_type": "parent_category",
+          "source_type": "data_class",
+          "target_type": "category"
+        }
+      }
+    ],
+    "limit": 10,
+    "count": 1,
+    "first": {
+      "href": "/v3/data_classes/f1c8cd84-ce0d-435f-8613-970f6970c452/versions/ebd1af9b-8d03-414d-99e9-79dd8016900c/relationships?offset=0&type=parent_category"
+    }
+  }
+}

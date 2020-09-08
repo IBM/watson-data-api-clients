@@ -29,6 +29,9 @@ import java.util.Objects;
 public class AbstractRelationshipEntity {
 
     private String description;
+    private String relationshipType;
+    private String sourceType;
+    private String targetType;
 
     public AbstractRelationshipEntity description(String description) {
         this.description = description;
@@ -45,17 +48,53 @@ public class AbstractRelationshipEntity {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
+    public AbstractRelationshipEntity relationshipType(String relationshipType) {
+        this.relationshipType = relationshipType;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("relationship_type")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getRelationshipType() { return relationshipType; }
+    public void setRelationshipType(String relationshipType) { this.relationshipType = relationshipType; }
+
+    public AbstractRelationshipEntity sourceType(String sourceType) {
+        this.sourceType = sourceType;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("source_type")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getSourceType() { return sourceType; }
+    public void setSourceType(String sourceType) { this.sourceType = sourceType; }
+
+    public AbstractRelationshipEntity targetType(String targetType) {
+        this.targetType = targetType;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("target_type")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getTargetType() { return targetType; }
+    public void setTargetType(String targetType) { this.targetType = targetType; }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         AbstractRelationshipEntity abstractRelationshipEntity = (AbstractRelationshipEntity)o;
-        return Objects.equals(this.description, abstractRelationshipEntity.description);
+        return Objects.equals(this.description, abstractRelationshipEntity.description) &&
+                Objects.equals(this.relationshipType, abstractRelationshipEntity.relationshipType) &&
+                Objects.equals(this.sourceType, abstractRelationshipEntity.sourceType) &&
+                Objects.equals(this.targetType, abstractRelationshipEntity.targetType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description);
+        return Objects.hash(description, relationshipType, sourceType, targetType);
     }
 
     @Override
@@ -69,6 +108,9 @@ public class AbstractRelationshipEntity {
 
     protected void toString(StringBuilder sb) {
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
+        sb.append("    relationshipType: ").append(toIndentedString(relationshipType)).append("\n");
+        sb.append("    sourceType: ").append(toIndentedString(sourceType)).append("\n");
+        sb.append("    targetType: ").append(toIndentedString(targetType)).append("\n");
     }
 
     /**

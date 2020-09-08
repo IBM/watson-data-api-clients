@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "artifact_type": "data_class",
+    "artifact_id": "f1c8cd84-ce0d-435f-8613-970f6970c452",
+    "version_id": "ebd1af9b-8d03-414d-99e9-79dd8016900c",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_f1c8cd84-ce0d-435f-8613-970f6970c452",
+    "workflow_id": "5d5ff9ae-f1ca-11ea-995d-0a580a830010",
+    "draft_mode": "created",
+    "created_by": "1000331004",
+    "created_at": "2020-09-08T11:56:44.946Z",
+    "modified_by": "1000331004",
+    "modified_at": "2020-09-08T11:56:44.946Z",
+    "revision": "0",
+    "name": "Test DataClass",
+    "short_description": "A data class to test APIs.",
+    "state": "DRAFT",
+    "tags": [],
+    "steward_ids": [],
+    "workflow_state": "Not started",
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "class_code": "TestDataClassf1c8cd84-ce0d-435f-8613-970f6970c452",
+    "provider_type": "CUSTOM",
+    "data_class_type": "Regex",
+    "definition": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><DataClasses xmlns=\"http://www.ibm.com/infosphere/ia/classification/DataclassesDefinition\"><DataClass id=\"TestDataClassf1c8cd84-ce0d-435f-8613-970f6970c452\" name=\"Test DataClass\" active=\"true\"><RegexClassifier><RegularExpression>^test$</RegularExpression></RegexClassifier><DataTypeFilter><LogicalDataType>string</LogicalDataType></DataTypeFilter></DataClass></DataClasses>",
+    "enabled": false,
+    "parent_enabled": true,
+    "data_type": [
+      "string"
+    ],
+    "case_sensitive": false,
+    "allow_substring_match": false,
+    "squeeze_consecutive_white_spaces": false,
+    "regular_expression": "^test$",
+    "applicable_for": "structured_data_only",
+    "default_locale_id": "en-US",
+    "custom_attributes": []
+  }
+}

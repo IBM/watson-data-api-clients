@@ -46,7 +46,7 @@ public class AbstractRelationshipEntityDeserializer extends StdDeserializer<Abst
         if (node.get("parent_id") != null || node.get("child_id") != null) {
             // parent_id or child_id should only appear in the ParentRelationshipEntity
             return p.getCodec().treeToValue(node, ParentRelationshipEntity.class);
-        } else if (node.get("target_id") != null || node.get("target_type") != null) {
+        } else if (node.get("target_id") != null || node.get("target_name") != null) {
             // target_id should only appear in the RelationshipEntity
             return p.getCodec().treeToValue(node, RelationshipEntity.class);
         } else {
