@@ -63,6 +63,7 @@ public class MockConstants {
     public static final String CUSTOM_ATTR_ID = "15c217fd-d8bf-4f88-a80c-92645d3613f4";
     public static final String NEW_CATEGORY_ID = "a06c6237-32a4-468b-bdfe-9a09ab9bf06b";
     public static final String NEW_DATACLASS_ID = "f1c8cd84-ce0d-435f-8613-970f6970c452";
+    public static final String NEW_DP_RULE_ID = "faee7d99-74b0-4c08-ab8e-ccc50bb9440a";
 
     public static ApiClient getApiClient() {
         ApiClient apiClient = new ApiClient(false);
