@@ -17,60 +17,50 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
- * PaginatedDataClassList
+ * UpdatableRuleEntity
  */
-public class PaginatedDataClassList extends PaginatedList {
+public class UpdatableRuleEntity extends WriteableRuleEntity {
 
-    private List<ResponseDataClass> resources = null;
+    private String revision;
 
-    public PaginatedDataClassList resources(List<ResponseDataClass> resources) {
-        this.resources = resources;
-        return this;
-    }
-
-    public PaginatedDataClassList addResourcesItem(ResponseDataClass resourcesItem) {
-        if (this.resources == null) {
-            this.resources = new ArrayList<>();
-        }
-        this.resources.add(resourcesItem);
+    public UpdatableRuleEntity revision(String revision) {
+        this.revision = revision;
         return this;
     }
 
     /**
-     * Results of the list / search.
-     * @return resources
+     * The revision of the artifact. It is used for optimistic locking.
+     * @return revision
      **/
-    @javax.annotation.Nullable
-    @JsonProperty("resources")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<ResponseDataClass> getResources() { return resources; }
-    public void setResources(List<ResponseDataClass> resources) { this.resources = resources; }
+    @JsonProperty("revision")
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
+    public String getRevision() { return revision; }
+    public void setRevision(String revision) { this.revision = revision; }
+
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        PaginatedDataClassList paginatedArtifactList = (PaginatedDataClassList)o;
+        UpdatableRuleEntity updatableRuleEntity = (UpdatableRuleEntity)o;
         return super.equals(o) &&
-                Objects.equals(this.resources, paginatedArtifactList.resources);
+                Objects.equals(this.revision, updatableRuleEntity.revision);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), resources);
+        return Objects.hash(super.hashCode(), revision);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PaginatedDataClassList {\n");
+        sb.append("class UpdatableRuleEntity {\n");
         super.toString(sb);
-        sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
+        sb.append("    revision: ").append(toIndentedString(revision)).append("\n");
         sb.append("}");
         return sb.toString();
     }

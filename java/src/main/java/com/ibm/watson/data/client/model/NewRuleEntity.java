@@ -17,60 +17,50 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
+import com.ibm.watson.data.client.model.enums.RuleType;
 import java.util.Objects;
 
 /**
- * PaginatedDataClassList
+ * NewRuleEntity
  */
-public class PaginatedDataClassList extends PaginatedList {
+public class NewRuleEntity extends WriteableRuleEntity {
 
-    private List<ResponseDataClass> resources = null;
+    private RuleType ruleType;
 
-    public PaginatedDataClassList resources(List<ResponseDataClass> resources) {
-        this.resources = resources;
-        return this;
-    }
-
-    public PaginatedDataClassList addResourcesItem(ResponseDataClass resourcesItem) {
-        if (this.resources == null) {
-            this.resources = new ArrayList<>();
-        }
-        this.resources.add(resourcesItem);
+    public NewRuleEntity ruleType(RuleType ruleType) {
+        this.ruleType = ruleType;
         return this;
     }
 
     /**
-     * Results of the list / search.
-     * @return resources
+     * Currently supported: Governance.
+     * @return ruleType
      **/
-    @javax.annotation.Nullable
-    @JsonProperty("resources")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<ResponseDataClass> getResources() { return resources; }
-    public void setResources(List<ResponseDataClass> resources) { this.resources = resources; }
+    @JsonProperty("rule_type")
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
+    public RuleType getRuleType() { return ruleType; }
+    public void setRuleType(RuleType ruleType) { this.ruleType = ruleType; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        PaginatedDataClassList paginatedArtifactList = (PaginatedDataClassList)o;
+        NewRuleEntity newRuleEntity = (NewRuleEntity)o;
         return super.equals(o) &&
-                Objects.equals(this.resources, paginatedArtifactList.resources);
+                Objects.equals(this.ruleType, newRuleEntity.ruleType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), resources);
+        return Objects.hash(super.hashCode(), ruleType);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PaginatedDataClassList {\n");
+        sb.append("class NewRuleEntity {\n");
         super.toString(sb);
-        sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
+        sb.append("    ruleType: ").append(toIndentedString(ruleType)).append("\n");
         sb.append("}");
         return sb.toString();
     }

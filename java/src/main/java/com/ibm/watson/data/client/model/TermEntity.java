@@ -17,7 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ibm.watson.data.client.model.enums.TermState;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -27,69 +26,13 @@ import java.util.Objects;
 /**
  * TermEntity
  */
-public class TermEntity {
+public class TermEntity extends GlossaryObjectEntity {
 
-    private String longDescription;
-    private TermState state;
-    private List<CustomAttribute> customAttributes = null;
     private List<String> abbreviations = null;
     private String importSourceCreatedBy;
     private OffsetDateTime importSourceCreatedOn;
     private String importSourceUsage;
     private String example;
-
-    public TermEntity longDescription(String longDescription) {
-        this.longDescription = longDescription;
-        return this;
-    }
-
-    /**
-     * The long description of an artifact.
-     * @return longDescription
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("long_description")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getLongDescription() { return longDescription; }
-    public void setLongDescription(String longDescription) { this.longDescription = longDescription; }
-
-    public TermEntity state(TermState state) {
-        this.state = state;
-        return this;
-    }
-
-    /**
-     * The state of an artifact, such as DRAFT, ACTIVE or ARCHIVED.
-     * @return state
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("state")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public TermState getState() { return state; }
-    public void setState(TermState state) { this.state = state; }
-
-    public TermEntity customAttributes(List<CustomAttribute> customAttributes) {
-        this.customAttributes = customAttributes;
-        return this;
-    }
-
-    public TermEntity addCustomAttributesItem(CustomAttribute customAttributesItem) {
-        if (this.customAttributes == null) {
-            this.customAttributes = new ArrayList<>();
-        }
-        this.customAttributes.add(customAttributesItem);
-        return this;
-    }
-
-    /**
-     * List of custom attributes with their values.
-     * @return customAttributes
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("custom_attributes")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<CustomAttribute> getCustomAttributes() { return customAttributes; }
-    public void setCustomAttributes(List<CustomAttribute> customAttributes) { this.customAttributes = customAttributes; }
 
     public TermEntity abbreviations(List<String> abbreviations) {
         this.abbreviations = abbreviations;
@@ -181,9 +124,7 @@ public class TermEntity {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         TermEntity newTermEntity = (TermEntity)o;
-        return Objects.equals(this.longDescription, newTermEntity.longDescription) &&
-                Objects.equals(this.state, newTermEntity.state) &&
-                Objects.equals(this.customAttributes, newTermEntity.customAttributes) &&
+        return super.equals(o) &&
                 Objects.equals(this.abbreviations, newTermEntity.abbreviations) &&
                 Objects.equals(this.importSourceCreatedBy, newTermEntity.importSourceCreatedBy) &&
                 Objects.equals(this.importSourceCreatedOn, newTermEntity.importSourceCreatedOn) &&
@@ -193,8 +134,7 @@ public class TermEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                longDescription, state, customAttributes, abbreviations,
+        return Objects.hash(super.hashCode(), abbreviations,
                 importSourceCreatedBy, importSourceCreatedOn, importSourceUsage,
                 example);
     }
@@ -202,30 +142,19 @@ public class TermEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class NewTermEntity {\n");
+        sb.append("class TermEntity {\n");
         toString(sb);
         sb.append("}");
         return sb.toString();
     }
 
     protected void toString(StringBuilder sb) {
-        sb.append("    longDescription: ").append(toIndentedString(longDescription)).append("\n");
-        sb.append("    state: ").append(toIndentedString(state)).append("\n");
-        sb.append("    customAttributes: ").append(toIndentedString(customAttributes)).append("\n");
+        super.toString(sb);
         sb.append("    abbreviations: ").append(toIndentedString(abbreviations)).append("\n");
         sb.append("    importSourceCreatedBy: ").append(toIndentedString(importSourceCreatedBy)).append("\n");
         sb.append("    importSourceCreatedOn: ").append(toIndentedString(importSourceCreatedOn)).append("\n");
         sb.append("    importSourceUsage: ").append(toIndentedString(importSourceUsage)).append("\n");
         sb.append("    example: ").append(toIndentedString(example)).append("\n");
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    protected String toIndentedString(java.lang.Object o) {
-        if (o == null) { return "null"; }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }

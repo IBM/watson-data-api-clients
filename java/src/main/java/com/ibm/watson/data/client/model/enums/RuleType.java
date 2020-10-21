@@ -19,25 +19,23 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * The state of a term, such as DRAFT, ACTIVE or ARCHIVED.
+ * The type of a rule.
  */
-public enum TermState {
+public enum RuleType {
 
-    DRAFT("DRAFT"),
+    QUALITY("Quality"),
 
-    PUBLISHED("PUBLISHED"),
+    AUTOMATION("Automation"),
 
-    DRAFT_HISTORY("DRAFT_HISTORY"),
+    DATAPROTECTION("DataProtection"),
 
-    PUBLISHED_HISTORY("PUBLISHED_HISTORY"),
+    GOVERNANCE("Governance"),
 
-    DELETED("DELETED"),
-
-    ARCHIVED("ARCHIVED");
+    DATA("Data");
 
     private String value;
 
-    TermState(String value) { this.value = value; }
+    RuleType(String value) { this.value = value; }
 
     @JsonValue
     public String getValue() {
@@ -50,8 +48,8 @@ public enum TermState {
     }
 
     @JsonCreator
-    public static TermState fromValue(String value) {
-        for (TermState b : TermState.values()) {
+    public static RuleType fromValue(String value) {
+        for (RuleType b : RuleType.values()) {
             if (b.value.equals(value)) {
                 return b;
             }

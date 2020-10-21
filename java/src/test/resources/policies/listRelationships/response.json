@@ -1,0 +1,81 @@
+{
+  "parent_category": {
+    "offset": 0,
+    "last": {
+      "href": "/v3/policies/c13f20b3-13c5-4898-bf3e-8bd3e769e0e9/versions/3d297087-3e85-4fb9-bc54-2677a9313884_0/relationships?offset=0&type=parent_category"
+    },
+    "resources": [
+      {
+        "metadata": {
+          "artifact_type": "relationship",
+          "artifact_id": "b515de37-e20a-4aba-b75e-5638c7f93e6f",
+          "version_id": "c27e0a5f-7574-4891-a663-8bd9454cb10e_0",
+          "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_b515de37-e20a-4aba-b75e-5638c7f93e6f",
+          "effective_start_date": "2020-10-20T14:56:15.943Z",
+          "created_by": "1000331004",
+          "created_at": "2020-10-20T14:56:15.943Z",
+          "modified_by": "1000331004",
+          "modified_at": "2020-10-20T14:56:15.943Z",
+          "revision": "0",
+          "state": "PUBLISHED",
+          "read_only": false,
+          "remove_start_date": false,
+          "remove_end_date": false
+        },
+        "entity": {
+          "parent_id": "e39ada11-8338-3704-90e3-681a71e7c839",
+          "parent_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_e39ada11-8338-3704-90e3-681a71e7c839",
+          "parent_name": "[uncategorized]",
+          "parent_enabled": true,
+          "child_id": "c13f20b3-13c5-4898-bf3e-8bd3e769e0e9",
+          "child_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_c13f20b3-13c5-4898-bf3e-8bd3e769e0e9",
+          "child_name": "Test Policy",
+          "relationship_type": "parent_category",
+          "source_type": "policy",
+          "target_type": "category"
+        }
+      }
+    ],
+    "limit": 10,
+    "count": 1,
+    "first": {
+      "href": "/v3/policies/c13f20b3-13c5-4898-bf3e-8bd3e769e0e9/versions/3d297087-3e85-4fb9-bc54-2677a9313884_0/relationships?offset=0&type=parent_category"
+    }
+  },
+  "data_protection_rules": {
+    "offset": 0,
+    "last": {
+      "href": "/v3/policies/c13f20b3-13c5-4898-bf3e-8bd3e769e0e9/versions/3d297087-3e85-4fb9-bc54-2677a9313884_0/relationships?offset=0&type=data_protection_rules"
+    },
+    "resources": [
+      {
+        "metadata": {
+          "artifact_type": "relationship",
+          "artifact_id": "580199f4-7cf9-47bf-a46f-2e514111e12d",
+          "version_id": "cab1c91a-fbaf-4dd7-8539-b6668499b55d_0",
+          "created_by": "1000331004",
+          "created_at": "2020-10-20T15:43:39.776Z",
+          "modified_by": "1000331004",
+          "modified_at": "2020-10-20T15:43:39.776Z",
+          "revision": "0",
+          "state": "PUBLISHED",
+          "read_only": false,
+          "remove_start_date": false,
+          "remove_end_date": false
+        },
+        "entity": {
+          "target_global_id": "faee7d99-74b0-4c08-ab8e-ccc50bb9440a",
+          "relationship_type": "related_assets",
+          "source_type": "policy",
+          "target_type": "all"
+        }
+      }
+    ],
+    "limit": 10,
+    "count": 1,
+    "first": {
+      "href": "/v3/policies/c13f20b3-13c5-4898-bf3e-8bd3e769e0e9/versions/3d297087-3e85-4fb9-bc54-2677a9313884_0/relationships?offset=0&type=data_protection_rules"
+    }
+  }
+}

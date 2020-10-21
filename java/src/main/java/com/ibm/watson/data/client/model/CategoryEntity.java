@@ -17,7 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ibm.watson.data.client.model.enums.GlossaryObjectState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,32 +25,14 @@ import java.util.Objects;
 /**
  * CategoryEntity
  */
-public class CategoryEntity {
+public class CategoryEntity extends GlossaryObjectEntity {
 
-    private String longDescription;
     private List<String> stewardIds = null;
-    private GlossaryObjectState state;
     private String defaultLocaleId;
-    private List<CustomAttribute> customAttributes = null;
     private String parentCategoryId;
     private List<RelationshipObject> hasTypesCategoryRels = null;
     private List<RelationshipObject> groupedAssetsRels = null;
     private List<RelationshipObject> parentCategoryFor = null;
-
-    public CategoryEntity longDescription(String longDescription) {
-        this.longDescription = longDescription;
-        return this;
-    }
-
-    /**
-     * The long description of an artifact.
-     * @return longDescription
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("long_description")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getLongDescription() { return longDescription; }
-    public void setLongDescription(String longDescription) { this.longDescription = longDescription; }
 
     public CategoryEntity stewardIds(List<String> stewardIds) {
         this.stewardIds = stewardIds;
@@ -76,21 +57,6 @@ public class CategoryEntity {
     public List<String> getStewardIds() { return stewardIds; }
     public void setStewardIds(List<String> stewardIds) { this.stewardIds = stewardIds; }
 
-    public CategoryEntity state(GlossaryObjectState state) {
-        this.state = state;
-        return this;
-    }
-
-    /**
-     * State of the artifact
-     * @return state
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("state")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public GlossaryObjectState getState() { return state; }
-    public void setState(GlossaryObjectState state) { this.state = state; }
-
     public CategoryEntity defaultLocaleId(String defaultLocaleId) {
         this.defaultLocaleId = defaultLocaleId;
         return this;
@@ -101,29 +67,6 @@ public class CategoryEntity {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getDefaultLocaleId() { return defaultLocaleId; }
     public void setDefaultLocaleId(String defaultLocaleId) { this.defaultLocaleId = defaultLocaleId; }
-
-    public CategoryEntity customAttributes(List<CustomAttribute> customAttributes) {
-        this.customAttributes = customAttributes;
-        return this;
-    }
-
-    public CategoryEntity addCustomAttributesItem(CustomAttribute customAttributesItem) {
-        if (this.customAttributes == null) {
-            this.customAttributes = new ArrayList<>();
-        }
-        this.customAttributes.add(customAttributesItem);
-        return this;
-    }
-
-    /**
-     * List of custom attributes with their values.
-     * @return customAttributes
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("custom_attributes")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<CustomAttribute> getCustomAttributes() { return customAttributes; }
-    public void setCustomAttributes(List<CustomAttribute> customAttributes) { this.customAttributes = customAttributes; }
 
     public CategoryEntity parentCategoryId(String parentCategoryId) {
         this.parentCategoryId = parentCategoryId;
@@ -217,11 +160,9 @@ public class CategoryEntity {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         CategoryEntity categoryEntity = (CategoryEntity)o;
-        return Objects.equals(this.longDescription, categoryEntity.longDescription) &&
+        return super.equals(o) &&
                 Objects.equals(this.stewardIds, categoryEntity.stewardIds) &&
-                Objects.equals(this.state, categoryEntity.state) &&
                 Objects.equals(this.defaultLocaleId, categoryEntity.defaultLocaleId) &&
-                Objects.equals(this.customAttributes, categoryEntity.customAttributes) &&
                 Objects.equals(this.parentCategoryId, categoryEntity.parentCategoryId) &&
                 Objects.equals(this.hasTypesCategoryRels, categoryEntity.hasTypesCategoryRels) &&
                 Objects.equals(this.groupedAssetsRels, categoryEntity.groupedAssetsRels) &&
@@ -230,35 +171,24 @@ public class CategoryEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(longDescription, stewardIds, state, defaultLocaleId,
-                customAttributes, parentCategoryId, hasTypesCategoryRels,
-                groupedAssetsRels, parentCategoryFor);
+        return Objects.hash(super.hashCode(), stewardIds, defaultLocaleId,
+                parentCategoryId, hasTypesCategoryRels, groupedAssetsRels,
+                parentCategoryFor);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class CategoryEntity {\n");
-        sb.append("    longDescription: ").append(toIndentedString(longDescription)).append("\n");
+        super.toString(sb);
         sb.append("    stewardIds: ").append(toIndentedString(stewardIds)).append("\n");
-        sb.append("    state: ").append(toIndentedString(state)).append("\n");
         sb.append("    defaultLocaleId: ").append(toIndentedString(defaultLocaleId)).append("\n");
-        sb.append("    customAttributes: ").append(toIndentedString(customAttributes)).append("\n");
         sb.append("    parentCategoryId: ").append(toIndentedString(parentCategoryId)).append("\n");
         sb.append("    hasTypesCategoryRels: ").append(toIndentedString(hasTypesCategoryRels)).append("\n");
         sb.append("    groupedAssetsRels: ").append(toIndentedString(groupedAssetsRels)).append("\n");
         sb.append("    parentCategoryFor: ").append(toIndentedString(parentCategoryFor)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) { return "null"; }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }

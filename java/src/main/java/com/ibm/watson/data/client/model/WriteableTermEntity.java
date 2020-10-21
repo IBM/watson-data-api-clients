@@ -17,7 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ibm.watson.data.client.model.enums.TermState;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;

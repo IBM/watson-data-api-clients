@@ -22,7 +22,6 @@ import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectDraftMode;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectState;
-import com.ibm.watson.data.client.model.enums.TermState;
 import org.junit.Test;
 import org.mockserver.client.MockServerClient;
 
@@ -217,7 +216,7 @@ public class BusinessTermsTest extends AbstractExpectations {
         Term one = response.getResources().get(0);
         assertNotNull(one);
         validateTermMetadata(one.getMetadata(), "0", publishedVersionId, GlossaryObjectState.PUBLISHED);
-        validateTermEntity(one.getEntity(), "This is an updated term description.", TermState.PUBLISHED);
+        validateTermEntity(one.getEntity(), "This is an updated term description.", GlossaryObjectState.PUBLISHED);
         assertEquals(response.getLimit(), Integer.valueOf(10));
         assertEquals(response.getCount(), Long.valueOf(1L));
         assertNotNull(response.getFirst());
@@ -283,10 +282,10 @@ public class BusinessTermsTest extends AbstractExpectations {
     }
 
     private void validateTermEntity(ResponseTermEntity entity, String description) {
-        validateTermEntity(entity, description, TermState.DRAFT);
+        validateTermEntity(entity, description, GlossaryObjectState.DRAFT);
     }
 
-    private void validateTermEntity(ResponseTermEntity entity, String description, TermState state) {
+    private void validateTermEntity(ResponseTermEntity entity, String description, GlossaryObjectState state) {
         assertNotNull(entity);
         assertEquals(entity.getAbbreviation(), "TT");
         assertNotNull(entity.getAbbreviations());

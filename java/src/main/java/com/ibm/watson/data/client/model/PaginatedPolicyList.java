@@ -22,18 +22,18 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * PaginatedDataClassList
+ * PaginatedPolicyList
  */
-public class PaginatedDataClassList extends PaginatedList {
+public class PaginatedPolicyList extends PaginatedList {
 
-    private List<ResponseDataClass> resources = null;
+    private List<ResponsePolicy> resources = null;
 
-    public PaginatedDataClassList resources(List<ResponseDataClass> resources) {
+    public PaginatedPolicyList resources(List<ResponsePolicy> resources) {
         this.resources = resources;
         return this;
     }
 
-    public PaginatedDataClassList addResourcesItem(ResponseDataClass resourcesItem) {
+    public PaginatedPolicyList addResourcesItem(ResponsePolicy resourcesItem) {
         if (this.resources == null) {
             this.resources = new ArrayList<>();
         }
@@ -48,14 +48,14 @@ public class PaginatedDataClassList extends PaginatedList {
     @javax.annotation.Nullable
     @JsonProperty("resources")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<ResponseDataClass> getResources() { return resources; }
-    public void setResources(List<ResponseDataClass> resources) { this.resources = resources; }
+    public List<ResponsePolicy> getResources() { return resources; }
+    public void setResources(List<ResponsePolicy> resources) { this.resources = resources; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        PaginatedDataClassList paginatedArtifactList = (PaginatedDataClassList)o;
+        PaginatedPolicyList paginatedArtifactList = (PaginatedPolicyList)o;
         return super.equals(o) &&
                 Objects.equals(this.resources, paginatedArtifactList.resources);
     }
@@ -68,7 +68,7 @@ public class PaginatedDataClassList extends PaginatedList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PaginatedDataClassList {\n");
+        sb.append("class PaginatedPolicyList {\n");
         super.toString(sb);
         sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
         sb.append("}");

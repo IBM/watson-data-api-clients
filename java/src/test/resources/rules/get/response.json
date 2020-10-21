@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "artifact_type": "rule",
+    "artifact_id": "aafe5366-1d32-49c7-aa3c-4d8a899425b7",
+    "version_id": "e4c8a972-2016-4001-bc43-bfaac3553a99",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_aafe5366-1d32-49c7-aa3c-4d8a899425b7",
+    "workflow_id": "6c932425-1391-11eb-8009-0a580a81055e",
+    "draft_mode": "created",
+    "created_by": "1000331004",
+    "created_at": "2020-10-21T11:34:49.998Z",
+    "modified_by": "1000331004",
+    "modified_at": "2020-10-21T11:34:49.998Z",
+    "revision": "0",
+    "name": "Test Rule",
+    "short_description": "A simple rule to test the APIs.",
+    "state": "DRAFT",
+    "tags": [],
+    "steward_ids": [],
+    "workflow_state": "Not started",
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "rule_type": "Governance",
+    "state": "DRAFT",
+    "default_locale_id": "en-US",
+    "custom_attributes": []
+  }
+}
