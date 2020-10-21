@@ -1,0 +1,90 @@
+{
+  "terms": {
+    "offset": 0,
+    "last": {
+      "href": "/v3/classifications/cbb8b86f-d91c-49a1-a541-aad046edf978/versions/299e6712-8e39-4a5b-ac04-bac866707f71/relationships?offset=0&type=terms"
+    },
+    "resources": [
+      {
+        "metadata": {
+          "artifact_type": "relationship",
+          "artifact_id": "9b80330a-b056-4f88-bb3a-8cbea4c9e9cf",
+          "version_id": "2d5e33cb-4602-40b1-978d-359c62d17bcf",
+          "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_9b80330a-b056-4f88-bb3a-8cbea4c9e9cf",
+          "workflow_id": "23836914-13a8-11eb-8009-0a580a81055e",
+          "draft_mode": "created",
+          "created_by": "1000331004",
+          "created_at": "2020-10-21T15:09:11.927Z",
+          "modified_by": "1000331004",
+          "modified_at": "2020-10-21T15:09:11.927Z",
+          "revision": "0",
+          "short_description": "A new relationship via API",
+          "state": "DRAFT",
+          "read_only": false,
+          "remove_start_date": false,
+          "remove_end_date": false
+        },
+        "entity": {
+          "target_id": "13d98203-6aad-4003-87a0-87c662c95cd1",
+          "target_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_13d98203-6aad-4003-87a0-87c662c95cd1",
+          "target_name": "Test Term",
+          "relationship_type": "related",
+          "source_type": "classification",
+          "target_type": "glossary_term",
+          "description": "A new relationship via API"
+        }
+      }
+    ],
+    "limit": 10,
+    "count": 1,
+    "first": {
+      "href": "/v3/classifications/cbb8b86f-d91c-49a1-a541-aad046edf978/versions/299e6712-8e39-4a5b-ac04-bac866707f71/relationships?offset=0&type=terms"
+    }
+  },
+  "parent_category": {
+    "offset": 0,
+    "last": {
+      "href": "/v3/classifications/cbb8b86f-d91c-49a1-a541-aad046edf978/versions/299e6712-8e39-4a5b-ac04-bac866707f71/relationships?offset=0&type=parent_category"
+    },
+    "resources": [
+      {
+        "metadata": {
+          "artifact_type": "relationship",
+          "artifact_id": "2c3b5704-d12a-4839-af09-1b0c11e88841",
+          "version_id": "96740f4a-5e51-4abb-92a2-31cc6eb48083",
+          "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_2c3b5704-d12a-4839-af09-1b0c11e88841",
+          "workflow_id": "23836914-13a8-11eb-8009-0a580a81055e",
+          "draft_mode": "created",
+          "created_by": "1000331004",
+          "created_at": "2020-10-21T14:17:24.509Z",
+          "modified_by": "1000331004",
+          "modified_at": "2020-10-21T14:17:24.509Z",
+          "revision": "0",
+          "state": "DRAFT",
+          "read_only": false,
+          "remove_start_date": false,
+          "remove_end_date": false
+        },
+        "entity": {
+          "parent_id": "e39ada11-8338-3704-90e3-681a71e7c839",
+          "parent_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_e39ada11-8338-3704-90e3-681a71e7c839",
+          "parent_name": "[uncategorized]",
+          "parent_enabled": true,
+          "child_id": "cbb8b86f-d91c-49a1-a541-aad046edf978",
+          "child_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_cbb8b86f-d91c-49a1-a541-aad046edf978",
+          "child_name": "Test Classification",
+          "relationship_type": "parent_category",
+          "source_type": "classification",
+          "target_type": "category"
+        }
+      }
+    ],
+    "limit": 10,
+    "count": 1,
+    "first": {
+      "href": "/v3/classifications/cbb8b86f-d91c-49a1-a541-aad046edf978/versions/299e6712-8e39-4a5b-ac04-bac866707f71/relationships?offset=0&type=parent_category"
+    }
+  }
+}

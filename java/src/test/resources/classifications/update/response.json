@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "artifact_type": "classification",
+    "artifact_id": "cbb8b86f-d91c-49a1-a541-aad046edf978",
+    "version_id": "299e6712-8e39-4a5b-ac04-bac866707f71",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_cbb8b86f-d91c-49a1-a541-aad046edf978",
+    "workflow_id": "23836914-13a8-11eb-8009-0a580a81055e",
+    "draft_mode": "created",
+    "created_by": "1000331004",
+    "created_at": "2020-10-21T14:17:24.456Z",
+    "modified_by": "1000331004",
+    "modified_at": "2020-10-21T14:52:23.349Z",
+    "revision": "1",
+    "name": "Test Classification",
+    "short_description": "A simple classification to test the APIs.",
+    "state": "DRAFT",
+    "tags": [],
+    "steward_ids": [],
+    "workflow_state": "Not started",
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "long_description": "Now with a long description.",
+    "state": "DRAFT",
+    "default_locale_id": "en-US"
+  }
+}

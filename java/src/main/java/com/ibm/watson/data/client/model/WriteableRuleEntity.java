@@ -18,7 +18,6 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,170 +25,14 @@ import java.util.Objects;
 /**
  * NewRuleEntity
  */
-public class WriteableRuleEntity extends GlossaryObjectEntity {
+public class WriteableRuleEntity extends WriteableGlossaryObjectEntity {
 
-    private String name;
-    private String shortDescription;
-    private OffsetDateTime effectiveStartDate;
-    private OffsetDateTime effectiveEndDate;
-    private List<String> tags = null;
-    private List<String> stewardIds = null;
-    private NewRelationship parentCategory;
-    private List<NewRelationship> categories = null;
     private List<NewRelationship> policies = null;
     private List<NewRelationship> rules = null;
     private List<NewRelationship> terms = null;
     private List<NewRelationship> classifications = null;
     private List<NewRelationship> referenceData = null;
     private List<NewRelationship> dataClasses = null;
-
-    public WriteableRuleEntity name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    /**
-     * The name of the artifact.
-     * @return name
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("name")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public WriteableRuleEntity shortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-        return this;
-    }
-
-    /**
-     * The short description of an artifact.
-     * @return shortDescription
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("short_description")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getShortDescription() { return shortDescription; }
-    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
-
-    public WriteableRuleEntity effectiveStartDate(OffsetDateTime effectiveStartDate) {
-        this.effectiveStartDate = effectiveStartDate;
-        return this;
-    }
-
-    /**
-     * The effective start date at which the artifact goes into effect. If the
-     * effective start date is not specified, then the artifact goes into effect
-     * immediately.
-     * @return effectiveStartDate
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("effective_start_date")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveStartDate() { return effectiveStartDate; }
-    public void setEffectiveStartDate(OffsetDateTime effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
-
-    public WriteableRuleEntity effectiveEndDate(OffsetDateTime effectiveEndDate) {
-        this.effectiveEndDate = effectiveEndDate;
-        return this;
-    }
-
-    /**
-     * The effective end date at which the artifact ends and no longer effective.
-     * If the effective end date is not specified, then the artifact remains effect
-     * forever.
-     * @return effectiveEndDate
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("effective_end_date")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveEndDate() { return effectiveEndDate; }
-    public void setEffectiveEndDate(OffsetDateTime effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
-
-    public WriteableRuleEntity tags(List<String> tags) {
-        this.tags = tags;
-        return this;
-    }
-
-    public WriteableRuleEntity addTagsItem(String tagsItem) {
-        if (this.tags == null) {
-            this.tags = new ArrayList<>();
-        }
-        this.tags.add(tagsItem);
-        return this;
-    }
-
-    /**
-     * The tags assigned to an artifact.
-     * @return tags
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("tags")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<String> getTags() { return tags; }
-    public void setTags(List<String> tags) { this.tags = tags; }
-
-    public WriteableRuleEntity stewardIds(List<String> stewardIds) {
-        this.stewardIds = stewardIds;
-        return this;
-    }
-
-    public WriteableRuleEntity addStewardIdsItem(String stewardIdsItem) {
-        if (this.stewardIds == null) {
-            this.stewardIds = new ArrayList<>();
-        }
-        this.stewardIds.add(stewardIdsItem);
-        return this;
-    }
-
-    /**
-     * The stewards assigned to an artifact.
-     * @return stewardIds
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("steward_ids")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<String> getStewardIds() { return stewardIds; }
-    public void setStewardIds(List<String> stewardIds) { this.stewardIds = stewardIds; }
-
-    public WriteableRuleEntity parentCategory(NewRelationship parentCategory) {
-        this.parentCategory = parentCategory;
-        return this;
-    }
-
-    /**
-     * Get parentCategory
-     * @return parentCategory
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("parent_category")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public NewRelationship getParentCategory() { return parentCategory; }
-    public void setParentCategory(NewRelationship parentCategory) { this.parentCategory = parentCategory; }
-
-    public WriteableRuleEntity categories(List<NewRelationship> categories) {
-        this.categories = categories;
-        return this;
-    }
-
-    public WriteableRuleEntity addCategoriesItem(NewRelationship categoriesItem) {
-        if (this.categories == null) {
-            this.categories = new ArrayList<>();
-        }
-        this.categories.add(categoriesItem);
-        return this;
-    }
-
-    /**
-     * Secondary categories the artifact belongs to.
-     * @return categories
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("categories")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<NewRelationship> getCategories() { return categories; }
-    public void setCategories(List<NewRelationship> categories) { this.categories = categories; }
 
     public WriteableRuleEntity policies(List<NewRelationship> policies) {
         this.policies = policies;
@@ -336,14 +179,6 @@ public class WriteableRuleEntity extends GlossaryObjectEntity {
         if (o == null || getClass() != o.getClass()) { return false; }
         WriteableRuleEntity newRuleEntity = (WriteableRuleEntity)o;
         return super.equals(o) &&
-                Objects.equals(this.name, newRuleEntity.name) &&
-                Objects.equals(this.shortDescription, newRuleEntity.shortDescription) &&
-                Objects.equals(this.effectiveStartDate, newRuleEntity.effectiveStartDate) &&
-                Objects.equals(this.effectiveEndDate, newRuleEntity.effectiveEndDate) &&
-                Objects.equals(this.tags, newRuleEntity.tags) &&
-                Objects.equals(this.stewardIds, newRuleEntity.stewardIds) &&
-                Objects.equals(this.parentCategory, newRuleEntity.parentCategory) &&
-                Objects.equals(this.categories, newRuleEntity.categories) &&
                 Objects.equals(this.policies, newRuleEntity.policies) &&
                 Objects.equals(this.rules, newRuleEntity.rules) &&
                 Objects.equals(this.terms, newRuleEntity.terms) &&
@@ -354,9 +189,7 @@ public class WriteableRuleEntity extends GlossaryObjectEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, shortDescription,
-                effectiveStartDate, effectiveEndDate, tags, stewardIds,
-                parentCategory, categories, policies, rules, terms,
+        return Objects.hash(super.hashCode(), policies, rules, terms,
                 classifications, referenceData, dataClasses);
     }
 
@@ -371,14 +204,6 @@ public class WriteableRuleEntity extends GlossaryObjectEntity {
 
     protected void toString(StringBuilder sb) {
         super.toString(sb);
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    shortDescription: ").append(toIndentedString(shortDescription)).append("\n");
-        sb.append("    effectiveStartDate: ").append(toIndentedString(effectiveStartDate)).append("\n");
-        sb.append("    effectiveEndDate: ").append(toIndentedString(effectiveEndDate)).append("\n");
-        sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
-        sb.append("    stewardIds: ").append(toIndentedString(stewardIds)).append("\n");
-        sb.append("    parentCategory: ").append(toIndentedString(parentCategory)).append("\n");
-        sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
         sb.append("    policies: ").append(toIndentedString(policies)).append("\n");
         sb.append("    rules: ").append(toIndentedString(rules)).append("\n");
         sb.append("    terms: ").append(toIndentedString(terms)).append("\n");

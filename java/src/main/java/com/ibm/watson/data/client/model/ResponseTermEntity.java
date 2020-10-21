@@ -17,13 +17,22 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * ResponseTermEntity
  */
-public class ResponseTermEntity extends TermEntity {
+public class ResponseTermEntity extends GlossaryObjectEntity {
 
+    private List<String> abbreviations = null;
+    private String importSourceCreatedBy;
+    private OffsetDateTime importSourceCreatedOn;
+    private String importSourceUsage;
+    private String example;
     private String abbreviation;
     private String defaultLocaleId;
     private PaginatedParentRelationshipsList parentCategory;
@@ -42,6 +51,91 @@ public class ResponseTermEntity extends TermEntity {
     private PaginatedRelationshipsList referenceDataValues;
     private PaginatedRelationshipsList policies;
     private PaginatedRelationshipsList rules;
+
+    public ResponseTermEntity abbreviations(List<String> abbreviations) {
+        this.abbreviations = abbreviations;
+        return this;
+    }
+
+    public ResponseTermEntity addAbbreviationsItem(String abbreviationsItem) {
+        if (this.abbreviations == null) {
+            this.abbreviations = new ArrayList<>();
+        }
+        this.abbreviations.add(abbreviationsItem);
+        return this;
+    }
+
+    /**
+     * The list of abbreviations of a business term.
+     * @return abbreviations
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("abbreviations")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getAbbreviations() { return abbreviations; }
+    public void setAbbreviations(List<String> abbreviations) { this.abbreviations = abbreviations; }
+
+    public ResponseTermEntity importSourceCreatedBy(String importSourceCreatedBy) {
+        this.importSourceCreatedBy = importSourceCreatedBy;
+        return this;
+    }
+
+    /**
+     * Name of the user who has created the term in the original source for
+     * imported term.
+     * @return importSourceCreatedBy
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("import_source_created_by")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getImportSourceCreatedBy() { return importSourceCreatedBy; }
+    public void setImportSourceCreatedBy(String importSourceCreatedBy) { this.importSourceCreatedBy = importSourceCreatedBy; }
+
+    public ResponseTermEntity importSourceCreatedOn(OffsetDateTime importSourceCreatedOn) {
+        this.importSourceCreatedOn = importSourceCreatedOn;
+        return this;
+    }
+
+    /**
+     * The timestamp when the term was created in the original source for imported
+     * term.
+     * @return importSourceCreatedOn
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("import_source_created_on")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public OffsetDateTime getImportSourceCreatedOn() { return importSourceCreatedOn; }
+    public void setImportSourceCreatedOn(OffsetDateTime importSourceCreatedOn) { this.importSourceCreatedOn = importSourceCreatedOn; }
+
+    public ResponseTermEntity importSourceUsage(String importSourceUsage) {
+        this.importSourceUsage = importSourceUsage;
+        return this;
+    }
+
+    /**
+     * The usage of the term in the original source for imported term.
+     * @return importSourceUsage
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("import_source_usage")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getImportSourceUsage() { return importSourceUsage; }
+    public void setImportSourceUsage(String importSourceUsage) { this.importSourceUsage = importSourceUsage; }
+
+    public ResponseTermEntity example(String example) {
+        this.example = example;
+        return this;
+    }
+
+    /**
+     * Get example
+     * @return example
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("example")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getExample() { return example; }
+    public void setExample(String example) { this.example = example; }
 
     public ResponseTermEntity abbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
@@ -311,6 +405,11 @@ public class ResponseTermEntity extends TermEntity {
         if (o == null || getClass() != o.getClass()) { return false; }
         ResponseTermEntity responseTermEntity = (ResponseTermEntity)o;
         return super.equals(o) &&
+                Objects.equals(this.abbreviations, responseTermEntity.abbreviations) &&
+                Objects.equals(this.importSourceCreatedBy, responseTermEntity.importSourceCreatedBy) &&
+                Objects.equals(this.importSourceCreatedOn, responseTermEntity.importSourceCreatedOn) &&
+                Objects.equals(this.importSourceUsage, responseTermEntity.importSourceUsage) &&
+                Objects.equals(this.example, responseTermEntity.example) &&
                 Objects.equals(this.abbreviation, responseTermEntity.abbreviation) &&
                 Objects.equals(this.defaultLocaleId, responseTermEntity.defaultLocaleId) &&
                 Objects.equals(this.parentCategory, responseTermEntity.parentCategory) &&
@@ -333,7 +432,9 @@ public class ResponseTermEntity extends TermEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), abbreviation, defaultLocaleId,
+        return Objects.hash(super.hashCode(), abbreviations,
+                importSourceCreatedBy, importSourceCreatedOn, importSourceUsage,
+                example, abbreviation, defaultLocaleId,
                 parentCategory, categories,
                 isATypeOfTerms, hasTypeTerms, isOfTerms, hasTerms,
                 synonymTerms, relatedTerms, replacesTerms,
@@ -346,6 +447,11 @@ public class ResponseTermEntity extends TermEntity {
         StringBuilder sb = new StringBuilder();
         sb.append("class ResponseTermEntity {\n");
         super.toString(sb);
+        sb.append("    abbreviations: ").append(toIndentedString(abbreviations)).append("\n");
+        sb.append("    importSourceCreatedBy: ").append(toIndentedString(importSourceCreatedBy)).append("\n");
+        sb.append("    importSourceCreatedOn: ").append(toIndentedString(importSourceCreatedOn)).append("\n");
+        sb.append("    importSourceUsage: ").append(toIndentedString(importSourceUsage)).append("\n");
+        sb.append("    example: ").append(toIndentedString(example)).append("\n");
         sb.append("    abbreviation: ").append(toIndentedString(abbreviation)).append("\n");
         sb.append("    defaultLocaleId: ").append(toIndentedString(defaultLocaleId)).append("\n");
         sb.append("    parentCategory: ").append(toIndentedString(parentCategory)).append("\n");

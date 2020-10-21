@@ -26,17 +26,14 @@ import java.util.Objects;
 /**
  * WriteableTermEntity
  */
-public class WriteableTermEntity extends TermEntity {
+public class WriteableTermEntity extends WriteableGlossaryObjectEntity {
 
-    private String name;
-    private String shortDescription;
-    private OffsetDateTime effectiveStartDate;
-    private OffsetDateTime effectiveEndDate;
-    private List<String> tags = null;
-    private List<String> stewardIds = null;
+    private List<String> abbreviations = null;
+    private String importSourceCreatedBy;
+    private OffsetDateTime importSourceCreatedOn;
+    private String importSourceUsage;
+    private String example;
     private List<RelationshipObject> relatedTermRelationships = null;
-    private NewRelationship parentCategory;
-    private List<NewRelationship> categories = null;
     private List<NewRelationship> isATypeOfTerms = null;
     private List<NewRelationship> hasTypeTerms = null;
     private List<NewRelationship> isOfTerms = null;
@@ -48,114 +45,90 @@ public class WriteableTermEntity extends TermEntity {
     private List<NewRelationship> dataClasses = null;
     private List<NewRelationship> classifications = null;
 
-    public WriteableTermEntity name(String name) {
-        this.name = name;
+    public WriteableTermEntity abbreviations(List<String> abbreviations) {
+        this.abbreviations = abbreviations;
         return this;
     }
 
-    /**
-     * The name of the artifact.
-     * @return name
-     **/
-    @JsonProperty("name")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public WriteableTermEntity shortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-        return this;
-    }
-
-    /**
-     * The short description of an artifact.
-     * @return shortDescription
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("short_description")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getShortDescription() { return shortDescription; }
-    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
-
-    public WriteableTermEntity effectiveStartDate(OffsetDateTime effectiveStartDate) {
-        this.effectiveStartDate = effectiveStartDate;
-        return this;
-    }
-
-    /**
-     * The effective start date at which the artifact goes into effect. If the
-     * effective start date is not specified, then the artifact goes into effect
-     * immediately.
-     * @return effectiveStartDate
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("effective_start_date")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveStartDate() { return effectiveStartDate; }
-    public void setEffectiveStartDate(OffsetDateTime effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
-
-    public WriteableTermEntity effectiveEndDate(OffsetDateTime effectiveEndDate) {
-        this.effectiveEndDate = effectiveEndDate;
-        return this;
-    }
-
-    /**
-     * The effective end date at which the artifact ends and no longer effective.
-     * If the effective end date is not specified, then the artifact remains effect
-     * forever.
-     * @return effectiveEndDate
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("effective_end_date")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveEndDate() { return effectiveEndDate; }
-    public void setEffectiveEndDate(OffsetDateTime effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
-
-    public WriteableTermEntity tags(List<String> tags) {
-        this.tags = tags;
-        return this;
-    }
-
-    public WriteableTermEntity addTagsItem(String tagsItem) {
-        if (this.tags == null) {
-            this.tags = new ArrayList<>();
+    public WriteableTermEntity addAbbreviationsItem(String abbreviationsItem) {
+        if (this.abbreviations == null) {
+            this.abbreviations = new ArrayList<>();
         }
-        this.tags.add(tagsItem);
+        this.abbreviations.add(abbreviationsItem);
         return this;
     }
 
     /**
-     * The tags assigned to an artifact.
-     * @return tags
+     * The list of abbreviations of a business term.
+     * @return abbreviations
      **/
     @javax.annotation.Nullable
-    @JsonProperty("tags")
+    @JsonProperty("abbreviations")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<String> getTags() { return tags; }
-    public void setTags(List<String> tags) { this.tags = tags; }
+    public List<String> getAbbreviations() { return abbreviations; }
+    public void setAbbreviations(List<String> abbreviations) { this.abbreviations = abbreviations; }
 
-    public WriteableTermEntity stewardIds(List<String> stewardIds) {
-        this.stewardIds = stewardIds;
-        return this;
-    }
-
-    public WriteableTermEntity addStewardIdsItem(String stewardIdsItem) {
-        if (this.stewardIds == null) {
-            this.stewardIds = new ArrayList<>();
-        }
-        this.stewardIds.add(stewardIdsItem);
+    public WriteableTermEntity importSourceCreatedBy(String importSourceCreatedBy) {
+        this.importSourceCreatedBy = importSourceCreatedBy;
         return this;
     }
 
     /**
-     * The stewards assigned to an artifact.
-     * @return stewardIds
+     * Name of the user who has created the term in the original source for
+     * imported term.
+     * @return importSourceCreatedBy
      **/
     @javax.annotation.Nullable
-    @JsonProperty("steward_ids")
+    @JsonProperty("import_source_created_by")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<String> getStewardIds() { return stewardIds; }
-    public void setStewardIds(List<String> stewardIds) { this.stewardIds = stewardIds; }
+    public String getImportSourceCreatedBy() { return importSourceCreatedBy; }
+    public void setImportSourceCreatedBy(String importSourceCreatedBy) { this.importSourceCreatedBy = importSourceCreatedBy; }
+
+    public WriteableTermEntity importSourceCreatedOn(OffsetDateTime importSourceCreatedOn) {
+        this.importSourceCreatedOn = importSourceCreatedOn;
+        return this;
+    }
+
+    /**
+     * The timestamp when the term was created in the original source for imported
+     * term.
+     * @return importSourceCreatedOn
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("import_source_created_on")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public OffsetDateTime getImportSourceCreatedOn() { return importSourceCreatedOn; }
+    public void setImportSourceCreatedOn(OffsetDateTime importSourceCreatedOn) { this.importSourceCreatedOn = importSourceCreatedOn; }
+
+    public WriteableTermEntity importSourceUsage(String importSourceUsage) {
+        this.importSourceUsage = importSourceUsage;
+        return this;
+    }
+
+    /**
+     * The usage of the term in the original source for imported term.
+     * @return importSourceUsage
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("import_source_usage")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getImportSourceUsage() { return importSourceUsage; }
+    public void setImportSourceUsage(String importSourceUsage) { this.importSourceUsage = importSourceUsage; }
+
+    public WriteableTermEntity example(String example) {
+        this.example = example;
+        return this;
+    }
+
+    /**
+     * Get example
+     * @return example
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("example")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getExample() { return example; }
+    public void setExample(String example) { this.example = example; }
 
     public WriteableTermEntity relatedTermRelationships(List<RelationshipObject> relatedTermRelationships) {
         this.relatedTermRelationships = relatedTermRelationships;
@@ -179,44 +152,6 @@ public class WriteableTermEntity extends TermEntity {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public List<RelationshipObject> getRelatedTermRelationships() { return relatedTermRelationships; }
     public void setRelatedTermRelationships(List<RelationshipObject> relatedTermRelationships) { this.relatedTermRelationships = relatedTermRelationships; }
-
-    public WriteableTermEntity parentCategory(NewRelationship parentCategory) {
-        this.parentCategory = parentCategory;
-        return this;
-    }
-
-    /**
-     * Get parentCategory
-     * @return parentCategory
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("parent_category")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public NewRelationship getParentCategory() { return parentCategory; }
-    public void setParentCategory(NewRelationship parentCategory) { this.parentCategory = parentCategory; }
-
-    public WriteableTermEntity categories(List<NewRelationship> categories) {
-        this.categories = categories;
-        return this;
-    }
-
-    public WriteableTermEntity addCategoriesItem(NewRelationship categoriesItem) {
-        if (this.categories == null) {
-            this.categories = new ArrayList<>();
-        }
-        this.categories.add(categoriesItem);
-        return this;
-    }
-
-    /**
-     * Secondary categories the artifact belongs to.
-     * @return categories
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("categories")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<NewRelationship> getCategories() { return categories; }
-    public void setCategories(List<NewRelationship> categories) { this.categories = categories; }
 
     public WriteableTermEntity isATypeOfTerms(List<NewRelationship> isATypeOfTerms) {
         this.isATypeOfTerms = isATypeOfTerms;
@@ -456,15 +391,12 @@ public class WriteableTermEntity extends TermEntity {
         if (o == null || getClass() != o.getClass()) { return false; }
         WriteableTermEntity newTermEntity = (WriteableTermEntity)o;
         return super.equals(o) &&
-                Objects.equals(this.name, newTermEntity.name) &&
-                Objects.equals(this.shortDescription, newTermEntity.shortDescription) &&
-                Objects.equals(this.effectiveStartDate, newTermEntity.effectiveStartDate) &&
-                Objects.equals(this.effectiveEndDate, newTermEntity.effectiveEndDate) &&
-                Objects.equals(this.tags, newTermEntity.tags) &&
-                Objects.equals(this.stewardIds, newTermEntity.stewardIds) &&
+                Objects.equals(this.abbreviations, newTermEntity.abbreviations) &&
+                Objects.equals(this.importSourceCreatedBy, newTermEntity.importSourceCreatedBy) &&
+                Objects.equals(this.importSourceCreatedOn, newTermEntity.importSourceCreatedOn) &&
+                Objects.equals(this.importSourceUsage, newTermEntity.importSourceUsage) &&
+                Objects.equals(this.example, newTermEntity.example) &&
                 Objects.equals(this.relatedTermRelationships, newTermEntity.relatedTermRelationships) &&
-                Objects.equals(this.parentCategory, newTermEntity.parentCategory) &&
-                Objects.equals(this.categories, newTermEntity.categories) &&
                 Objects.equals(this.isATypeOfTerms, newTermEntity.isATypeOfTerms) &&
                 Objects.equals(this.hasTypeTerms, newTermEntity.hasTypeTerms) &&
                 Objects.equals(this.isOfTerms, newTermEntity.isOfTerms) &&
@@ -480,11 +412,10 @@ public class WriteableTermEntity extends TermEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(),
-                name, shortDescription, effectiveStartDate,
-                effectiveEndDate, tags, stewardIds,
-                relatedTermRelationships, parentCategory, categories, isATypeOfTerms, hasTypeTerms,
-                isOfTerms, hasTerms, synonymTerms, relatedTerms, replacesTerms,
-                replacedByTerms, dataClasses, classifications);
+                abbreviations, importSourceCreatedBy, importSourceCreatedOn,
+                importSourceUsage, example, relatedTermRelationships, isATypeOfTerms,
+                hasTypeTerms, isOfTerms, hasTerms, synonymTerms, relatedTerms,
+                replacesTerms, replacedByTerms, dataClasses, classifications);
     }
 
     @Override
@@ -499,15 +430,12 @@ public class WriteableTermEntity extends TermEntity {
     @Override
     public void toString(StringBuilder sb) {
         super.toString(sb);
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    shortDescription: ").append(toIndentedString(shortDescription)).append("\n");
-        sb.append("    effectiveStartDate: ").append(toIndentedString(effectiveStartDate)).append("\n");
-        sb.append("    effectiveEndDate: ").append(toIndentedString(effectiveEndDate)).append("\n");
-        sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
-        sb.append("    stewardIds: ").append(toIndentedString(stewardIds)).append("\n");
+        sb.append("    abbreviations: ").append(toIndentedString(abbreviations)).append("\n");
+        sb.append("    importSourceCreatedBy: ").append(toIndentedString(importSourceCreatedBy)).append("\n");
+        sb.append("    importSourceCreatedOn: ").append(toIndentedString(importSourceCreatedOn)).append("\n");
+        sb.append("    importSourceUsage: ").append(toIndentedString(importSourceUsage)).append("\n");
+        sb.append("    example: ").append(toIndentedString(example)).append("\n");
         sb.append("    relatedTermRelationships: ").append(toIndentedString(relatedTermRelationships)).append("\n");
-        sb.append("    parentCategory: ").append(toIndentedString(parentCategory)).append("\n");
-        sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
         sb.append("    isATypeOfTerms: ").append(toIndentedString(isATypeOfTerms)).append("\n");
         sb.append("    hasTypeTerms: ").append(toIndentedString(hasTypeTerms)).append("\n");
         sb.append("    isOfTerms: ").append(toIndentedString(isOfTerms)).append("\n");
