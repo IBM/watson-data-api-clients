@@ -146,7 +146,7 @@ public class AssetsTest extends AbstractExpectations {
 
     @Test
     public void testUpdateRov() {
-        AssetRovMembers members = readRequestFromFile("updateRov", new TypeReference<AssetRovMembers>() {});
+        BaseRov members = readRequestFromFile("updateRov", new TypeReference<BaseRov>() {});
         MetadataEntityResult response = api.updateRov(NEW_ASSET_GUID, members, CATALOG_GUID, null, null).block();
         validateAsset(response, 1595596385055L);
     }

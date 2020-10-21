@@ -1087,7 +1087,7 @@ public class AssetsApiV2 {
      *     the API
      */
     public Mono<MetadataEntityResult> updateRov(String assetId,
-                                                AssetRovMembers assetRovMembers,
+                                                BaseRov assetRovMembers,
                                                 String catalogId,
                                                 String projectId,
                                                 String spaceId) throws RestClientException {

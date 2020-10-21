@@ -27,7 +27,7 @@ import java.util.Objects;
 public class AssetMetadata extends MetadataHeader {
 
     private String resourceKey;
-    private AssetRov rov;
+    private BaseRov rov;
     private SourceSystem sourceSystem;
     private List<SourceSystem> childSourceSystems = null;
 
@@ -42,7 +42,7 @@ public class AssetMetadata extends MetadataHeader {
     public String getResourceKey() { return resourceKey; }
     public void setResourceKey(String resourceKey) { this.resourceKey = resourceKey; }
 
-    public AssetMetadata rov(AssetRov rov) {
+    public AssetMetadata rov(BaseRov rov) {
         this.rov = rov;
         return this;
     }
@@ -50,8 +50,8 @@ public class AssetMetadata extends MetadataHeader {
     @javax.annotation.Nullable
     @JsonProperty("rov")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public AssetRov getRov() { return rov; }
-    public void setRov(AssetRov rov) { this.rov = rov; }
+    public BaseRov getRov() { return rov; }
+    public void setRov(BaseRov rov) { this.rov = rov; }
 
     public AssetMetadata sourceSystem(SourceSystem sourceSystem) {
         this.sourceSystem = sourceSystem;
