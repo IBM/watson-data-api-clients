@@ -1,0 +1,9 @@
+{
+  "query": {
+    "match": {
+      "metadata.artifact_type": {
+        "query": "policy"
+      }
+    }
+  }
+}

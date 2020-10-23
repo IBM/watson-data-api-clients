@@ -22,10 +22,7 @@ import org.mockserver.model.HttpResponse;
 import org.mockserver.model.JsonBody;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
@@ -179,6 +176,24 @@ public class MockConstants {
                 return resource.getFile();
             } catch (IOException e) {
                 System.err.println("Unable to convert resource file into a File object: " + filename);
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieve a test resource as an input stream.
+     * @param filename of the resource
+     * @return InputStream
+     */
+    public static InputStream getInputStreamFromResources(String filename) {
+        ClassPathResource resource = new ClassPathResource(filename);
+        if (resource.exists()) {
+            try {
+                return resource.getInputStream();
+            } catch (IOException e) {
+                System.err.println("Unable to convert resource file into an InputStream object: " + filename);
                 e.printStackTrace();
             }
         }

@@ -1,0 +1,41 @@
+{
+  "size": 1,
+  "rows": [
+    {
+      "provider_type_id": "glossary",
+      "tenant_id": "999",
+      "metadata": {
+        "modified_on": "2020-10-20T14:56:15.823Z",
+        "artifact_type": "policy",
+        "name": "Test Policy",
+        "modified_by": "1000331004",
+        "description": "Now with a long description.",
+        "state": "PUBLISHED",
+        "steward_ids": [],
+        "tags": []
+      },
+      "last_updated_at": 1603205776108,
+      "categories": {
+        "secondary_category_ids": [],
+        "last_updated_at": 1603205776100,
+        "secondary_category_global_ids": [],
+        "primary_category_global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_e39ada11-8338-3704-90e3-681a71e7c839",
+        "primary_category_id": "e39ada11-8338-3704-90e3-681a71e7c839",
+        "primary_category_name": "[uncategorized]",
+        "secondary_category_names": []
+      },
+      "artifact_id": "c13f20b3-13c5-4898-bf3e-8bd3e769e0e9",
+      "entity": {
+        "artifacts": {
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_c13f20b3-13c5-4898-bf3e-8bd3e769e0e9",
+          "effective_start_date": "2020-10-20T14:56:15.823Z",
+          "version_id": "3d297087-3e85-4fb9-bc54-2677a9313884_0",
+          "artifact_id": "c13f20b3-13c5-4898-bf3e-8bd3e769e0e9"
+        }
+      },
+      "custom_attributes": [],
+      "_score": 7.5404444
+    }
+  ],
+  "aggregations": {}
+}
