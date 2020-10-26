@@ -106,7 +106,7 @@ public class BusinessTermsTest extends AbstractExpectations {
 
     @Test
     public void testGet() {
-        PaginatedArtifactList response = api.get(NEW_TERM_GUID, "DRAFT", null, null, null, null, null).block();
+        PaginatedTermList response = api.get(NEW_TERM_GUID, "DRAFT", null, null, null, null, null).block();
         assertNotNull(response);
         assertEquals(response.getOffset(), Integer.valueOf(0));
         assertNotNull(response.getLast());
@@ -206,7 +206,7 @@ public class BusinessTermsTest extends AbstractExpectations {
 
     @Test
     public void testList() {
-        PaginatedArtifactList response = api.list(null, null, null, null, null, null).block();
+        PaginatedTermList response = api.list(null, null, null, null, null, null).block();
         assertNotNull(response);
         assertEquals(response.getOffset(), Integer.valueOf(0));
         assertNotNull(response.getLast());

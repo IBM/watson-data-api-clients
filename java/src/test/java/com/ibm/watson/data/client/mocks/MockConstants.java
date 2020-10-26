@@ -64,6 +64,7 @@ public class MockConstants {
     public static final String NEW_POLICY_GUID = "c13f20b3-13c5-4898-bf3e-8bd3e769e0e9";
     public static final String NEW_RULE_GUID  = "aafe5366-1d32-49c7-aa3c-4d8a899425b7";
     public static final String NEW_CLASSIFICATION_ID = "cbb8b86f-d91c-49a1-a541-aad046edf978";
+    public static final String NEW_REF_DATA_GUID = "6c2e568e-5bbe-40cf-a12e-b99691f8a78b";
 
     public static ApiClient getApiClient() {
         ApiClient apiClient = new ApiClient(false);

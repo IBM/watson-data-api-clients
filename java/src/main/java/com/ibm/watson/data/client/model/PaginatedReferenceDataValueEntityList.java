@@ -22,18 +22,18 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * PaginatedArtifactList
+ * PaginatedReferenceDataValueEntityList
  */
-public class PaginatedArtifactList extends PaginatedList {
+public class PaginatedReferenceDataValueEntityList extends PaginatedList {
 
-    private List<Term> resources = null;
+    private List<ResponseReferenceDataValueEntity> resources = null;
 
-    public PaginatedArtifactList resources(List<Term> resources) {
+    public PaginatedReferenceDataValueEntityList resources(List<ResponseReferenceDataValueEntity> resources) {
         this.resources = resources;
         return this;
     }
 
-    public PaginatedArtifactList addResourcesItem(Term resourcesItem) {
+    public PaginatedReferenceDataValueEntityList addResourcesItem(ResponseReferenceDataValueEntity resourcesItem) {
         if (this.resources == null) {
             this.resources = new ArrayList<>();
         }
@@ -48,16 +48,16 @@ public class PaginatedArtifactList extends PaginatedList {
     @javax.annotation.Nullable
     @JsonProperty("resources")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<Term> getResources() { return resources; }
-    public void setResources(List<Term> resources) { this.resources = resources; }
+    public List<ResponseReferenceDataValueEntity> getResources() { return resources; }
+    public void setResources(List<ResponseReferenceDataValueEntity> resources) { this.resources = resources; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        PaginatedArtifactList paginatedArtifactList = (PaginatedArtifactList)o;
+        PaginatedReferenceDataValueEntityList paginatedReferenceDataValueEntityList = (PaginatedReferenceDataValueEntityList)o;
         return super.equals(o) &&
-                Objects.equals(this.resources, paginatedArtifactList.resources);
+                Objects.equals(this.resources, paginatedReferenceDataValueEntityList.resources);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class PaginatedArtifactList extends PaginatedList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PaginatedArtifactList {\n");
+        sb.append("class PaginatedReferenceDataValueEntityList {\n");
         super.toString(sb);
         sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
         sb.append("}");

@@ -1,0 +1,22 @@
+{
+  "name": "Test RDS",
+  "long_description": "A simple reference data set to test the APIs.",
+  "type": "TEXT",
+  "rds_values": [
+    {
+      "code": "A",
+      "value": "Apple",
+      "description": "the first letter of the alphabet"
+    },
+    {
+      "code": "B",
+      "value": "Brain",
+      "description": "the second letter of the alphabet"
+    },
+    {
+      "code": "C",
+      "value": "Cycle",
+      "description": "the third letter of the alphabet"
+    }
+  ]
+}

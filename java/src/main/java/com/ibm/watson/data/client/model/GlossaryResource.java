@@ -143,21 +143,25 @@ public class GlossaryResource {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class GlossaryResource {\n");
+        toString(sb);
+        sb.append("}");
+        return sb.toString();
+    }
+
+    protected void toString(StringBuilder sb) {
         sb.append("    href: ").append(toIndentedString(href)).append("\n");
         sb.append("    artifactId: ").append(toIndentedString(artifactId)).append("\n");
         sb.append("    versionId: ").append(toIndentedString(versionId)).append("\n");
         sb.append("    workflowId: ").append(toIndentedString(workflowId)).append("\n");
         sb.append("    globalId: ").append(toIndentedString(globalId)).append("\n");
         sb.append("    entityType: ").append(toIndentedString(entityType)).append("\n");
-        sb.append("}");
-        return sb.toString();
     }
 
     /**
      * Convert the given object to string with each line indented by 4 spaces
      * (except the first line).
      */
-    private String toIndentedString(java.lang.Object o) {
+    protected String toIndentedString(java.lang.Object o) {
         if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }

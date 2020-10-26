@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "artifact_type": "reference_data",
+    "artifact_id": "6c2e568e-5bbe-40cf-a12e-b99691f8a78b",
+    "version_id": "1fb40e50-44f6-4227-803b-85635550ebf4",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_6c2e568e-5bbe-40cf-a12e-b99691f8a78b",
+    "workflow_id": "8f1fff25-1785-11eb-8009-0a580a81055e",
+    "draft_mode": "created",
+    "created_by": "1000331004",
+    "created_at": "2020-10-26T12:19:57.680Z",
+    "modified_by": "1000331004",
+    "modified_at": "2020-10-26T14:43:16.236Z",
+    "revision": "1",
+    "name": "Test RDS",
+    "state": "DRAFT",
+    "tags": [],
+    "steward_ids": [],
+    "workflow_state": "Not started",
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "rds_values": {
+      "offset": 0,
+      "last": {
+        "href": "/v3/reference_data/6c2e568e-5bbe-40cf-a12e-b99691f8a78b/versions/1fb40e50-44f6-4227-803b-85635550ebf4?offset=0"
+      },
+      "resources": [
+        {
+          "code": "A",
+          "value": "Apple",
+          "description": "the first letter of the alphabet",
+          "revision": "0"
+        },
+        {
+          "code": "B",
+          "value": "Brain",
+          "description": "the second letter of the alphabet",
+          "revision": "0"
+        },
+        {
+          "code": "C",
+          "value": "Cycle",
+          "description": "the third letter of the alphabet",
+          "revision": "0"
+        }
+      ],
+      "limit": 10,
+      "count": 3,
+      "first": {
+        "href": "/v3/reference_data/6c2e568e-5bbe-40cf-a12e-b99691f8a78b/versions/1fb40e50-44f6-4227-803b-85635550ebf4?offset=0"
+      }
+    },
+    "type": "TEXT",
+    "long_description": "now with a long description",
+    "state": "DRAFT",
+    "default_locale_id": "en-US"
+  }
+}

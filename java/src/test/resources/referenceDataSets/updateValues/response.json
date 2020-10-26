@@ -1,0 +1,20 @@
+{
+  "resources": [
+    {
+      "rds_values": [
+        {
+          "code": "D",
+          "value": "Delete",
+          "description": "now with a modified description",
+          "revision": "1"
+        }
+      ],
+      "href": "/v3/reference_data/6c2e568e-5bbe-40cf-a12e-b99691f8a78b/versions/1fb40e50-44f6-4227-803b-85635550ebf4/values/6c2e568e-5bbe-40cf-a12e-b99691f8a78b/versions/1fb40e50-44f6-4227-803b-85635550ebf4",
+      "artifact_id": "6c2e568e-5bbe-40cf-a12e-b99691f8a78b",
+      "version_id": "1fb40e50-44f6-4227-803b-85635550ebf4",
+      "workflow_id": "8f1fff25-1785-11eb-8009-0a580a81055e",
+      "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_6c2e568e-5bbe-40cf-a12e-b99691f8a78b",
+      "entity_type": "reference_data"
+    }
+  ]
+}

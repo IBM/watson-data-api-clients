@@ -19,7 +19,7 @@ import com.ibm.watson.data.client.ApiClient;
 import com.ibm.watson.data.client.model.PaginatedAbstractRelationshipList;
 import com.ibm.watson.data.client.model.GlossaryCreateResponse;
 import com.ibm.watson.data.client.model.NewTermEntity;
-import com.ibm.watson.data.client.model.PaginatedArtifactList;
+import com.ibm.watson.data.client.model.PaginatedTermList;
 import com.ibm.watson.data.client.model.ResponseGlossaryTerm;
 import com.ibm.watson.data.client.model.TermRelationshipsRequest;
 import com.ibm.watson.data.client.model.UpdatableTermEntity;
@@ -346,13 +346,13 @@ public class BusinessTermsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedArtifactList> get(String guid,
-                                           String status,
-                                           String includeRelationship,
-                                           Boolean allParents,
-                                           String limit,
-                                           String offset,
-                                           String runAsTenant) throws RestClientException {
+    public Mono<PaginatedTermList> get(String guid,
+                                       String status,
+                                       String includeRelationship,
+                                       Boolean allParents,
+                                       String limit,
+                                       String offset,
+                                       String runAsTenant) throws RestClientException {
 
         // verify the required parameter 'guid' is set
         if (guid == null) {
@@ -383,7 +383,7 @@ public class BusinessTermsApiV3 {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PaginatedArtifactList> localVarReturnType = new ParameterizedTypeReference<PaginatedArtifactList>() {};
+        ParameterizedTypeReference<PaginatedTermList> localVarReturnType = new ParameterizedTypeReference<PaginatedTermList>() {};
         return apiClient.invokeAPI(BASE_API + "/{guid}/versions",
                 HttpMethod.GET, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams,
@@ -491,12 +491,12 @@ public class BusinessTermsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedArtifactList> list(String status,
-                                            String includeRelationship,
-                                            Boolean allParents,
-                                            String runAsTenant,
-                                            Integer limit,
-                                            Integer offset) throws RestClientException {
+    public Mono<PaginatedTermList> list(String status,
+                                        String includeRelationship,
+                                        Boolean allParents,
+                                        String runAsTenant,
+                                        Integer limit,
+                                        Integer offset) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -519,7 +519,7 @@ public class BusinessTermsApiV3 {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PaginatedArtifactList> localVarReturnType = new ParameterizedTypeReference<PaginatedArtifactList>() {};
+        ParameterizedTypeReference<PaginatedTermList> localVarReturnType = new ParameterizedTypeReference<PaginatedTermList>() {};
         return apiClient.invokeAPI(
                 BASE_API, HttpMethod.GET, pathParams, queryParams, null,
                 headerParams, cookieParams, formParams, localVarAccept,
