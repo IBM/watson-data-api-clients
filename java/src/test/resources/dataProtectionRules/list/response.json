@@ -1,0 +1,51 @@
+{
+  "resources": [
+    {
+      "entity": {
+        "name": "Test DP Rule",
+        "description": "A sample rule for testing the Data Protection APIs.",
+        "governance_type_id": "Access",
+        "trigger": [
+          "$Asset.InferredClassification",
+          "CONTAINS",
+          [
+            "$5d2d5419-0032-4c64-90e2-ce68c6997bb5_c42561e8-4578-4ba8-8102-c15d85b5f11d",
+            "$5d2d5419-0032-4c64-90e2-ce68c6997bb5_388a668d-4541-4879-974c-ebd29f9324b9"
+          ]
+        ],
+        "action": {
+          "name": "Transform",
+          "subaction": {
+            "name": "redactTerms",
+            "parameters": [
+              {
+                "name": "term_names",
+                "value": [
+                  "5d2d5419-0032-4c64-90e2-ce68c6997bb5_c42561e8-4578-4ba8-8102-c15d85b5f11d",
+                  "5d2d5419-0032-4c64-90e2-ce68c6997bb5_388a668d-4541-4879-974c-ebd29f9324b9"
+                ]
+              }
+            ]
+          }
+        },
+        "state": "active"
+      },
+      "metadata": {
+        "guid": "faee7d99-74b0-4c08-ab8e-ccc50bb9440a",
+        "created_at": "2020-10-19T15:36:21.830Z",
+        "creator": "1000331004",
+        "updated_at": "2020-10-19T15:36:21.830Z",
+        "modifier": "1000331004"
+      }
+    }
+  ],
+  "limit": 50,
+  "offset": 0,
+  "count": 1,
+  "first": {
+    "href": "/v3/enforcement/rules?offset=0"
+  },
+  "last": {
+    "href": "/v3/enforcement/rules?offset=0"
+  }
+}

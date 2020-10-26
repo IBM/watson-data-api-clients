@@ -1,0 +1,5 @@
+{
+  "name": "Test Rule",
+  "short_description": "A simple rule to test the APIs.",
+  "rule_type": "Governance"
+}

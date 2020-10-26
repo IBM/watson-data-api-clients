@@ -1,0 +1,124 @@
+{
+  "Roles": [
+    {
+      "ID": "All Roles - Admin",
+      "permissions": [
+        "access_advanced_governance_capabilities",
+        "sign_in_only",
+        "access_catalog",
+        "access_information_assets",
+        "administrator",
+        "manage_quality",
+        "can_provision",
+        "manage_discovery",
+        "manage_metadata_import",
+        "virtualize_transform",
+        "manage_catalog",
+        "author_governance_artifacts",
+        "manage_categories",
+        "manage_governance_workflow",
+        "manage_information_assets",
+        "view_quality",
+        "view_governance_artifacts"
+      ],
+      "role_name": "All Roles - Admin"
+    },
+    {
+      "ID": "Administrator",
+      "description": "Administrator role",
+      "permissions": [
+        "administrator",
+        "can_provision",
+        "manage_catalog",
+        "manage_quality",
+        "manage_information_assets",
+        "manage_discovery",
+        "manage_metadata_import",
+        "manage_governance_workflow",
+        "manage_categories",
+        "author_governance_artifacts",
+        "virtualize_transform"
+      ],
+      "role_name": "Administrator"
+    },
+    {
+      "ID": "User",
+      "description": "Default role for users with limited permissions on the platform",
+      "permissions": [
+        "sign_in_only"
+      ],
+      "role_name": "User"
+    },
+    {
+      "ID": "Data Scientist",
+      "description": "Data scientist role",
+      "permissions": [
+        "access_catalog"
+      ],
+      "role_name": "Data Scientist"
+    },
+    {
+      "ID": "Developer",
+      "description": "Developer role",
+      "permissions": [
+        "access_catalog",
+        "can_provision"
+      ],
+      "role_name": "Developer"
+    },
+    {
+      "ID": "Business Analyst",
+      "description": "Business Analyst role",
+      "permissions": [
+        "access_catalog",
+        "access_information_assets",
+        "view_quality"
+      ],
+      "role_name": "Business Analyst"
+    },
+    {
+      "ID": "Data Engineer",
+      "description": "Data engineer role",
+      "permissions": [
+        "access_catalog",
+        "view_quality",
+        "manage_information_assets",
+        "manage_metadata_import",
+        "manage_discovery",
+        "author_governance_artifacts",
+        "manage_quality",
+        "can_provision",
+        "virtualize_transform"
+      ],
+      "role_name": "Data Engineer"
+    },
+    {
+      "ID": "Data Quality Analyst",
+      "description": "Data quality analyst role",
+      "permissions": [
+        "access_catalog",
+        "manage_information_assets",
+        "manage_metadata_import",
+        "manage_discovery",
+        "author_governance_artifacts",
+        "manage_quality"
+      ],
+      "role_name": "Data Quality Analyst"
+    },
+    {
+      "ID": "Data Steward",
+      "description": "Data steward role",
+      "permissions": [
+        "access_catalog",
+        "manage_information_assets",
+        "manage_metadata_import",
+        "manage_discovery",
+        "author_governance_artifacts",
+        "view_quality"
+      ],
+      "role_name": "Data Steward"
+    }
+  ],
+  "_messageCode_": "200",
+  "message": "All Roles retrieved successfully."
+}

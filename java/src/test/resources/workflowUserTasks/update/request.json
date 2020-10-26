@@ -1,0 +1,13 @@
+{
+  "action": "complete",
+  "form_properties": [
+    {
+      "id": "action",
+      "value": "#publish"
+    },
+    {
+      "id": "comment",
+      "value": "Publishing the item with this comment."
+    }
+  ]
+}

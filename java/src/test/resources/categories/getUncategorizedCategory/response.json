@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "artifact_type": "category",
+    "artifact_id": "e39ada11-8338-3704-90e3-681a71e7c839",
+    "version_id": "cb043e08-2123-43eb-ac3c-a39d76baad62_0",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_e39ada11-8338-3704-90e3-681a71e7c839",
+    "created_by": "storage-admin",
+    "created_at": "2020-08-25T19:52:43.194Z",
+    "modified_by": "storage-admin",
+    "modified_at": "2020-08-25T19:52:43.194Z",
+    "revision": "0",
+    "name": "[uncategorized]",
+    "state": "PUBLISHED",
+    "tags": [],
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "long_description": "This is the system default if a standard category is not assigned.",
+    "state": "PUBLISHED",
+    "default_locale_id": "en-US",
+    "custom_attributes": []
+  }
+}

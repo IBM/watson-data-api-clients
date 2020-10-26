@@ -1,0 +1,11 @@
+{
+  "members": [
+    {
+      "role": "viewer",
+      "user_name": "jsmith",
+      "id": "1000331015",
+      "state": "ACTIVE",
+      "type": "user"
+    }
+  ]
+}

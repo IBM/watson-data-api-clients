@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "name": "Test Asset",
+    "description": "A test asset to validate the API client works as expected.",
+    "asset_type": "test_type",
+    "asset_category": "USER",
+    "origin_country": "GB"
+  },
+  "entity": {
+    "test_type": {
+      "test_field": "Sample value for the asset's custom field."
+    }
+  }
+}

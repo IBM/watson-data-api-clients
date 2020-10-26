@@ -1,0 +1,18 @@
+{
+  "trace": "574fe0xsvwistj7zhyqdglr8s",
+  "errors": [
+    {
+      "code": "not_authorized",
+      "message": "Access to upgrade API is restricted to whitelisted user IDs only.",
+      "extra": {
+        "environment_name": "icp4data",
+        "http_status": 403,
+        "id": "CDICO9029E",
+        "source_cluster": "NULL",
+        "source_component": "wdp-connect-connection",
+        "timestamp": "2020-08-06T20:52:46.002Z",
+        "user": "1000331004"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "offset": 0,
+  "last": {
+    "href": "/v3/governance_artifact_types/glossary_term/57904012-45da-4995-9dfb-84daa372ce7a/versions/de8db9ee-4319-48c6-983f-8fd0b419a135/aggregated_logs/5252d5cf-9c7b-4dc5-b180-dd6228777277?offset=0"
+  },
+  "resources": [
+    {
+      "metadata": {
+        "id": "5252d5cf-9c7b-4dc5-b180-dd6228777277",
+        "modified_by": "1000331004",
+        "modified_at": "2020-09-02T08:42:57.544Z"
+      },
+      "entity": {
+        "modification_details": {
+          "property_name": "parent_category",
+          "new_value": "[uncategorized]",
+          "property_type": "Relationship",
+          "additional_info": "category",
+          "action": "Added"
+        }
+      }
+    }
+  ],
+  "limit": 10,
+  "count": 1,
+  "first": {
+    "href": "/v3/governance_artifact_types/glossary_term/57904012-45da-4995-9dfb-84daa372ce7a/versions/de8db9ee-4319-48c6-983f-8fd0b419a135/aggregated_logs/5252d5cf-9c7b-4dc5-b180-dd6228777277?offset=0"
+  }
+}

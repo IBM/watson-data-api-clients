@@ -1,0 +1,28 @@
+{
+  "path": "SCHEMA_NAME",
+  "asset_types": [
+    {
+      "type": "table",
+      "dataset": true,
+      "dataset_container": false
+    }
+  ],
+  "assets": [
+    {
+      "id": "BANKRELN",
+      "type": "table",
+      "name": "BANKRELN",
+      "path": "/SCHEMA_NAME/BANKRELN"
+    },
+    {
+      "id": "CUSTOMER",
+      "type": "table",
+      "name": "CUSTOMER",
+      "path": "/SCHEMA_NAME/CUSTOMER"
+    }
+  ],
+  "first": {
+    "href": "https://internal-nginx-svc:12443/v2/connections/99845973-050b-482b-b900-a13a75865258/assets?project_id=f0bd7b72-f690-4b65-9edb-7a430fa658d9&offset=0&limit=100&path=SCHEMA_NAME"
+  },
+  "total_count": 2
+}

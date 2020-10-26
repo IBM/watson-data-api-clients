@@ -1,0 +1,2403 @@
+{
+  "metadata": {
+    "asset_id": "193a97c1-4475-4a19-b90c-295c4fdc6517",
+    "asset_type": "datasource_type",
+    "creator_id": "IBM"
+  },
+  "entity": {
+    "name": "bluemixcloudobjectstorage",
+    "label": "Cloud Object Storage",
+    "description": "Cloud Object Storage service on IBM Cloud. Offers S3 API and application binding with regional and cross regional ",
+    "type": "file",
+    "allowed_as_source": true,
+    "allowed_as_target": true,
+    "data_shape": "rectangular",
+    "auto_discovery": true,
+    "discovery": {
+      "top_level_filters": [
+        "include_files",
+        "include_folders"
+      ],
+      "asset_types": [
+        {
+          "name": "excel",
+          "label": "Excel File",
+          "next_level_filters": [
+            "depth",
+            "include_files",
+            "include_folders"
+          ]
+        },
+        {
+          "name": "file",
+          "label": "File",
+          "next_level_filters": [
+            "depth",
+            "include_files",
+            "include_folders"
+          ]
+        },
+        {
+          "name": "folder",
+          "label": "Folder",
+          "next_level_filters": [
+            "depth",
+            "include_files",
+            "include_folders"
+          ]
+        },
+        {
+          "name": "worksheet",
+          "label": "Worksheet",
+          "next_level_filters": []
+        }
+      ]
+    },
+    "secure_gateway": "not_applicable",
+    "properties": {
+      "connection": [
+        {
+          "name": "access_key",
+          "type": "string",
+          "label": "Access Key",
+          "description": "Connecting to the IBM COS service with the S3 API requires credentials and an endpoint. Credentials consist of an Access Key and a Secret Key. Find the Access Key by going to https://console.ng.bluemix.net/dashboard/services, clicking the Cloud Object Storage service, clicking Service credentials in the left pane, and then clicking View credentials in the Actions column of the Service Credentials table. Copy the value of access_key, not including quotation marks",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "username"
+          ],
+          "group": "credentials"
+        },
+        {
+          "name": "api_key",
+          "type": "string",
+          "label": "API Key",
+          "description": "A token that is used to call the Watson IoT Platform HTTP APIs. API keys are assigned roles that grant them authorization to call certain sets of HTTP APIs. Find the API key by going to https://console.ng.bluemix.net/dashboard/services, clicking the Cloud Object Storage service, clicking Service credentials in the left pane, and then clicking View credentials in the Actions column of the Service Credentials table. Copy the value of api_key, not including quotation marks",
+          "required": true,
+          "masked": true,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "password"
+          ],
+          "group": "credentials"
+        },
+        {
+          "name": "auto_discovery",
+          "type": "boolean",
+          "label": "Discover data assets",
+          "description": "Discover data assets",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false,
+          "group": "domain"
+        },
+        {
+          "name": "bucket",
+          "type": "string",
+          "label": "Bucket",
+          "description": "The name of the bucket that contains the files to access",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "container"
+          ]
+        },
+        {
+          "name": "defer_credentials",
+          "type": "boolean",
+          "label": "Defer credentials",
+          "description": "Defer specifying credentials until usage",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "iam_url",
+          "type": "string",
+          "label": "IAM URL",
+          "description": "The URL that IBM Cloud Object Storage should use to authenticate the API key with Identity and Access Management (IAM)",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "label": "Region (deprecated)",
+          "description": "Signing region",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "resource_instance_id",
+          "type": "string",
+          "label": "Resource Instance ID",
+          "description": "The identifier of the resource instance that you created when you ordered IBM Cloud Object Storage. Find the resource instance ID by going to https://console.ng.bluemix.net/dashboard/services, clicking the Cloud Object Storage service, clicking Service credentials in the left pane, and then clicking View credentials in the Actions column of the Service Credentials table. Copy the value of resource_instance_id, not including quotation marks",
+          "required": true,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "username"
+          ],
+          "group": "credentials"
+        },
+        {
+          "name": "secret_key",
+          "type": "string",
+          "label": "Secret Key",
+          "description": "Connecting to the IBM COS service with the S3 API requires credentials and an endpoint. Credentials consist of an Access Key and a Secret Key. Find the Secret Key by going to https://console.ng.bluemix.net/dashboard/services, clicking the Cloud Object Storage service, clicking Service credentials in the left pane, and then clicking View credentials in the Actions column of the Service Credentials table. Copy the value of secret_key, not including quotation marks",
+          "required": false,
+          "masked": true,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "password"
+          ],
+          "group": "credentials"
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "label": "Login URL",
+          "description": "The URL for logging in to IBM Cloud Object Storage. Find this URL by going to https://console.ng.bluemix.net/dashboard/services, clicking the Cloud Object Storage service, and then clicking Endpoint in the left pane. Copy the value of the public endpoint that you want to use",
+          "placeholder": "https://s3.us.cloud-object-storage.appdomain.cloud",
+          "required": true,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        }
+      ],
+      "source": [
+        {
+          "name": "bucket",
+          "type": "string",
+          "label": "Bucket",
+          "description": "The name of the bucket that contains the files to read",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "container"
+          ]
+        },
+        {
+          "name": "byte_limit",
+          "type": "string",
+          "label": "Byte Limit",
+          "description": "The maximum number of bytes to return. Use any of these suffixes; KB, MB, GB, or TB",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "date_format",
+          "type": "string",
+          "label": "Date Format",
+          "description": "The format of date values, for example, yyyy-[m]m-[d]d",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "decimal_format",
+          "type": "string",
+          "label": "Decimal Format",
+          "description": "The format of decimal values, for example, #,###.##",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "decimal_format_decimal_separator",
+          "type": "string",
+          "label": "Decimal Separator",
+          "description": "The character used to separate the integer part from the fractional part of a number",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "decimal_format_grouping_separator",
+          "type": "string",
+          "label": "Decimal Grouping Separator",
+          "description": "The character used to group digits of similar significance",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "display_value_labels",
+          "type": "boolean",
+          "label": "Display Value Labels",
+          "description": "Display the value labels",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "encoding",
+          "type": "string",
+          "label": "Encoding",
+          "description": "The appropriate character encoding for your data, for example, UTF-8",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "utf-8"
+        },
+        {
+          "name": "encryption_key",
+          "type": "string",
+          "label": "Encryption Key",
+          "description": "Key to decrypt sav file",
+          "required": false,
+          "masked": true,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "escape_character",
+          "type": "enum",
+          "label": "Escape Character",
+          "description": "The character that's used to escape other characters, for example, a backslash. Escaping is a string technique that identifies characters as being part of a string value.",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "none",
+          "values": [
+            {
+              "value": "<?>",
+              "label": "Any character"
+            },
+            {
+              "value": "backslash",
+              "label": "Backslash"
+            },
+            {
+              "value": "double_quote",
+              "label": "Double quotation mark"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "single_quote",
+              "label": "Single quotation mark"
+            }
+          ]
+        },
+        {
+          "name": "exclude_missing_values",
+          "type": "boolean",
+          "label": "Exclude Missing Values",
+          "description": "Set values that have been defined as missing values to null",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "field_delimiter",
+          "type": "enum",
+          "label": "Field Delimiter",
+          "description": "The character that separates each value from the next value, for example, a comma",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "comma",
+          "values": [
+            {
+              "value": "<?>",
+              "label": "Any character"
+            },
+            {
+              "value": "colon",
+              "label": "Colon"
+            },
+            {
+              "value": "comma",
+              "label": "Comma"
+            },
+            {
+              "value": "tab",
+              "label": "Tab"
+            }
+          ]
+        },
+        {
+          "name": "file_format",
+          "type": "enum",
+          "label": "File Format",
+          "description": "The format of the file",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "csv",
+          "values": [
+            {
+              "value": "avro",
+              "label": "Avro"
+            },
+            {
+              "value": "csv",
+              "label": "CSV"
+            },
+            {
+              "value": "delimited",
+              "label": "Delimited"
+            },
+            {
+              "value": "excel",
+              "label": "Excel"
+            },
+            {
+              "value": "json",
+              "label": "JSON"
+            },
+            {
+              "value": "orc",
+              "label": "ORC"
+            },
+            {
+              "value": "parquet",
+              "label": "Parquet"
+            },
+            {
+              "value": "sas",
+              "label": "SAS"
+            },
+            {
+              "value": "sav",
+              "label": "SAV"
+            },
+            {
+              "value": "shp",
+              "label": "SHP"
+            },
+            {
+              "value": "xml",
+              "label": "XML"
+            }
+          ]
+        },
+        {
+          "name": "file_name",
+          "type": "string",
+          "label": "File Name",
+          "description": "The name of the file to read",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "file"
+          ]
+        },
+        {
+          "name": "first_line",
+          "type": "integer",
+          "label": "First line",
+          "description": "The first line of data or header",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "0"
+        },
+        {
+          "name": "first_line_header",
+          "type": "boolean",
+          "label": "Header",
+          "description": "The first line of the file contains column headers",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "infer_as_varchar",
+          "type": "boolean",
+          "label": "Infer as VARCHAR",
+          "description": "Treat the data in all columns as VARCHARs",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "infer_record_count",
+          "type": "integer",
+          "label": "Infer Record Count",
+          "description": "The number of records to process to obtain the structure of the data",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "1000"
+        },
+        {
+          "name": "infer_schema",
+          "type": "boolean",
+          "label": "Infer Schema",
+          "description": "Obtain the schema from the file",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "infer_timestamp_as_date",
+          "type": "boolean",
+          "label": "Infer Timestamp as Date",
+          "description": "Infer columns containing date and time data as date",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "true"
+        },
+        {
+          "name": "invalid_data_handling",
+          "type": "enum",
+          "label": "Invalid data handling",
+          "description": "How to handle values that are not valid: fail the job, null the column, or drop the row",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "fail",
+          "values": [
+            {
+              "value": "column",
+              "label": "Column"
+            },
+            {
+              "value": "fail",
+              "label": "Fail"
+            },
+            {
+              "value": "row",
+              "label": "Row"
+            }
+          ]
+        },
+        {
+          "name": "json_infer_record_count",
+          "type": "integer",
+          "label": "Infer Record Count",
+          "description": "Deprecated. Use infer_record_count property. The number of JSON elements to process to obtain the structure of the data",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "json_path",
+          "type": "string",
+          "label": "JSON Path",
+          "description": "The path that identifies the elements to retrieve from a JSON document, for example, /book/publisher",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "labels_as_names",
+          "type": "boolean",
+          "label": "Labels as Names",
+          "description": "Set column names to the value of the column label",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "null_value",
+          "type": "string",
+          "label": "Null Value",
+          "description": "The value that represents null (a missing value) in the file, for example, NULL",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "partition_name_prefix",
+          "type": "string",
+          "label": "Partition Name Prefix",
+          "description": "The prefix in each partition name",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "part"
+        },
+        {
+          "name": "quote_character",
+          "type": "enum",
+          "label": "Quote Character",
+          "description": "The character that's used to enclose string values, for example, a double quotation mark",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "none",
+          "values": [
+            {
+              "value": "\"",
+              "label": "\""
+            },
+            {
+              "value": "'",
+              "label": "'"
+            },
+            {
+              "value": "double_quote",
+              "label": "Double quotation mark"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "single_quote",
+              "label": "Single quotation mark"
+            }
+          ]
+        },
+        {
+          "name": "range",
+          "type": "string",
+          "label": "Cell Range for Excel Worksheets",
+          "description": "The range of cells to retrieve from the Excel worksheet, for example, C1:F10",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "read_mode",
+          "type": "enum",
+          "label": "Read Mode",
+          "description": "The method for reading files",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "read_single",
+          "values": [
+            {
+              "value": "read_multiple_regex",
+              "label": "Read Multiple Files Using Regex Expression"
+            },
+            {
+              "value": "read_multiple_wildcard",
+              "label": "Read Multiple Files Using Wildcards"
+            },
+            {
+              "value": "read_raw",
+              "label": "Read Binary Data"
+            },
+            {
+              "value": "read_single",
+              "label": "Read A Single File"
+            }
+          ]
+        },
+        {
+          "name": "row_delimiter",
+          "type": "enum",
+          "label": "Row Delimiter",
+          "description": "The character or characters that separate one line from another, for example, CR/LF (Carriage Return/Line Feed)",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "new_line",
+          "values": [
+            {
+              "value": "carriage_return",
+              "label": "Carriage Return"
+            },
+            {
+              "value": "carriage_return_line_feed",
+              "label": "Carriage Return & Line Feed"
+            },
+            {
+              "value": "line_feed",
+              "label": "Line Feed"
+            },
+            {
+              "value": "new_line",
+              "label": "Any New Line"
+            }
+          ]
+        },
+        {
+          "name": "row_limit",
+          "type": "integer",
+          "label": "Row Limit",
+          "description": "The maximum number of rows to return",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "sheet_name",
+          "type": "string",
+          "label": "Excel worksheet name",
+          "description": "The name of the Excel worksheet to read from",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "worksheet"
+          ]
+        },
+        {
+          "name": "time_format",
+          "type": "string",
+          "label": "Time Format",
+          "description": "The format of time values, for example, HH:mm:ss[.f]",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "timestamp_format",
+          "type": "string",
+          "label": "Timestamp Format",
+          "description": "The format of timestamp values, for example, yyyy-MM-dd H:m:s",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "type_mapping",
+          "type": "string",
+          "label": "Type mapping",
+          "description": "Overrides the data types of specified columns in the file's inferred schema, for example, inferredType1:newType1;inferredType2:newType2",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "use_field_formats",
+          "type": "boolean",
+          "label": "Use Field Formats",
+          "description": "Format data using specified field formats",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "use_variable_formats",
+          "type": "boolean",
+          "label": "Use Variable Formats",
+          "description": "Format data using specified variable formats.",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "xml_path",
+          "type": "string",
+          "label": "XPath",
+          "description": "The path that identifies the root elements to retrieve from a XML document, for example, /book/publisher",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "xml_path_fields",
+          "type": "string",
+          "label": "Fields XPath",
+          "description": "The path that identifies the specified elements to retrieve from the root path of a XML document, for example, ../publisher",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "xml_schema",
+          "type": "string",
+          "label": "Schema of XML",
+          "description": "The schema that specified metadata information of elements, for example, data type, values, min, max",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": true
+        }
+      ],
+      "target": [
+        {
+          "name": "bucket",
+          "type": "string",
+          "label": "Bucket",
+          "description": "The name of the bucket that contains the files to write",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "container"
+          ]
+        },
+        {
+          "name": "codec_avro",
+          "type": "enum",
+          "label": "Compression Codec",
+          "description": "The compression codec to use when writing",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "values": [
+            {
+              "value": "bzip2",
+              "label": "Bzip2"
+            },
+            {
+              "value": "deflate",
+              "label": "Deflate"
+            },
+            {
+              "value": "null",
+              "label": "None"
+            },
+            {
+              "value": "snappy",
+              "label": "Snappy"
+            }
+          ]
+        },
+        {
+          "name": "codec_orc",
+          "type": "enum",
+          "label": "Compression Codec",
+          "description": "The compression codec to use when writing",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "values": [
+            {
+              "value": "lz4",
+              "label": "LZ4"
+            },
+            {
+              "value": "lzo",
+              "label": "LZO"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "snappy",
+              "label": "Snappy"
+            },
+            {
+              "value": "zlib",
+              "label": "ZLib"
+            }
+          ]
+        },
+        {
+          "name": "codec_parquet",
+          "type": "enum",
+          "label": "Compression Codec",
+          "description": "The compression codec to use when writing",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "values": [
+            {
+              "value": "gzip",
+              "label": "GZip"
+            },
+            {
+              "value": "snappy",
+              "label": "Snappy"
+            },
+            {
+              "value": "uncompressed",
+              "label": "None"
+            }
+          ]
+        },
+        {
+          "name": "create_bucket",
+          "type": "boolean",
+          "label": "Create Bucket",
+          "description": "Create the bucket that contains the files to write to",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "date_format",
+          "type": "string",
+          "label": "Date Format",
+          "description": "The format of date values, for example, yyyy-[m]m-[d]d",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "decimal_format",
+          "type": "string",
+          "label": "Decimal Format",
+          "description": "The format of decimal values, for example, #,###.##",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "decimal_format_decimal_separator",
+          "type": "string",
+          "label": "Decimal Separator",
+          "description": "The character used to separate the integer part from the fractional part of a number",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "decimal_format_grouping_separator",
+          "type": "string",
+          "label": "Decimal Grouping Separator",
+          "description": "The character used to group digits of similar significance",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "encoding",
+          "type": "string",
+          "label": "Encoding",
+          "description": "The appropriate character encoding for your data, for example, UTF-8",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "utf-8"
+        },
+        {
+          "name": "encryption_key",
+          "type": "string",
+          "label": "Encryption Key",
+          "description": "Key to decrypt sav file",
+          "required": false,
+          "masked": true,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "escape_character",
+          "type": "enum",
+          "label": "Escape Character",
+          "description": "The character that's used to escape other characters, for example, a backslash. Escaping is a string technique that identifies characters as being part of a string value.",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "none",
+          "values": [
+            {
+              "value": "<?>",
+              "label": "Any character"
+            },
+            {
+              "value": "backslash",
+              "label": "Backslash"
+            },
+            {
+              "value": "double_quote",
+              "label": "Double quotation mark"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "single_quote",
+              "label": "Single quotation mark"
+            }
+          ]
+        },
+        {
+          "name": "field_delimiter",
+          "type": "enum",
+          "label": "Field Delimiter",
+          "description": "The character that separates each value from the next value, for example, a comma",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "comma",
+          "values": [
+            {
+              "value": "<?>",
+              "label": "Any character"
+            },
+            {
+              "value": "colon",
+              "label": "Colon"
+            },
+            {
+              "value": "comma",
+              "label": "Comma"
+            },
+            {
+              "value": "tab",
+              "label": "Tab"
+            }
+          ]
+        },
+        {
+          "name": "file_format",
+          "type": "enum",
+          "label": "File Format",
+          "description": "The format of the file to write to",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "csv",
+          "values": [
+            {
+              "value": "avro",
+              "label": "Avro"
+            },
+            {
+              "value": "csv",
+              "label": "CSV"
+            },
+            {
+              "value": "delimited",
+              "label": "Delimited"
+            },
+            {
+              "value": "excel",
+              "label": "Excel"
+            },
+            {
+              "value": "json",
+              "label": "JSON"
+            },
+            {
+              "value": "orc",
+              "label": "ORC"
+            },
+            {
+              "value": "parquet",
+              "label": "Parquet"
+            },
+            {
+              "value": "sav",
+              "label": "SAV"
+            },
+            {
+              "value": "xml",
+              "label": "XML"
+            }
+          ]
+        },
+        {
+          "name": "file_name",
+          "type": "string",
+          "label": "File Name",
+          "description": "The name of the file to write to or delete",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "tags": [
+            "file"
+          ]
+        },
+        {
+          "name": "first_line_header",
+          "type": "boolean",
+          "label": "Header",
+          "description": "The first line of the file contains column headers",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "include_types",
+          "type": "boolean",
+          "label": "Include Types",
+          "description": "Include data types in the first line of the file",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "names_as_labels",
+          "type": "boolean",
+          "label": "Names as Labels",
+          "description": "Set column labels to the value of the column name",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "null_value",
+          "type": "string",
+          "label": "Null Value",
+          "description": "The value that represents null (a missing value) in the file, for example, NULL",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "partition_name_prefix",
+          "type": "string",
+          "label": "Partition Name Prefix",
+          "description": "The prefix in each partition name",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "part"
+        },
+        {
+          "name": "partitioned",
+          "type": "boolean",
+          "label": "Partitioned",
+          "description": "Write the file as multiple partitions",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "false"
+        },
+        {
+          "name": "quote_character",
+          "type": "enum",
+          "label": "Quote Character",
+          "description": "The character that's used to enclose string values, for example, a double quotation mark",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "none",
+          "values": [
+            {
+              "value": "\"",
+              "label": "\""
+            },
+            {
+              "value": "'",
+              "label": "'"
+            },
+            {
+              "value": "double_quote",
+              "label": "Double quotation mark"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "single_quote",
+              "label": "Single quotation mark"
+            }
+          ]
+        },
+        {
+          "name": "quote_numerics",
+          "type": "boolean",
+          "label": "Quote Numeric Values",
+          "description": "Enclose numeric values the same as strings using the quote character",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "true"
+        },
+        {
+          "name": "row_delimiter",
+          "type": "enum",
+          "label": "Row Delimiter",
+          "description": "The character or characters that separate one line from another, for example, CR/LF (Carriage Return/Line Feed)",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "new_line",
+          "values": [
+            {
+              "value": "carriage_return",
+              "label": "Carriage Return"
+            },
+            {
+              "value": "carriage_return_line_feed",
+              "label": "Carriage Return & Line Feed"
+            },
+            {
+              "value": "line_feed",
+              "label": "Line Feed"
+            },
+            {
+              "value": "new_line",
+              "label": "Any New Line"
+            }
+          ]
+        },
+        {
+          "name": "storage_class",
+          "type": "enum",
+          "label": "Storage Class",
+          "description": "The storage class for the created bucket",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "standard",
+          "values": [
+            {
+              "value": "cold_vault",
+              "label": "Cold Vault"
+            },
+            {
+              "value": "flex",
+              "label": "Flex"
+            },
+            {
+              "value": "standard",
+              "label": "Standard"
+            },
+            {
+              "value": "vault",
+              "label": "Vault"
+            }
+          ]
+        },
+        {
+          "name": "time_format",
+          "type": "string",
+          "label": "Time Format",
+          "description": "The format of time values, for example, HH:mm:ss[.f]",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "timestamp_format",
+          "type": "string",
+          "label": "Timestamp Format",
+          "description": "The format of timestamp values, for example, yyyy-MM-dd H:m:s",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false
+        },
+        {
+          "name": "write_mode",
+          "type": "enum",
+          "label": "Write Mode",
+          "description": "Whether to write to, or delete, the target",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "write",
+          "values": [
+            {
+              "value": "delete",
+              "label": "Delete"
+            },
+            {
+              "value": "write",
+              "label": "Write"
+            },
+            {
+              "value": "write_raw",
+              "label": "Write Binary Data"
+            }
+          ]
+        }
+      ],
+      "filter": [
+        {
+          "name": "depth",
+          "type": "integer",
+          "label": "Folder Depth",
+          "description": "Number of folder levels to traverse",
+          "required": false,
+          "masked": false,
+          "hidden": true,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "1"
+        },
+        {
+          "name": "include_files",
+          "type": "boolean",
+          "label": "Include Files",
+          "description": "Whether to include files in the discovery result",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "true"
+        },
+        {
+          "name": "include_folders",
+          "type": "boolean",
+          "label": "Include Folders",
+          "description": "Whether to include folders in the discovery result",
+          "required": false,
+          "masked": false,
+          "hidden": false,
+          "readonly": false,
+          "multiline": false,
+          "default_value": "true"
+        }
+      ],
+      "conditions": {
+        "connection": [
+          {
+            "property_name": "resource_instance_id",
+            "conditions": [
+              {
+                "property_name": "defer_credentials",
+                "condition": "not_equals",
+                "values": [
+                  "yes"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "api_key",
+            "conditions": [
+              {
+                "property_name": "defer_credentials",
+                "condition": "not_equals",
+                "values": [
+                  "yes"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "access_key",
+            "conditions": [
+              {
+                "property_name": "defer_credentials",
+                "condition": "not_equals",
+                "values": [
+                  "yes"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "secret_key",
+            "conditions": [
+              {
+                "property_name": "defer_credentials",
+                "condition": "not_equals",
+                "values": [
+                  "yes"
+                ]
+              },
+              {
+                "property_name": "access_key",
+                "condition": "set"
+              }
+            ],
+            "all_conditions_required": true
+          }
+        ],
+        "source": [
+          {
+            "property_name": "file_format",
+            "conditions": [
+              {
+                "property_name": "read_mode",
+                "condition": "not_equals",
+                "values": [
+                  "read_raw"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "first_line_header",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited",
+                  "excel"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "first_line",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "field_delimiter",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "row_delimiter",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "null_value",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "escape_character",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "quote_character",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "encoding",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited",
+                  "shp"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "decimal_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "decimal_format_decimal_separator",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "decimal_format_grouping_separator",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "date_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "display_value_labels",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sav"
+                ]
+              },
+              {
+                "property_name": "exclude_missing_values",
+                "condition": "not_equals",
+                "values": [
+                  "true"
+                ]
+              }
+            ],
+            "all_conditions_required": true
+          },
+          {
+            "property_name": "exclude_missing_values",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sav"
+                ]
+              },
+              {
+                "property_name": "display_value_labels",
+                "condition": "not_equals",
+                "values": [
+                  "true"
+                ]
+              }
+            ],
+            "all_conditions_required": true
+          },
+          {
+            "property_name": "labels_as_names",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sav"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "use_field_formats",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sav"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "infer_timestamp_as_date",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sav"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "time_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "timestamp_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "json_path",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "json"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "json_infer_record_count",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "json"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "infer_record_count",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "excel",
+                  "json"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "invalid_data_handling",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "type_mapping",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              },
+              {
+                "property_name": "infer_schema",
+                "condition": "equals",
+                "values": [
+                  "true"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "infer_as_varchar",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              },
+              {
+                "property_name": "infer_schema",
+                "condition": "equals",
+                "values": [
+                  "true"
+                ]
+              },
+              {
+                "property_name": "type_mapping",
+                "condition": "equals",
+                "values": [
+                  "false"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "use_variable_formats",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sas"
+                ]
+              },
+              {
+                "property_name": "infer_schema",
+                "condition": "not_equals",
+                "values": [
+                  "true"
+                ]
+              }
+            ],
+            "all_conditions_required": true
+          },
+          {
+            "property_name": "xml_path",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "xml"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "xml_path_fields",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "xml"
+                ]
+              },
+              {
+                "property_name": "xml_path",
+                "condition": "set"
+              }
+            ],
+            "all_conditions_required": true
+          },
+          {
+            "property_name": "xml_schema",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "xml"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          }
+        ],
+        "target": [
+          {
+            "property_name": "codec_avro",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "avro"
+                ]
+              },
+              {
+                "property_name": "file_name",
+                "condition": "matches",
+                "values": [
+                  ".*\\.avro$"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "first_line_header",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited",
+                  "excel"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "include_types",
+            "conditions": [
+              {
+                "property_name": "first_line_header",
+                "condition": "equals",
+                "values": [
+                  "yes"
+                ]
+              },
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited",
+                  "excel"
+                ]
+              }
+            ],
+            "all_conditions_required": true
+          },
+          {
+            "property_name": "field_delimiter",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "row_delimiter",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "null_value",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "escape_character",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "quote_character",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "encoding",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "decimal_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "decimal_format_decimal_separator",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "decimal_format_grouping_separator",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "date_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "time_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "timestamp_format",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "avro",
+                  "csv",
+                  "delimited",
+                  "parquet"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "file_format",
+            "conditions": [
+              {
+                "property_name": "write_mode",
+                "condition": "equals",
+                "values": [
+                  "write"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "codec_orc",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "orc"
+                ]
+              },
+              {
+                "property_name": "file_name",
+                "condition": "matches",
+                "values": [
+                  ".*\\.orc$"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "create_bucket",
+            "conditions": [
+              {
+                "property_name": "write_mode",
+                "condition": "not_equals",
+                "values": [
+                  "delete"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "storage_class",
+            "conditions": [
+              {
+                "property_name": "create_bucket",
+                "condition": "set"
+              },
+              {
+                "property_name": "create_bucket",
+                "condition": "equals",
+                "values": [
+                  "yes"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "codec_parquet",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "parquet"
+                ]
+              },
+              {
+                "property_name": "file_name",
+                "condition": "matches",
+                "values": [
+                  ".*\\.parquet$"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "partitioned",
+            "conditions": [
+              {
+                "property_name": "write_mode",
+                "condition": "equals",
+                "values": [
+                  "write"
+                ]
+              },
+              {
+                "property_name": "file_format",
+                "condition": "in",
+                "values": [
+                  "csv",
+                  "delimited"
+                ]
+              }
+            ],
+            "all_conditions_required": true
+          },
+          {
+            "property_name": "encryption_key",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sav"
+                ]
+              },
+              {
+                "property_name": "file_name",
+                "condition": "matches",
+                "values": [
+                  ".*\\.sav$"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          },
+          {
+            "property_name": "names_as_labels",
+            "conditions": [
+              {
+                "property_name": "file_format",
+                "condition": "equals",
+                "values": [
+                  "sav"
+                ]
+              },
+              {
+                "property_name": "file_name",
+                "condition": "matches",
+                "values": [
+                  ".*\\.sav$"
+                ]
+              }
+            ],
+            "all_conditions_required": false
+          }
+        ]
+      }
+    },
+    "tags": [
+      "IBM"
+    ],
+    "actions": [
+      {
+        "name": "get_signed_url",
+        "description": "Get a signed URL for accessing a file",
+        "properties": {
+          "input": [
+            {
+              "name": "bucket",
+              "type": "string",
+              "label": "Bucket",
+              "description": "Name of the bucket",
+              "required": true,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false,
+              "tags": [
+                "container"
+              ]
+            },
+            {
+              "name": "expires",
+              "type": "integer",
+              "label": "Expiration in seconds",
+              "description": "Number of seconds until the URL expires",
+              "required": true,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "file_name",
+              "type": "string",
+              "label": "File Name",
+              "description": "Name of the file",
+              "required": true,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false,
+              "tags": [
+                "file"
+              ]
+            },
+            {
+              "name": "method",
+              "type": "enum",
+              "label": "HTTP Method",
+              "description": "HTTP method that will be used with this URL",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false,
+              "default_value": "get",
+              "values": [
+                {
+                  "value": "get",
+                  "label": "HTTP GET"
+                },
+                {
+                  "value": "put",
+                  "label": "HTTP PUT"
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "name": "signed_url",
+              "type": "string",
+              "label": "Signed URL",
+              "description": "Signed URL for accessing a file",
+              "required": true,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            }
+          ]
+        }
+      }
+    ],
+    "supported_environments": [
+      "cloud",
+      "java",
+      "local",
+      "private",
+      "spark",
+      "streams"
+    ],
+    "supported_plans": [
+      "enterprise",
+      "lite",
+      "professional",
+      "standard"
+    ],
+    "supported_products": [
+      "catalog",
+      "cpd",
+      "ml",
+      "studio"
+    ],
+    "status": "active"
+  }
+}

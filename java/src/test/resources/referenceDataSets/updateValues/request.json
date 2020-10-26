@@ -1,0 +1,10 @@
+{
+  "values": [
+    {
+      "code": "D",
+      "value": "Delete",
+      "description": "now with a modified description",
+      "revision": "0"
+    }
+  ]
+}

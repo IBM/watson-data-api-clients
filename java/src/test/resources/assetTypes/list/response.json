@@ -1,0 +1,3620 @@
+{
+  "resources": [
+    {
+      "description": "Environment specification, which envelops software and hardware specifications.",
+      "fields": [
+        {
+          "key": "software_specification_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.software_specification.guid",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "hardware_specification_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.hardware_specification.guid",
+          "is_searchable_across_types": true
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "environment",
+      "version": 1.0
+    },
+    {
+      "description": "Software specifications to be used with environments",
+      "fields": [
+        {
+          "key": "base_software_specification_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.base_software_specification.guid",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "package_extensions_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "asset.package_extensions[].guid",
+          "is_searchable_across_types": true
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "software_specification",
+      "version": 1.0
+    },
+    {
+      "description": "Hardware specifications to be used with environments",
+      "fields": [
+        {
+          "key": "cpu_units",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.nodes.cpu.units",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "mem_size",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.nodes.mem.size",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "gpu_name",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.nodes.gpu.name",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "num_gpu",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.nodes.gpu.num_gpu",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "spark_num_drivers",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.spark.num_drivers",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "spark_num_executors",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.spark.num_executors",
+          "is_searchable_across_types": true
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "hardware_specification",
+      "version": 1.0
+    },
+    {
+      "description": "OMRS asset type",
+      "fields": [
+        {
+          "key": "omrs_entity1.omrs_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "omrs_entity2.omrs_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "omrs_type",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "omrs_relationship",
+      "version": 1.0
+    },
+    {
+      "description": "An asset type you can use to describe the columns of a data asset.  Normally attached as a property to an existing data asset.",
+      "fields": [
+        {
+          "key": "column_info_term_display_name",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "search_path": "*.column_terms[].term_display_name",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "column_info_term_id",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "search_path": "*.column_terms[].term_id",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "column_info_tag",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "search_path": "*.column_tags[]",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "column_info_description",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "*.column_description",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "column_info_omrs_guid",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "search_path": "*.omrs_guid",
+          "is_searchable_across_types": true
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "column_info",
+      "version": 1.0
+    },
+    {
+      "description": "OMRS asset type",
+      "fields": [
+        {
+          "key": "entity1.omrs_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "entity2.omrs_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "omrs_type",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "omrs_relationship_message",
+      "version": 1.0
+    },
+    {
+      "description": "Virtual Data Asset Type",
+      "fields": [
+        {
+          "key": "virtual_asset_type",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "virtual_data_asset",
+      "version": 1.0
+    },
+    {
+      "description": "Experiment asset type",
+      "fields": [
+        {
+          "key": "tags",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "tags[].value",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "pipeline_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "pipeline_dependencies",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "model_definition_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "model_definition_dependencies",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "training_lib_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "training_lib_dependencies",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "software_spec_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "software_spec_dependencies",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "hardware_spec_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "hardware_spec_dependencies",
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [
+        {
+          "key": "pipeline_dependencies",
+          "target_asset_type": "wml_pipeline",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "model_definition_dependencies",
+          "target_asset_type": "wml_model_definition",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "training_lib_dependencies",
+          "target_asset_type": "wml_model_definition",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "software_spec_dependencies",
+          "target_asset_type": "software_specification",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "hardware_spec_dependencies",
+          "target_asset_type": "hardware_specification",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        }
+      ],
+      "properties": {
+        "custom": {
+          "type": "object",
+          "description": "caller defined properties",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "{user-defined-property}": {
+              "description": "custom property",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "pipeline_dependencies": {
+          "type": "string",
+          "description": "list of dependent pipeline ids for the experiment",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        },
+        "tags": {
+          "type": "object",
+          "description": "tags for experiments. This is a DEPRECATED field!!. Use tags in metadata.",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "tag value",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false
+            },
+            "description": {
+              "type": "string",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "label_column": {
+          "type": "string",
+          "description": "label",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None",
+          "min_length": 0,
+          "max_length": 100
+        },
+        "training_references": {
+          "type": "object",
+          "description": "training_references of the experiment",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "pipeline": {
+              "type": "object",
+              "description": "pipeline",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "data_bindings": {
+                  "type": "object",
+                  "description": "data_bindings",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "data_reference_name": {
+                      "type": "string",
+                      "description": "data_reference_name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "node_id": {
+                      "type": "string",
+                      "description": "node_id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                },
+                "hybrid_pipeline_hardware_specs": {
+                  "type": "object",
+                  "description": "hybrid_pipeline_hardware_specs",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "node_runtime_id": {
+                      "type": "string",
+                      "description": "runtime id of node",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "hardware_spec": {
+                      "type": "object",
+                      "description": "hardware_spec",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "hardware_spec name",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "rev": {
+                          "type": "string",
+                          "description": "hardware_spec rev",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "hardware_spec id",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "base_id": {
+                          "type": "string",
+                          "description": "base hardware_spec id",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": true,
+                          "readonly": false
+                        },
+                        "num_nodes": {
+                          "type": "number",
+                          "description": "number of nodes",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    }
+                  }
+                },
+                "rev": {
+                  "type": "string",
+                  "description": "pipeline rev",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "id": {
+                  "type": "string",
+                  "description": "pipeline id",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "nodes_parameters": {
+                  "type": "object",
+                  "description": "nodes_parameters",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "node_id": {
+                      "type": "string",
+                      "description": "data_reference_name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "parameters": {
+                      "type": "object",
+                      "description": "caller defined properties",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "{user-defined-property}": {
+                          "description": "custom property",
+                          "placeholder": "Put a value here",
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    }
+                  }
+                },
+                "model_type": {
+                  "type": "string",
+                  "description": "model_type",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "href": {
+                  "type": "string",
+                  "description": "pipeline href. This is a DEPRECATED field!!. Use id and rev fields.",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": true,
+                  "readonly": false
+                },
+                "hardware_spec": {
+                  "type": "object",
+                  "description": "hardware_spec",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "hardware_spec name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "rev": {
+                      "type": "string",
+                      "description": "hardware_spec rev",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "hardware_spec id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "base_id": {
+                      "type": "string",
+                      "description": "base hardware_spec id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": true,
+                      "readonly": false
+                    },
+                    "num_nodes": {
+                      "type": "number",
+                      "description": "number of nodes",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                }
+              }
+            },
+            "training_lib": {
+              "type": "object",
+              "description": "training_lib. This is a DEPRECATED field!!. Use model_definition field.",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false,
+              "properties": {
+                "compute": {
+                  "type": "object",
+                  "description": "compute",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "compute name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "nodes": {
+                      "type": "number",
+                      "description": "nodes",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                },
+                "command": {
+                  "type": "string",
+                  "description": "command",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "rev": {
+                  "type": "string",
+                  "description": "training_lib rev",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "id": {
+                  "type": "string",
+                  "description": "training_lib href",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "model_type": {
+                  "type": "string",
+                  "description": "model_type",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "href": {
+                  "type": "string",
+                  "description": "training_lib href",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "parameters": {
+                  "type": "object",
+                  "description": "caller defined properties",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{user-defined-property}": {
+                      "description": "custom property",
+                      "placeholder": "Put a value here",
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                },
+                "runtime": {
+                  "type": "object",
+                  "description": "runtime",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "href": {
+                      "type": "string",
+                      "description": "runtime href",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                }
+              }
+            },
+            "model_definition": {
+              "type": "object",
+              "description": "model_definition",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "software_spec": {
+                  "type": "object",
+                  "description": "software_spec of the function",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "software_spec id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "rev": {
+                      "type": "string",
+                      "description": "software_spec rev",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "software_spec name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "base_id": {
+                      "type": "string",
+                      "description": "base software_spec id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": true,
+                      "readonly": false
+                    }
+                  }
+                },
+                "command": {
+                  "type": "string",
+                  "description": "command",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "rev": {
+                  "type": "string",
+                  "description": "model_definition rev",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "id": {
+                  "type": "string",
+                  "description": "model_definition id",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "model_type": {
+                  "type": "string",
+                  "description": "model_type",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "parameters": {
+                  "type": "object",
+                  "description": "caller defined properties",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{user-defined-property}": {
+                      "description": "custom property",
+                      "placeholder": "Put a value here",
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                },
+                "hardware_spec": {
+                  "type": "object",
+                  "description": "hardware_spec",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "hardware_spec name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "rev": {
+                      "type": "string",
+                      "description": "hardware_spec rev",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "hardware_spec id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "base_id": {
+                      "type": "string",
+                      "description": "base hardware_spec id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": true,
+                      "readonly": false
+                    },
+                    "num_nodes": {
+                      "type": "number",
+                      "description": "number of nodes",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                }
+              }
+            },
+            "hyper_parameters_optimization": {
+              "type": "object",
+              "description": "hyper_parameters_optimization",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "method": {
+                  "type": "object",
+                  "description": "method",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "parameters": {
+                      "type": "object",
+                      "description": "parameters",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "{user-defined-property}": {
+                          "description": "custom property",
+                          "placeholder": "Put a value here",
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    }
+                  }
+                },
+                "hyper_parameters": {
+                  "type": "object",
+                  "description": "hyper parameters",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "items": {
+                      "type": "object",
+                      "description": "items",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "{user-defined-property}": {
+                          "description": "items can have values as vector of string,int or double. items can have min, max, step and power for IntRange and Double Range.",
+                          "placeholder": "Put a value here",
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "hardware_spec_dependencies": {
+          "type": "string",
+          "description": "list of dependent hardware_spec ids for the experiment",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        },
+        "evaluation_definition": {
+          "type": "object",
+          "description": "evaluation definition of the experiment",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "method": {
+              "type": "string",
+              "description": "method type",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "metrics": {
+              "type": "object",
+              "description": "evaluation metrics",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": true,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "metrics name",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "maximize": {
+                  "type": "bool",
+                  "description": "evaluation metrics",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                }
+              }
+            }
+          }
+        },
+        "model_definition_dependencies": {
+          "type": "string",
+          "description": "list of dependent model_definition ids for the experiment",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        },
+        "software_spec_dependencies": {
+          "type": "string",
+          "description": "list of dependent software_spec ids for the experiment",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        },
+        "training_lib_dependencies": {
+          "type": "string",
+          "description": "list of dependent training_lib ids for the experiment",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        }
+      },
+      "name": "wml_experiment",
+      "version": 1.0
+    },
+    {
+      "description": "Model asset type",
+      "fields": [
+        {
+          "key": "tags",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "tags[].value",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "runtime.href",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "runtime.href",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "runtime.id",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "runtime.id",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "software_spec.id",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "software_spec.id",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "data_asset_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "data_asset_dependencies",
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [
+        {
+          "key": "training_lib.id",
+          "target_asset_type": "wml_model_definition",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "model_definition.id",
+          "target_asset_type": "wml_model_definition",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "pipeline.id",
+          "target_asset_type": "wml_pipeline",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "software_spec.id",
+          "target_asset_type": "software_specification",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "data_asset_dependencies",
+          "target_asset_type": "data_asset",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        }
+      ],
+      "properties": {
+        "model_definition": {
+          "type": "object",
+          "description": "model_definition of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "model_definition id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "rev": {
+              "type": "string",
+              "description": "model_definition rev",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "data_asset_dependencies": {
+          "type": "string",
+          "description": "list of dependent data_asset ids for the model",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false
+        },
+        "custom": {
+          "type": "object",
+          "description": "caller defined properties",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "{user-defined-property}": {
+              "description": "custom property",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "size": {
+          "type": "object",
+          "description": "Size of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "in_memory": {
+              "type": "string",
+              "description": "In memory size of the model",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "content": {
+              "type": "string",
+              "description": "Content size of the model",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "tags for models. This is a DEPRECATED field!!. Use tags in metadata.",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "tag value",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false
+            },
+            "description": {
+              "type": "string",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "domain": {
+          "type": "string",
+          "description": "domain of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None",
+          "min_length": 0,
+          "max_length": 100
+        },
+        "training_data_references": {
+          "type": "object",
+          "description": "training data references for the model",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "location": {
+              "type": "object",
+              "description": "file or folder details",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{location_properties}": {}
+              }
+            },
+            "id": {
+              "type": "string",
+              "description": "id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "schema": {
+              "type": "object",
+              "description": "The schema of the expected data",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{datarecord_schema}": {}
+              }
+            },
+            "connection": {
+              "type": "object",
+              "description": "connection details",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{connection_properties}": {}
+              }
+            },
+            "type": {
+              "type": "string",
+              "description": "type of the data source",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "label_column": {
+          "type": "string",
+          "description": "label column of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None",
+          "min_length": 0,
+          "max_length": 100
+        },
+        "software_spec": {
+          "type": "object",
+          "description": "software_spec of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "runtime id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "rev": {
+              "type": "string",
+              "description": "software_spec rev",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "name": {
+              "type": "string",
+              "description": "software_spec name",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "base_id": {
+              "type": "string",
+              "description": "base software_spec id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "hyper_parameters": {
+          "type": "object",
+          "description": "Hyper parameters",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "{user-defined-properties}": {
+              "description": "hyper parameter property",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "pipeline": {
+          "type": "object",
+          "description": "pipeline of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "pipeline id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "rev": {
+              "type": "string",
+              "description": "pipeline rev",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "href": {
+              "type": "string",
+              "description": "pipeline href. This is a DEPRECATED field!!. Use id and rev fields.",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "import": {
+          "type": "object",
+          "description": "Model import location. This is a DEPRECATED field!!.",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            },
+            "type": {
+              "type": "string",
+              "description": "type of the data source",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false
+            },
+            "connection": {
+              "type": "object",
+              "description": "connection details",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false,
+              "properties": {
+                "{connection_properties}": {}
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "file or folder details",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false,
+              "properties": {
+                "{location_properties}": {}
+              }
+            }
+          }
+        },
+        "training_lib": {
+          "type": "object",
+          "description": "training_lib of the model. This is a DEPRECATED field!!. Use model_definition.",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "training_lib id.",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            },
+            "rev": {
+              "type": "string",
+              "description": "training_lib rev.",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            },
+            "href": {
+              "type": "string",
+              "description": "training_lib href.",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "transformed_label_column": {
+          "type": "string",
+          "description": "transformed label column of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None",
+          "min_length": 0,
+          "max_length": 100
+        },
+        "metrics": {
+          "type": "object",
+          "description": "metrics of the model",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "ml_metrics": {
+              "type": "object",
+              "description": "ml_metrics details",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{ml_metrics_properties}": {}
+              }
+            },
+            "timestamp": {
+              "type": "string",
+              "description": "timestamp",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            },
+            "context": {
+              "type": "object",
+              "description": "context details",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "step": {
+                  "type": "object",
+                  "description": "step",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "data_allocation": {
+                      "type": "number",
+                      "description": "data_allocation",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "estimator": {
+                      "type": "string",
+                      "description": "estimator",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "completed_at": {
+                      "type": "string",
+                      "description": "completed_at",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "score": {
+                      "type": "number",
+                      "description": "score",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "hyper_parameters": {
+                      "type": "object",
+                      "description": "hyper_parameters",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "{user-defined-properties}": {
+                          "description": "hyper parameter property",
+                          "placeholder": "Put a value here",
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    },
+                    "started_at": {
+                      "type": "string",
+                      "description": "started_at",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "id",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "transformer": {
+                      "type": "string",
+                      "description": "transformer",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                },
+                "classes": {
+                  "type": "string",
+                  "description": "classes",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "phase": {
+                  "type": "string",
+                  "description": "phase",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "multi_class_classification": {
+                  "type": "object",
+                  "description": "multi_class_classification",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "one_vs_all": {
+                      "type": "object",
+                      "description": "one_vs_all",
+                      "placeholder": "Put a value here",
+                      "is_array": true,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "class": {
+                          "type": "string",
+                          "description": "class",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "confusion_matrix": {
+                          "type": "object",
+                          "description": "confusion_matrix",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false,
+                          "properties": {
+                            "tp": {
+                              "type": "number",
+                              "description": "tp",
+                              "placeholder": "Put a value here",
+                              "is_array": false,
+                              "required": true,
+                              "hidden": false,
+                              "readonly": false
+                            },
+                            "true_class": {
+                              "type": "string",
+                              "description": "true_class",
+                              "placeholder": "Put a value here",
+                              "is_array": false,
+                              "required": true,
+                              "hidden": false,
+                              "readonly": false
+                            },
+                            "fp": {
+                              "type": "number",
+                              "description": "fp",
+                              "placeholder": "Put a value here",
+                              "is_array": false,
+                              "required": true,
+                              "hidden": false,
+                              "readonly": false
+                            },
+                            "fn": {
+                              "type": "number",
+                              "description": "fn",
+                              "placeholder": "Put a value here",
+                              "is_array": false,
+                              "required": false,
+                              "hidden": false,
+                              "readonly": false
+                            },
+                            "tn": {
+                              "type": "number",
+                              "description": "tn",
+                              "placeholder": "Put a value here",
+                              "is_array": false,
+                              "required": true,
+                              "hidden": false,
+                              "readonly": false
+                            }
+                          }
+                        },
+                        "roc_curve": {
+                          "type": "object",
+                          "description": "roc_curve",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false,
+                          "properties": {
+                            "true_class": {
+                              "type": "string",
+                              "description": "true_class",
+                              "placeholder": "Put a value here",
+                              "is_array": false,
+                              "required": true,
+                              "hidden": false,
+                              "readonly": false
+                            },
+                            "tpr": {
+                              "type": "number",
+                              "description": "tpr",
+                              "placeholder": "Put a value here",
+                              "is_array": true,
+                              "required": true,
+                              "hidden": false,
+                              "readonly": false
+                            },
+                            "fpr": {
+                              "type": "number",
+                              "description": "fpr",
+                              "placeholder": "Put a value here",
+                              "is_array": true,
+                              "required": true,
+                              "hidden": false,
+                              "readonly": false
+                            },
+                            "thresholds": {
+                              "type": "number",
+                              "description": "thresholds",
+                              "placeholder": "Put a value here",
+                              "is_array": true,
+                              "required": false,
+                              "hidden": false,
+                              "readonly": false
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "binary_classification": {
+                  "type": "object",
+                  "description": "binary_classification",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "confusion_matrix": {
+                      "type": "object",
+                      "description": "confusion_matrix",
+                      "placeholder": "Put a value here",
+                      "is_array": true,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "tp": {
+                          "type": "number",
+                          "description": "tp",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "true_class": {
+                          "type": "string",
+                          "description": "true_class",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "fp": {
+                          "type": "number",
+                          "description": "fp",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "fn": {
+                          "type": "number",
+                          "description": "fn",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "tn": {
+                          "type": "number",
+                          "description": "tn",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    },
+                    "roc_curve": {
+                      "type": "object",
+                      "description": "roc_curve",
+                      "placeholder": "Put a value here",
+                      "is_array": true,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "true_class": {
+                          "type": "string",
+                          "description": "true_class",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "tpr": {
+                          "type": "number",
+                          "description": "tpr",
+                          "placeholder": "Put a value here",
+                          "is_array": true,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "fpr": {
+                          "type": "number",
+                          "description": "fpr",
+                          "placeholder": "Put a value here",
+                          "is_array": true,
+                          "required": true,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "thresholds": {
+                          "type": "number",
+                          "description": "thresholds",
+                          "placeholder": "Put a value here",
+                          "is_array": true,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    }
+                  }
+                },
+                "intermediate_model": {
+                  "type": "object",
+                  "description": "intermediate_model",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "duration": {
+                      "type": "number",
+                      "description": "duration",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "name",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "location": {
+                      "type": "object",
+                      "description": "location",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "pipeline": {
+                          "type": "string",
+                          "description": "pipeline",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "pipeline_model": {
+                          "type": "string",
+                          "description": "pipeline_model",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        },
+                        "model": {
+                          "type": "string",
+                          "description": "model",
+                          "placeholder": "Put a value here",
+                          "is_array": false,
+                          "required": false,
+                          "hidden": false,
+                          "readonly": false
+                        }
+                      }
+                    },
+                    "notebook_location": {
+                      "type": "string",
+                      "description": "notebook_location",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "process": {
+                      "type": "string",
+                      "description": "process",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "composition_steps": {
+                      "type": "string",
+                      "description": "composition_steps",
+                      "placeholder": "Put a value here",
+                      "is_array": true,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "schema_location": {
+                      "type": "string",
+                      "description": "schema_location",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "pipeline_nodes": {
+                      "type": "string",
+                      "description": "pipeline_nodes",
+                      "placeholder": "Put a value here",
+                      "is_array": true,
+                      "required": false,
+                      "hidden": false,
+                      "readonly": false
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "string",
+                  "description": "schema details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "features_importance": {
+                  "type": "object",
+                  "description": "features_importance",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "stage": {
+                      "type": "string",
+                      "description": "stage details",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "computation_type": {
+                      "type": "string",
+                      "description": "computation_type details",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false
+                    },
+                    "features": {
+                      "type": "object",
+                      "description": "features details",
+                      "placeholder": "Put a value here",
+                      "is_array": false,
+                      "required": true,
+                      "hidden": false,
+                      "readonly": false,
+                      "properties": {
+                        "{features_properties}": {}
+                      }
+                    }
+                  }
+                },
+                "estimators": {
+                  "type": "string",
+                  "description": "estimators details",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                }
+              }
+            },
+            "ml_federated_metrics": {
+              "type": "object",
+              "description": "ml_federated_metrics details",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{ml_federated_metrics_properties}": {}
+              }
+            },
+            "iteration": {
+              "type": "number",
+              "description": "iteration",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the model",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": true,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None",
+          "min_length": 0,
+          "max_length": 100
+        },
+        "runtime": {
+          "type": "object",
+          "description": "runtime of the model. This is a DEPRECATED field!!. Use software_spec field.",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "runtime id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            },
+            "href": {
+              "type": "string",
+              "description": "runtime href",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "schemas": {
+          "type": "object",
+          "description": "schema",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "input": {
+              "type": "object",
+              "description": "input data schema",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": true,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{datarecord_schema}": {}
+              }
+            },
+            "ouput": {
+              "type": "object",
+              "description": "output data schema",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": true,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{datarecord_schema}": {}
+              }
+            }
+          }
+        }
+      },
+      "name": "wml_model",
+      "version": 1.0
+    },
+    {
+      "description": "Script File",
+      "fields": [
+        {
+          "key": "language",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "asset.type",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "software_spec.id",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "script",
+      "version": 2.0
+    },
+    {
+      "fields": [
+        {
+          "key": "name",
+          "type": "string",
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "entity",
+          "type": "object",
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "shiny_asset",
+      "version": 1.0
+    },
+    {
+      "description": "Deployment job definition asset type",
+      "fields": [
+        {
+          "key": "deployment",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "deployment.href",
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "properties": {
+        "deployment": {
+          "type": "object",
+          "description": "object containing deployment href for job",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": true,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None",
+          "properties": {
+            "href": {
+              "type": "string",
+              "description": "href of the deployment for job",
+              "placeholder": "Put a value here",
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "scoring": {
+          "type": "object",
+          "description": "The payload for scoring",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "input_data": {
+              "type": "object",
+              "description": "input data",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Discriminates the data for multi input data situation",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "fields": {
+                  "type": "string",
+                  "description": "The names of the fields. The order of fields values must be consistent with the order of fields names",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "values": {
+                  "type": "object",
+                  "description": "values for the fields",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                }
+              }
+            },
+            "output_data_reference": {
+              "type": "object",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "type of the data source",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "connection": {
+                  "type": "object",
+                  "description": "connection details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{connection_properties}": {}
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "description": "The schema of the expected data",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{datarecord_schema}": {}
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "file or folder details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{location_properties}": {}
+                  }
+                }
+              }
+            },
+            "evaluations": {
+              "type": "string",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "input_target": {
+                  "type": "string",
+                  "description": "input_target",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "metrics_names": {
+                  "type": "string",
+                  "description": "input_target",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                }
+              }
+            },
+            "environment_variables": {
+              "type": "object",
+              "description": "environment variables and its values required to be consumed by the batch deployment job of PyScript deployment",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{env_var_properties}": {}
+              }
+            },
+            "input_data_references": {
+              "type": "object",
+              "description": "input data reference",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "type of the data source",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "connection": {
+                  "type": "object",
+                  "description": "connection details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{connection_properties}": {}
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "description": "The schema of the expected data",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{datarecord_schema}": {}
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "file or folder details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{location_properties}": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "hybrid_pipeline_hardware_specs": {
+          "type": "object",
+          "description": "A hardware specification used only for hybrid runtime",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "node_runtime_id": {
+              "type": "string",
+              "description": "The id of node runtime",
+              "placeholder": "Put a value here",
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            },
+            "hardware_spec": {
+              "type": "object",
+              "description": "A hardware specification",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "description": "href of the hardware specification",
+                  "placeholder": "Put a value here",
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name of the hardware specification",
+                  "placeholder": "Put a value here",
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "id": {
+                  "type": "string",
+                  "description": "ID of the hardware specification",
+                  "placeholder": "Put a value here",
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "num_nodes": {
+                  "type": "number",
+                  "description": "The number of nodes applied to a computation",
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                }
+              }
+            }
+          }
+        },
+        "decision_optimization": {
+          "type": "object",
+          "description": "The payload for decision optimization",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "solve_parameters": {
+              "type": "string",
+              "description": "solve parameters",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "input_data": {
+              "type": "object",
+              "description": "input data",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Discriminates the data for multi input data situation",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "fields": {
+                  "type": "string",
+                  "description": "The names of the fields. The order of fields values must be consistent with the order of fields names",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "values": {
+                  "type": "object",
+                  "description": "values for the fields",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                }
+              }
+            },
+            "output_data_reference": {
+              "type": "object",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "type of the data source",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "connection": {
+                  "type": "object",
+                  "description": "connection details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{connection_properties}": {}
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "description": "The schema of the expected data",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{datarecord_schema}": {}
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "file or folder details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{location_properties}": {}
+                  }
+                }
+              }
+            },
+            "output_data": {
+              "type": "string",
+              "description": "output data",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "input_data_references": {
+              "type": "object",
+              "description": "input data reference",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "type of the data source",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "connection": {
+                  "type": "object",
+                  "description": "connection details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{connection_properties}": {}
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "description": "The schema of the expected data",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{datarecord_schema}": {}
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "file or folder details",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": true,
+                  "hidden": false,
+                  "readonly": false,
+                  "properties": {
+                    "{location_properties}": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "space_id": {
+          "type": "string",
+          "description": "ID of the space this deployment job definition belongs to",
+          "placeholder": "333-333-333-333-333",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None"
+        },
+        "hardware_spec": {
+          "type": "object",
+          "description": "A hardware specification",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "href": {
+              "type": "string",
+              "description": "href of the hardware specification",
+              "placeholder": "Put a value here",
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            },
+            "name": {
+              "type": "string",
+              "description": "name of the hardware specification",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "id": {
+              "type": "string",
+              "description": "ID of the hardware specification",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "num_nodes": {
+              "type": "number",
+              "description": "The number of nodes applied to a computation",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        }
+      },
+      "name": "wml_deployment_job_definition",
+      "version": 1.0
+    },
+    {
+      "description": "Data Asset Type",
+      "fields": [
+        {
+          "key": "dataset",
+          "type": "boolean",
+          "facet": true,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "mime_type",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "columns",
+          "type": "string",
+          "facet": true,
+          "is_array": true,
+          "search_path": "columns[].name",
+          "is_searchable_across_types": true
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "data_asset",
+      "version": 1.0
+    },
+    {
+      "description": "Folder asset type",
+      "fields": [
+        {
+          "key": "host",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "user",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "ip",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "folder_asset",
+      "version": 1.0
+    },
+    {
+      "description": "OMRS asset type",
+      "fields": [
+        {
+          "key": "omrs_guid",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "omrs_type",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "omrs_entity",
+      "version": 1.0
+    },
+    {
+      "description": "Transform asset type",
+      "fields": [
+        {
+          "key": "outcome",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "policy_transform",
+      "version": 1.0
+    },
+    {
+      "description": "An asset type that you can use to assign terms from a business glossary to any asset.  Attach items of this type as attributes to other assets.",
+      "fields": [
+        {
+          "key": "asset_term_display_name",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "search_path": "list[].term_display_name",
+          "is_searchable_across_types": true
+        },
+        {
+          "key": "asset_term_id",
+          "type": "string",
+          "facet": true,
+          "is_array": false,
+          "search_path": "list[].term_id",
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "asset_terms",
+      "version": 1.0
+    },
+    {
+      "description": "Model definition asset type",
+      "fields": [
+        {
+          "key": "tags",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "tags[].value",
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "properties": {
+        "custom": {
+          "type": "object",
+          "description": "caller defined properties",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "{user-defined-property}": {
+              "description": "custom property",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "tags for model_definition. This is a DEPRECATED field!!. Use tags in metadata.",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "tag value",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false
+            },
+            "description": {
+              "type": "string",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "command": {
+          "type": "string",
+          "description": "command for the model_definition",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "None",
+          "min_length": 0,
+          "max_length": 1000
+        },
+        "version": {
+          "type": "string",
+          "description": "package version",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": true,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "1.0",
+          "min_length": 0,
+          "max_length": 100
+        },
+        "platform": {
+          "type": "object",
+          "description": "platform of the model_definition",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": true,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "name",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            },
+            "versions": {
+              "type": "string",
+              "description": "versions",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": true,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        }
+      },
+      "name": "wml_model_definition",
+      "version": 1.0
+    },
+    {
+      "description": "Pipeline asset type",
+      "fields": [
+        {
+          "key": "tags",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "tags[].value",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "model_definition_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "model_definition_dependencies",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "software_spec_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "software_spec_dependencies",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "hardware_spec_dependencies",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "hardware_spec_dependencies",
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [
+        {
+          "key": "model_definition_dependencies",
+          "target_asset_type": "wml_model_definition",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "software_spec_dependencies",
+          "target_asset_type": "software_specification",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        },
+        {
+          "key": "hardware_spec_dependencies",
+          "target_asset_type": "hardware_specification",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        }
+      ],
+      "properties": {
+        "custom": {
+          "type": "object",
+          "description": "caller defined properties",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "{user-defined-property}": {
+              "description": "custom property",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "document": {
+          "type": "object",
+          "description": "pipeline document",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "{wdp_defined_schema}": {}
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "tags for pipelines. This is a DEPRECATED field!!. Use tags in metadata.",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "tag value",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false
+            },
+            "description": {
+              "type": "string",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "hardware_spec_dependencies": {
+          "type": "string",
+          "description": "list of dependent hardware_spec ids for the pipeline",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        },
+        "model_definition_dependencies": {
+          "type": "string",
+          "description": "list of dependent model_definition ids for the pipeline",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        },
+        "software_spec_dependencies": {
+          "type": "string",
+          "description": "list of dependent software_spec ids for the pipeline",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "default_value": "None"
+        }
+      },
+      "name": "wml_pipeline",
+      "version": 1.0
+    },
+    {
+      "description": "Function asset type",
+      "fields": [
+        {
+          "key": "tags",
+          "type": "string",
+          "facet": false,
+          "is_array": true,
+          "search_path": "tags[].value",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "runtime.href",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "runtime.href",
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "software_spec.id",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "search_path": "software_spec.id",
+          "is_searchable_across_types": false
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [
+        {
+          "key": "software_spec.id",
+          "target_asset_type": "software_specification",
+          "on_delete_target": "IGNORE",
+          "on_delete": "IGNORE",
+          "on_clone_target": "IGNORE"
+        }
+      ],
+      "properties": {
+        "custom": {
+          "type": "object",
+          "description": "caller defined properties",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "{user-defined-property}": {
+              "description": "custom property",
+              "placeholder": "Put a value here",
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            }
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "tags for functions. This is a DEPRECATED field!!. Use tags in metadata.",
+          "placeholder": "Put a value here",
+          "is_array": true,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "tag value",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": true,
+              "hidden": true,
+              "readonly": false
+            },
+            "description": {
+              "type": "string",
+              "description": "tag description",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "software_spec": {
+          "type": "object",
+          "description": "software_spec of the function",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "software_spec id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "rev": {
+              "type": "string",
+              "description": "software_spec rev",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "name": {
+              "type": "string",
+              "description": "software_spec name",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": false,
+              "readonly": false
+            },
+            "base_id": {
+              "type": "string",
+              "description": "base software_spec id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "sample_scoring_input": {
+          "type": "object",
+          "description": "sample scoring input for a function",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "input_data": {
+              "type": "object",
+              "description": "input data",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": false,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Discriminates the data for multi input data situation",
+                  "placeholder": "Put a value here",
+                  "is_array": false,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "fields": {
+                  "type": "string",
+                  "description": "The names of the fields. The order of fields values must be consistent with the order of fields names",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                },
+                "values": {
+                  "type": "object",
+                  "description": "values for the fields",
+                  "placeholder": "Put a value here",
+                  "is_array": true,
+                  "required": false,
+                  "hidden": false,
+                  "readonly": false
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the function",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "default_value": "python",
+          "min_length": 0,
+          "max_length": 100
+        },
+        "runtime": {
+          "type": "object",
+          "description": "runtime of the function. This is a DEPRECATED field!!. Use software_spec field.",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": true,
+          "readonly": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "runtime id",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            },
+            "href": {
+              "type": "string",
+              "description": "runtime href",
+              "placeholder": "Put a value here",
+              "is_array": false,
+              "required": false,
+              "hidden": true,
+              "readonly": false
+            }
+          }
+        },
+        "schemas": {
+          "type": "object",
+          "description": "schema",
+          "placeholder": "Put a value here",
+          "is_array": false,
+          "required": false,
+          "hidden": false,
+          "readonly": false,
+          "properties": {
+            "input": {
+              "type": "object",
+              "description": "input data schema",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": true,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{datarecord_schema}": {}
+              }
+            },
+            "output": {
+              "type": "object",
+              "description": "output data schema",
+              "placeholder": "Put a value here",
+              "is_array": true,
+              "required": true,
+              "hidden": false,
+              "readonly": false,
+              "properties": {
+                "{datarecord_schema}": {}
+              }
+            }
+          }
+        }
+      },
+      "name": "wml_function",
+      "version": 1.0
+    },
+    {
+      "fields": [
+        {
+          "key": "name",
+          "type": "string",
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "job_ref",
+          "type": "string",
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "relationships": [],
+      "name": "job_run",
+      "version": 1.0
+    },
+    {
+      "fields": [
+        {
+          "key": "name",
+          "type": "string",
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "asset_ref",
+          "type": "string",
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "relationships": [],
+      "name": "job",
+      "version": 1.0
+    },
+    {
+      "description": "Package extension to be used with software specifications within environments",
+      "fields": [
+        {
+          "key": "type",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": true
+        }
+      ],
+      "external_asset_preview": {},
+      "relationships": [],
+      "name": "package_extension",
+      "version": 1.0
+    },
+    {
+      "description": "Connection asset type",
+      "fields": [
+        {
+          "key": "datasource_type",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        },
+        {
+          "key": "context",
+          "type": "string",
+          "facet": false,
+          "is_array": false,
+          "is_searchable_across_types": false
+        }
+      ],
+      "relationships": [],
+      "name": "connection",
+      "version": 1.0
+    }
+  ]
+}

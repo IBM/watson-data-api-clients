@@ -1,0 +1,47 @@
+{
+  "actions": [
+    {
+      "name": "get_record_count",
+      "description": "Get the number of rows in the specified table",
+      "properties": {
+        "input": [
+          {
+            "name": "schema_name",
+            "type": "string",
+            "label": "Schema Name",
+            "description": "Name of the schema that contains the table",
+            "required": false,
+            "masked": false,
+            "hidden": false,
+            "readonly": false,
+            "multiline": false
+          },
+          {
+            "name": "table_name",
+            "type": "string",
+            "label": "Table Name",
+            "description": "Name of the table for which to obtain the number of rows",
+            "required": true,
+            "masked": false,
+            "hidden": false,
+            "readonly": false,
+            "multiline": false
+          }
+        ],
+        "output": [
+          {
+            "name": "record_count",
+            "type": "integer",
+            "label": "Record Count",
+            "description": "Number of available rows",
+            "required": true,
+            "masked": false,
+            "hidden": false,
+            "readonly": false,
+            "multiline": false
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "artifact_type": "custom_attribute_definition",
+    "artifact_id": "15c217fd-d8bf-4f88-a80c-92645d3613f4",
+    "version_id": "06f409b2-082f-4e31-b248-d5eb12092ba8",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_15c217fd-d8bf-4f88-a80c-92645d3613f4",
+    "created_by": "1000331004",
+    "created_at": "2020-08-27T13:41:00.797Z",
+    "modified_by": "1000331004",
+    "modified_at": "2020-08-27T14:21:25.463Z",
+    "revision": "1",
+    "name": "Test Custom Attribute",
+    "short_description": "A revised description for the custom attribute",
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "name": "Test Custom Attribute",
+    "description": "A revised description for the custom attribute",
+    "type": "NUMBER",
+    "artifact_types": [
+      "glossary_term"
+    ],
+    "related_artifact_types": [],
+    "multiple_values": false,
+    "display_in_child_assets": false,
+    "required": false,
+    "read_only": false,
+    "hidden": false,
+    "placeholder": false,
+    "elements_list": []
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "import_info": {
+    "href": "/v3/reference_data/6c2e568e-5bbe-40cf-a12e-b99691f8a78b/versions/1fb40e50-44f6-4227-803b-85635550ebf4/values/import/1ddd8711-fc29-4a02-8cc0-e79c152fa96e",
+    "import_id": "1ddd8711-fc29-4a02-8cc0-e79c152fa96e",
+    "import_state": "CANCEL_REQUESTED",
+    "import_message": "Import in progress",
+    "values_count": 1,
+    "values_processed": 0,
+    "values_skipped": 0,
+    "values_inserted": 0
+  }
+}

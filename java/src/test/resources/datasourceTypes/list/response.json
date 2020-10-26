@@ -1,0 +1,1965 @@
+{
+  "resources": [
+    {
+      "metadata": {
+        "asset_id": "029e5d1c-ba73-4b09-b742-14c3a39b6cf9",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "informix",
+        "label": "Informix",
+        "description": "IBM Informix database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "048ed1bf-516c-46f0-ae90-fa3349d8bc1c",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "postgresql-compose",
+        "label": "Databases for PostgreSQL",
+        "description": "Databases for PostgreSQL database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "05b7f0ea-6ae4-45e2-a455-cc280f110825",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "googlecloudstorage",
+        "label": "Google Cloud Storage",
+        "description": "Google Cloud Storage",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "05c58384-862e-4597-b19a-c71ea7e760bc",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "impala",
+        "label": "Cloudera Impala",
+        "description": "Cloudera Impala database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "06847b16-07b4-4415-a924-c63d11a17aa1",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "salesforce",
+        "label": "Salesforce.com",
+        "description": "Salesforce.com",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "0cd4b64c-b485-47ed-a8c4-329c25412de3",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "mysql-compose",
+        "label": "Compose for MySQL",
+        "description": "Compose for MySQL database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "0fd83fe5-8995-4e2e-a1be-679bb8813a6d",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "hive",
+        "label": "Apache Hive",
+        "description": "Apache Hive database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "11f3029d-a1cf-4c4d-b8e7-64422fa54a94",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "cognos-analytics",
+        "label": "Cognos Analytics",
+        "description": "Cognos Analytics",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "13e8b257-1dff-49ed-bac8-7eca796a40b3",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "hive-watson",
+        "label": "Hive via Execution Engine for Hadoop",
+        "description": "Hive via Execution Engine for Hadoop",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "193a97c1-4475-4a19-b90c-295c4fdc6517",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "bluemixcloudobjectstorage",
+        "label": "Cloud Object Storage",
+        "description": "Cloud Object Storage service on IBM Cloud. Offers S3 API and application binding with regional and cross regional ",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "27c3e1b0-b7d2-4e32-9511-1b8aaa197de0",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "odata",
+        "label": "OData",
+        "description": "OData",
+        "type": "generic",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "professional"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "2bdd9544-f13a-47b6-b6c3-f5964a08066a",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "bigsql",
+        "label": "Db2 Big SQL",
+        "description": "IBM Db2 Big SQL",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "2fc1372f-b58c-4d45-b0c4-dfb32a1c78a5",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "snowflake",
+        "label": "Snowflake",
+        "description": "Snowflake database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "31170994-f54c-4148-9c5a-807832fa1d07",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "redshift",
+        "label": "Amazon Redshift",
+        "description": "Amazon Redshift database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "335cbfe7-e495-474e-8ad7-78ad63c05091",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "db2iseries",
+        "label": "Db2 for i",
+        "description": "IBM Db2 database for i",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "44e904b5-0cb2-4d8e-a5c0-c48bc3e24fdd",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "cloudant",
+        "label": "Cloudant",
+        "description": "IBM Cloudant",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "48695e79-6279-474a-b539-342625d3dfc2",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "sqlserver",
+        "label": "Microsoft SQL Server",
+        "description": "Microsoft SQL Server database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "49079262-fac2-4762-99d1-452c1caf6b49",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "sybaseiq",
+        "label": "Sybase IQ",
+        "description": "Sybase IQ database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "49686982-255f-423a-a5de-d825bfc0abe3",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "dv",
+        "label": "Data Virtualization",
+        "description": "IBM Data Virtualization",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "java",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "4bf2dedd-3809-4443-96ec-b7bc5726c07b",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "cloudobjectstorage",
+        "label": "Cloud Object Storage (infrastructure)",
+        "description": "Object storage for workloads requiring AWS SDKs and AWS Signature style authentication",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "506039fb-802f-4ef2-a2bf-c1682e9c8aa2",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "db2cloud",
+        "label": "Db2 on Cloud",
+        "description": "IBM Db2 fully-managed cloud SQL database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "507b850c-f4a1-41d7-ad64-4182a1264014",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "dropbox",
+        "label": "Dropbox",
+        "description": "Dropbox secure file sharing and storage service",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "526f54ea-cde0-4818-a0b6-749efd35ccfa",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "impala-watson",
+        "label": "Impala via Execution Engine for Hadoop",
+        "description": "Impala via Execution Engine for Hadoop",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "6863060d-97c4-4653-abbe-958bde533f8c",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "azuredatalake",
+        "label": "Microsoft Azure Data Lake Store",
+        "description": "Microsoft Azure Data Lake Store via the WebHDFS API",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "6976a3fc-b2ad-4db6-818c-ea049cac309d",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "sybase",
+        "label": "Sybase",
+        "description": "Sybase database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "69857d6b-2be8-4a59-8a70-723405f09708",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "looker",
+        "label": "Looker",
+        "description": "Looker",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "professional"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "79a0a133-cbb6-48d0-a3b0-0956a9655401",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "sapodata",
+        "label": "SAP OData",
+        "description": "SAP OData",
+        "type": "generic",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "professional"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "81641c94-a3a7-4d3e-9ea8-bdf79bdd3b06",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "minio",
+        "label": "Minio",
+        "description": "Minio",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "81bafdbd-b7c6-45c5-a4fd-6ec135f66f4e",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "assetfiles",
+        "label": "Asset Files",
+        "description": "Asset Files",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "system"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "83da8a63-ffe3-4aa0-9127-adb5331c19cc",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "hdfs-watson",
+        "label": "HDFS via Execution Engine for Hadoop",
+        "description": "HDFS via Execution Engine for Hadoop",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "895507b6-f23e-40b2-b40a-5414fc9bd2ca",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "hdfs-analyticsengine",
+        "label": "Analytics Engine HDFS",
+        "description": "IBM Analytics Engine HDFS via the WebHDFS API",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "8c1a4480-1c29-4b33-9086-9cb799d7b157",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "db2",
+        "label": "Db2",
+        "description": "IBM Db2 database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "933152db-99e1-453a-8ce5-ae0e6714d1a9",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "bigquery",
+        "label": "Google BigQuery",
+        "description": "Google BigQuery",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "9525f6a6-1c44-4925-b1a0-9a2b731518cb",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "db2hosted",
+        "label": "Db2 Hosted",
+        "description": "IBM Db2 hosted database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "96ec8f53-a818-4ba1-bd8d-c86cc33a0b45",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "teradata",
+        "label": "Teradata",
+        "description": "Teradata database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "971223d3-093e-4957-8af9-a83181ee9dd9",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "oracle",
+        "label": "Oracle",
+        "description": "Oracle database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "974eb770-7879-4b52-876f-70941d019d95",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "localhdfs",
+        "label": "Local HDFS",
+        "description": "Files on a local HDFS file system",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "system"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "9ebc33eb-8c01-43fd-be1e-7202cf5c2c82",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "tableau",
+        "label": "Tableau",
+        "description": "Tableau",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": false,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "a0b1d14a-4767-404c-aac1-4ce0e62818c3",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "amazons3",
+        "label": "Amazon S3",
+        "description": "Amazon Simple Storage Service (S3)",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "not_applicable",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "b2cc3dc2-aff7-4a80-8f80-5e8c5703e9d2",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "mysql",
+        "label": "MySQL",
+        "description": "MySQL database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "c10e5224-f17d-4524-844f-e97b1305e489",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "hdfs-apache",
+        "label": "Apache HDFS",
+        "description": "Apache HDFS via the WebHDFS API",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "c2a82a72-0711-4376-a468-4e9951cabf22",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "netezza",
+        "label": "PureData System for Analytics",
+        "description": "IBM PureData System for Analytics database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "c8d3eab2-25f6-4a90-8e10-0b4226693c45",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "db2zos",
+        "label": "Db2 for z/OS",
+        "description": "IBM Db2 database for z/OS",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "c8f3d379-78b2-4bad-969d-2e928277377e",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "tm1odata",
+        "label": "Planning Analytics",
+        "description": "Planning Analytics",
+        "type": "generic",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "cfdcb449-1204-44ba-baa6-9a8a878e6aa7",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "dashdb",
+        "label": "Db2 Warehouse",
+        "description": "Db2 Warehouse",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "tags": [
+          "IBM"
+        ],
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark",
+          "streams"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "d5dbc62f-7c4c-4d49-8eb2-dab6cef2969c",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "ftp",
+        "label": "FTP",
+        "description": "Remote file system (FTP)",
+        "type": "file",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "e1c23729-99d8-4407-b3df-336e33ffdc82",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "postgresql",
+        "label": "PostgreSQL",
+        "description": "PostgreSQL database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": true,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "e278eff1-a7c4-4d60-9a02-bde1bb1d26ef",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "greenplum",
+        "label": "Pivotal Greenplum",
+        "description": "Pivotal Greenplum database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "e375c0ae-cba9-47fc-baf7-523bef88c09e",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "azuresql",
+        "label": "Microsoft Azure SQL Database",
+        "description": "Microsoft Azure SQL Database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "cloud",
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "catalog",
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    },
+    {
+      "metadata": {
+        "asset_id": "e59b1c36-6f30-4879-9f74-7e81dde4cca6",
+        "asset_type": "datasource_type",
+        "creator_id": "IBM"
+      },
+      "entity": {
+        "name": "genericjdbc",
+        "label": "Generic JDBC",
+        "description": "Generic JDBC database",
+        "type": "database",
+        "allowed_as_source": true,
+        "allowed_as_target": true,
+        "data_shape": "rectangular",
+        "auto_discovery": false,
+        "secure_gateway": "optional",
+        "supported_environments": [
+          "java",
+          "local",
+          "private",
+          "spark"
+        ],
+        "supported_plans": [
+          "enterprise",
+          "lite",
+          "professional",
+          "standard"
+        ],
+        "supported_products": [
+          "cpd",
+          "ml",
+          "studio"
+        ],
+        "status": "active"
+      }
+    }
+  ],
+  "first": {
+    "href": "https://internal-nginx-svc:12443/v2/datasource_types?limit=100"
+  },
+  "last": {
+    "href": "https://internal-nginx-svc:12443/v2/datasource_types?offset=0&limit=100"
+  },
+  "offset": 0,
+  "total_count": 50
+}

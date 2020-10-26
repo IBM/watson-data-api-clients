@@ -1,0 +1,21 @@
+[
+  {
+    "permission_id": "UserManagementPermission",
+    "condition": {
+      "type": "artifact_type",
+      "values": [
+        "category",
+        "glossary_term",
+        "classification",
+        "data_class",
+        "reference_data",
+        "policy",
+        "rule"
+      ]
+    },
+    "actions": [
+      "author",
+      "read"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "resources": [
+    {
+      "href": "/v3/categories/a06c6237-32a4-468b-bdfe-9a09ab9bf06b",
+      "artifact_id": "a06c6237-32a4-468b-bdfe-9a09ab9bf06b",
+      "version_id": "25e2e3ea-593e-4dbd-966e-342e4014e7d7",
+      "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_a06c6237-32a4-468b-bdfe-9a09ab9bf06b",
+      "entity_type": "category"
+    }
+  ]
+}

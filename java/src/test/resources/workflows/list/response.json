@@ -1,0 +1,43 @@
+{
+  "offset": 0,
+  "limit": 10,
+  "total_count": 1,
+  "first": {
+    "href": "/v3/workflows?offset=0"
+  },
+  "last": {
+    "href": "/v3/workflows?offset=0"
+  },
+  "resources": [
+    {
+      "metadata": {
+        "artifact_type": "workflow",
+        "workflow_id": "937c841f-e083-11ea-8c06-0a580a810041",
+        "created_by": "1000331004",
+        "created_at": "2020-08-17T12:17:10.797Z",
+        "state": "running"
+      },
+      "entity": {
+        "workflow_template_id": "autoPublish:1:808374b6-aa22-11ea-8c06-0a580a810041",
+        "workflow_template_key": "autoPublish",
+        "workflow_template_version": 1,
+        "artifacts": [
+          {
+            "metadata": {
+              "artifact_type": "glossary_term",
+              "artifact_id": "57904012-45da-4995-9dfb-84daa372ce7a",
+              "version_id": "e0c87bc9-93eb-4c84-a3e3-e5fd309d3c6b",
+              "state": "draft",
+              "name": "Test Term"
+            },
+            "workflow_data": {
+              "base_url": "https://internal-nginx-svc:12443/v3/glossary_terms",
+              "draft_mode": "created"
+            }
+          }
+        ],
+        "workflow_state": "Not started"
+      }
+    }
+  ]
+}

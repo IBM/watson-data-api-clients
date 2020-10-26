@@ -1,0 +1,30 @@
+{
+  "UserInfo": {
+    "approval_status": "approved",
+    "authenticator": "default",
+    "created_timestamp": "2020-07-22 10:20:22.464 +0000 UTC",
+    "current_account_status": "enabled",
+    "displayName": "Jon Smith",
+    "email": "jsmith@example.com",
+    "last_modified_timestamp": "2020-07-22 10:20:22.464 +0000 UTC",
+    "permissions": [
+      "access_catalog",
+      "view_quality",
+      "manage_information_assets",
+      "manage_metadata_import",
+      "manage_discovery",
+      "author_governance_artifacts",
+      "manage_quality",
+      "can_provision",
+      "virtualize_transform"
+    ],
+    "role": "User",
+    "uid": "1000331015",
+    "user_roles": [
+      "Data Engineer"
+    ],
+    "username": "jsmith"
+  },
+  "_messageCode_": "200",
+  "message": "User details fetched successfully."
+}

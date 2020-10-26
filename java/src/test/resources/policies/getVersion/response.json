@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "artifact_type": "policy",
+    "artifact_id": "c13f20b3-13c5-4898-bf3e-8bd3e769e0e9",
+    "version_id": "7125313f-8694-4494-a9b4-ef5970d0bec3",
+    "source_repository_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5",
+    "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_c13f20b3-13c5-4898-bf3e-8bd3e769e0e9",
+    "workflow_id": "8e0c5fa6-12dd-11eb-8009-0a580a81055e",
+    "draft_mode": "created",
+    "created_by": "1000331004",
+    "created_at": "2020-10-20T14:07:16.217Z",
+    "modified_by": "1000331004",
+    "modified_at": "2020-10-20T14:07:16.217Z",
+    "revision": "0",
+    "name": "Test Policy",
+    "short_description": "A simple policy to test the APIs.",
+    "state": "DRAFT",
+    "tags": [],
+    "steward_ids": [],
+    "workflow_state": "Not started",
+    "read_only": false,
+    "remove_start_date": false,
+    "remove_end_date": false
+  },
+  "entity": {
+    "state": "DRAFT",
+    "default_locale_id": "en-US",
+    "steward_ids": [],
+    "custom_attributes": []
+  }
+}

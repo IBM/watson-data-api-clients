@@ -1,0 +1,63 @@
+{
+  "resources": {
+    "trigger_terms": [
+      {
+        "entity": {
+          "name": "LastName",
+          "display_name": "Last Name of an individual."
+        },
+        "metadata": {
+          "artifact_id": "388a668d-4541-4879-974c-ebd29f9324b9",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_388a668d-4541-4879-974c-ebd29f9324b9",
+          "artifact_type": "data_class"
+        }
+      },
+      {
+        "entity": {
+          "name": "FirstName",
+          "display_name": "First Name of an individual."
+        },
+        "metadata": {
+          "artifact_id": "c42561e8-4578-4ba8-8102-c15d85b5f11d",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_c42561e8-4578-4ba8-8102-c15d85b5f11d",
+          "artifact_type": "data_class"
+        }
+      },
+      {
+        "entity": {
+          "name": "Asset.InferredClassification",
+          "display_name": "WDPPS_DATA_CLASS"
+        },
+        "metadata": {
+          "artifact_id": "160ac312-9cb3-414d-a04d-01591a70231e",
+          "global_id": "WKC_BG_160ac312-9cb3-414d-a04d-01591a70231e",
+          "artifact_type": "lhs_term"
+        }
+      }
+    ],
+    "action_terms": [
+      {
+        "entity": {
+          "name": "FirstName",
+          "display_name": "First Name of an individual."
+        },
+        "metadata": {
+          "artifact_id": "c42561e8-4578-4ba8-8102-c15d85b5f11d",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_c42561e8-4578-4ba8-8102-c15d85b5f11d",
+          "artifact_type": "data_class"
+        }
+      },
+      {
+        "entity": {
+          "name": "LastName",
+          "display_name": "Last Name of an individual."
+        },
+        "metadata": {
+          "artifact_id": "388a668d-4541-4879-974c-ebd29f9324b9",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_388a668d-4541-4879-974c-ebd29f9324b9",
+          "artifact_type": "data_class"
+        }
+      }
+    ]
+  }
+}

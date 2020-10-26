@@ -1,0 +1,8 @@
+{
+  "name": "Test DataClass",
+  "short_description": "A data class to test APIs.",
+  "data_class_type": "Regex",
+  "enabled": false,
+  "data_type": [ "string" ],
+  "regular_expression": "^test$"
+}

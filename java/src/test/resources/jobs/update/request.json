@@ -1,0 +1,3 @@
+[
+  { "op": "replace", "path": "/metadata/description", "value": "New description of the job." }
+]

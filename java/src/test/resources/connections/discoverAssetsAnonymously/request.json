@@ -1,0 +1,9 @@
+{
+  "datasource_type": "506039fb-802f-4ef2-a2bf-c1682e9c8aa2",
+  "properties": {
+    "host": "example.com",
+    "database": "db_name",
+    "username": "username",
+    "password": "password"
+  }
+}

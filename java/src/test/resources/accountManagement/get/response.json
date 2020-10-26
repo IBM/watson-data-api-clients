@@ -1,0 +1,30 @@
+{
+  "UserInfo": {
+    "displayName": "Some User",
+    "email": "someone@example.com",
+    "permissions": [
+      "administrator",
+      "can_provision",
+      "manage_catalog",
+      "manage_quality",
+      "manage_information_assets",
+      "manage_discovery",
+      "manage_metadata_import",
+      "manage_governance_workflow",
+      "manage_categories",
+      "author_governance_artifacts",
+      "virtualize_transform",
+      "access_advanced_governance_capabilities",
+      "sign_in_only",
+      "access_catalog",
+      "access_information_assets",
+      "view_quality",
+      "view_governance_artifacts"
+    ],
+    "role": "Admin",
+    "uid": "1000331004",
+    "username": "someone"
+  },
+  "_messageCode_": "200",
+  "message": "User details fetched successfully."
+}

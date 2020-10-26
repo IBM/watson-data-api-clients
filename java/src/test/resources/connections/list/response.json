@@ -1,0 +1,243 @@
+{
+  "resources": [
+    {
+      "metadata": {
+        "asset_id": "99845973-050b-482b-b900-a13a75865258",
+        "asset_type": "connection",
+        "asset_category": "USER",
+        "create_time": "2020-08-06T13:53:29.000Z",
+        "creator_id": "1000331004",
+        "project_id": "f0bd7b72-f690-4b65-9edb-7a430fa658d9",
+        "tags": [],
+        "usage": {
+          "last_access_time": "2020-08-06T13:53:29.550Z",
+          "last_accessor_id": "1000331004",
+          "access_count": 0
+        }
+      },
+      "entity": {
+        "datasource_type": "506039fb-802f-4ef2-a2bf-c1682e9c8aa2",
+        "description": "",
+        "name": "Test Connection",
+        "origin_country": "gb",
+        "owner_id": "1000331004",
+        "rov": {
+          "mode": 0
+        },
+        "properties": {
+          "database": "db_name",
+          "password": "password",
+          "host": "example.com",
+          "username": "username"
+        },
+        "interaction_properties": {
+          "source": [
+            {
+              "name": "byte_limit",
+              "type": "string",
+              "label": "Byte Limit",
+              "description": "The maximum number of bytes to return. Use any of these suffixes; KB, MB, GB, or TB",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "rcp",
+              "type": "boolean",
+              "label": "Infer Schema",
+              "description": "Obtain the schema from the data source",
+              "required": false,
+              "masked": false,
+              "hidden": true,
+              "readonly": false,
+              "multiline": false,
+              "default_value": "true"
+            },
+            {
+              "name": "row_limit",
+              "type": "integer",
+              "label": "Row Limit",
+              "description": "The maximum number of rows to return",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "schema_name",
+              "type": "string",
+              "label": "Schema Name",
+              "description": "The name of the schema that contains the table to read from",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "select_statement",
+              "type": "string",
+              "label": "Select Statement",
+              "description": "The SQL SELECT statement for retrieving data from the table",
+              "required": true,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "table_name",
+              "type": "string",
+              "label": "Table Name",
+              "description": "The name of the table to read from",
+              "required": true,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            }
+          ],
+          "target": [
+            {
+              "name": "create_statement",
+              "type": "string",
+              "label": "Create Statement",
+              "description": "The Create DDL statement for recreating the target table",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "existing_table_action",
+              "type": "enum",
+              "label": "Table Action",
+              "description": "The action to take on the target table, if it already exists, to handle the existing and new data sets",
+              "required": false,
+              "masked": false,
+              "hidden": true,
+              "readonly": false,
+              "multiline": false,
+              "default_value": "append",
+              "values": [
+                {
+                  "value": "append",
+                  "label": "Append"
+                },
+                {
+                  "value": "merge",
+                  "label": "Merge"
+                },
+                {
+                  "value": "replace",
+                  "label": "Replace"
+                },
+                {
+                  "value": "truncate",
+                  "label": "Truncate"
+                },
+                {
+                  "value": "update",
+                  "label": "Updated"
+                }
+              ]
+            },
+            {
+              "name": "key_column_names",
+              "type": "string",
+              "label": "Key Column Names",
+              "description": "A comma separated list of column names to override the primary key used during an update or merge",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "schema_name",
+              "type": "string",
+              "label": "Schema Name",
+              "description": "The name of the schema that contains the table to write to",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "table_action",
+              "type": "enum",
+              "label": "Table Action",
+              "description": "The action to take on the target table to handle the new data set",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false,
+              "default_value": "append",
+              "values": [
+                {
+                  "value": "append",
+                  "label": "Append"
+                },
+                {
+                  "value": "replace",
+                  "label": "Replace"
+                },
+                {
+                  "value": "truncate",
+                  "label": "Truncate"
+                }
+              ]
+            },
+            {
+              "name": "table_name",
+              "type": "string",
+              "label": "Table Name",
+              "description": "The name of the table to write to",
+              "required": true,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false
+            },
+            {
+              "name": "write_mode",
+              "type": "enum",
+              "label": "Write Mode",
+              "description": "The mode for writing records to the target table",
+              "required": false,
+              "masked": false,
+              "hidden": false,
+              "readonly": false,
+              "multiline": false,
+              "default_value": "insert",
+              "values": [
+                {
+                  "value": "insert",
+                  "label": "Insert"
+                },
+                {
+                  "value": "merge",
+                  "label": "Merge"
+                },
+                {
+                  "value": "update",
+                  "label": "Update"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "first": {
+    "href": "https://internal-nginx-svc:12443/v2/connections?project_id=f0bd7b72-f690-4b65-9edb-7a430fa658d9&limit=100"
+  },
+  "total_count": 1
+}
