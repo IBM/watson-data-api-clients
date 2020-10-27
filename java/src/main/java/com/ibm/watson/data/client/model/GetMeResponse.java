@@ -17,28 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.Objects;
 
 /**
  * GetMeResponse
  */
-@JsonPropertyOrder({
-        GetMeResponse.JSON_PROPERTY_MESSAGE_CODE,
-        GetMeResponse.JSON_PROPERTY_MESSAGE,
-        GetMeResponse.JSON_PROPERTY_USER_INFO
-})
 public class GetMeResponse {
 
-    public static final String JSON_PROPERTY_MESSAGE_CODE = "_messageCode_";
     private String messageCode;
-
-    public static final String JSON_PROPERTY_MESSAGE = "message";
     private String message;
-
-    public static final String JSON_PROPERTY_USER_INFO = "UserInfo";
     private GetMeResponseAllOf1UserInfo userInfo;
 
     public GetMeResponse messageCode(String messageCode) {
@@ -51,17 +38,10 @@ public class GetMeResponse {
      * @return messageCode
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The identifier of the response.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessageCode() {
-        return messageCode;
-    }
-
-    public void setMessageCode(String messageCode) {
-        this.messageCode = messageCode;
-    }
+    @JsonProperty("_messageCode_")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessageCode() { return messageCode; }
+    public void setMessageCode(String messageCode) { this.messageCode = messageCode; }
 
     public GetMeResponse message(String message) {
         this.message = message;
@@ -73,14 +53,9 @@ public class GetMeResponse {
      * @return message
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The explanation of the `messageCode`.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessage() {
-        return message;
-    }
-
+    @JsonProperty("message")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
     public GetMeResponse userInfo(GetMeResponseAllOf1UserInfo userInfo) {
@@ -93,26 +68,15 @@ public class GetMeResponse {
      * @return userInfo
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_USER_INFO)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public GetMeResponseAllOf1UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(GetMeResponseAllOf1UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
+    @JsonProperty("UserInfo")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public GetMeResponseAllOf1UserInfo getUserInfo() { return userInfo; }
+    public void setUserInfo(GetMeResponseAllOf1UserInfo userInfo) { this.userInfo = userInfo; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         GetMeResponse getMeResponse = (GetMeResponse)o;
         return Objects.equals(this.messageCode, getMeResponse.messageCode) &&
                 Objects.equals(this.message, getMeResponse.message) &&
@@ -128,9 +92,7 @@ public class GetMeResponse {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class GetMeResponse {\n");
-        sb.append("    messageCode: ")
-                .append(toIndentedString(messageCode))
-                .append("\n");
+        sb.append("    messageCode: ").append(toIndentedString(messageCode)).append("\n");
         sb.append("    message: ").append(toIndentedString(message)).append("\n");
         sb.append("    userInfo: ").append(toIndentedString(userInfo)).append("\n");
         sb.append("}");
@@ -142,9 +104,7 @@ public class GetMeResponse {
      * (except the first line).
      */
     private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

@@ -20,61 +20,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Bucket Credentials
+ * OMAGCertificateResponse
  */
-public class Credentials {
+public class OMAGCertificateResponse {
 
-    private String accessKeyId;
-    private String secretAccessKey;
+    private String base64EncodedKafkaSslCertificate;
 
-    public Credentials accessKeyId(String accessKeyId) {
-        this.accessKeyId = accessKeyId;
+    public OMAGCertificateResponse base64EncodedKafkaSslCertificate(String base64EncodedKafkaSslCertificate) {
+        this.base64EncodedKafkaSslCertificate = base64EncodedKafkaSslCertificate;
         return this;
     }
 
     /**
-     * Get accessKeyId
-     * @return accessKeyId
+     * Get base64EncodedKafkaSslCertificate
+     * @return base64EncodedKafkaSslCertificate
      **/
-    @JsonProperty("access_key_id")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getAccessKeyId() { return accessKeyId; }
-    public void setAccessKeyId(String accessKeyId) { this.accessKeyId = accessKeyId; }
-
-    public Credentials secretAccessKey(String secretAccessKey) {
-        this.secretAccessKey = secretAccessKey;
-        return this;
-    }
-
-    /**
-     * Get secretAccessKey
-     * @return secretAccessKey
-     **/
-    @JsonProperty("secret_access_key")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getSecretAccessKey() { return secretAccessKey; }
-    public void setSecretAccessKey(String secretAccessKey) { this.secretAccessKey = secretAccessKey; }
+    @javax.annotation.Nullable
+    @JsonProperty("base_64_encoded_kafka_ssl_certificate")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getBase64EncodedKafkaSslCertificate() { return base64EncodedKafkaSslCertificate; }
+    public void setBase64EncodedKafkaSslCertificate(String base64EncodedKafkaSslCertificate) { this.base64EncodedKafkaSslCertificate = base64EncodedKafkaSslCertificate; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        Credentials credentials = (Credentials)o;
-        return Objects.equals(this.accessKeyId, credentials.accessKeyId) &&
-                Objects.equals(this.secretAccessKey, credentials.secretAccessKey);
+        OMAGCertificateResponse omAGCertificateResponse = (OMAGCertificateResponse)o;
+        return Objects.equals(this.base64EncodedKafkaSslCertificate, omAGCertificateResponse.base64EncodedKafkaSslCertificate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessKeyId, secretAccessKey);
+        return Objects.hash(base64EncodedKafkaSslCertificate);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class Credentials {\n");
-        sb.append("    accessKeyId: ").append(toIndentedString(accessKeyId)).append("\n");
-        sb.append("    secretAccessKey: ").append(toIndentedString(secretAccessKey)).append("\n");
+        sb.append("class OMAGCertificateResponse {\n");
+        sb.append("    base64EncodedKafkaSslCertificate: ").append(toIndentedString(base64EncodedKafkaSslCertificate)).append("\n");
         sb.append("}");
         return sb.toString();
     }

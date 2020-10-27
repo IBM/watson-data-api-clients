@@ -16,12 +16,8 @@
 package com.ibm.watson.data.client.api;
 
 import com.ibm.watson.data.client.ApiClient;
-import com.ibm.watson.data.client.model.Category;
-import com.ibm.watson.data.client.model.CategoryHierarchyResponse;
-import com.ibm.watson.data.client.model.CreateCategoryResponse;
-import com.ibm.watson.data.client.model.GlossaryArchiveResponse;
-import com.ibm.watson.data.client.model.NewCategoryAssignment;
-import com.ibm.watson.data.client.model.NewCategoryEntity;
+import com.ibm.watson.data.client.model.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -133,11 +129,11 @@ public class CategoriesApiV3 {
      * @param newCategoryEntity Category to be created.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
-     * @return CreateCategoryResponse
+     * @return GlossaryCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<CreateCategoryResponse> create(NewCategoryEntity newCategoryEntity, String runAsTenant) throws RestClientException {
+    public Mono<GlossaryCreateResponse> create(NewCategoryEntity newCategoryEntity, String runAsTenant) throws RestClientException {
 
         // verify the required parameter 'newCategoryEntity' is set
         if (newCategoryEntity == null) {
@@ -160,7 +156,7 @@ public class CategoriesApiV3 {
         final String[] localVarContentTypes = {"application/json"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<CreateCategoryResponse> localVarReturnType = new ParameterizedTypeReference<CreateCategoryResponse>() {};
+        ParameterizedTypeReference<GlossaryCreateResponse> localVarReturnType = new ParameterizedTypeReference<GlossaryCreateResponse>() {};
         return apiClient.invokeAPI(
                 BASE_API, HttpMethod.POST, pathParams, queryParams, newCategoryEntity,
                 headerParams, cookieParams, formParams, localVarAccept,

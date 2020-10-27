@@ -17,9 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,25 +24,11 @@ import java.util.Objects;
 /**
  * Asset Type URL Model
  */
-@ApiModel(description = "Asset Type URL Model")
-@JsonPropertyOrder({
-        ExternalAssetPreview.JSON_PROPERTY_BASE_CLIENT_URL,
-        ExternalAssetPreview.JSON_PROPERTY_URL_PARAMETERS_FROM_ASSET_ATTRIBUTES,
-        ExternalAssetPreview.JSON_PROPERTY_URL_PATH_FROM_ASSET_ATTRIBUTES,
-        ExternalAssetPreview.JSON_PROPERTY_URL_PARAMETERS_FIXED
-})
 public class ExternalAssetPreview {
 
-    public static final String JSON_PROPERTY_BASE_CLIENT_URL = "base_client_url";
     private String baseClientUrl;
-
-    public static final String JSON_PROPERTY_URL_PARAMETERS_FROM_ASSET_ATTRIBUTES = "url_parameters_from_asset_attributes";
     private List<String> urlParametersFromAssetAttributes = null;
-
-    public static final String JSON_PROPERTY_URL_PATH_FROM_ASSET_ATTRIBUTES = "url_path_from_asset_attributes";
     private String urlPathFromAssetAttributes;
-
-    public static final String JSON_PROPERTY_URL_PARAMETERS_FIXED = "url_parameters_fixed";
     private String urlParametersFixed;
 
     public ExternalAssetPreview baseClientUrl(String baseClientUrl) {
@@ -57,18 +40,10 @@ public class ExternalAssetPreview {
      * Base client URL
      * @return baseClientUrl
      **/
-    @ApiModelProperty(example = "https://ibm.com", required = true,
-            value = "Base client URL")
-    @JsonProperty(JSON_PROPERTY_BASE_CLIENT_URL)
+    @JsonProperty("base_client_url")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getBaseClientUrl() {
-        return baseClientUrl;
-    }
-
-    public void setBaseClientUrl(String baseClientUrl) {
-        this.baseClientUrl = baseClientUrl;
-    }
+    public String getBaseClientUrl() { return baseClientUrl; }
+    public void setBaseClientUrl(String baseClientUrl) { this.baseClientUrl = baseClientUrl; }
 
     public ExternalAssetPreview urlParametersFromAssetAttributes(List<String> urlParametersFromAssetAttributes) {
         this.urlParametersFromAssetAttributes = urlParametersFromAssetAttributes;
@@ -89,17 +64,10 @@ public class ExternalAssetPreview {
      * @return urlParametersFromAssetAttributes
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "URL parameters")
-    @JsonProperty(JSON_PROPERTY_URL_PARAMETERS_FROM_ASSET_ATTRIBUTES)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<String> getUrlParametersFromAssetAttributes() {
-        return urlParametersFromAssetAttributes;
-    }
-
-    public void setUrlParametersFromAssetAttributes(List<String> urlParametersFromAssetAttributes) {
-        this.urlParametersFromAssetAttributes = urlParametersFromAssetAttributes;
-    }
+    @JsonProperty("url_parameters_from_asset_attributes")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getUrlParametersFromAssetAttributes() { return urlParametersFromAssetAttributes; }
+    public void setUrlParametersFromAssetAttributes(List<String> urlParametersFromAssetAttributes) { this.urlParametersFromAssetAttributes = urlParametersFromAssetAttributes; }
 
     public ExternalAssetPreview urlPathFromAssetAttributes(String urlPathFromAssetAttributes) {
         this.urlPathFromAssetAttributes = urlPathFromAssetAttributes;
@@ -111,17 +79,10 @@ public class ExternalAssetPreview {
      * @return urlPathFromAssetAttributes
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "id", value = "URL path")
-    @JsonProperty(JSON_PROPERTY_URL_PATH_FROM_ASSET_ATTRIBUTES)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getUrlPathFromAssetAttributes() {
-        return urlPathFromAssetAttributes;
-    }
-
-    public void setUrlPathFromAssetAttributes(String urlPathFromAssetAttributes) {
-        this.urlPathFromAssetAttributes = urlPathFromAssetAttributes;
-    }
+    @JsonProperty("url_path_from_asset_attributes")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getUrlPathFromAssetAttributes() { return urlPathFromAssetAttributes; }
+    public void setUrlPathFromAssetAttributes(String urlPathFromAssetAttributes) { this.urlPathFromAssetAttributes = urlPathFromAssetAttributes; }
 
     public ExternalAssetPreview urlParametersFixed(String urlParametersFixed) {
         this.urlParametersFixed = urlParametersFixed;
@@ -133,36 +94,20 @@ public class ExternalAssetPreview {
      * @return urlParametersFixed
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "allow_login_screen=true",
-            value = "URL parameters fixed")
-    @JsonProperty(JSON_PROPERTY_URL_PARAMETERS_FIXED)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getUrlParametersFixed() {
-        return urlParametersFixed;
-    }
-
-    public void setUrlParametersFixed(String urlParametersFixed) {
-        this.urlParametersFixed = urlParametersFixed;
-    }
+    @JsonProperty("url_parameters_fixed")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getUrlParametersFixed() { return urlParametersFixed; }
+    public void setUrlParametersFixed(String urlParametersFixed) { this.urlParametersFixed = urlParametersFixed; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ExternalAssetPreview externalAssetPreview = (ExternalAssetPreview)o;
-        return Objects.equals(this.baseClientUrl,
-                externalAssetPreview.baseClientUrl) &&
-                Objects.equals(this.urlParametersFromAssetAttributes,
-                        externalAssetPreview.urlParametersFromAssetAttributes) &&
-                Objects.equals(this.urlPathFromAssetAttributes,
-                        externalAssetPreview.urlPathFromAssetAttributes) &&
-                Objects.equals(this.urlParametersFixed,
-                        externalAssetPreview.urlParametersFixed);
+        return Objects.equals(this.baseClientUrl, externalAssetPreview.baseClientUrl) &&
+                Objects.equals(this.urlParametersFromAssetAttributes, externalAssetPreview.urlParametersFromAssetAttributes) &&
+                Objects.equals(this.urlPathFromAssetAttributes, externalAssetPreview.urlPathFromAssetAttributes) &&
+                Objects.equals(this.urlParametersFixed, externalAssetPreview.urlParametersFixed);
     }
 
     @Override
@@ -175,18 +120,10 @@ public class ExternalAssetPreview {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class ExternalAssetPreview {\n");
-        sb.append("    baseClientUrl: ")
-                .append(toIndentedString(baseClientUrl))
-                .append("\n");
-        sb.append("    urlParametersFromAssetAttributes: ")
-                .append(toIndentedString(urlParametersFromAssetAttributes))
-                .append("\n");
-        sb.append("    urlPathFromAssetAttributes: ")
-                .append(toIndentedString(urlPathFromAssetAttributes))
-                .append("\n");
-        sb.append("    urlParametersFixed: ")
-                .append(toIndentedString(urlParametersFixed))
-                .append("\n");
+        sb.append("    baseClientUrl: ").append(toIndentedString(baseClientUrl)).append("\n");
+        sb.append("    urlParametersFromAssetAttributes: ").append(toIndentedString(urlParametersFromAssetAttributes)).append("\n");
+        sb.append("    urlPathFromAssetAttributes: ").append(toIndentedString(urlPathFromAssetAttributes)).append("\n");
+        sb.append("    urlParametersFixed: ").append(toIndentedString(urlParametersFixed)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -196,9 +133,7 @@ public class ExternalAssetPreview {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

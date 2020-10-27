@@ -17,39 +17,18 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * CatalogBucket
  */
-@JsonPropertyOrder({
-        CatalogBucket.JSON_PROPERTY_BUCKET_NAME,
-        CatalogBucket.JSON_PROPERTY_BUCKET_LOCATION,
-        CatalogBucket.JSON_PROPERTY_ENDPOINT_URL,
-        CatalogBucket.JSON_PROPERTY_RESOURCE_INSTANCE_ID,
-        CatalogBucket.JSON_PROPERTY_CREDENTIALS_RW,
-        CatalogBucket.JSON_PROPERTY_BLUEMIX_COS_CREDENTIALS
-})
 public class CatalogBucket {
 
-    public static final String JSON_PROPERTY_BUCKET_NAME = "bucket_name";
     private String bucketName;
-
-    public static final String JSON_PROPERTY_BUCKET_LOCATION = "bucket_location";
     private String bucketLocation;
-
-    public static final String JSON_PROPERTY_ENDPOINT_URL = "endpoint_url";
     private String endpointUrl;
-
-    public static final String JSON_PROPERTY_RESOURCE_INSTANCE_ID = "resource_instance_id";
     private String resourceInstanceId;
-
-    public static final String JSON_PROPERTY_CREDENTIALS_RW = "credentials_rw";
     private Credentials credentialsRw;
-
-    public static final String JSON_PROPERTY_BLUEMIX_COS_CREDENTIALS = "bluemix_cos_credentials";
     private BluemixCredentialsForCOS bluemixCosCredentials;
 
     public CatalogBucket bucketName(String bucketName) {
@@ -61,14 +40,9 @@ public class CatalogBucket {
      * Get bucketName
      * @return bucketName
      **/
-    @ApiModelProperty(example = "Bucket Name", required = true, value = "")
-    @JsonProperty(JSON_PROPERTY_BUCKET_NAME)
+    @JsonProperty("bucket_name")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getBucketName() {
-        return bucketName;
-    }
-
+    public String getBucketName() { return bucketName; }
     public void setBucketName(String bucketName) { this.bucketName = bucketName; }
 
     public CatalogBucket bucketLocation(String bucketLocation) {
@@ -81,17 +55,10 @@ public class CatalogBucket {
      * @return bucketLocation
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_BUCKET_LOCATION)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getBucketLocation() {
-        return bucketLocation;
-    }
-
-    public void setBucketLocation(String bucketLocation) {
-        this.bucketLocation = bucketLocation;
-    }
+    @JsonProperty("bucket_location")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getBucketLocation() { return bucketLocation; }
+    public void setBucketLocation(String bucketLocation) { this.bucketLocation = bucketLocation; }
 
     public CatalogBucket endpointUrl(String endpointUrl) {
         this.endpointUrl = endpointUrl;
@@ -103,17 +70,10 @@ public class CatalogBucket {
      * @return endpointUrl
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_ENDPOINT_URL)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getEndpointUrl() {
-        return endpointUrl;
-    }
-
-    public void setEndpointUrl(String endpointUrl) {
-        this.endpointUrl = endpointUrl;
-    }
+    @JsonProperty("endpoint_url")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getEndpointUrl() { return endpointUrl; }
+    public void setEndpointUrl(String endpointUrl) { this.endpointUrl = endpointUrl; }
 
     public CatalogBucket resourceInstanceId(String resourceInstanceId) {
         this.resourceInstanceId = resourceInstanceId;
@@ -125,17 +85,10 @@ public class CatalogBucket {
      * @return resourceInstanceId
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "Bluemix COS Resource Instance ID ", value = "")
-    @JsonProperty(JSON_PROPERTY_RESOURCE_INSTANCE_ID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getResourceInstanceId() {
-        return resourceInstanceId;
-    }
-
-    public void setResourceInstanceId(String resourceInstanceId) {
-        this.resourceInstanceId = resourceInstanceId;
-    }
+    @JsonProperty("resource_instance_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getResourceInstanceId() { return resourceInstanceId; }
+    public void setResourceInstanceId(String resourceInstanceId) { this.resourceInstanceId = resourceInstanceId; }
 
     public CatalogBucket credentialsRw(Credentials credentialsRw) {
         this.credentialsRw = credentialsRw;
@@ -147,20 +100,12 @@ public class CatalogBucket {
      * @return credentialsRw
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_CREDENTIALS_RW)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+    @JsonProperty("credentials_rw")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Credentials getCredentialsRw() { return credentialsRw; }
+    public void setCredentialsRw(Credentials credentialsRw) { this.credentialsRw = credentialsRw; }
 
-    public Credentials getCredentialsRw() {
-        return credentialsRw;
-    }
-
-    public void setCredentialsRw(Credentials credentialsRw) {
-        this.credentialsRw = credentialsRw;
-    }
-
-    public CatalogBucket
-    bluemixCosCredentials(BluemixCredentialsForCOS bluemixCosCredentials) {
+    public CatalogBucket bluemixCosCredentials(BluemixCredentialsForCOS bluemixCosCredentials) {
         this.bluemixCosCredentials = bluemixCosCredentials;
         return this;
     }
@@ -170,35 +115,22 @@ public class CatalogBucket {
      * @return bluemixCosCredentials
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_BLUEMIX_COS_CREDENTIALS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public BluemixCredentialsForCOS getBluemixCosCredentials() {
-        return bluemixCosCredentials;
-    }
-
-    public void setBluemixCosCredentials(BluemixCredentialsForCOS bluemixCosCredentials) {
-        this.bluemixCosCredentials = bluemixCosCredentials;
-    }
+    @JsonProperty("bluemix_cos_credentials")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public BluemixCredentialsForCOS getBluemixCosCredentials() { return bluemixCosCredentials; }
+    public void setBluemixCosCredentials(BluemixCredentialsForCOS bluemixCosCredentials) { this.bluemixCosCredentials = bluemixCosCredentials; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         CatalogBucket catalogBucket = (CatalogBucket)o;
         return Objects.equals(this.bucketName, catalogBucket.bucketName) &&
                 Objects.equals(this.bucketLocation, catalogBucket.bucketLocation) &&
                 Objects.equals(this.endpointUrl, catalogBucket.endpointUrl) &&
-                Objects.equals(this.resourceInstanceId,
-                        catalogBucket.resourceInstanceId) &&
+                Objects.equals(this.resourceInstanceId, catalogBucket.resourceInstanceId) &&
                 Objects.equals(this.credentialsRw, catalogBucket.credentialsRw) &&
-                Objects.equals(this.bluemixCosCredentials,
-                        catalogBucket.bluemixCosCredentials);
+                Objects.equals(this.bluemixCosCredentials, catalogBucket.bluemixCosCredentials);
     }
 
     @Override
@@ -212,24 +144,12 @@ public class CatalogBucket {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class CatalogBucket {\n");
-        sb.append("    bucketName: ")
-                .append(toIndentedString(bucketName))
-                .append("\n");
-        sb.append("    bucketLocation: ")
-                .append(toIndentedString(bucketLocation))
-                .append("\n");
-        sb.append("    endpointUrl: ")
-                .append(toIndentedString(endpointUrl))
-                .append("\n");
-        sb.append("    resourceInstanceId: ")
-                .append(toIndentedString(resourceInstanceId))
-                .append("\n");
-        sb.append("    credentialsRw: ")
-                .append(toIndentedString(credentialsRw))
-                .append("\n");
-        sb.append("    bluemixCosCredentials: ")
-                .append(toIndentedString(bluemixCosCredentials))
-                .append("\n");
+        sb.append("    bucketName: ").append(toIndentedString(bucketName)).append("\n");
+        sb.append("    bucketLocation: ").append(toIndentedString(bucketLocation)).append("\n");
+        sb.append("    endpointUrl: ").append(toIndentedString(endpointUrl)).append("\n");
+        sb.append("    resourceInstanceId: ").append(toIndentedString(resourceInstanceId)).append("\n");
+        sb.append("    credentialsRw: ").append(toIndentedString(credentialsRw)).append("\n");
+        sb.append("    bluemixCosCredentials: ").append(toIndentedString(bluemixCosCredentials)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -239,9 +159,7 @@ public class CatalogBucket {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 
