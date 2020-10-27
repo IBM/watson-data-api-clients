@@ -17,59 +17,23 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * CatalogEntity
  */
-@JsonPropertyOrder({
-        CatalogEntity.JSON_PROPERTY_NAME,
-        CatalogEntity.JSON_PROPERTY_DESCRIPTION,
-        CatalogEntity.JSON_PROPERTY_GENERATOR,
-        CatalogEntity.JSON_PROPERTY_PROJECT_ID,
-        CatalogEntity.JSON_PROPERTY_SPACE_ID,
-        CatalogEntity.JSON_PROPERTY_BSS_ACCOUNT_ID,
-        CatalogEntity.JSON_PROPERTY_CAPACITY_LIMIT,
-        CatalogEntity.JSON_PROPERTY_BUCKET,
-        CatalogEntity.JSON_PROPERTY_IS_GOVERNED,
-        CatalogEntity.JSON_PROPERTY_AUTO_PROFILING,
-        CatalogEntity.JSON_PROPERTY_SAML_INSTANCE_NAME
-})
 public class CatalogEntity {
 
-    public static final String JSON_PROPERTY_NAME = "name";
     private String name;
-
-    public static final String JSON_PROPERTY_DESCRIPTION = "description";
     private String description;
-
-    public static final String JSON_PROPERTY_GENERATOR = "generator";
     private String generator;
-
-    public static final String JSON_PROPERTY_PROJECT_ID = "project_id";
     private String projectId;
-
-    public static final String JSON_PROPERTY_SPACE_ID = "space_id";
     private String spaceId;
-
-    public static final String JSON_PROPERTY_BSS_ACCOUNT_ID = "bss_account_id";
     private String bssAccountId;
-
-    public static final String JSON_PROPERTY_CAPACITY_LIMIT = "capacity_limit";
     private Long capacityLimit;
-
-    public static final String JSON_PROPERTY_BUCKET = "bucket";
     private CatalogBucket bucket;
-
-    public static final String JSON_PROPERTY_IS_GOVERNED = "is_governed";
     private Boolean isGoverned;
-
-    public static final String JSON_PROPERTY_AUTO_PROFILING = "auto_profiling";
     private Boolean autoProfiling;
-
-    public static final String JSON_PROPERTY_SAML_INSTANCE_NAME = "saml_instance_name";
     private String samlInstanceName;
 
     public CatalogEntity name(String name) {
@@ -81,14 +45,9 @@ public class CatalogEntity {
      * Name the Catalog instance
      * @return name
      **/
-    @ApiModelProperty(required = true, value = "Name the Catalog instance")
-    @JsonProperty(JSON_PROPERTY_NAME)
+    @JsonProperty("name")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getName() {
-        return name;
-    }
-
+    public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
     public CatalogEntity description(String description) {
@@ -101,17 +60,10 @@ public class CatalogEntity {
      * @return description
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Description of the Catalog instance")
-    @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @JsonProperty("description")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public CatalogEntity generator(String generator) {
         this.generator = generator;
@@ -123,14 +75,9 @@ public class CatalogEntity {
      * @return generator
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Generator of the Catalog instance")
-    @JsonProperty(JSON_PROPERTY_GENERATOR)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getGenerator() {
-        return generator;
-    }
-
+    @JsonProperty("generator")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getGenerator() { return generator; }
     public void setGenerator(String generator) { this.generator = generator; }
 
     public CatalogEntity projectId(String projectId) {
@@ -143,14 +90,9 @@ public class CatalogEntity {
      * @return projectId
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Project id")
-    @JsonProperty(JSON_PROPERTY_PROJECT_ID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getProjectId() {
-        return projectId;
-    }
-
+    @JsonProperty("project_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getProjectId() { return projectId; }
     public void setProjectId(String projectId) { this.projectId = projectId; }
 
     public CatalogEntity spaceId(String spaceId) {
@@ -163,14 +105,9 @@ public class CatalogEntity {
      * @return spaceId
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Space id")
-    @JsonProperty(JSON_PROPERTY_SPACE_ID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getSpaceId() {
-        return spaceId;
-    }
-
+    @JsonProperty("space_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getSpaceId() { return spaceId; }
     public void setSpaceId(String spaceId) { this.spaceId = spaceId; }
 
     public CatalogEntity bssAccountId(String bssAccountId) {
@@ -183,17 +120,10 @@ public class CatalogEntity {
      * @return bssAccountId
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Account ID")
-    @JsonProperty(JSON_PROPERTY_BSS_ACCOUNT_ID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getBssAccountId() {
-        return bssAccountId;
-    }
-
-    public void setBssAccountId(String bssAccountId) {
-        this.bssAccountId = bssAccountId;
-    }
+    @JsonProperty("bss_account_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getBssAccountId() { return bssAccountId; }
+    public void setBssAccountId(String bssAccountId) { this.bssAccountId = bssAccountId; }
 
     public CatalogEntity capacityLimit(Long capacityLimit) {
         this.capacityLimit = capacityLimit;
@@ -205,17 +135,10 @@ public class CatalogEntity {
      * @return capacityLimit
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Capacity Limit")
-    @JsonProperty(JSON_PROPERTY_CAPACITY_LIMIT)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Long getCapacityLimit() {
-        return capacityLimit;
-    }
-
-    public void setCapacityLimit(Long capacityLimit) {
-        this.capacityLimit = capacityLimit;
-    }
+    @JsonProperty("capacity_limit")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Long getCapacityLimit() { return capacityLimit; }
+    public void setCapacityLimit(Long capacityLimit) { this.capacityLimit = capacityLimit; }
 
     public CatalogEntity bucket(CatalogBucket bucket) {
         this.bucket = bucket;
@@ -227,14 +150,9 @@ public class CatalogEntity {
      * @return bucket
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_BUCKET)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public CatalogBucket getBucket() {
-        return bucket;
-    }
-
+    @JsonProperty("bucket")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public CatalogBucket getBucket() { return bucket; }
     public void setBucket(CatalogBucket bucket) { this.bucket = bucket; }
 
     public CatalogEntity isGoverned(Boolean isGoverned) {
@@ -244,24 +162,15 @@ public class CatalogEntity {
 
     /**
      * Indicates if the assets in the Catalog are governed. if not specified, it
-     *defaults to false. For private catalogs, &#39;false&#39; should be always
-     *passed, because private catalogs can not be governed.
+     * defaults to false. For private catalogs, &#39;false&#39; should be always
+     * passed, because private catalogs can not be governed.
      * @return isGoverned
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            value =
-                    "Indicates if the assets in the Catalog are governed. if not specified, it defaults to false. For private catalogs, 'false' should be always passed, because private catalogs can not be governed.")
-    @JsonProperty(JSON_PROPERTY_IS_GOVERNED)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Boolean getIsGoverned() {
-        return isGoverned;
-    }
-
-    public void setIsGoverned(Boolean isGoverned) {
-        this.isGoverned = isGoverned;
-    }
+    @JsonProperty("is_governed")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getIsGoverned() { return isGoverned; }
+    public void setIsGoverned(Boolean isGoverned) { this.isGoverned = isGoverned; }
 
     public CatalogEntity autoProfiling(Boolean autoProfiling) {
         this.autoProfiling = autoProfiling;
@@ -274,19 +183,10 @@ public class CatalogEntity {
      * @return autoProfiling
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            value =
-                    "Indicates if the assets in the Catalog are allowed for profiling. if not specified")
-    @JsonProperty(JSON_PROPERTY_AUTO_PROFILING)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Boolean getAutoProfiling() {
-        return autoProfiling;
-    }
-
-    public void setAutoProfiling(Boolean autoProfiling) {
-        this.autoProfiling = autoProfiling;
-    }
+    @JsonProperty("auto_profiling")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getAutoProfiling() { return autoProfiling; }
+    public void setAutoProfiling(Boolean autoProfiling) { this.autoProfiling = autoProfiling; }
 
     public CatalogEntity samlInstanceName(String samlInstanceName) {
         this.samlInstanceName = samlInstanceName;
@@ -298,26 +198,15 @@ public class CatalogEntity {
      * @return samlInstanceName
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "SAML instance type")
-    @JsonProperty(JSON_PROPERTY_SAML_INSTANCE_NAME)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getSamlInstanceName() {
-        return samlInstanceName;
-    }
-
-    public void setSamlInstanceName(String samlInstanceName) {
-        this.samlInstanceName = samlInstanceName;
-    }
+    @JsonProperty("saml_instance_name")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getSamlInstanceName() { return samlInstanceName; }
+    public void setSamlInstanceName(String samlInstanceName) { this.samlInstanceName = samlInstanceName; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         CatalogEntity catalogEntity = (CatalogEntity)o;
         return Objects.equals(this.name, catalogEntity.name) &&
                 Objects.equals(this.description, catalogEntity.description) &&
@@ -344,32 +233,16 @@ public class CatalogEntity {
         StringBuilder sb = new StringBuilder();
         sb.append("class CatalogEntity {\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    description: ")
-                .append(toIndentedString(description))
-                .append("\n");
-        sb.append("    generator: ")
-                .append(toIndentedString(generator))
-                .append("\n");
-        sb.append("    projectId: ")
-                .append(toIndentedString(projectId))
-                .append("\n");
+        sb.append("    description: ").append(toIndentedString(description)).append("\n");
+        sb.append("    generator: ").append(toIndentedString(generator)).append("\n");
+        sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
         sb.append("    spaceId: ").append(toIndentedString(spaceId)).append("\n");
-        sb.append("    bssAccountId: ")
-                .append(toIndentedString(bssAccountId))
-                .append("\n");
-        sb.append("    capacityLimit: ")
-                .append(toIndentedString(capacityLimit))
-                .append("\n");
+        sb.append("    bssAccountId: ").append(toIndentedString(bssAccountId)).append("\n");
+        sb.append("    capacityLimit: ").append(toIndentedString(capacityLimit)).append("\n");
         sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-        sb.append("    isGoverned: ")
-                .append(toIndentedString(isGoverned))
-                .append("\n");
-        sb.append("    autoProfiling: ")
-                .append(toIndentedString(autoProfiling))
-                .append("\n");
-        sb.append("    samlInstanceName: ")
-                .append(toIndentedString(samlInstanceName))
-                .append("\n");
+        sb.append("    isGoverned: ").append(toIndentedString(isGoverned)).append("\n");
+        sb.append("    autoProfiling: ").append(toIndentedString(autoProfiling)).append("\n");
+        sb.append("    samlInstanceName: ").append(toIndentedString(samlInstanceName)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -379,9 +252,7 @@ public class CatalogEntity {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

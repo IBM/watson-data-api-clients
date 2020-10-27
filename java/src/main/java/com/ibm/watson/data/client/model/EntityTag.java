@@ -20,61 +20,63 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Bucket Credentials
+ * EntityTag
  */
-public class Credentials {
+public class EntityTag {
 
-    private String accessKeyId;
-    private String secretAccessKey;
+    private String value;
+    private Boolean weak;
 
-    public Credentials accessKeyId(String accessKeyId) {
-        this.accessKeyId = accessKeyId;
+    public EntityTag value(String value) {
+        this.value = value;
         return this;
     }
 
     /**
-     * Get accessKeyId
-     * @return accessKeyId
+     * Get value
+     * @return value
      **/
-    @JsonProperty("access_key_id")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getAccessKeyId() { return accessKeyId; }
-    public void setAccessKeyId(String accessKeyId) { this.accessKeyId = accessKeyId; }
+    @javax.annotation.Nullable
+    @JsonProperty("value")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getValue() { return value; }
+    public void setValue(String value) { this.value = value; }
 
-    public Credentials secretAccessKey(String secretAccessKey) {
-        this.secretAccessKey = secretAccessKey;
+    public EntityTag weak(Boolean weak) {
+        this.weak = weak;
         return this;
     }
 
     /**
-     * Get secretAccessKey
-     * @return secretAccessKey
+     * Get weak
+     * @return weak
      **/
-    @JsonProperty("secret_access_key")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getSecretAccessKey() { return secretAccessKey; }
-    public void setSecretAccessKey(String secretAccessKey) { this.secretAccessKey = secretAccessKey; }
+    @javax.annotation.Nullable
+    @JsonProperty("weak")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getWeak() { return weak; }
+    public void setWeak(Boolean weak) { this.weak = weak; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        Credentials credentials = (Credentials)o;
-        return Objects.equals(this.accessKeyId, credentials.accessKeyId) &&
-                Objects.equals(this.secretAccessKey, credentials.secretAccessKey);
+        EntityTag entityTag = (EntityTag)o;
+        return Objects.equals(this.value, entityTag.value) &&
+                Objects.equals(this.weak, entityTag.weak);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessKeyId, secretAccessKey);
+        return Objects.hash(value, weak);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class Credentials {\n");
-        sb.append("    accessKeyId: ").append(toIndentedString(accessKeyId)).append("\n");
-        sb.append("    secretAccessKey: ").append(toIndentedString(secretAccessKey)).append("\n");
+        sb.append("class EntityTag {\n");
+        sb.append("    value: ").append(toIndentedString(value)).append("\n");
+        sb.append("    weak: ").append(toIndentedString(weak)).append("\n");
         sb.append("}");
         return sb.toString();
     }

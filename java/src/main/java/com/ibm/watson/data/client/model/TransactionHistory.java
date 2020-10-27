@@ -20,81 +20,81 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Bluemix COS  Credentials
+ * Description of import transaction history.
  */
-public class BluemixCredentialsForCOS {
+public class TransactionHistory {
 
-    private BluemixCOSCredentials viewer;
-    private BluemixCOSCredentials editor;
-    private BluemixCOSCredentials admin;
+    private String description;
+    private String status;
+    private String updatedAt;
 
-    public BluemixCredentialsForCOS viewer(BluemixCOSCredentials viewer) {
-        this.viewer = viewer;
+    public TransactionHistory description(String description) {
+        this.description = description;
         return this;
     }
 
     /**
-     * Get viewer
-     * @return viewer
+     * Description of the transaction status
+     * @return description
      **/
     @javax.annotation.Nullable
-    @JsonProperty("viewer")
+    @JsonProperty("description")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public BluemixCOSCredentials getViewer() { return viewer; }
-    public void setViewer(BluemixCOSCredentials viewer) { this.viewer = viewer; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public BluemixCredentialsForCOS editor(BluemixCOSCredentials editor) {
-        this.editor = editor;
+    public TransactionHistory status(String status) {
+        this.status = status;
         return this;
     }
 
     /**
-     * Get editor
-     * @return editor
+     * Status of the transaction
+     * @return status
      **/
     @javax.annotation.Nullable
-    @JsonProperty("editor")
+    @JsonProperty("status")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public BluemixCOSCredentials getEditor() { return editor; }
-    public void setEditor(BluemixCOSCredentials editor) { this.editor = editor; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public BluemixCredentialsForCOS admin(BluemixCOSCredentials admin) {
-        this.admin = admin;
+    public TransactionHistory updatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
         return this;
     }
 
     /**
-     * Get admin
-     * @return admin
+     * The date and time the status was updated in UTC (ISO 8601)
+     * @return updatedAt
      **/
     @javax.annotation.Nullable
-    @JsonProperty("admin")
+    @JsonProperty("updated_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public BluemixCOSCredentials getAdmin() { return admin; }
-    public void setAdmin(BluemixCOSCredentials admin) { this.admin = admin; }
+    public String getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        BluemixCredentialsForCOS bluemixCredentialsForCOS = (BluemixCredentialsForCOS)o;
-        return Objects.equals(this.viewer, bluemixCredentialsForCOS.viewer) &&
-                Objects.equals(this.editor, bluemixCredentialsForCOS.editor) &&
-                Objects.equals(this.admin, bluemixCredentialsForCOS.admin);
+        TransactionHistory transactionHistory = (TransactionHistory)o;
+        return Objects.equals(this.description, transactionHistory.description) &&
+                Objects.equals(this.status, transactionHistory.status) &&
+                Objects.equals(this.updatedAt, transactionHistory.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(viewer, editor, admin);
+        return Objects.hash(description, status, updatedAt);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class BluemixCredentialsForCOS {\n");
-        sb.append("    viewer: ").append(toIndentedString(viewer)).append("\n");
-        sb.append("    editor: ").append(toIndentedString(editor)).append("\n");
-        sb.append("    admin: ").append(toIndentedString(admin)).append("\n");
+        sb.append("class TransactionHistory {\n");
+        sb.append("    description: ").append(toIndentedString(description)).append("\n");
+        sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
         sb.append("}");
         return sb.toString();
     }

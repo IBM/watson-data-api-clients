@@ -20,61 +20,62 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 /**
- * Bucket Credentials
+ * resource object within the response for the /v3/policy_rules/{ruleId}/terms API
  */
-public class Credentials {
+public class PolicyRuleTermListResponseResource {
 
-    private String accessKeyId;
-    private String secretAccessKey;
+    private PolicyRuleTermListResponseEntity entity;
+    private PolicyResourceForeignEntityMetadata metadata;
 
-    public Credentials accessKeyId(String accessKeyId) {
-        this.accessKeyId = accessKeyId;
+    public PolicyRuleTermListResponseResource entity(PolicyRuleTermListResponseEntity entity) {
+        this.entity = entity;
         return this;
     }
 
     /**
-     * Get accessKeyId
-     * @return accessKeyId
+     * Get entity
+     * @return entity
      **/
-    @JsonProperty("access_key_id")
+    @JsonProperty("entity")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getAccessKeyId() { return accessKeyId; }
-    public void setAccessKeyId(String accessKeyId) { this.accessKeyId = accessKeyId; }
+    public PolicyRuleTermListResponseEntity getEntity() { return entity; }
+    public void setEntity(PolicyRuleTermListResponseEntity entity) { this.entity = entity; }
 
-    public Credentials secretAccessKey(String secretAccessKey) {
-        this.secretAccessKey = secretAccessKey;
+
+    public PolicyRuleTermListResponseResource metadata(PolicyResourceForeignEntityMetadata metadata) {
+        this.metadata = metadata;
         return this;
     }
 
     /**
-     * Get secretAccessKey
-     * @return secretAccessKey
+     * Get metadata
+     * @return metadata
      **/
-    @JsonProperty("secret_access_key")
+    @JsonProperty("metadata")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getSecretAccessKey() { return secretAccessKey; }
-    public void setSecretAccessKey(String secretAccessKey) { this.secretAccessKey = secretAccessKey; }
+    public PolicyResourceForeignEntityMetadata getMetadata() { return metadata; }
+    public void setMetadata(PolicyResourceForeignEntityMetadata metadata) { this.metadata = metadata; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        Credentials credentials = (Credentials)o;
-        return Objects.equals(this.accessKeyId, credentials.accessKeyId) &&
-                Objects.equals(this.secretAccessKey, credentials.secretAccessKey);
+        PolicyRuleTermListResponseResource policyRuleTermListResponseResource = (PolicyRuleTermListResponseResource) o;
+        return Objects.equals(this.entity, policyRuleTermListResponseResource.entity) &&
+                Objects.equals(this.metadata, policyRuleTermListResponseResource.metadata);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessKeyId, secretAccessKey);
+        return Objects.hash(entity, metadata);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class Credentials {\n");
-        sb.append("    accessKeyId: ").append(toIndentedString(accessKeyId)).append("\n");
-        sb.append("    secretAccessKey: ").append(toIndentedString(secretAccessKey)).append("\n");
+        sb.append("class PolicyRuleTermListResponseResource {\n");
+        sb.append("    entity: ").append(toIndentedString(entity)).append("\n");
+        sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
         sb.append("}");
         return sb.toString();
     }

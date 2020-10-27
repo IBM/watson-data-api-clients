@@ -101,7 +101,7 @@ public class CategoriesTest extends AbstractExpectations {
     @Test
     public void testCreate() {
         NewCategoryEntity body = readRequestFromFile("create", new TypeReference<NewCategoryEntity>() {});
-        CreateCategoryResponse response = api.create(body, null).block();
+        GlossaryCreateResponse response = api.create(body, null).block();
         assertNotNull(response);
         assertNotNull(response.getResources());
         assertEquals(response.getResources().size(), 1);
