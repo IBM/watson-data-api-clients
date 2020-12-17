@@ -378,7 +378,7 @@ public class GovernanceArtifactTypesApiV3 {
 
         if (runAsTenant != null)
             headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
-        final String[] localVarAccepts = {"text/csv", "application/json"};
+        final String[] localVarAccepts = {};
         final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
