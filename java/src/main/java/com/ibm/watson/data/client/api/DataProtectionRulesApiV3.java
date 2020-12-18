@@ -209,7 +209,7 @@ public class DataProtectionRulesApiV3 {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "limit", limit));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "offset", offset));
 
-        final String[] localVarAccepts = {"application/octet-stream", "application/json"};
+        final String[] localVarAccepts = {};
         final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
