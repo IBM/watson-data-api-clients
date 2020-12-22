@@ -15,78 +15,23 @@
  */
 package com.ibm.watson.data.client.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
+import com.ibm.watson.data.client.model.enums.JsonPatchOperation;
+
 import java.util.Objects;
 
 /**
  * JSONResourcePatchModel
  */
-@JsonPropertyOrder({
-        JSONResourcePatchModel.JSON_PROPERTY_OP,
-        JSONResourcePatchModel.JSON_PROPERTY_PATH,
-        JSONResourcePatchModel.JSON_PROPERTY_FROM,
-        JSONResourcePatchModel.JSON_PROPERTY_VALUE
-})
 public class JSONResourcePatchModel {
-    /**
-     * The operation to be performed
-     */
-    public enum OpEnum {
-        ADD("add"),
 
-        REMOVE("remove"),
-
-        REPLACE("replace"),
-
-        MOVE("move"),
-
-        COPY("copy"),
-
-        TEST("test");
-
-        private String value;
-
-        OpEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static OpEnum fromValue(String value) {
-            for (OpEnum b : OpEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    public static final String JSON_PROPERTY_OP = "op";
-    private OpEnum op;
-
-    public static final String JSON_PROPERTY_PATH = "path";
+    private JsonPatchOperation op;
     private String path;
-
-    public static final String JSON_PROPERTY_FROM = "from";
     private String from;
-
-    public static final String JSON_PROPERTY_VALUE = "value";
     private Object value;
 
-    public JSONResourcePatchModel op(OpEnum op) {
+    public JSONResourcePatchModel op(JsonPatchOperation op) {
         this.op = op;
         return this;
     }
@@ -96,15 +41,10 @@ public class JSONResourcePatchModel {
      * @return op
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The operation to be performed")
-    @JsonProperty(JSON_PROPERTY_OP)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public OpEnum getOp() {
-        return op;
-    }
-
-    public void setOp(OpEnum op) { this.op = op; }
+    @JsonProperty("op")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public JsonPatchOperation getOp() { return op; }
+    public void setOp(JsonPatchOperation op) { this.op = op; }
 
     public JSONResourcePatchModel path(String path) {
         this.path = path;
@@ -116,14 +56,9 @@ public class JSONResourcePatchModel {
      * @return path
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "A JSON pointer to the field to update")
-    @JsonProperty(JSON_PROPERTY_PATH)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getPath() {
-        return path;
-    }
-
+    @JsonProperty("path")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getPath() { return path; }
     public void setPath(String path) { this.path = path; }
 
     public JSONResourcePatchModel from(String from) {
@@ -136,14 +71,9 @@ public class JSONResourcePatchModel {
      * @return from
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "A string containing a JSON pointer value")
-    @JsonProperty(JSON_PROPERTY_FROM)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getFrom() {
-        return from;
-    }
-
+    @JsonProperty("from")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getFrom() { return from; }
     public void setFrom(String from) { this.from = from; }
 
     public JSONResourcePatchModel value(Object value) {
@@ -156,24 +86,15 @@ public class JSONResourcePatchModel {
      * @return value
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_VALUE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Object getValue() {
-        return value;
-    }
-
+    @JsonProperty("value")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Object getValue() { return value; }
     public void setValue(Object value) { this.value = value; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         JSONResourcePatchModel jsONResourcePatchModel = (JSONResourcePatchModel)o;
         return Objects.equals(this.op, jsONResourcePatchModel.op) &&
                 Objects.equals(this.path, jsONResourcePatchModel.path) &&
@@ -203,9 +124,7 @@ public class JSONResourcePatchModel {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

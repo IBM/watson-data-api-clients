@@ -15,91 +15,23 @@
  */
 package com.ibm.watson.data.client.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.ibm.watson.data.client.model.enums.ComputeType;
+
 import java.util.Objects;
 
 /**
  * A compute associated with the project.
  */
-@ApiModel(description = "A compute associated with the project.")
-@JsonPropertyOrder({
-        ProjectCompute.JSON_PROPERTY_CREDENTIALS,
-        ProjectCompute.JSON_PROPERTY_CRN,
-        ProjectCompute.JSON_PROPERTY_GUID,
-        ProjectCompute.JSON_PROPERTY_LABEL,
-        ProjectCompute.JSON_PROPERTY_NAME,
-        ProjectCompute.JSON_PROPERTY_TYPE,
-        ProjectCompute.JSON_PROPERTY_PROPERTIES
-})
 public class ProjectCompute {
 
-    public static final String JSON_PROPERTY_CREDENTIALS = "credentials";
     private Object credentials;
-
-    public static final String JSON_PROPERTY_CRN = "crn";
     private String crn;
-
-    public static final String JSON_PROPERTY_GUID = "guid";
     private String guid;
-
-    public static final String JSON_PROPERTY_LABEL = "label";
     private String label;
-
-    public static final String JSON_PROPERTY_NAME = "name";
     private String name;
-
-    /**
-     * The type of compute associated with the project.
-     */
-    public enum TypeEnum {
-
-        ANALYTICS_ENGINE("analytics_engine"),
-
-        SPARK("spark"),
-
-        MACHINE_LEARNING("machine_learning"),
-
-        AWS_EMR("aws_emr"),
-
-        STREAMING_ANALYTICS("streaming_analytics"),
-
-        WATSON("watson");
-
-        private String value;
-
-        TypeEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum b : TypeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    public static final String JSON_PROPERTY_TYPE = "type";
-    private TypeEnum type;
-
-    public static final String JSON_PROPERTY_PROPERTIES = "properties";
+    private ComputeType type;
     private Object properties;
 
     public ProjectCompute credentials(Object credentials) {
@@ -111,18 +43,10 @@ public class ProjectCompute {
      * The credentials used to access the compute.
      * @return credentials
      **/
-    @ApiModelProperty(example = "{}", required = true,
-            value = "The credentials used to access the compute.")
-    @JsonProperty(JSON_PROPERTY_CREDENTIALS)
+    @JsonProperty("credentials")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public Object getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(Object credentials) {
-        this.credentials = credentials;
-    }
+    public Object getCredentials() { return credentials; }
+    public void setCredentials(Object credentials) { this.credentials = credentials; }
 
     public ProjectCompute crn(String crn) {
         this.crn = crn;
@@ -134,18 +58,9 @@ public class ProjectCompute {
      * @return crn
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example =
-                    "crn:v1:staging:public:watson-vision-combined:us-south:a/1438bf1daef49e20401d0179818ebef5:6874282b-42d6-40fa-869b-95a3c0f04125::",
-            value =
-                    "The Cloud Resource Name (CRN) for the compute service associated with the project.")
-    @JsonProperty(JSON_PROPERTY_CRN)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getCrn() {
-        return crn;
-    }
-
+    @JsonProperty("crn")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getCrn() { return crn; }
     public void setCrn(String crn) { this.crn = crn; }
 
     public ProjectCompute guid(String guid) {
@@ -155,20 +70,12 @@ public class ProjectCompute {
 
     /**
      * Unique GUID of the associated project compute. i.e. GUID of Spark or
-     *Machine Learning service instance.
+     * Machine Learning service instance.
      * @return guid
      **/
-    @ApiModelProperty(
-            example = "eddc2f0c-4401-49d1-b632-dee2ec33dcc0", required = true,
-            value =
-                    "Unique GUID of the associated project compute. i.e. GUID of Spark or Machine Learning service instance.")
-    @JsonProperty(JSON_PROPERTY_GUID)
+    @JsonProperty("guid")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getGuid() {
-        return guid;
-    }
-
+    public String getGuid() { return guid; }
     public void setGuid(String guid) { this.guid = guid; }
 
     public ProjectCompute label(String label) {
@@ -181,15 +88,9 @@ public class ProjectCompute {
      * @return label
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "service_label",
-            value = "Service label when compute type is 'watson'")
-    @JsonProperty(JSON_PROPERTY_LABEL)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getLabel() {
-        return label;
-    }
-
+    @JsonProperty("label")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getLabel() { return label; }
     public void setLabel(String label) { this.label = label; }
 
     public ProjectCompute name(String name) {
@@ -201,20 +102,12 @@ public class ProjectCompute {
      * Display name of the compute instance associated with the project.
      * @return name
      **/
-    @ApiModelProperty(
-            example = "Analytics Engine", required = true,
-            value =
-                    "Display name of the compute instance associated with the project.")
-    @JsonProperty(JSON_PROPERTY_NAME)
+    @JsonProperty("name")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getName() {
-        return name;
-    }
-
+    public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public ProjectCompute type(TypeEnum type) {
+    public ProjectCompute type(ComputeType type) {
         this.type = type;
         return this;
     }
@@ -223,16 +116,10 @@ public class ProjectCompute {
      * The type of compute associated with the project.
      * @return type
      **/
-    @ApiModelProperty(required = true,
-            value = "The type of compute associated with the project.")
-    @JsonProperty(JSON_PROPERTY_TYPE)
+    @JsonProperty("type")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public TypeEnum getType() {
-        return type;
-    }
-
-    public void setType(TypeEnum type) { this.type = type; }
+    public ComputeType getType() { return type; }
+    public void setType(ComputeType type) { this.type = type; }
 
     public ProjectCompute properties(Object properties) {
         this.properties = properties;
@@ -243,27 +130,15 @@ public class ProjectCompute {
      * The properties of the compute.
      * @return properties
      **/
-    @ApiModelProperty(example = "{}", required = false,
-            value = "The properties of the compute.")
-    @JsonProperty(JSON_PROPERTY_PROPERTIES)
+    @JsonProperty("properties")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public Object getProperties() {
-        return properties;
-    }
-
-    public void setProperties(Object properties) {
-        this.properties = properties;
-    }
+    public Object getProperties() { return properties; }
+    public void setProperties(Object properties) { this.properties = properties; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ProjectCompute projectCompute = (ProjectCompute)o;
         return Objects.equals(this.credentials, projectCompute.credentials) &&
                 Objects.equals(this.crn, projectCompute.crn) &&
@@ -299,9 +174,7 @@ public class ProjectCompute {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

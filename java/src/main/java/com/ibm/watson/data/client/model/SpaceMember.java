@@ -17,28 +17,27 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ibm.watson.data.client.model.enums.MemberState;
+import com.ibm.watson.data.client.model.enums.MemberStateLower;
 import com.ibm.watson.data.client.model.enums.MemberType;
 import java.util.Objects;
 
 /**
- * A project member.
+ * A space member.
  */
-public class ProjectMember {
+public class SpaceMember {
 
     private String id;
     private String role;
-    private MemberState state = MemberState.ACTIVE;
+    private MemberStateLower state = MemberStateLower.ACTIVE;
     private MemberType type = MemberType.USER;
-    private String userName;
 
-    public ProjectMember id(String id) {
+    public SpaceMember id(String id) {
         this.id = id;
         return this;
     }
 
     /**
-     * The IAM ID of the project member. This field is required for project
+     * The IAM ID of the space member. This field is required for space
      * members with the &#39;ACTIVE&#39; state.
      * @return id
      **/
@@ -48,7 +47,7 @@ public class ProjectMember {
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    public ProjectMember role(String role) {
+    public SpaceMember role(String role) {
         this.role = role;
         return this;
     }
@@ -62,7 +61,7 @@ public class ProjectMember {
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
-    public ProjectMember state(MemberState state) {
+    public SpaceMember state(MemberStateLower state) {
         this.state = state;
         return this;
     }
@@ -74,10 +73,10 @@ public class ProjectMember {
     @javax.annotation.Nullable
     @JsonProperty("state")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public MemberState getState() { return state; }
-    public void setState(MemberState state) { this.state = state; }
+    public MemberStateLower getState() { return state; }
+    public void setState(MemberStateLower state) { this.state = state; }
 
-    public ProjectMember type(MemberType type) {
+    public SpaceMember type(MemberType type) {
         this.type = type;
         return this;
     }
@@ -92,48 +91,30 @@ public class ProjectMember {
     public MemberType getType() { return type; }
     public void setType(MemberType type) { this.type = type; }
 
-    public ProjectMember userName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    /**
-     * The username of the project member. If the member type is
-     * &#39;service&#39;, then the &#39;user_name&#39; and &#39;id&#39; fields must
-     * match.
-     * @return userName
-     **/
-    @JsonProperty("user_name")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getUserName() { return userName; }
-    public void setUserName(String userName) { this.userName = userName; }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        ProjectMember projectMember = (ProjectMember)o;
-        return Objects.equals(this.id, projectMember.id) &&
-                Objects.equals(this.role, projectMember.role) &&
-                Objects.equals(this.state, projectMember.state) &&
-                Objects.equals(this.type, projectMember.type) &&
-                Objects.equals(this.userName, projectMember.userName);
+        SpaceMember that = (SpaceMember)o;
+        return Objects.equals(this.id, that.id) &&
+                Objects.equals(this.role, that.role) &&
+                Objects.equals(this.state, that.state) &&
+                Objects.equals(this.type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role, state, type, userName);
+        return Objects.hash(id, role, state, type);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ProjectMember {\n");
+        sb.append("class SpaceMember {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    role: ").append(toIndentedString(role)).append("\n");
         sb.append("    state: ").append(toIndentedString(state)).append("\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
-        sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
         sb.append("}");
         return sb.toString();
     }
