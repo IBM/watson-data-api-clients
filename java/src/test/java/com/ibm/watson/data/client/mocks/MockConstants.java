@@ -36,6 +36,7 @@ import static org.mockserver.model.JsonBody.json;
 public class MockConstants {
 
     // Set some constants that we can re-use throughout
+    public static final String SPACE_GUID     = "ad4f6950-79e4-4fac-a656-cb07b53c4c71";
     public static final String PROJECT_GUID   = "f0bd7b72-f690-4b65-9edb-7a430fa658d9";
     public static final String CATALOG_GUID   = "0f85f071-7528-4ff9-9db8-ab7c7b0244bf";
     public static final String NEW_ROLE_NAME  = "Test Role";
