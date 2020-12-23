@@ -1,0 +1,10 @@
+{
+  "name": "Test Model",
+  "description": "This is a model to test the APIs work as expected.",
+  "space_id": "ad4f6950-79e4-4fac-a656-cb07b53c4c71",
+  "type": "scikit-learn_0.23",
+  "software_spec": {
+    "name": "default_py3.7",
+    "id": "e4429883-c883-42b6-87a8-f419d64088cd"
+  }
+}
