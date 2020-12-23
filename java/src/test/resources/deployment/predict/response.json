@@ -1,0 +1,19 @@
+{
+  "predictions": [
+    {
+      "fields": [
+        "prediction",
+        "probability"
+      ],
+      "values": [
+        [
+          "Risk",
+          [
+            0.49456965923309326,
+            0.5054303407669067
+          ]
+        ]
+      ]
+    }
+  ]
+}

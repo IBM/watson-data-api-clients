@@ -20,49 +20,56 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * A reference to data with an optional data schema. 
+ * A URL to be used for various purposes.
  */
-public class DataConnectionReference extends ObjectLocation {
+public class UrlDetails {
 
-    private DataSchema schema;
+    private String url;
 
-    public DataConnectionReference schema(DataSchema schema) {
-        this.schema = schema;
+    public UrlDetails url(String url) {
+        this.url = url;
         return this;
     }
 
     /**
-     * Get schema
-     * @return schema
+     * Get url
+     * @return url
      **/
     @javax.annotation.Nullable
-    @JsonProperty("schema")
+    @JsonProperty("url")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public DataSchema getSchema() { return schema; }
-    public void setSchema(DataSchema schema) { this.schema = schema; }
+    public String getUrl() { return url; }
+    public void setUrl(String url) { this.url = url; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        DataConnectionReference dataConnectionReference = (DataConnectionReference) o;
-        return super.equals(o) &&
-                Objects.equals(this.schema, dataConnectionReference.schema);
+        UrlDetails deploymentEntityAllOfStatusOnlineUrl = (UrlDetails) o;
+        return Objects.equals(this.url, deploymentEntityAllOfStatusOnlineUrl.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), schema);
+        return Objects.hash(url);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class DataConnectionReference {\n");
-        super.toString(sb);
-        sb.append("    schema: ").append(toIndentedString(schema)).append("\n");
+        sb.append("class UrlDetails {\n");
+        sb.append("    url: ").append(toIndentedString(url)).append("\n");
         sb.append("}");
         return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(Object o) {
+        if (o == null) { return "null"; }
+        return o.toString().replace("\n", "\n    ");
     }
 
 }

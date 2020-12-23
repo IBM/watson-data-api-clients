@@ -1,0 +1,30 @@
+{
+  "entity": {
+    "asset": {
+      "id": "a40e2d17-6f33-4434-9944-4d6fa19ec397"
+    },
+    "custom": {},
+    "deployed_asset_type": "model",
+    "description": "A deployment to test the API works as expected.",
+    "name": "Test Deployment",
+    "online": {
+      "parameters": {}
+    },
+    "space_id": "ad4f6950-79e4-4fac-a656-cb07b53c4c71",
+    "status": {
+      "online_url": {
+        "url": "https://zen-cpd-zen.apps.cpdv35-test.cpd-daell.com/ml/v4/deployments/63e1b529-dbbc-4e8f-849a-ce57ef9b534e/predictions"
+      },
+      "state": "initializing"
+    }
+  },
+  "metadata": {
+    "created_at": "2020-12-23T16:35:08.775Z",
+    "description": "A deployment to test the API works as expected.",
+    "id": "63e1b529-dbbc-4e8f-849a-ce57ef9b534e",
+    "modified_at": "2020-12-23T16:35:08.775Z",
+    "name": "Test Deployment",
+    "owner": "1000331004",
+    "space_id": "ad4f6950-79e4-4fac-a656-cb07b53c4c71"
+  }
+}
