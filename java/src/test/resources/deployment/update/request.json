@@ -1,0 +1,3 @@
+[
+  { "op": "replace", "path": "/description", "value": "Now with an updated description." }
+]
