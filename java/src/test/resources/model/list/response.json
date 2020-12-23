@@ -1,0 +1,397 @@
+{
+  "first": {
+    "href": "/ml/v4/models?space_id=ad4f6950-79e4-4fac-a656-cb07b53c4c71&limit=100"
+  },
+  "resources": [
+    {
+      "entity": {
+        "custom": {
+          "feedback": "credit_risk_feedback.csv",
+          "input_data": "structured",
+          "problem_type": "binary"
+        },
+        "label_column": "RISK",
+        "schemas": {
+          "input": [
+            {
+              "fields": [
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "less_1",
+                      "greater_7",
+                      "4_to_7",
+                      "1_to_4",
+                      "unemployed"
+                    ]
+                  },
+                  "name": "EMPLDUR",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "female",
+                      "male"
+                    ]
+                  },
+                  "name": "SEX",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "range": {
+                      "max": 6.0,
+                      "min": 1.0
+                    }
+                  },
+                  "name": "RESIDUR",
+                  "type": "double"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "real_estate",
+                      "unknown",
+                      "car_other",
+                      "savings_insurance"
+                    ]
+                  },
+                  "name": "OWNSPROP",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "range": {
+                      "max": 65.0,
+                      "min": 18.0
+                    }
+                  },
+                  "name": "AGE",
+                  "type": "double"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "own",
+                      "rent",
+                      "free"
+                    ]
+                  },
+                  "name": "HOUSING",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "management_self-employed",
+                      "unskilled",
+                      "skilled",
+                      "unemployed"
+                    ]
+                  },
+                  "name": "JOB",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "range": {
+                      "max": 2.0,
+                      "min": 1.0
+                    }
+                  },
+                  "name": "DEPENDNT",
+                  "type": "double"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "none",
+                      "yes"
+                    ]
+                  },
+                  "name": "TELEPHON",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "0_to_200",
+                      "no_checking",
+                      "less_0",
+                      "greater_200"
+                    ]
+                  },
+                  "name": "CHECKINGSTATUS",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "range": {
+                      "max": 64.0,
+                      "min": 4.0
+                    }
+                  },
+                  "name": "LOANDURATION",
+                  "type": "double"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "all_credits_paid_back",
+                      "prior_payments_delayed",
+                      "credits_paid_to_date",
+                      "outstanding_credit",
+                      "no_credits"
+                    ]
+                  },
+                  "name": "CREDITHISTORY",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "car_new",
+                      "appliances",
+                      "vacation",
+                      "car_used",
+                      "radio_tv",
+                      "furniture",
+                      "repairs",
+                      "other",
+                      "business",
+                      "retraining",
+                      "education"
+                    ]
+                  },
+                  "name": "LOANPURPOSE",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "range": {
+                      "max": 11676.0,
+                      "min": 250.0
+                    }
+                  },
+                  "name": "LOANAMOUNT",
+                  "type": "double"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "less_100",
+                      "500_to_1000",
+                      "unknown",
+                      "100_to_500",
+                      "greater_1000"
+                    ]
+                  },
+                  "name": "EXISTINGSAVINGS",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "range": {
+                      "max": 6.0,
+                      "min": 1.0
+                    }
+                  },
+                  "name": "INSTALLMENTPERCENT",
+                  "type": "double"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "none",
+                      "co-applicant",
+                      "guarantor"
+                    ]
+                  },
+                  "name": "OTHERSONLOAN",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "none",
+                      "stores",
+                      "bank"
+                    ]
+                  },
+                  "name": "INSTALLMENTPLANS",
+                  "type": "string"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "range": {
+                      "max": 4.0,
+                      "min": 1.0
+                    }
+                  },
+                  "name": "EXISTINGCREDITSCOUNT",
+                  "type": "double"
+                },
+                {
+                  "metadata": {
+                    "modeling_role": "input",
+                    "values": [
+                      "yes",
+                      "no"
+                    ]
+                  },
+                  "name": "FOREIGNWORKER",
+                  "type": "string"
+                }
+              ],
+              "id": "1",
+              "type": "struct"
+            }
+          ],
+          "output": []
+        },
+        "software_spec": {
+          "id": "e4429883-c883-42b6-87a8-f419d64088cd",
+          "name": "default_py3.7"
+        },
+        "training_data_references": [
+          {
+            "connection": {
+              "api_key": "1234567890",
+              "iam_url": "https://iam.cloud.ibm.com/identity/token",
+              "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/b11ef9462fd5cd198951947913b3ccff:4e23fcd9-8d9b-4b80-86c7-196e7de4efe8::",
+              "url": "https://s3.private.us-south.cloud-object-storage.appdomain.cloud"
+            },
+            "id": "credit_risk_training.csv",
+            "location": {
+              "bucket": "cp4d-samples-output",
+              "file_format": "csv",
+              "file_name": "credit_risk_training.csv",
+              "firstlineheader": "true"
+            },
+            "schema": {
+              "fields": [
+                {
+                  "name": "EMPLDUR",
+                  "type": "object"
+                },
+                {
+                  "name": "SEX",
+                  "type": "object"
+                },
+                {
+                  "name": "RESIDUR",
+                  "type": "float64"
+                },
+                {
+                  "name": "OWNSPROP",
+                  "type": "object"
+                },
+                {
+                  "name": "AGE",
+                  "type": "float64"
+                },
+                {
+                  "name": "HOUSING",
+                  "type": "object"
+                },
+                {
+                  "name": "JOB",
+                  "type": "object"
+                },
+                {
+                  "name": "DEPENDNT",
+                  "type": "float64"
+                },
+                {
+                  "name": "TELEPHON",
+                  "type": "object"
+                },
+                {
+                  "name": "CHECKINGSTATUS",
+                  "type": "object"
+                },
+                {
+                  "name": "LOANDURATION",
+                  "type": "float64"
+                },
+                {
+                  "name": "CREDITHISTORY",
+                  "type": "object"
+                },
+                {
+                  "name": "LOANPURPOSE",
+                  "type": "object"
+                },
+                {
+                  "name": "LOANAMOUNT",
+                  "type": "float64"
+                },
+                {
+                  "name": "EXISTINGSAVINGS",
+                  "type": "object"
+                },
+                {
+                  "name": "INSTALLMENTPERCENT",
+                  "type": "float64"
+                },
+                {
+                  "name": "OTHERSONLOAN",
+                  "type": "object"
+                },
+                {
+                  "name": "INSTALLMENTPLANS",
+                  "type": "object"
+                },
+                {
+                  "name": "EXISTINGCREDITSCOUNT",
+                  "type": "float64"
+                },
+                {
+                  "name": "FOREIGNWORKER",
+                  "type": "object"
+                }
+              ],
+              "id": "1",
+              "type": "DataFrame"
+            },
+            "type": "fs"
+          }
+        ],
+        "type": "scikit-learn_0.23"
+      },
+      "metadata": {
+        "created_at": "2020-12-21T23:52:06.002Z",
+        "description": "Consumer Credit Risk - XGB",
+        "id": "a40e2d17-6f33-4434-9944-4d6fa19ec397",
+        "modified_at": "2020-12-21T23:52:10.728Z",
+        "name": "Consumer Credit Risk - XGB",
+        "owner": "1000331004",
+        "space_id": "ad4f6950-79e4-4fac-a656-cb07b53c4c71"
+      },
+      "system": {
+        "warnings": []
+      }
+    }
+  ],
+  "total_count": 1
+}
