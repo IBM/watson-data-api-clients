@@ -84,10 +84,10 @@ public class ModelsTest extends AbstractExpectations {
         setupTest(client, "PATCH", modelEndpoint, createParams, "update");
         client
                 .when(withRequest("GET", getBaseUrl() + modelEndpoint + "/content/" + attachmentId, getArea(), "download1").withQueryStringParameters(downloadParams1))
-                .respond(withResponse(getResourceFileContents(getArea() + File.separator + "download1" + File.separator + attachmentId + ".tar")).withHeader("Content-Type", "application/octet-stream"));
+                .respond(withResponse(getResourceFileContents(getArea() + File.separator + "download1" + File.separator + attachmentId + ".tgz")).withHeader("Content-Type", "application/octet-stream"));
         client
                 .when(withRequest("GET", getBaseUrl() + modelEndpoint + "/download", getArea(), "download2").withQueryStringParameters(downloadParams2))
-                .respond(withResponse(getResourceFileContents(getArea() + File.separator + "download2" + File.separator + MODEL_GUID + ".tar")).withHeader("Content-Type", "application/octet-stream"));
+                .respond(withResponse(getResourceFileContents(getArea() + File.separator + "download2" + File.separator + MODEL_GUID + ".tgz")).withHeader("Content-Type", "application/octet-stream"));
         // Note that for the upload we will test any TAR rather than a specific one, as the
         // MockServer is not yet easily capable of handling multi-part form requests with files
         client
@@ -181,7 +181,7 @@ public class ModelsTest extends AbstractExpectations {
 
     @Test
     public void testUpload() {
-        File tar = getFileFromResources(getArea() + File.separator + "upload" + File.separator + "request.tar");
+        File tar = getFileFromResources(getArea() + File.separator + "upload" + File.separator + "request.tgz");
         ContentMetadata response = api.upload(MODEL_GUID, version, "native", tar, SPACE_GUID, null, null, null).getBody();
         assertNotNull(response);
         assertEquals(response.getAttachmentId(), attachmentId);
@@ -363,7 +363,7 @@ public class ModelsTest extends AbstractExpectations {
 
     private void validateDownload(Mono<DataBuffer> stream) {
         assertNotNull(stream);
-        Path output = api.saveDownloadAsFile("download.tar", stream);
+        Path output = api.saveDownloadAsFile("download.tgz", stream);
         assertNotNull(output);
         File file = output.toFile();
         assertNotNull(file);
