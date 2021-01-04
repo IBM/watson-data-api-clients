@@ -16,6 +16,7 @@
 package com.ibm.watson.data.client.api;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -765,7 +766,6 @@ public class ModelsApi {
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
-        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "version", version));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "content_format", contentFormat));
@@ -776,14 +776,21 @@ public class ModelsApi {
 
         final String[] localVarAccepts = {"application/json"};
         final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        final String[] localVarContentTypes = {"multipart/form-data"};
+        final String[] localVarContentTypes = {"application/octet-stream"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
         ParameterizedTypeReference<ContentMetadata> localVarReturnType = new ParameterizedTypeReference<ContentMetadata>() {};
 
-        return apiClient.invokeFileUploadAPI(BASE_API + "/{model_id}/content", HttpMethod.PUT,
-                pathParams, queryParams, uploadContent, headerParams, cookieParams, formParams,
-                localVarAccept, localVarContentType, localVarReturnType);
+        ResponseEntity<ContentMetadata> response;
+        try {
+            response = apiClient.invokeBinaryFileUploadAPI(BASE_API + "/{model_id}/content", HttpMethod.PUT,
+                    pathParams, queryParams, uploadContent, headerParams, cookieParams,
+                    localVarAccept, localVarContentType, localVarReturnType);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new WebClientResponseException(404, "Unable to upload model: " + e.getMessage(), headerParams, null, null);
+        }
+        return response;
 
     }
 

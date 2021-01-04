@@ -22,6 +22,8 @@ import com.ibm.watson.data.client.auth.Authentication;
 import com.ibm.watson.data.client.auth.HttpBearerAuth;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
@@ -543,6 +545,46 @@ public class ApiClient {
         }
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headerParams);
+        String url = expandPathForRestTemplate(path, pathParams, queryParams);
+        return restTemplate.exchange(url, method, requestEntity, returnType);
+
+    }
+
+    /**
+     * Invoke API by sending HTTP request with the given options, when a binary file needs to be uploaded as part of
+     * the request.
+     *
+     * @param path the sub-path of the HTTP URL
+     * @param method the request method
+     * @param pathParams the path parameters
+     * @param queryParams the query parameters
+     * @param file the file to be uploaded
+     * @param headerParams the header parameters
+     * @param cookieParams the cookies
+     * @param accept the request's Accept header
+     * @param contentType the request's Content-Type header
+     * @param returnType the return type into which to deserialize the response
+     * @param <T> the type of the response
+     * @return The response body in chosen type
+     * @throws IOException if unable to read the provided file
+     */
+    public <T> ResponseEntity<T> invokeBinaryFileUploadAPI(
+            String path, HttpMethod method, Map<String, Object> pathParams,
+            MultiValueMap<String, String> queryParams, File file,
+            HttpHeaders headerParams, MultiValueMap<String, String> cookieParams,
+            List<MediaType> accept, MediaType contentType,
+            ParameterizedTypeReference<T> returnType) throws IOException {
+
+        updateParamsForAuth(queryParams, headerParams, cookieParams);
+
+        headerParams.setContentType(contentType);
+        headerParams.setAccept(accept);
+        // TODO: not sure if this is how cookies should really be added?
+        headerParams.addAll(cookieParams);
+
+        byte[] body = Files.readAllBytes(Paths.get(file.getAbsolutePath()));
+
+        HttpEntity<byte[]> requestEntity = new HttpEntity<>(body, headerParams);
         String url = expandPathForRestTemplate(path, pathParams, queryParams);
         return restTemplate.exchange(url, method, requestEntity, returnType);
 
