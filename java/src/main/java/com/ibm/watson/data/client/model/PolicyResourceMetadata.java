@@ -17,7 +17,7 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -27,9 +27,9 @@ import java.util.Objects;
 public class PolicyResourceMetadata {
 
     private String guid;
-    private OffsetDateTime createdAt;
+    private Date createdAt;
     private String creator;
-    private OffsetDateTime updatedAt;
+    private Date updatedAt;
     private String modifier;
 
     public PolicyResourceMetadata guid(String guid) {
@@ -46,7 +46,7 @@ public class PolicyResourceMetadata {
     public String getGuid() { return guid; }
     public void setGuid(String guid) { this.guid = guid; }
 
-    public PolicyResourceMetadata createdAt(OffsetDateTime createdAt) {
+    public PolicyResourceMetadata createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -57,8 +57,8 @@ public class PolicyResourceMetadata {
      **/
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public PolicyResourceMetadata creator(String creator) {
         this.creator = creator;
@@ -74,7 +74,7 @@ public class PolicyResourceMetadata {
     public String getCreator() { return creator; }
     public void setCreator(String creator) { this.creator = creator; }
 
-    public PolicyResourceMetadata updatedAt(OffsetDateTime updatedAt) {
+    public PolicyResourceMetadata updatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -85,8 +85,8 @@ public class PolicyResourceMetadata {
      **/
     @JsonProperty("updated_at")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public Date getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
 
     public PolicyResourceMetadata modifier(String modifier) {
         this.modifier = modifier;

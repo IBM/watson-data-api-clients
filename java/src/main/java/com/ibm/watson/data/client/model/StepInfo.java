@@ -15,11 +15,11 @@
  */
 package com.ibm.watson.data.client.model;
 
+import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 
 /**
  * Details about the step. 
@@ -28,8 +28,8 @@ public class StepInfo {
 
     private String id;
     private String name;
-    private OffsetDateTime startedAt;
-    private OffsetDateTime completedAt;
+    private Date startedAt;
+    private Date completedAt;
     private Object hyperParameters;
     private Integer dataAllocation;
     private String estimator;
@@ -65,7 +65,7 @@ public class StepInfo {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public StepInfo startedAt(OffsetDateTime startedAt) {
+    public StepInfo startedAt(Date startedAt) {
         this.startedAt = startedAt;
         return this;
     }
@@ -77,10 +77,10 @@ public class StepInfo {
     @javax.annotation.Nullable
     @JsonProperty("started_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getStartedAt() { return startedAt; }
-    public void setStartedAt(OffsetDateTime startedAt) { this.startedAt = startedAt; }
+    public Date getStartedAt() { return startedAt; }
+    public void setStartedAt(Date startedAt) { this.startedAt = startedAt; }
 
-    public StepInfo completedAt(OffsetDateTime completedAt) {
+    public StepInfo completedAt(Date completedAt) {
         this.completedAt = completedAt;
         return this;
     }
@@ -92,8 +92,8 @@ public class StepInfo {
     @javax.annotation.Nullable
     @JsonProperty("completed_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCompletedAt() { return completedAt; }
-    public void setCompletedAt(OffsetDateTime completedAt) { this.completedAt = completedAt; }
+    public Date getCompletedAt() { return completedAt; }
+    public void setCompletedAt(Date completedAt) { this.completedAt = completedAt; }
 
     public StepInfo hyperParameters(Object hyperParameters) {
         this.hyperParameters = hyperParameters;

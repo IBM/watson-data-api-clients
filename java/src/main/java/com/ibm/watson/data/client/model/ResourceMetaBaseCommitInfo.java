@@ -15,20 +15,20 @@
  */
 package com.ibm.watson.data.client.model;
 
+import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
 
 /**
  * Information related to the revision. 
  */
 public class ResourceMetaBaseCommitInfo {
 
-    private OffsetDateTime committedAt;
+    private Date committedAt;
     private String commitMessage;
 
-    public ResourceMetaBaseCommitInfo committedAt(OffsetDateTime committedAt) {
+    public ResourceMetaBaseCommitInfo committedAt(Date committedAt) {
         this.committedAt = committedAt;
         return this;
     }
@@ -39,8 +39,8 @@ public class ResourceMetaBaseCommitInfo {
      **/
     @JsonProperty("committed_at")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getCommittedAt() { return committedAt; }
-    public void setCommittedAt(OffsetDateTime committedAt) { this.committedAt = committedAt; }
+    public Date getCommittedAt() { return committedAt; }
+    public void setCommittedAt(Date committedAt) { this.committedAt = committedAt; }
 
     public ResourceMetaBaseCommitInfo commitMessage(String commitMessage) {
         this.commitMessage = commitMessage;

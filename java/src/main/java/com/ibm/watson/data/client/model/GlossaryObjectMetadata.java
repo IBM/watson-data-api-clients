@@ -17,11 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectDraftMode;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectState;
+import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
+import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,12 +44,20 @@ public class GlossaryObjectMetadata {
     private GlossaryObjectDraftMode draftMode;
     private String publishedAncestorId;
     private String draftAncestorId;
-    private OffsetDateTime effectiveStartDate;
-    private OffsetDateTime effectiveEndDate;
+    private Date effectiveStartDate;
+    private Date effectiveEndDate;
     private String createdBy;
-    private OffsetDateTime createdAt;
+
+    @JsonSerialize(using = DateTimeMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
+    private Date createdAt;
+
     private String modifiedBy;
-    private OffsetDateTime modifiedAt;
+
+    @JsonSerialize(using = DateTimeMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
+    private Date modifiedAt;
+
     private String revision;
     private String name;
     private String shortDescription;
@@ -211,7 +223,7 @@ public class GlossaryObjectMetadata {
     public String getDraftAncestorId() { return draftAncestorId; }
     public void setDraftAncestorId(String draftAncestorId) { this.draftAncestorId = draftAncestorId; }
 
-    public GlossaryObjectMetadata effectiveStartDate(OffsetDateTime effectiveStartDate) {
+    public GlossaryObjectMetadata effectiveStartDate(Date effectiveStartDate) {
         this.effectiveStartDate = effectiveStartDate;
         return this;
     }
@@ -223,10 +235,10 @@ public class GlossaryObjectMetadata {
     @javax.annotation.Nullable
     @JsonProperty("effective_start_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveStartDate() { return effectiveStartDate; }
-    public void setEffectiveStartDate(OffsetDateTime effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
+    public Date getEffectiveStartDate() { return effectiveStartDate; }
+    public void setEffectiveStartDate(Date effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
 
-    public GlossaryObjectMetadata effectiveEndDate(OffsetDateTime effectiveEndDate) {
+    public GlossaryObjectMetadata effectiveEndDate(Date effectiveEndDate) {
         this.effectiveEndDate = effectiveEndDate;
         return this;
     }
@@ -238,8 +250,8 @@ public class GlossaryObjectMetadata {
     @javax.annotation.Nullable
     @JsonProperty("effective_end_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveEndDate() { return effectiveEndDate; }
-    public void setEffectiveEndDate(OffsetDateTime effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
+    public Date getEffectiveEndDate() { return effectiveEndDate; }
+    public void setEffectiveEndDate(Date effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
 
     public GlossaryObjectMetadata createdBy(String createdBy) {
         this.createdBy = createdBy;
@@ -256,7 +268,7 @@ public class GlossaryObjectMetadata {
     public String getCreatedBy() { return createdBy; }
     public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
 
-    public GlossaryObjectMetadata createdAt(OffsetDateTime createdAt) {
+    public GlossaryObjectMetadata createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -268,8 +280,8 @@ public class GlossaryObjectMetadata {
     @javax.annotation.Nullable
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public GlossaryObjectMetadata modifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
@@ -286,7 +298,7 @@ public class GlossaryObjectMetadata {
     public String getModifiedBy() { return modifiedBy; }
     public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public GlossaryObjectMetadata modifiedAt(OffsetDateTime modifiedAt) {
+    public GlossaryObjectMetadata modifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
         return this;
     }
@@ -298,8 +310,8 @@ public class GlossaryObjectMetadata {
     @javax.annotation.Nullable
     @JsonProperty("modified_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getModifiedAt() { return modifiedAt; }
-    public void setModifiedAt(OffsetDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
+    public Date getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(Date modifiedAt) { this.modifiedAt = modifiedAt; }
 
     public GlossaryObjectMetadata revision(String revision) {
         this.revision = revision;

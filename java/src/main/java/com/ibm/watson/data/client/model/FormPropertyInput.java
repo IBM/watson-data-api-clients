@@ -17,7 +17,7 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -25,12 +25,12 @@ import java.util.Objects;
  */
 public class FormPropertyInput {
 
-    private OffsetDateTime dateValue;
+    private Date dateValue;
     private String id;
     private Long longValue;
     private String value;
 
-    public FormPropertyInput dateValue(OffsetDateTime dateValue) {
+    public FormPropertyInput dateValue(Date dateValue) {
         this.dateValue = dateValue;
         return this;
     }
@@ -42,8 +42,8 @@ public class FormPropertyInput {
     @javax.annotation.Nullable
     @JsonProperty("date_value")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getDateValue() { return dateValue; }
-    public void setDateValue(OffsetDateTime dateValue) { this.dateValue = dateValue; }
+    public Date getDateValue() { return dateValue; }
+    public void setDateValue(Date dateValue) { this.dateValue = dateValue; }
 
     public FormPropertyInput id(String id) {
         this.id = id;

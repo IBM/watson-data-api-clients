@@ -17,15 +17,12 @@ package com.ibm.watson.data.client;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ibm.watson.data.client.api.AuthorizationApi;
 import com.ibm.watson.data.client.auth.Authentication;
 import com.ibm.watson.data.client.auth.HttpBearerAuth;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.util.*;
@@ -33,6 +30,7 @@ import java.util.Map.Entry;
 
 import com.ibm.watson.data.client.model.LoginCredentials;
 import com.ibm.watson.data.client.model.LoginResponse;
+import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
@@ -42,9 +40,6 @@ import org.openapitools.jackson.nullable.JsonNullableModule;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ClientHttpRequest;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -75,6 +70,8 @@ public class ApiClient {
 
     private static final Log log = LogFactory.getLog(ApiClient.class);
 
+    public static final DateFormat DEFAULT_DATE_FORMAT = DateTimeMilliDeserializer.DATE_FORMAT;
+
     public enum CollectionFormat {
         CSV(","),
         TSV("\t"),
@@ -99,7 +96,6 @@ public class ApiClient {
     // We need RestTemplate for uploading files, just far too complicated with WebClient
     private final RestTemplate restTemplate;
     private final WebClient webClient;
-    private final DateFormat dateFormat;
 
     private String username;
     private String password;
@@ -108,10 +104,8 @@ public class ApiClient {
     private Authentication authentication;
 
     public ApiClient(boolean disableSSLVerification) {
-        this.dateFormat = createDefaultDateFormat();
         ObjectMapper mapper = new ObjectMapper();
-        mapper.setDateFormat(dateFormat);
-        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         JsonNullableModule jnm = new JsonNullableModule();
         mapper.registerModule(jnm);
@@ -119,30 +113,6 @@ public class ApiClient {
         this.webClient = buildWebClient(mapper, disableSSLVerification);
         this.restTemplate = buildRestTemplate(mapper, disableSSLVerification);
         this.init();
-    }
-
-    /*public ApiClient(ObjectMapper mapper, DateFormat format, boolean disableSSLVerification) {
-        this(buildWebClient(mapper.copy(), disableSSLVerification), buildRestTemplate(mapper.copy(), disableSSLVerification), format);
-    }*/
-
-/*    public ApiClient(WebClient webClient, ObjectMapper mapper,
-                     DateFormat format, boolean disableSSLVerification) {
-        this(Optional.ofNullable(webClient).orElseGet(
-                () -> buildWebClient(mapper.copy(), disableSSLVerification)),
-                format);
-    }*/
-
-    /*private ApiClient(WebClient webClient, RestTemplate restTemplate, DateFormat format) {
-        this.webClient = webClient;
-        this.restTemplate = restTemplate;
-        this.dateFormat = format;
-        this.init();
-    }*/
-
-    public DateFormat createDefaultDateFormat() {
-        DateFormat dateFormat = new RFC3339DateFormat();
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return dateFormat;
     }
 
     protected void init() {
@@ -324,7 +294,7 @@ public class ApiClient {
     /**
      * Format the given Date object into string.
      */
-    public String formatDate(Date date) { return dateFormat.format(date); }
+    public String formatDate(Date date) { return DEFAULT_DATE_FORMAT.format(date); }
 
     /**
      * Format the given parameter object into string.

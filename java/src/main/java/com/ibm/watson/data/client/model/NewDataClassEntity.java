@@ -18,8 +18,8 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,8 +30,8 @@ public class NewDataClassEntity extends DataClassEntity {
 
     private String name;
     private String shortDescription;
-    private OffsetDateTime effectiveStartDate;
-    private OffsetDateTime effectiveEndDate;
+    private Date effectiveStartDate;
+    private Date effectiveEndDate;
     private String workflowState;
     private List<String> tags = null;
     private List<String> stewardIds = null;
@@ -71,7 +71,7 @@ public class NewDataClassEntity extends DataClassEntity {
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
 
-    public NewDataClassEntity effectiveStartDate(OffsetDateTime effectiveStartDate) {
+    public NewDataClassEntity effectiveStartDate(Date effectiveStartDate) {
         this.effectiveStartDate = effectiveStartDate;
         return this;
     }
@@ -85,10 +85,10 @@ public class NewDataClassEntity extends DataClassEntity {
     @javax.annotation.Nullable
     @JsonProperty("effective_start_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveStartDate() { return effectiveStartDate; }
-    public void setEffectiveStartDate(OffsetDateTime effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
+    public Date getEffectiveStartDate() { return effectiveStartDate; }
+    public void setEffectiveStartDate(Date effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
 
-    public NewDataClassEntity effectiveEndDate(OffsetDateTime effectiveEndDate) {
+    public NewDataClassEntity effectiveEndDate(Date effectiveEndDate) {
         this.effectiveEndDate = effectiveEndDate;
         return this;
     }
@@ -102,8 +102,8 @@ public class NewDataClassEntity extends DataClassEntity {
     @javax.annotation.Nullable
     @JsonProperty("effective_end_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveEndDate() { return effectiveEndDate; }
-    public void setEffectiveEndDate(OffsetDateTime effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
+    public Date getEffectiveEndDate() { return effectiveEndDate; }
+    public void setEffectiveEndDate(Date effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
 
     public NewDataClassEntity workflowState(String workflowState) {
         this.workflowState = workflowState;

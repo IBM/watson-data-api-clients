@@ -18,8 +18,8 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,8 +30,8 @@ public class WriteableGlossaryObjectEntity extends GlossaryObjectEntity {
 
     private String name;
     private String shortDescription;
-    private OffsetDateTime effectiveStartDate;
-    private OffsetDateTime effectiveEndDate;
+    private Date effectiveStartDate;
+    private Date effectiveEndDate;
     private List<String> tags = null;
     private List<String> stewardIds = null;
     private NewRelationship parentCategory;
@@ -66,7 +66,7 @@ public class WriteableGlossaryObjectEntity extends GlossaryObjectEntity {
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
 
-    public WriteableGlossaryObjectEntity effectiveStartDate(OffsetDateTime effectiveStartDate) {
+    public WriteableGlossaryObjectEntity effectiveStartDate(Date effectiveStartDate) {
         this.effectiveStartDate = effectiveStartDate;
         return this;
     }
@@ -80,10 +80,10 @@ public class WriteableGlossaryObjectEntity extends GlossaryObjectEntity {
     @javax.annotation.Nullable
     @JsonProperty("effective_start_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveStartDate() { return effectiveStartDate; }
-    public void setEffectiveStartDate(OffsetDateTime effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
+    public Date getEffectiveStartDate() { return effectiveStartDate; }
+    public void setEffectiveStartDate(Date effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
 
-    public WriteableGlossaryObjectEntity effectiveEndDate(OffsetDateTime effectiveEndDate) {
+    public WriteableGlossaryObjectEntity effectiveEndDate(Date effectiveEndDate) {
         this.effectiveEndDate = effectiveEndDate;
         return this;
     }
@@ -97,8 +97,8 @@ public class WriteableGlossaryObjectEntity extends GlossaryObjectEntity {
     @javax.annotation.Nullable
     @JsonProperty("effective_end_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveEndDate() { return effectiveEndDate; }
-    public void setEffectiveEndDate(OffsetDateTime effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
+    public Date getEffectiveEndDate() { return effectiveEndDate; }
+    public void setEffectiveEndDate(Date effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
 
     public WriteableGlossaryObjectEntity tags(List<String> tags) {
         this.tags = tags;

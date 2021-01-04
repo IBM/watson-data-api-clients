@@ -18,7 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -26,11 +26,11 @@ import java.util.Objects;
  */
 public class ConnectionMetadataUsage {
 
-    private OffsetDateTime lastAccessTime;
+    private Date lastAccessTime;
     private String lastAccessorId;
     private Integer accessCount;
 
-    public ConnectionMetadataUsage lastAccessTime(OffsetDateTime lastAccessTime) {
+    public ConnectionMetadataUsage lastAccessTime(Date lastAccessTime) {
         this.lastAccessTime = lastAccessTime;
         return this;
     }
@@ -41,8 +41,8 @@ public class ConnectionMetadataUsage {
      **/
     @JsonProperty("last_access_time")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getLastAccessTime() { return lastAccessTime; }
-    public void setLastAccessTime(OffsetDateTime lastAccessTime) { this.lastAccessTime = lastAccessTime; }
+    public Date getLastAccessTime() { return lastAccessTime; }
+    public void setLastAccessTime(Date lastAccessTime) { this.lastAccessTime = lastAccessTime; }
 
     public ConnectionMetadataUsage lastAccessorId(String lastAccessorId) {
         this.lastAccessorId = lastAccessorId;

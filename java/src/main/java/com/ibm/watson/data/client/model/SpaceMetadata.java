@@ -17,8 +17,12 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
+import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -26,13 +30,20 @@ import java.util.Objects;
  */
 public class SpaceMetadata {
 
-    private OffsetDateTime createdAt;
+    @JsonSerialize(using = DateTimeMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
+    private Date createdAt;
+
     private String creatorId;
     private String id;
-    private OffsetDateTime updatedAt;
+
+    @JsonSerialize(using = DateTimeMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
+    private Date updatedAt;
+
     private String url;
 
-    public SpaceMetadata createdAt(OffsetDateTime createdAt) {
+    public SpaceMetadata createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -44,8 +55,8 @@ public class SpaceMetadata {
     @javax.annotation.Nullable
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public SpaceMetadata creatorId(String creatorId) {
         this.creatorId = creatorId;
@@ -77,7 +88,7 @@ public class SpaceMetadata {
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    public SpaceMetadata updatedAt(OffsetDateTime updatedAt) {
+    public SpaceMetadata updatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -89,8 +100,8 @@ public class SpaceMetadata {
     @javax.annotation.Nullable
     @JsonProperty("updated_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public Date getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
 
     public SpaceMetadata url(String url) {
         this.url = url;

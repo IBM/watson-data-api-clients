@@ -18,7 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -26,11 +26,11 @@ import java.util.Objects;
  */
 public class CommitInfo {
 
-    private OffsetDateTime committedAt;
+    private Date committedAt;
     private String commitMessage;
     private Long previousRevision;
 
-    public CommitInfo committedAt(OffsetDateTime committedAt) {
+    public CommitInfo committedAt(Date committedAt) {
         this.committedAt = committedAt;
         return this;
     }
@@ -38,8 +38,8 @@ public class CommitInfo {
     @javax.annotation.Nullable
     @JsonProperty("committed_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCommittedAt() { return committedAt; }
-    public void setCommittedAt(OffsetDateTime committedAt) { this.committedAt = committedAt; }
+    public Date getCommittedAt() { return committedAt; }
+    public void setCommittedAt(Date committedAt) { this.committedAt = committedAt; }
 
     public CommitInfo commitMessage(String commitMessage) {
         this.commitMessage = commitMessage;

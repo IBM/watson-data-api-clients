@@ -18,9 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -29,7 +27,7 @@ import java.util.Objects;
 public class ConnectionMetadata extends Metadata {
 
     private String assetId;
-    private OffsetDateTime createTime;
+    private Date createTime;
     private String creatorId;
     private String projectId;
     private String catalogId;
@@ -46,7 +44,7 @@ public class ConnectionMetadata extends Metadata {
     public String getAssetId() { return assetId; }
     public void setAssetId(String assetId) { this.assetId = assetId; }
 
-    public ConnectionMetadata createTime(OffsetDateTime createTime) {
+    public ConnectionMetadata createTime(Date createTime) {
         this.createTime = createTime;
         return this;
     }
@@ -54,8 +52,8 @@ public class ConnectionMetadata extends Metadata {
     @javax.annotation.Nullable
     @JsonProperty("create_time")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreateTime() { return createTime; }
-    public void setCreateTime(OffsetDateTime createTime) { this.createTime = createTime; }
+    public Date getCreateTime() { return createTime; }
+    public void setCreateTime(Date createTime) { this.createTime = createTime; }
 
     public ConnectionMetadata creatorId(String creatorId) {
         this.creatorId = creatorId;

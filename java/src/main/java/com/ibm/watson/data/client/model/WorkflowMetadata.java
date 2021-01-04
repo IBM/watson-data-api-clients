@@ -17,9 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ibm.watson.data.client.model.enums.WorkflowState;
+import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
+import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -28,10 +32,18 @@ import java.util.Objects;
 public class WorkflowMetadata {
 
     private String artifactType;
-    private OffsetDateTime createdAt;
+
+    @JsonSerialize(using = DateTimeMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
+    private Date createdAt;
+
     private String createdBy;
     private String description;
-    private OffsetDateTime modifiedAt;
+
+    @JsonSerialize(using = DateTimeMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
+    private Date modifiedAt;
+
     private String modifiedBy;
     private String name;
     private WorkflowState state;
@@ -52,7 +64,7 @@ public class WorkflowMetadata {
     public String getArtifactType() { return artifactType; }
     public void setArtifactType(String artifactType) { this.artifactType = artifactType; }
 
-    public WorkflowMetadata createdAt(OffsetDateTime createdAt) {
+    public WorkflowMetadata createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -63,8 +75,8 @@ public class WorkflowMetadata {
      **/
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public WorkflowMetadata createdBy(String createdBy) {
         this.createdBy = createdBy;
@@ -95,7 +107,7 @@ public class WorkflowMetadata {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public WorkflowMetadata modifiedAt(OffsetDateTime modifiedAt) {
+    public WorkflowMetadata modifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
         return this;
     }
@@ -106,8 +118,8 @@ public class WorkflowMetadata {
      **/
     @JsonProperty("modified_at")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getModifiedAt() { return modifiedAt; }
-    public void setModifiedAt(OffsetDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
+    public Date getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(Date modifiedAt) { this.modifiedAt = modifiedAt; }
 
     public WorkflowMetadata modifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;

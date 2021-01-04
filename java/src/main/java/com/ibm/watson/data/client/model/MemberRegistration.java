@@ -17,7 +17,7 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -30,7 +30,7 @@ public class MemberRegistration {
     private String serverName;
     private String serverType;
     private String organizationName;
-    private OffsetDateTime registrationTime;
+    private Date registrationTime;
     private Connection repositoryConnection;
 
     public MemberRegistration metadataCollectionId(String metadataCollectionId) {
@@ -108,7 +108,7 @@ public class MemberRegistration {
     public String getOrganizationName() { return organizationName; }
     public void setOrganizationName(String organizationName) { this.organizationName = organizationName; }
 
-    public MemberRegistration registrationTime(OffsetDateTime registrationTime) {
+    public MemberRegistration registrationTime(Date registrationTime) {
         this.registrationTime = registrationTime;
         return this;
     }
@@ -120,8 +120,8 @@ public class MemberRegistration {
     @javax.annotation.Nullable
     @JsonProperty("registrationTime")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getRegistrationTime() { return registrationTime; }
-    public void setRegistrationTime(OffsetDateTime registrationTime) { this.registrationTime = registrationTime; }
+    public Date getRegistrationTime() { return registrationTime; }
+    public void setRegistrationTime(Date registrationTime) { this.registrationTime = registrationTime; }
 
     public MemberRegistration repositoryConnection(Connection repositoryConnection) {
         this.repositoryConnection = repositoryConnection;

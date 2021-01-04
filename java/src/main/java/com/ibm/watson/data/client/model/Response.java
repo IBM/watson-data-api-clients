@@ -18,12 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Response
@@ -39,8 +34,8 @@ public class Response {
     private List<String> allowedMethods = null;
     private Map<String, NewCookie> cookies = null;
     private EntityTag entityTag;
-    private OffsetDateTime date;
-    private OffsetDateTime lastModified;
+    private Date date;
+    private Date lastModified;
     private URI location;
     private List<Link> links = null;
     private Map<String, List<Object>> metadata = null;
@@ -198,7 +193,7 @@ public class Response {
     public EntityTag getEntityTag() { return entityTag; }
     public void setEntityTag(EntityTag entityTag) { this.entityTag = entityTag; }
 
-    public Response date(OffsetDateTime date) {
+    public Response date(Date date) {
         this.date = date;
         return this;
     }
@@ -210,10 +205,10 @@ public class Response {
     @javax.annotation.Nullable
     @JsonProperty("date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getDate() { return date; }
-    public void setDate(OffsetDateTime date) { this.date = date; }
+    public Date getDate() { return date; }
+    public void setDate(Date date) { this.date = date; }
 
-    public Response lastModified(OffsetDateTime lastModified) {
+    public Response lastModified(Date lastModified) {
         this.lastModified = lastModified;
         return this;
     }
@@ -225,8 +220,8 @@ public class Response {
     @javax.annotation.Nullable
     @JsonProperty("lastModified")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getLastModified() { return lastModified; }
-    public void setLastModified(OffsetDateTime lastModified) { this.lastModified = lastModified; }
+    public Date getLastModified() { return lastModified; }
+    public void setLastModified(Date lastModified) { this.lastModified = lastModified; }
 
     public Response location(URI location) {
         this.location = location;

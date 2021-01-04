@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ibm.watson.data.client;
+package com.ibm.watson.data.client.serde;
 
-import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
-import com.fasterxml.jackson.databind.util.ISO8601Utils;
-import java.text.FieldPosition;
-import java.util.Date;
-
-public class RFC3339DateFormat extends ISO8601DateFormat {
-
-    // Same as ISO8601DateFormat but serializing milliseconds.
-    @Override
-    public StringBuffer format(Date date, StringBuffer toAppendTo,
-                               FieldPosition fieldPosition) {
-        String value = ISO8601Utils.format(date, true);
-        toAppendTo.append(value);
-        return toAppendTo;
+/**
+ * Custom serialization for Dates, to handle serialization of date and timestamps
+ * without millisecond-level detail.
+ */
+public class DateTimeNoMilliSerializer extends DateTimeBaseSerializer {
+    protected DateTimeNoMilliSerializer() {
+        super(DateTimeNoMilliDeserializer.DATE_FORMAT);
     }
-
 }
