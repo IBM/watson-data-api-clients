@@ -17,8 +17,8 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,8 +33,8 @@ public class DraftArtifact {
     private String workflowId;
     private String type;
     private String longDescription;
-    private OffsetDateTime createdAt;
-    private OffsetDateTime modifiedAt;
+    private Date createdAt;
+    private Date modifiedAt;
     private String createdBy;
     private String modifiedBy;
     private SearchRelatedAsset parentCategory;
@@ -134,7 +134,7 @@ public class DraftArtifact {
     public String getLongDescription() { return longDescription; }
     public void setLongDescription(String longDescription) { this.longDescription = longDescription; }
 
-    public DraftArtifact createdAt(OffsetDateTime createdAt) {
+    public DraftArtifact createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -146,10 +146,10 @@ public class DraftArtifact {
     @javax.annotation.Nullable
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
-    public DraftArtifact modifiedAt(OffsetDateTime modifiedAt) {
+    public DraftArtifact modifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
         return this;
     }
@@ -161,8 +161,8 @@ public class DraftArtifact {
     @javax.annotation.Nullable
     @JsonProperty("modified_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getModifiedAt() { return modifiedAt; }
-    public void setModifiedAt(OffsetDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
+    public Date getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(Date modifiedAt) { this.modifiedAt = modifiedAt; }
 
     public DraftArtifact createdBy(String createdBy) {
         this.createdBy = createdBy;

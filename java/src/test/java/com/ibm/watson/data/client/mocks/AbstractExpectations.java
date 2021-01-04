@@ -18,6 +18,7 @@ package com.ibm.watson.data.client.mocks;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ibm.watson.data.client.ApiClient;
 import org.mockserver.client.MockServerClient;
 
 import java.io.File;

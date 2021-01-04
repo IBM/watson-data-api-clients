@@ -20,8 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectDraftMode;
 import com.ibm.watson.data.client.model.enums.WorkflowAction;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,8 +33,8 @@ public class ArtifactWorkflowData {
     private WorkflowAction action;
     private String baseUrl;
     private GlossaryObjectDraftMode draftMode;
-    private OffsetDateTime oldEffectiveEndDate;
-    private OffsetDateTime oldEffectiveStartDate;
+    private Date oldEffectiveEndDate;
+    private Date oldEffectiveStartDate;
     private Category oldParentCategory;
     private List<Workflow> workflows = null;
 
@@ -81,7 +81,7 @@ public class ArtifactWorkflowData {
     public GlossaryObjectDraftMode getDraftMode() { return draftMode; }
     public void setDraftMode(GlossaryObjectDraftMode draftMode) { this.draftMode = draftMode; }
 
-    public ArtifactWorkflowData oldEffectiveEndDate(OffsetDateTime oldEffectiveEndDate) {
+    public ArtifactWorkflowData oldEffectiveEndDate(Date oldEffectiveEndDate) {
         this.oldEffectiveEndDate = oldEffectiveEndDate;
         return this;
     }
@@ -93,10 +93,10 @@ public class ArtifactWorkflowData {
     @javax.annotation.Nullable
     @JsonProperty("old_effective_end_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getOldEffectiveEndDate() { return oldEffectiveEndDate; }
-    public void setOldEffectiveEndDate(OffsetDateTime oldEffectiveEndDate) { this.oldEffectiveEndDate = oldEffectiveEndDate; }
+    public Date getOldEffectiveEndDate() { return oldEffectiveEndDate; }
+    public void setOldEffectiveEndDate(Date oldEffectiveEndDate) { this.oldEffectiveEndDate = oldEffectiveEndDate; }
 
-    public ArtifactWorkflowData oldEffectiveStartDate(OffsetDateTime oldEffectiveStartDate) {
+    public ArtifactWorkflowData oldEffectiveStartDate(Date oldEffectiveStartDate) {
         this.oldEffectiveStartDate = oldEffectiveStartDate;
         return this;
     }
@@ -107,8 +107,8 @@ public class ArtifactWorkflowData {
      **/
     @JsonProperty("old_effective_start_date")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getOldEffectiveStartDate() { return oldEffectiveStartDate; }
-    public void setOldEffectiveStartDate(OffsetDateTime oldEffectiveStartDate) { this.oldEffectiveStartDate = oldEffectiveStartDate; }
+    public Date getOldEffectiveStartDate() { return oldEffectiveStartDate; }
+    public void setOldEffectiveStartDate(Date oldEffectiveStartDate) { this.oldEffectiveStartDate = oldEffectiveStartDate; }
 
     public ArtifactWorkflowData oldParentCategory(Category oldParentCategory) {
         this.oldParentCategory = oldParentCategory;

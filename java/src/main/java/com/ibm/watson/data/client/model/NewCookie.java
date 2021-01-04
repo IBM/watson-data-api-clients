@@ -17,7 +17,7 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -32,7 +32,7 @@ public class NewCookie {
     private String domain;
     private String comment;
     private Integer maxAge;
-    private OffsetDateTime expiry;
+    private Date expiry;
     private Boolean secure;
     private Boolean httpOnly;
 
@@ -141,7 +141,7 @@ public class NewCookie {
     public Integer getMaxAge() { return maxAge; }
     public void setMaxAge(Integer maxAge) { this.maxAge = maxAge; }
 
-    public NewCookie expiry(OffsetDateTime expiry) {
+    public NewCookie expiry(Date expiry) {
         this.expiry = expiry;
         return this;
     }
@@ -153,8 +153,8 @@ public class NewCookie {
     @javax.annotation.Nullable
     @JsonProperty("expiry")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getExpiry() { return expiry; }
-    public void setExpiry(OffsetDateTime expiry) { this.expiry = expiry; }
+    public Date getExpiry() { return expiry; }
+    public void setExpiry(Date expiry) { this.expiry = expiry; }
 
     public NewCookie secure(Boolean secure) {
         this.secure = secure;

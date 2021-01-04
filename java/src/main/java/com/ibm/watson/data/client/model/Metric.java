@@ -15,11 +15,11 @@
  */
 package com.ibm.watson.data.client.model;
 
+import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,13 +28,13 @@ import java.util.Map;
  */
 public class Metric {
 
-    private OffsetDateTime timestamp;
+    private Date timestamp;
     private Integer iteration;
     private Map<String, BigDecimal> mlMetrics = null;
     private Map<String, MlFederatedMetric> mlFederatedMetrics = null;
     private MetricsContext context;
 
-    public Metric timestamp(OffsetDateTime timestamp) {
+    public Metric timestamp(Date timestamp) {
         this.timestamp = timestamp;
         return this;
     }
@@ -45,8 +45,8 @@ public class Metric {
      **/
     @JsonProperty("timestamp")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getTimestamp() { return timestamp; }
-    public void setTimestamp(OffsetDateTime timestamp) { this.timestamp = timestamp; }
+    public Date getTimestamp() { return timestamp; }
+    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
 
     public Metric iteration(Integer iteration) {
         this.iteration = iteration;

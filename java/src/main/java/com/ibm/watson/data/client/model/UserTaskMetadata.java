@@ -17,9 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ibm.watson.data.client.model.enums.UserTaskState;
+import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
+import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -28,7 +32,11 @@ import java.util.Objects;
 public class UserTaskMetadata {
 
     private String artifactType;
-    private OffsetDateTime createdAt;
+
+    @JsonSerialize(using = DateTimeMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
+    private Date createdAt;
+
     private String name;
     private UserTaskState state;
     private String taskId;
@@ -49,7 +57,7 @@ public class UserTaskMetadata {
     public String getArtifactType() { return artifactType; }
     public void setArtifactType(String artifactType) { this.artifactType = artifactType; }
 
-    public UserTaskMetadata createdAt(OffsetDateTime createdAt) {
+    public UserTaskMetadata createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -60,8 +68,8 @@ public class UserTaskMetadata {
      **/
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public UserTaskMetadata name(String name) {
         this.name = name;

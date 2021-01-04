@@ -17,8 +17,8 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,9 +30,9 @@ public class UserTaskEntity {
     private String assignee;
     private List<String> candidateGroups = null;
     private List<String> candidateUsers = null;
-    private OffsetDateTime claimedAt;
-    private OffsetDateTime completedAt;
-    private OffsetDateTime dueDate;
+    private Date claimedAt;
+    private Date completedAt;
+    private Date dueDate;
     private String formKey;
     private List<FormProperty> formProperties = null;
     private String owner;
@@ -105,7 +105,7 @@ public class UserTaskEntity {
     public List<String> getCandidateUsers() { return candidateUsers; }
     public void setCandidateUsers(List<String> candidateUsers) { this.candidateUsers = candidateUsers; }
 
-    public UserTaskEntity claimedAt(OffsetDateTime claimedAt) {
+    public UserTaskEntity claimedAt(Date claimedAt) {
         this.claimedAt = claimedAt;
         return this;
     }
@@ -117,10 +117,10 @@ public class UserTaskEntity {
     @javax.annotation.Nullable
     @JsonProperty("claimed_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getClaimedAt() { return claimedAt; }
-    public void setClaimedAt(OffsetDateTime claimedAt) { this.claimedAt = claimedAt; }
+    public Date getClaimedAt() { return claimedAt; }
+    public void setClaimedAt(Date claimedAt) { this.claimedAt = claimedAt; }
 
-    public UserTaskEntity completedAt(OffsetDateTime completedAt) {
+    public UserTaskEntity completedAt(Date completedAt) {
         this.completedAt = completedAt;
         return this;
     }
@@ -132,10 +132,10 @@ public class UserTaskEntity {
     @javax.annotation.Nullable
     @JsonProperty("completed_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCompletedAt() { return completedAt; }
-    public void setCompletedAt(OffsetDateTime completedAt) { this.completedAt = completedAt; }
+    public Date getCompletedAt() { return completedAt; }
+    public void setCompletedAt(Date completedAt) { this.completedAt = completedAt; }
 
-    public UserTaskEntity dueDate(OffsetDateTime dueDate) {
+    public UserTaskEntity dueDate(Date dueDate) {
         this.dueDate = dueDate;
         return this;
     }
@@ -147,8 +147,8 @@ public class UserTaskEntity {
     @javax.annotation.Nullable
     @JsonProperty("due_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getDueDate() { return dueDate; }
-    public void setDueDate(OffsetDateTime dueDate) { this.dueDate = dueDate; }
+    public Date getDueDate() { return dueDate; }
+    public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
 
     public UserTaskEntity formKey(String formKey) {
         this.formKey = formKey;

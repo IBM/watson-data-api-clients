@@ -17,9 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ibm.watson.data.client.serde.DateTimeNoMilliDeserializer;
+import com.ibm.watson.data.client.serde.DateTimeNoMilliSerializer;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,7 +44,7 @@ public class MetadataAsset extends MetadataHeader {
     private Long totalRatings;
     private String catalogId;
     private Long created;
-    private OffsetDateTime createdAt;
+    private Date createdAt;
     private String ownerId;
     private Long size;
     private Double version;
@@ -175,7 +179,7 @@ public class MetadataAsset extends MetadataHeader {
     public Long getCreated() { return created; }
     public void setCreated(Long created) { this.created = created; }
 
-    public MetadataAsset createdAt(OffsetDateTime createdAt) {
+    public MetadataAsset createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -183,8 +187,8 @@ public class MetadataAsset extends MetadataHeader {
     @javax.annotation.Nullable
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public MetadataAsset ownerId(String ownerId) {
         this.ownerId = ownerId;

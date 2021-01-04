@@ -18,8 +18,8 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,14 +28,14 @@ import java.util.Objects;
  */
 public class ProjectToken {
 
-    private OffsetDateTime createdAt;
+    private Date createdAt;
     private String guid;
-    private OffsetDateTime lastUsedAt;
+    private Date lastUsedAt;
     private String name;
     private List<TokenScope> scopes = null;
     private String token;
 
-    public ProjectToken createdAt(OffsetDateTime createdAt) {
+    public ProjectToken createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -47,8 +47,8 @@ public class ProjectToken {
     @javax.annotation.Nullable
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public ProjectToken guid(String guid) {
         this.guid = guid;
@@ -65,7 +65,7 @@ public class ProjectToken {
     public String getGuid() { return guid; }
     public void setGuid(String guid) { this.guid = guid; }
 
-    public ProjectToken lastUsedAt(OffsetDateTime lastUsedAt) {
+    public ProjectToken lastUsedAt(Date lastUsedAt) {
         this.lastUsedAt = lastUsedAt;
         return this;
     }
@@ -77,8 +77,8 @@ public class ProjectToken {
     @javax.annotation.Nullable
     @JsonProperty("last_used_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getLastUsedAt() { return lastUsedAt; }
-    public void setLastUsedAt(OffsetDateTime lastUsedAt) { this.lastUsedAt = lastUsedAt; }
+    public Date getLastUsedAt() { return lastUsedAt; }
+    public void setLastUsedAt(Date lastUsedAt) { this.lastUsedAt = lastUsedAt; }
 
     public ProjectToken name(String name) {
         this.name = name;

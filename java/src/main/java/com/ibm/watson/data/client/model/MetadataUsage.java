@@ -18,7 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -26,15 +26,15 @@ import java.util.Objects;
  */
 public class MetadataUsage {
 
-    private OffsetDateTime lastUpdatedAt;
+    private Date lastUpdatedAt;
     private String lastUpdaterId;
     private Long lastUpdateTime;
-    private OffsetDateTime lastAccessedAt;
+    private Date lastAccessedAt;
     private Long lastAccessTime;
     private String lastAccessorId;
     private Integer accessCount;
 
-    public MetadataUsage lastUpdatedAt(OffsetDateTime lastUpdatedAt) {
+    public MetadataUsage lastUpdatedAt(Date lastUpdatedAt) {
         this.lastUpdatedAt = lastUpdatedAt;
         return this;
     }
@@ -47,8 +47,8 @@ public class MetadataUsage {
      **/
     @JsonProperty("last_updated_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getLastUpdatedAt() { return lastUpdatedAt; }
-    public void setLastUpdatedAt(OffsetDateTime lastUpdatedAt) { this.lastUpdatedAt = lastUpdatedAt; }
+    public Date getLastUpdatedAt() { return lastUpdatedAt; }
+    public void setLastUpdatedAt(Date lastUpdatedAt) { this.lastUpdatedAt = lastUpdatedAt; }
 
     public MetadataUsage lastUpdaterId(String lastUpdaterId) {
         this.lastUpdaterId = lastUpdaterId;
@@ -78,7 +78,7 @@ public class MetadataUsage {
     public Long getLastUpdateTime() { return lastUpdateTime; }
     public void setLastUpdateTime(Long lastUpdateTime) { this.lastUpdateTime = lastUpdateTime; }
 
-    public MetadataUsage lastAccessedAt(OffsetDateTime lastAccessedAt) {
+    public MetadataUsage lastAccessedAt(Date lastAccessedAt) {
         this.lastAccessedAt = lastAccessedAt;
         return this;
     }
@@ -91,8 +91,8 @@ public class MetadataUsage {
      **/
     @JsonProperty("last_accessed_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getLastAccessedAt() { return lastAccessedAt; }
-    public void setLastAccessedAt(OffsetDateTime lastAccessedAt) { this.lastAccessedAt = lastAccessedAt; }
+    public Date getLastAccessedAt() { return lastAccessedAt; }
+    public void setLastAccessedAt(Date lastAccessedAt) { this.lastAccessedAt = lastAccessedAt; }
 
     public MetadataUsage lastAccessTime(Long lastAccessTime) {
         this.lastAccessTime = lastAccessTime;

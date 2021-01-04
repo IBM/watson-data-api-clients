@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ibm.watson.data.client.model.enums.ArtifactState;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -29,8 +29,8 @@ public class ArtifactMetadata {
 
     private String artifactId;
     private String artifactType;
-    private OffsetDateTime effectiveEndDate;
-    private OffsetDateTime effectiveStartDate;
+    private Date effectiveEndDate;
+    private Date effectiveStartDate;
     private String name;
     private Category parentCategory;
     private String publishedAncestorId;
@@ -65,7 +65,7 @@ public class ArtifactMetadata {
     public String getArtifactType() { return artifactType; }
     public void setArtifactType(String artifactType) { this.artifactType = artifactType; }
 
-    public ArtifactMetadata effectiveEndDate(OffsetDateTime effectiveEndDate) {
+    public ArtifactMetadata effectiveEndDate(Date effectiveEndDate) {
         this.effectiveEndDate = effectiveEndDate;
         return this;
     }
@@ -77,10 +77,10 @@ public class ArtifactMetadata {
     @javax.annotation.Nullable
     @JsonProperty("effective_end_date")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getEffectiveEndDate() { return effectiveEndDate; }
-    public void setEffectiveEndDate(OffsetDateTime effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
+    public Date getEffectiveEndDate() { return effectiveEndDate; }
+    public void setEffectiveEndDate(Date effectiveEndDate) { this.effectiveEndDate = effectiveEndDate; }
 
-    public ArtifactMetadata effectiveStartDate(OffsetDateTime effectiveStartDate) {
+    public ArtifactMetadata effectiveStartDate(Date effectiveStartDate) {
         this.effectiveStartDate = effectiveStartDate;
         return this;
     }
@@ -91,8 +91,8 @@ public class ArtifactMetadata {
      **/
     @JsonProperty("effective_start_date")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public OffsetDateTime getEffectiveStartDate() { return effectiveStartDate; }
-    public void setEffectiveStartDate(OffsetDateTime effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
+    public Date getEffectiveStartDate() { return effectiveStartDate; }
+    public void setEffectiveStartDate(Date effectiveStartDate) { this.effectiveStartDate = effectiveStartDate; }
 
     public ArtifactMetadata name(String name) {
         this.name = name;

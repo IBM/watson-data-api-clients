@@ -17,8 +17,12 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ibm.watson.data.client.serde.DateTimeNoMilliDeserializer;
+import com.ibm.watson.data.client.serde.DateTimeNoMilliSerializer;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -30,8 +34,15 @@ public class AssetRatingMetadata {
     private String assetId;
     private String creator;
     private String creatorId;
-    private OffsetDateTime createdAt;
-    private OffsetDateTime updatedAt;
+
+    @JsonSerialize(using = DateTimeNoMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeNoMilliDeserializer.class)
+    private Date createdAt;
+
+    @JsonSerialize(using = DateTimeNoMilliSerializer.class)
+    @JsonDeserialize(using = DateTimeNoMilliDeserializer.class)
+    private Date updatedAt;
+
     private Long revisionId;
 
     public AssetRatingMetadata assetRatingId(String assetRatingId) {
@@ -88,7 +99,7 @@ public class AssetRatingMetadata {
     @javax.annotation.Nullable
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
+    public Date getCreatedAt() { return createdAt; }
 
     /**
      * RFC 3339 timestamp when the asset rating was updated (system managed)
@@ -97,7 +108,7 @@ public class AssetRatingMetadata {
     @javax.annotation.Nullable
     @JsonProperty("updated_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getUpdatedAt() { return updatedAt; }
+    public Date getUpdatedAt() { return updatedAt; }
 
     /**
      * identifier for asset associated with this rating (system managed)

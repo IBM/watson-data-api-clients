@@ -18,8 +18,8 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +30,7 @@ public class WriteableTermEntity extends WriteableGlossaryObjectEntity {
 
     private List<String> abbreviations = null;
     private String importSourceCreatedBy;
-    private OffsetDateTime importSourceCreatedOn;
+    private Date importSourceCreatedOn;
     private String importSourceUsage;
     private String example;
     private List<RelationshipObject> relatedTermRelationships = null;
@@ -84,7 +84,7 @@ public class WriteableTermEntity extends WriteableGlossaryObjectEntity {
     public String getImportSourceCreatedBy() { return importSourceCreatedBy; }
     public void setImportSourceCreatedBy(String importSourceCreatedBy) { this.importSourceCreatedBy = importSourceCreatedBy; }
 
-    public WriteableTermEntity importSourceCreatedOn(OffsetDateTime importSourceCreatedOn) {
+    public WriteableTermEntity importSourceCreatedOn(Date importSourceCreatedOn) {
         this.importSourceCreatedOn = importSourceCreatedOn;
         return this;
     }
@@ -97,8 +97,8 @@ public class WriteableTermEntity extends WriteableGlossaryObjectEntity {
     @javax.annotation.Nullable
     @JsonProperty("import_source_created_on")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getImportSourceCreatedOn() { return importSourceCreatedOn; }
-    public void setImportSourceCreatedOn(OffsetDateTime importSourceCreatedOn) { this.importSourceCreatedOn = importSourceCreatedOn; }
+    public Date getImportSourceCreatedOn() { return importSourceCreatedOn; }
+    public void setImportSourceCreatedOn(Date importSourceCreatedOn) { this.importSourceCreatedOn = importSourceCreatedOn; }
 
     public WriteableTermEntity importSourceUsage(String importSourceUsage) {
         this.importSourceUsage = importSourceUsage;

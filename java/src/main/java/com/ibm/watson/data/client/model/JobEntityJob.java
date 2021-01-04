@@ -18,7 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -31,7 +31,7 @@ public class JobEntityJob {
     private String assetRefType;
     private String lastRunStatus;
     private Integer lastRunStatusTimestamp;
-    private OffsetDateTime lastRunTime;
+    private Date lastRunTime;
     private String lastRunInitiator;
     private String schedule;
     private JobEntityJobScheduleInfo scheduleInfo;
@@ -113,7 +113,7 @@ public class JobEntityJob {
     public Integer getLastRunStatusTimestamp() { return lastRunStatusTimestamp; }
     public void setLastRunStatusTimestamp(Integer lastRunStatusTimestamp) { this.lastRunStatusTimestamp = lastRunStatusTimestamp; }
 
-    public JobEntityJob lastRunTime(OffsetDateTime lastRunTime) {
+    public JobEntityJob lastRunTime(Date lastRunTime) {
         this.lastRunTime = lastRunTime;
         return this;
     }
@@ -125,8 +125,8 @@ public class JobEntityJob {
     @javax.annotation.Nullable
     @JsonProperty("last_run_time")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getLastRunTime() { return lastRunTime; }
-    public void setLastRunTime(OffsetDateTime lastRunTime) { this.lastRunTime = lastRunTime; }
+    public Date getLastRunTime() { return lastRunTime; }
+    public void setLastRunTime(Date lastRunTime) { this.lastRunTime = lastRunTime; }
 
     public JobEntityJob lastRunInitiator(String lastRunInitiator) {
         this.lastRunInitiator = lastRunInitiator;

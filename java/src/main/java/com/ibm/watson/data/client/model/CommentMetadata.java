@@ -18,7 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -30,8 +30,8 @@ public class CommentMetadata {
     private String assetVersionId;
     private String assetAncestorId;
     private String modifiedBy;
-    private OffsetDateTime modifiedAt;
-    private OffsetDateTime createdAt;
+    private Date modifiedAt;
+    private Date createdAt;
 
     public CommentMetadata id(String id) {
         this.id = id;
@@ -93,7 +93,7 @@ public class CommentMetadata {
     public String getModifiedBy() { return modifiedBy; }
     public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
-    public CommentMetadata modifiedAt(OffsetDateTime modifiedAt) {
+    public CommentMetadata modifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
         return this;
     }
@@ -105,10 +105,10 @@ public class CommentMetadata {
     @javax.annotation.Nullable
     @JsonProperty("modified_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getModifiedAt() { return modifiedAt; }
-    public void setModifiedAt(OffsetDateTime modifiedAt) { this.modifiedAt = modifiedAt; }
+    public Date getModifiedAt() { return modifiedAt; }
+    public void setModifiedAt(Date modifiedAt) { this.modifiedAt = modifiedAt; }
 
-    public CommentMetadata createdAt(OffsetDateTime createdAt) {
+    public CommentMetadata createdAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -120,8 +120,8 @@ public class CommentMetadata {
     @javax.annotation.Nullable
     @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     @Override
     public boolean equals(java.lang.Object o) {
