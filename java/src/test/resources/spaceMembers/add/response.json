@@ -1,0 +1,10 @@
+{
+  "resources": [
+    {
+      "id": "1000331015",
+      "role": "admin",
+      "state": "active",
+      "type": "user"
+    }
+  ]
+}
