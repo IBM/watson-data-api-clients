@@ -17,9 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,13 +24,8 @@ import java.util.Objects;
 /**
  * The request body for updating project members.
  */
-@ApiModel(description = "The request body for updating project members.")
-@JsonPropertyOrder({
-        UpdateMembersBody.JSON_PROPERTY_MEMBERS
-})
 public class UpdateMembersBody {
 
-    public static final String JSON_PROPERTY_MEMBERS = "members";
     private List<UpdateMemberBody> members = new ArrayList<>();
 
     public UpdateMembersBody members(List<UpdateMemberBody> members) {
@@ -50,27 +42,15 @@ public class UpdateMembersBody {
      * A list of project members to update.
      * @return members
      **/
-    @ApiModelProperty(required = true,
-            value = "A list of project members to update.")
-    @JsonProperty(JSON_PROPERTY_MEMBERS)
+    @JsonProperty("members")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public List<UpdateMemberBody> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<UpdateMemberBody> members) {
-        this.members = members;
-    }
+    public List<UpdateMemberBody> getMembers() { return members; }
+    public void setMembers(List<UpdateMemberBody> members) { this.members = members; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         UpdateMembersBody updateMembersBody = (UpdateMembersBody)o;
         return Objects.equals(this.members, updateMembersBody.members);
     }
@@ -94,9 +74,7 @@ public class UpdateMembersBody {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

@@ -22,48 +22,49 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * A list of project members.
+ * A list of space members to create / update.
  */
-public class ProjectMembers {
+public class WriteableSpaceMembers {
 
-    private List<ProjectMember> members = new ArrayList<>();
+    private List<SpaceMember> members = new ArrayList<>();
 
-    public ProjectMembers members(List<ProjectMember> members) {
+    public WriteableSpaceMembers members(List<SpaceMember> members) {
         this.members = members;
         return this;
     }
 
-    public ProjectMembers addMembersItem(ProjectMember membersItem) {
+    public WriteableSpaceMembers addMembersItem(SpaceMember membersItem) {
         this.members.add(membersItem);
         return this;
     }
 
     /**
-     * A list of project members.
-     * @return members
+     * A list of space members.
+     * @return resources
      **/
     @JsonProperty("members")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public List<ProjectMember> getMembers() { return members; }
-    public void setMembers(List<ProjectMember> members) { this.members = members; }
+    public List<SpaceMember> getMembers() { return members; }
+    public void setMembers(List<SpaceMember> members) { this.members = members; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        ProjectMembers projectMembers = (ProjectMembers)o;
-        return Objects.equals(this.members, projectMembers.members);
+        WriteableSpaceMembers that = (WriteableSpaceMembers) o;
+        return super.equals(o) &&
+                Objects.equals(this.members, that.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(members);
+        return Objects.hash(super.hashCode(), members);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ProjectMembers {\n");
+        sb.append("class WriteableSpaceMembers {\n");
         sb.append("    members: ").append(toIndentedString(members)).append("\n");
         sb.append("}");
         return sb.toString();

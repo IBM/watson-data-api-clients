@@ -22,60 +22,53 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * A list of project members.
+ * A list of space members.
  */
-public class ProjectMembers {
+public class SpaceMembers extends PaginatedList {
 
-    private List<ProjectMember> members = new ArrayList<>();
+    private List<SpaceMember> resources = new ArrayList<>();
 
-    public ProjectMembers members(List<ProjectMember> members) {
-        this.members = members;
+    public SpaceMembers resources(List<SpaceMember> resources) {
+        this.resources = resources;
         return this;
     }
 
-    public ProjectMembers addMembersItem(ProjectMember membersItem) {
-        this.members.add(membersItem);
+    public SpaceMembers addResourcesItem(SpaceMember resourcesItem) {
+        this.resources.add(resourcesItem);
         return this;
     }
 
     /**
-     * A list of project members.
-     * @return members
+     * A list of space members.
+     * @return resources
      **/
-    @JsonProperty("members")
+    @JsonProperty("resources")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public List<ProjectMember> getMembers() { return members; }
-    public void setMembers(List<ProjectMember> members) { this.members = members; }
+    public List<SpaceMember> getResources() { return resources; }
+    public void setResources(List<SpaceMember> resources) { this.resources = resources; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        ProjectMembers projectMembers = (ProjectMembers)o;
-        return Objects.equals(this.members, projectMembers.members);
+        SpaceMembers that = (SpaceMembers) o;
+        return super.equals(o) &&
+                Objects.equals(this.resources, that.resources);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(members);
+        return Objects.hash(super.hashCode(), resources);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ProjectMembers {\n");
-        sb.append("    members: ").append(toIndentedString(members)).append("\n");
+        sb.append("class SpaceMembers {\n");
+        super.toString(sb);
+        sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) { return "null"; }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }
