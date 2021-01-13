@@ -34,7 +34,7 @@ public class SearchResultRow {
     private Double score;
     private SearchResultCategories categories;
     private List<CustomAttribute> customAttributes = null;
-    private Object metadata;
+    private SearchResultMetadata metadata;
     private Object entity;
 
     public SearchResultRow providerTypeId(String providerTypeId) {
@@ -122,7 +122,7 @@ public class SearchResultRow {
     public List<CustomAttribute> getCustomAttributes() { return customAttributes; }
     public void setCustomAttributes(List<CustomAttribute> customAttributes) { this.customAttributes = customAttributes; }
 
-    public SearchResultRow metadata(Object metadata) {
+    public SearchResultRow metadata(SearchResultMetadata metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -130,8 +130,8 @@ public class SearchResultRow {
     @javax.annotation.Nullable
     @JsonProperty("metadata")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Object getMetadata() { return metadata; }
-    public void setMetadata(Object metadata) { this.metadata = metadata; }
+    public SearchResultMetadata getMetadata() { return metadata; }
+    public void setMetadata(SearchResultMetadata metadata) { this.metadata = metadata; }
 
     public SearchResultRow entity(Object entity) {
         this.entity = entity;
