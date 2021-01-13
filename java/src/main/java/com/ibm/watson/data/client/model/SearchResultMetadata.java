@@ -45,6 +45,8 @@ public class SearchResultMetadata {
     private String state;
     private List<String> stewardIds;
     private List<String> tags;
+    private List<String> termGlobalIds;
+    private List<String> terms;
 
     public SearchResultMetadata modifiedOn(Date modifiedOn) {
         this.modifiedOn = modifiedOn;
@@ -188,6 +190,44 @@ public class SearchResultMetadata {
     public List<String> getTags() { return tags; }
     public void setTags(List<String> tags) { this.tags = tags; }
 
+    public SearchResultMetadata termGlobalIds(List<String> termGlobalIds) {
+        this.termGlobalIds = termGlobalIds;
+        return this;
+    }
+
+    public SearchResultMetadata addTermGlobalIdsItem(String termGlobalIdsItem) {
+        if (this.termGlobalIds == null) {
+            this.termGlobalIds = new ArrayList<>();
+        }
+        this.termGlobalIds.add(termGlobalIdsItem);
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("term_global_ids")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getTermGlobalIds() { return termGlobalIds; }
+    public void setTermGlobalIds(List<String> termGlobalIds) { this.termGlobalIds = termGlobalIds; }
+
+    public SearchResultMetadata terms(List<String> terms) {
+        this.terms = terms;
+        return this;
+    }
+
+    public SearchResultMetadata addTermsItem(String termsItem) {
+        if (this.terms == null) {
+            this.terms = new ArrayList<>();
+        }
+        this.terms.add(termsItem);
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("terms")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getTerms() { return terms; }
+    public void setTerms(List<String> terms) { this.terms = terms; }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
@@ -202,13 +242,15 @@ public class SearchResultMetadata {
                 Objects.equals(this.description, that.description) &&
                 Objects.equals(this.state, that.state) &&
                 Objects.equals(this.stewardIds, that.stewardIds) &&
-                Objects.equals(this.tags, that.tags);
+                Objects.equals(this.tags, that.tags) &&
+                Objects.equals(this.termGlobalIds, that.termGlobalIds) &&
+                Objects.equals(this.terms, that.terms);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(modifiedOn, classifications, artifactType, classificationGlobalIds,
-                name, modifiedBy, description, state, stewardIds, tags);
+                name, modifiedBy, description, state, stewardIds, tags, termGlobalIds, terms);
     }
 
     @Override
@@ -225,6 +267,8 @@ public class SearchResultMetadata {
         sb.append("    state: ").append(toIndentedString(state)).append("\n");
         sb.append("    stewardIds: ").append(toIndentedString(stewardIds)).append("\n");
         sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
+        sb.append("    termGlobalIds: ").append(toIndentedString(termGlobalIds)).append("\n");
+        sb.append("    terms: ").append(toIndentedString(terms)).append("\n");
         sb.append("}");
         return sb.toString();
     }
