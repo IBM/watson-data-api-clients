@@ -26,7 +26,7 @@ import java.util.*;
 public class Asset {
 
     private MetadataAsset metadata;
-    private Map<String, Object> entity = null;
+    private Map<String, AbstractAssetEntity> entity = null;
     private List<Attachment> attachments = null;
 
     public Asset metadata(MetadataAsset metadata) {
@@ -39,12 +39,12 @@ public class Asset {
     public MetadataAsset getMetadata() { return metadata; }
     public void setMetadata(MetadataAsset metadata) { this.metadata = metadata; }
 
-    public Asset entity(Map<String, Object> entity) {
+    public Asset entity(Map<String, AbstractAssetEntity> entity) {
         this.entity = entity;
         return this;
     }
 
-    public Asset putEntityItem(String key, Object entityItem) {
+    public Asset putEntityItem(String key, AbstractAssetEntity entityItem) {
         if (this.entity == null) {
             this.entity = new HashMap<>();
         }
@@ -55,8 +55,8 @@ public class Asset {
     @javax.annotation.Nullable
     @JsonProperty("entity")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Map<String, Object> getEntity() { return entity; }
-    public void setEntity(Map<String, Object> entity) { this.entity = entity; }
+    public Map<String, AbstractAssetEntity> getEntity() { return entity; }
+    public void setEntity(Map<String, AbstractAssetEntity> entity) { this.entity = entity; }
 
     public Asset attachments(List<Attachment> attachments) {
         this.attachments = attachments;
