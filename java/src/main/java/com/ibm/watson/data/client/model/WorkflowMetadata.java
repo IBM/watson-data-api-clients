@@ -17,11 +17,7 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ibm.watson.data.client.model.enums.WorkflowState;
-import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
-import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
 import java.util.Date;
 import java.util.Objects;
@@ -32,18 +28,10 @@ import java.util.Objects;
 public class WorkflowMetadata {
 
     private String artifactType;
-
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date createdAt;
-
     private String createdBy;
     private String description;
-
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date modifiedAt;
-
     private String modifiedBy;
     private String name;
     private WorkflowState state;

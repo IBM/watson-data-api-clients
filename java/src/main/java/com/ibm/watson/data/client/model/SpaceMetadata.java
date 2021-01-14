@@ -17,10 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
-import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
 import java.util.Date;
 import java.util.Objects;
@@ -30,17 +26,10 @@ import java.util.Objects;
  */
 public class SpaceMetadata {
 
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date createdAt;
-
     private String creatorId;
     private String id;
-
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date updatedAt;
-
     private String url;
 
     public SpaceMetadata createdAt(Date createdAt) {

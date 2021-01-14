@@ -17,10 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ibm.watson.data.client.serde.DateTimeNoMilliDeserializer;
-import com.ibm.watson.data.client.serde.DateTimeNoMilliSerializer;
 
 import java.util.Date;
 import java.util.Objects;
@@ -34,15 +30,8 @@ public class AssetRatingMetadata {
     private String assetId;
     private String creator;
     private String creatorId;
-
-    @JsonSerialize(using = DateTimeNoMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeNoMilliDeserializer.class)
     private Date createdAt;
-
-    @JsonSerialize(using = DateTimeNoMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeNoMilliDeserializer.class)
     private Date updatedAt;
-
     private Long revisionId;
 
     public AssetRatingMetadata assetRatingId(String assetRatingId) {
