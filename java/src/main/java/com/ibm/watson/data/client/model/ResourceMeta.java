@@ -19,10 +19,6 @@ import java.util.Date;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
-import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,15 +31,8 @@ public class ResourceMeta {
     private String id;
     private String rev;
     private String owner;
-    
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date createdAt;
-
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date modifiedAt;
-
     private String parentId;
     private String name;
     private String description;

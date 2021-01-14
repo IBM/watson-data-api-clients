@@ -15,40 +15,31 @@
  */
 package com.ibm.watson.data.client.serde;
 
-import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
 
 /**
- * Custom deserialization for Dates, to handle the variations that exist in the API endpoints
+ * Custom serialization for Dates, to handle the variations that exist in the API endpoints
  * and underlying meta-model, where some dates have millisecond-level detail and others do not.
  */
-public abstract class DateTimeBaseDeserializer extends StdDeserializer<Date> {
+public class DateTimeSerializer extends StdSerializer<Date> {
 
-    private DateFormat dateFormat;
-
-    protected DateTimeBaseDeserializer(DateFormat dateFormat) {
+    protected DateTimeSerializer(DateFormat dateFormat) {
         super(Date.class);
-        this.dateFormat = dateFormat;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        String date = p.getText();
-        try {
-            return dateFormat.parse(date);
-        } catch (ParseException e) {
-            throw new IOException("Unable to parse date and time: " + date, e);
-        }
+    public void serialize(Date value, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
+        gen.writeString(DateTimeDeserializer.DATE_FORMAT_MILLI.format(value));
     }
 
 }

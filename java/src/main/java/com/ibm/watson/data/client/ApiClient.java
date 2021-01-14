@@ -32,7 +32,7 @@ import java.util.Map.Entry;
 
 import com.ibm.watson.data.client.model.LoginCredentials;
 import com.ibm.watson.data.client.model.LoginResponse;
-import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
+import com.ibm.watson.data.client.serde.DateTimeDeserializer;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
@@ -72,7 +72,7 @@ public class ApiClient {
 
     private static final Log log = LogFactory.getLog(ApiClient.class);
 
-    public static final DateFormat DEFAULT_DATE_FORMAT = DateTimeMilliDeserializer.DATE_FORMAT;
+    public static final DateFormat DEFAULT_DATE_FORMAT = DateTimeDeserializer.DATE_FORMAT_MILLI;
 
     public enum CollectionFormat {
         CSV(","),

@@ -17,12 +17,8 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectDraftMode;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectState;
-import com.ibm.watson.data.client.serde.DateTimeMilliDeserializer;
-import com.ibm.watson.data.client.serde.DateTimeMilliSerializer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,17 +43,9 @@ public class GlossaryObjectMetadata {
     private Date effectiveStartDate;
     private Date effectiveEndDate;
     private String createdBy;
-
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date createdAt;
-
     private String modifiedBy;
-
-    @JsonSerialize(using = DateTimeMilliSerializer.class)
-    @JsonDeserialize(using = DateTimeMilliDeserializer.class)
     private Date modifiedAt;
-
     private String revision;
     private String name;
     private String shortDescription;

@@ -17,10 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ibm.watson.data.client.serde.DateTimeNoMilliDeserializer;
-import com.ibm.watson.data.client.serde.DateTimeNoMilliSerializer;
 
 import java.util.ArrayList;
 import java.util.Date;
