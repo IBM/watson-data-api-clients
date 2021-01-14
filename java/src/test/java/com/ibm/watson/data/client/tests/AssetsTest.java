@@ -252,6 +252,15 @@ public class AssetsTest extends AbstractExpectations {
         assertNotNull(asset.getHref());
         assertNotEquals(asset.getHref(), "");
         assertNotNull(asset.getEntity());
+        assertEquals(asset.getEntity().size(), 1);
+        assertTrue(asset.getEntity().containsKey("test_type"));
+        AbstractAssetEntity entity = asset.getEntity().get("test_type");
+        assertTrue(entity instanceof CustomFieldAssetEntity);
+        CustomFieldAssetEntity cfae = (CustomFieldAssetEntity) entity;
+        assertNotNull(cfae);
+        assertEquals(cfae.getFields().size(), 1);
+        assertTrue(cfae.getFields().containsKey("test_field"));
+        assertEquals(cfae.getFields().get("test_field"), "Sample value for the asset's custom field.");
     }
 
     private void validateRating(AssetRating rating, Integer stars) {
