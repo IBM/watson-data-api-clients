@@ -160,6 +160,7 @@ public class AssetsApiV2 {
      * @param catalogId catalog_id must be provided
      * @param assetId asset_id
      * @param assetCopyTo copy asset to
+     * @return {@code Mono<AssetCreateResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -223,6 +224,7 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a a project id, or a space id, but
      *     not more than one
      * @param assetCommitOptions Commit options
+     * @return {@code Mono<AssetCreateResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -300,6 +302,7 @@ public class AssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<AssetCreateResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -366,6 +369,7 @@ public class AssetsApiV2 {
      * <p><b>403</b> - Forbidden
      * <p><b>500</b> - Internal Server Error
      * @param publishAssetOnlyAssetMetada Asset metadata
+     * @return {@code Mono<AssetCreateResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -415,6 +419,7 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param purgeOnDelete If true, asset is also deleted from the trash.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -474,6 +479,7 @@ public class AssetsApiV2 {
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
      *     current asset version. Use &#39;latest&#39; for the most recent
      *     revision.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -692,6 +698,7 @@ public class AssetsApiV2 {
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
      *     current asset version. Use &#39;latest&#39; for the most recent
      *     revision.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -767,6 +774,7 @@ public class AssetsApiV2 {
      *     project.    Metadata may contain attributes to overwrite the values in
      *     original asset; currently only name, description and tags may be
      *     overwritten.
+     * @return {@code Mono<AssetCreateResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -903,6 +911,7 @@ public class AssetsApiV2 {
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
      *     current asset version. Use &#39;latest&#39; for the most recent
      *     revision.
+     * @return {@code Mono<MetadataEntityResult>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -961,6 +970,7 @@ public class AssetsApiV2 {
      *     Maximum is 200
      * @param start The revision number to start from, or &#39;latest&#39;. Latest
      *     revision is the default.
+     * @return {@code Mono<FindAssetsResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -1018,6 +1028,7 @@ public class AssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<MetadataEntityResult>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -1083,6 +1094,7 @@ public class AssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<MetadataEntityResult>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

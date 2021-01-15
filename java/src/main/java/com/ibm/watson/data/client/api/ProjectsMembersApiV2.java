@@ -111,6 +111,7 @@ public class ProjectsMembersApiV2 {
      * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param userName The username of the project member.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -164,6 +165,7 @@ public class ProjectsMembersApiV2 {
      * @param guid The project GUID.
      * @param userNames A list of comma-separated usernames corresponding to
      *     project members to remove from the project.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

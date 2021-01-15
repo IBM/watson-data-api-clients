@@ -166,7 +166,8 @@ public class ModelsApi {
      * @param modelId Model identifier. 
      * @param version The version date for the API of the form &#x60;YYYY-MM-DD&#x60;. 
      * @param spaceId The space that contains the resource. Either &#x60;space_id&#x60; or &#x60;project_id&#x60; query parameter has to be given. 
-     * @param projectId The project that contains the resource. Either &#x60;space_id&#x60; or &#x60;project_id&#x60; query parameter has to be given. 
+     * @param projectId The project that contains the resource. Either &#x60;space_id&#x60; or &#x60;project_id&#x60; query parameter has to be given.
+     * @return {@code Mono<Void>}
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     public Mono<Void> delete(String modelId,
@@ -219,7 +220,8 @@ public class ModelsApi {
      * @param attachmentId Identifier for the attachment for resources that support separate content. 
      * @param version The version date for the API of the form &#x60;YYYY-MM-DD&#x60;. 
      * @param spaceId The space that contains the resource. Either &#x60;space_id&#x60; or &#x60;project_id&#x60; query parameter has to be given. 
-     * @param projectId The project that contains the resource. Either &#x60;space_id&#x60; or &#x60;project_id&#x60; query parameter has to be given. 
+     * @param projectId The project that contains the resource. Either &#x60;space_id&#x60; or &#x60;project_id&#x60; query parameter has to be given.
+     * @return {@code Mono<Void>}
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     public Mono<Void> deleteContent(String modelId,

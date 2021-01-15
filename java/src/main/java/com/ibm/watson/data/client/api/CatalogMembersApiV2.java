@@ -114,6 +114,7 @@ public class CatalogMembersApiV2 {
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID
      * @param memberId Member GUID
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

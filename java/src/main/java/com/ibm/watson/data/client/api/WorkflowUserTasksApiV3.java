@@ -180,6 +180,7 @@ public class WorkflowUserTasksApiV3 {
      *     string, long, date, or enum. only one of the value fields can be
      *     provided for each variable. for enum type of value, supply the id of
      *     the enum value in &#39;value&#39; attribute.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

@@ -69,6 +69,7 @@ public class AssetTrashApiV2 {
      *     hh:mm:ss.sss&#39; Example &#39;2017-11-23 00:00:00.000&#39;
      * @param newerThan newer than Timestamp in UTC time. Format: &#39;yyyy-MM-dd
      *     hh:mm:ss.sss&#39; Example &#39;2017-11-23 00:00:00.000&#39;
+     * @return {@code Mono<ListTrashResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -117,6 +118,7 @@ public class AssetTrashApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<MetadataEntityResult>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -170,6 +172,7 @@ public class AssetTrashApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -224,6 +227,7 @@ public class AssetTrashApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<MetadataEntityResult>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

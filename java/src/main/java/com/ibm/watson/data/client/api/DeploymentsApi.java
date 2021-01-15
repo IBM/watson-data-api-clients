@@ -165,6 +165,7 @@ public class DeploymentsApi {
      * @param version The version date for the API of the form &#x60;YYYY-MM-DD&#x60;. 
      * @param deploymentId The deployment id.
      * @param spaceId Retrieves the deployments of assets that belong to this space.
+     * @return {@code Mono<Void>}
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     public Mono<Void> delete(LocalDate version, String deploymentId, String spaceId) throws WebClientResponseException {
