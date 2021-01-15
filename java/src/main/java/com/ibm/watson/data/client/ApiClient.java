@@ -444,7 +444,7 @@ public class ApiClient {
         } else if (MediaType.MULTIPART_FORM_DATA.equals(contentType)) {
             return BodyInserters.fromMultipartData(formParams);
         } else {
-            return obj != null ? BodyInserters.fromObject(obj) : null;
+            return obj != null ? BodyInserters.fromValue(obj) : null;
         }
     }
 
