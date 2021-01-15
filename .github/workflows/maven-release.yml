@@ -1,0 +1,33 @@
+# This workflow will publish to Maven Central when a release is created
+
+name: Publish release to Maven Central
+
+on:
+  release:
+    types: [created]
+
+defaults:
+  run:
+    working-directory: java
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: java
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Maven Central repository
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+        server-id: ossrh
+        server-username: MAVEN_USERNAME
+        server-password: MAVEN_PASSWORD
+    - name: Publish package
+      run: mvn --batch-mode deploy
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+
