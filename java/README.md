@@ -47,7 +47,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.ibm.watson.data</groupId>
   <artifactId>watson-data-api-java-client</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/watson-data-api-java-client-0.1-SNAPSHOT-jar-with-dependencies.jar`
+- `target/watson-data-api-java-client-0.1-jar-with-dependencies.jar`
 
 ## Getting Started
 

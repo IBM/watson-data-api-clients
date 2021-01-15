@@ -21,7 +21,7 @@
     <artifactId>watson-data-api-java-client</artifactId>
     <packaging>jar</packaging>
     <name>watson-data-api-java-client</name>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <url>https://github.com/openapitools/openapi-generator</url>
     <description>IBM Watson Data API Java Client</description>
     <scm>
@@ -48,7 +48,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <client-version>0.1-SNAPSHOT</client-version>
         <swagger-annotations-version>1.6.2</swagger-annotations-version>
         <spring-web-version>5.3.3</spring-web-version>
         <jackson-version>2.12.1</jackson-version>
