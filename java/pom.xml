@@ -18,9 +18,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ibm.watson.data</groupId>
-    <artifactId>watson-data-api-java-client</artifactId>
+    <artifactId>watson-data-api-client</artifactId>
     <packaging>jar</packaging>
-    <name>watson-data-api-java-client</name>
+    <name>watson-data-api-client</name>
     <version>0.1</version>
     <url>https://github.com/openapitools/openapi-generator</url>
     <description>IBM Watson Data API Java Client</description>
