@@ -63,6 +63,7 @@ public class TransactionalProjectsApiV2 {
      * <p><b>404</b> - Not Found
      * <p><b>500</b> - Internal Server Error
      * @param guid The GUID for the project to be deleted.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

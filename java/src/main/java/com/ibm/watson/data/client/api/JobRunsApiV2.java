@@ -178,6 +178,7 @@ public class JobRunsApiV2 {
      *     required.
      * @param spaceId The ID of the space to use. catalog_id, project_id, or
      *     space_id is required.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -245,6 +246,7 @@ public class JobRunsApiV2 {
      *     required.
      * @param spaceId The ID of the space to use. catalog_id, project_id, or
      *     space_id is required.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

@@ -179,6 +179,7 @@ public class CategoriesApiV3 {
      *     removed from a (secondary) category
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

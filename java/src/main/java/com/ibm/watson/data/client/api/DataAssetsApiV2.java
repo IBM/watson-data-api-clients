@@ -72,6 +72,7 @@ public class DataAssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<AssetCreateResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -178,6 +179,7 @@ public class DataAssetsApiV2 {
      * @param catalogId catalog_id
      * @param projectId project_id (only catalog_id is supported at this time)
      * @param spaceId space_id (only catalog_id is supported at this time)
+     * @return {@code Mono<Asset>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

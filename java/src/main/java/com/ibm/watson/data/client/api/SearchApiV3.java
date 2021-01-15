@@ -58,6 +58,7 @@ public class SearchApiV3 {
      * <p><b>500</b> - Internal error.  Try again later.
      * @param body A string representing a query.  The query must conform to
      *     Elasticsearch Domain Specific Language.
+     * @return {@code Mono<SearchResults>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -118,6 +119,7 @@ public class SearchApiV3 {
      *     you like.
      * @param limit The maximum number of items to return
      * @param isSimple Use simple query string syntax
+     * @return {@code Mono<SearchResults>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

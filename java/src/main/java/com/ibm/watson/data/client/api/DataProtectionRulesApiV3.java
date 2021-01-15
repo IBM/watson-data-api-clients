@@ -146,6 +146,7 @@ public class DataProtectionRulesApiV3 {
      * <p><b>404</b> - Not Found
      * <p><b>500</b> - Internal Server Error
      * @param ruleId Rule ID
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -193,6 +194,7 @@ public class DataProtectionRulesApiV3 {
      *     1000.
      * @param offset The index of the first matching Rule to include in the
      *     result. The default value is 0.
+     * @return {@code Mono<DataProtectionRuleExportFile>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

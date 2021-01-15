@@ -58,6 +58,7 @@ public class CatalogsApiV2 {
      * <p><b>403</b> - Forbidden
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID of the participating catalog
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -294,6 +295,7 @@ public class CatalogsApiV2 {
      * <p><b>403</b> - Forbidden
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID of the participating catalog
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -339,6 +341,7 @@ public class CatalogsApiV2 {
      * <p><b>403</b> - Forbidden
      * @param catalogId Catalog GUID
      * @param deleteBucket delete_bucket
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -384,6 +387,7 @@ public class CatalogsApiV2 {
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID of the participating catalog
      * @param cohortName name of the cohort
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -493,6 +497,7 @@ public class CatalogsApiV2 {
      * <p><b>403</b> - Forbidden
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -574,6 +579,7 @@ public class CatalogsApiV2 {
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID
      * @param propertyKey catalog property key
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -1087,6 +1093,7 @@ public class CatalogsApiV2 {
      *     6902.&lt;br/&gt;[ { \&quot;op\&quot;: \&quot;add\&quot;,
      *     \&quot;path\&quot;: \&quot;/properties/new-property\&quot;,
      *     \&quot;value\&quot;: \&quot;new-value\&quot; } ]
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -1138,6 +1145,7 @@ public class CatalogsApiV2 {
      * <p><b>409</b> - Conflict
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -1344,6 +1352,7 @@ public class CatalogsApiV2 {
      * <p><b>403</b> - Forbidden
      * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID of the participating catalog
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

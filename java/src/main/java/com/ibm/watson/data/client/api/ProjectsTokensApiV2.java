@@ -113,6 +113,7 @@ public class ProjectsTokensApiV2 {
      * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param tguid The token GUID.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -162,6 +163,7 @@ public class ProjectsTokensApiV2 {
      * Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
      * <p><b>404</b> - Not Found
      * @param guid The project GUID.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -201,6 +203,7 @@ public class ProjectsTokensApiV2 {
      * Validates a tenant access token specified via the Authorization HTTP
      * header. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
      * Unauthorized
+     * @param token to validate
      * @return ProjectToken
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API

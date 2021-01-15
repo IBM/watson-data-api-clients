@@ -295,6 +295,8 @@ public class ApiClient {
 
     /**
      * Format the given Date object into string.
+     * @param date to format
+     * @return String formatted date
      */
     public String formatDate(Date date) { return DEFAULT_DATE_FORMAT.format(date); }
 
@@ -456,6 +458,7 @@ public class ApiClient {
      * @param queryParams The query parameters
      * @param body The request body object
      * @param headerParams The header parameters
+     * @param cookieParams The cookie parameters
      * @param formParams The form parameters
      * @param accept The request's Accept header
      * @param contentType The request's Content-Type header
@@ -484,6 +487,7 @@ public class ApiClient {
      * @param queryParams The query parameters
      * @param body The request body object
      * @param headerParams The header parameters
+     * @param cookieParams The cookie parameters
      * @param formParams The form parameters
      * @param accept The request's Accept header
      * @param contentType The request's Content-Type header
@@ -600,6 +604,7 @@ public class ApiClient {
      * @param queryParams The query parameters
      * @param body The request body object
      * @param headerParams The header parameters
+     * @param cookieParams The cookie parameters
      * @param formParams The form parameters
      * @param accept The request's Accept header
      * @param contentType The request's Content-Type header

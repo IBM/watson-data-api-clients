@@ -102,6 +102,7 @@ public class ProjectsApiV2 {
      * <p><b>403</b> - Forbidden
      * <p><b>404</b> - Not Found
      * @param guid The project GUID.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      * @deprecated in favour of transactional equivalent

@@ -99,6 +99,7 @@ public class SpacesApiV2 {
      * <p><b>403</b> - Forbidden
      * <p><b>404</b> - Not Found
      * @param guid The space GUID.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

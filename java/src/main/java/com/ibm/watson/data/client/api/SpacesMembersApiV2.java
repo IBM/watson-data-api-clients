@@ -109,6 +109,7 @@ public class SpacesMembersApiV2 {
      * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param userId The username of the space member.
+     * @return {@code Mono<Void>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */

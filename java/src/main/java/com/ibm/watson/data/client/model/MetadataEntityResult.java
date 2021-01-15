@@ -18,6 +18,7 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -25,22 +26,18 @@ import java.util.Objects;
  */
 public class MetadataEntityResult extends MetadataAssetResult {
 
-    private Object entity;
+    private Map<String, AbstractAssetEntity> entity;
 
-    public MetadataEntityResult entity(Object entity) {
+    public MetadataEntityResult entity(Map<String, AbstractAssetEntity> entity) {
         this.entity = entity;
         return this;
     }
 
     @javax.annotation.Nullable
     @JsonProperty("entity")
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Object getEntity() {
-        return entity;
-    }
-
-    public void setEntity(Object entity) { this.entity = entity; }
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Map<String, AbstractAssetEntity> getEntity() { return entity; }
+    public void setEntity(Map<String, AbstractAssetEntity> entity) { this.entity = entity; }
 
     @Override
     public boolean equals(java.lang.Object o) {

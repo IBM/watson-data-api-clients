@@ -245,6 +245,7 @@ public class AssetTypesApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
+     * @return {@code Mono<FindAssetsResponse>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
