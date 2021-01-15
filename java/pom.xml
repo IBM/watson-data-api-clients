@@ -49,18 +49,18 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <swagger-annotations-version>1.6.2</swagger-annotations-version>
-        <spring-web-version>5.2.8.RELEASE</spring-web-version>
-        <jackson-version>2.11.1</jackson-version>
-        <jackson-databind-version>2.11.1</jackson-databind-version>
+        <spring-web-version>5.3.3</spring-web-version>
+        <jackson-version>2.12.1</jackson-version>
+        <jackson-databind-version>2.12.1</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.1</jackson-databind-nullable-version>
         <junit-version>4.13.1</junit-version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <reactor-version>3.3.7.RELEASE</reactor-version>
-        <reactor-netty-version>0.9.9.RELEASE</reactor-netty-version>
+        <reactor-version>3.4.2</reactor-version>
+        <reactor-netty-version>1.0.3</reactor-netty-version>
         <reactor-netty-ipc-version>0.7.15.RELEASE</reactor-netty-ipc-version>
-        <netty-version>4.1.51.Final</netty-version>
-        <testng.version>7.1.0</testng.version>
-        <mock-server.version>5.11.1</mock-server.version>
+        <netty-version>4.1.58.Final</netty-version>
+        <testng.version>7.3.0</testng.version>
+        <mock-server.version>5.11.2</mock-server.version>
     </properties>
 
     <dependencies>
@@ -201,7 +201,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -237,7 +237,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.5</version>
+                <version>3.3.0</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
