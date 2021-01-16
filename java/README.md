@@ -1,5 +1,7 @@
 # watson-data-api-java-client
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.ibm.watson.data/watson-data-api-client.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ibm.watson.data%22%20AND%20a:%22watson-data-api-client%22) [![javadoc](https://javadoc.io/badge2/com.ibm.watson.data/watson-data-api-client/javadoc.svg)](https://javadoc.io/doc/com.ibm.watson.data/watson-data-api-client)
+
 The Maven project contained in this directory of the repository provides a Java binding for
 the Watson Data REST APIs.
 
@@ -47,7 +49,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.ibm.watson.data</groupId>
   <artifactId>watson-data-api-java-client</artifactId>
-  <version>0.1</version>
+  <version>0.2-SNAPSHOT</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +64,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/watson-data-api-java-client-0.1-jar-with-dependencies.jar`
+- `target/watson-data-api-java-client-0.2-SNAPSHOT-jar-with-dependencies.jar`
 
 ## Getting Started
 
@@ -100,7 +102,7 @@ public class CatalogsApiV2Example {
 }
 ```
 
-## Documentation for Authorization
+## Authorization
 
 Authentication schemes defined for the API:
 
