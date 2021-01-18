@@ -24,7 +24,7 @@ import com.ibm.watson.data.client.model.ColumnInfoEntity;
 import java.io.IOException;
 
 /**
- * Custom serialization for ColumnInfoEntity's
+ * Custom serialization for ColumnInfoEntities.
  */
 public class ColumnInfoEntitySerializer extends StdSerializer<ColumnInfoEntity> {
 

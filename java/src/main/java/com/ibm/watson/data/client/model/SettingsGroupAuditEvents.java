@@ -17,21 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * The audit events settings group.
  */
-@ApiModel(description = "The audit events settings group.")
-@JsonPropertyOrder({
-        SettingsGroupAuditEvents.JSON_PROPERTY_ENABLED
-})
 public class SettingsGroupAuditEvents {
 
-    public static final String JSON_PROPERTY_ENABLED = "enabled";
     private Boolean enabled = false;
 
     public SettingsGroupAuditEvents enabled(Boolean enabled) {
@@ -43,27 +35,16 @@ public class SettingsGroupAuditEvents {
      * The enablement flag for the audit events feature.
      * @return enabled
      **/
-    @ApiModelProperty(required = true,
-            value = "The enablement flag for the audit events feature.")
-    @JsonProperty(JSON_PROPERTY_ENABLED)
+    @JsonProperty("enabled")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
+    public Boolean getEnabled() { return enabled; }
     public void setEnabled(Boolean enabled) { this.enabled = enabled; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        SettingsGroupAuditEvents settingsGroupAuditEvents =
-                (SettingsGroupAuditEvents)o;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        SettingsGroupAuditEvents settingsGroupAuditEvents = (SettingsGroupAuditEvents)o;
         return Objects.equals(this.enabled, settingsGroupAuditEvents.enabled);
     }
 
@@ -86,9 +67,7 @@ public class SettingsGroupAuditEvents {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

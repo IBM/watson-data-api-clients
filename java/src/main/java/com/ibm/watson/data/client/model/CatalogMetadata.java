@@ -17,31 +17,16 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * CatalogMetadata
  */
-@JsonPropertyOrder({
-        CatalogMetadata.JSON_PROPERTY_GUID,
-        CatalogMetadata.JSON_PROPERTY_URL,
-        CatalogMetadata.JSON_PROPERTY_CREATOR_ID,
-        CatalogMetadata.JSON_PROPERTY_CREATE_TIME
-})
 public class CatalogMetadata {
 
-    public static final String JSON_PROPERTY_GUID = "guid";
     private String guid;
-
-    public static final String JSON_PROPERTY_URL = "url";
     private String url;
-
-    public static final String JSON_PROPERTY_CREATOR_ID = "creator_id";
     private String creatorId;
-
-    public static final String JSON_PROPERTY_CREATE_TIME = "create_time";
     private String createTime;
 
     /**
@@ -49,61 +34,45 @@ public class CatalogMetadata {
      * @return guid
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "GUID of the Catalog instance")
-    @JsonProperty(JSON_PROPERTY_GUID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getGuid() {
-        return guid;
-    }
+    @JsonProperty("guid")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getGuid() { return guid; }
+    public void setGuid(String guid) { this.guid = guid; }
 
     /**
      * URL of the Catalog instance
      * @return url
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "URL of the Catalog instance")
-    @JsonProperty(JSON_PROPERTY_URL)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getUrl() {
-        return url;
-    }
+    @JsonProperty("url")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getUrl() { return url; }
+    public void setUrl(String url) { this.url = url; }
 
     /**
      * ibmid-50h088ud1b
      * @return creatorId
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "ibmid-50h088ud1b")
-    @JsonProperty(JSON_PROPERTY_CREATOR_ID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getCreatorId() {
-        return creatorId;
-    }
+    @JsonProperty("creator_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getCreatorId() { return creatorId; }
+    public void setCreatorId(String creatorId) { this.creatorId = creatorId; }
 
     /**
      * Created time
      * @return createTime
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Created time")
-    @JsonProperty(JSON_PROPERTY_CREATE_TIME)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getCreateTime() {
-        return createTime;
-    }
+    @JsonProperty("create_time")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getCreateTime() { return createTime; }
+    public void setCreateTime(String createTime) { this.createTime = createTime; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         CatalogMetadata catalogMetadata = (CatalogMetadata)o;
         return Objects.equals(this.guid, catalogMetadata.guid) &&
                 Objects.equals(this.url, catalogMetadata.url) &&
@@ -122,12 +91,8 @@ public class CatalogMetadata {
         sb.append("class CatalogMetadata {\n");
         sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
         sb.append("    url: ").append(toIndentedString(url)).append("\n");
-        sb.append("    creatorId: ")
-                .append(toIndentedString(creatorId))
-                .append("\n");
-        sb.append("    createTime: ")
-                .append(toIndentedString(createTime))
-                .append("\n");
+        sb.append("    creatorId: ").append(toIndentedString(creatorId)).append("\n");
+        sb.append("    createTime: ").append(toIndentedString(createTime)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -137,9 +102,7 @@ public class CatalogMetadata {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

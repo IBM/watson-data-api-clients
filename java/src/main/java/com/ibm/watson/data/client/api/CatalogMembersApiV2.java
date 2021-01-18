@@ -28,13 +28,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Catalog membership.
@@ -54,31 +53,17 @@ public class CatalogMembersApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Add members to a catalog
-     *  Adds members to a catalog. A catalog member can be a user or an access
-     * group. <p><b>200</b> - OK <p><b>201</b> - Created <p><b>400</b> - Bad
-     * Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Add members to a catalog. A catalog member can be a user or an access
+     * group.
      * @param catalogId catalog GUID
      * @param memberSet Members with roles
      * @return MemberSetPartialResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MemberSetPartialResult> add(String catalogId, MemberSet memberSet) throws RestClientException {
+    public Mono<MemberSetPartialResult> add(@NonNull String catalogId,
+                                            @NonNull MemberSet memberSet) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling addNewMembersV2");
-        }
-        // verify the required parameter 'memberSet' is set
-        if (memberSet == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'memberSet' when calling addNewMembersV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -104,34 +89,16 @@ public class CatalogMembersApiV2 {
     }
 
     /**
-     * Delete a member from a catalog
-     *  Delete a member from a catalog.
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Delete a member from a catalog.
      * @param catalogId catalog GUID
      * @param memberId Member GUID
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String catalogId, String memberId) throws RestClientException {
+    public Mono<Void> delete(@NonNull String catalogId,
+                             @NonNull String memberId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling deleteMemberV2");
-        }
-        // verify the required parameter 'memberId' is set
-        if (memberId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'memberId' when calling deleteMemberV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -158,34 +125,17 @@ public class CatalogMembersApiV2 {
     }
 
     /**
-     * Get catalog membership for a specific user
-     *  Returns any memberships this user has on the catalog, including direct
-     * membership and any access group memberships. <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Returns any memberships this user has on the catalog, including direct
+     * membership and any access group memberships.
      * @param catalogId catalog GUID
      * @param memberId member ID
      * @return MemberSet
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MemberSet> get(String catalogId, String memberId) throws RestClientException {
+    public Mono<MemberSet> get(@NonNull String catalogId,
+                               @NonNull String memberId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getMemberV2");
-        }
-        // verify the required parameter 'memberId' is set
-        if (memberId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'memberId' when calling getMemberV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -212,14 +162,7 @@ public class CatalogMembersApiV2 {
     }
 
     /**
-     * List all members of the catalog
-     *  Get members for the catalog.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * List all members of the catalog.
      * @param catalogId catalog GUID
      * @param limit limit
      * @param bookmark bookmark
@@ -228,14 +171,11 @@ public class CatalogMembersApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MemberSearchResult> list(String catalogId, Integer limit, String bookmark, String memberType) throws RestClientException {
+    public Mono<MemberSearchResult> list(@NonNull String catalogId,
+                                         Integer limit,
+                                         String bookmark,
+                                         String memberType) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getMembersV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -265,14 +205,7 @@ public class CatalogMembersApiV2 {
     }
 
     /**
-     * Update members in a catalog
-     *  Update a member of a catalog.
-     * <p><b>200</b> - Updated
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Update a member of a catalog.
      * @param catalogId catalog GUID
      * @param memberId Member GUID
      * @param memberRole Member updates
@@ -280,26 +213,10 @@ public class CatalogMembersApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Member> updateRole(String catalogId, String memberId, MemberRole memberRole) throws RestClientException {
+    public Mono<Member> updateRole(@NonNull String catalogId,
+                                   @NonNull String memberId,
+                                   @NonNull MemberRole memberRole) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling updateMemberRoleV2");
-        }
-        // verify the required parameter 'memberId' is set
-        if (memberId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'memberId' when calling updateMemberRoleV2");
-        }
-        // verify the required parameter 'memberRole' is set
-        if (memberRole == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'memberRole' when calling updateMemberRoleV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

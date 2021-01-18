@@ -17,71 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Objects;
 
 /**
  * CreateUserSuccessResponse
  */
-@JsonPropertyOrder({
-        CreateUserSuccessResponse.JSON_PROPERTY_MESSAGE_CODE,
-        CreateUserSuccessResponse.JSON_PROPERTY_MESSAGE,
-        CreateUserSuccessResponse.JSON_PROPERTY_USER
-})
-public class CreateUserSuccessResponse {
+public class CreateUserSuccessResponse extends BaseResponse {
 
-    public static final String JSON_PROPERTY_MESSAGE_CODE = "_messageCode_";
-    private String messageCode;
-
-    public static final String JSON_PROPERTY_MESSAGE = "message";
-    private String message;
-
-    public static final String JSON_PROPERTY_USER = "User";
     private CreateUserSuccessResponseAllOf1User user;
-
-    public CreateUserSuccessResponse messageCode(String messageCode) {
-        this.messageCode = messageCode;
-        return this;
-    }
-
-    /**
-     * The identifier of the response.
-     * @return messageCode
-     **/
-    @javax.annotation.Nullable
-    @ApiModelProperty(value = "The identifier of the response.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessageCode() {
-        return messageCode;
-    }
-
-    public void setMessageCode(String messageCode) {
-        this.messageCode = messageCode;
-    }
-
-    public CreateUserSuccessResponse message(String message) {
-        this.message = message;
-        return this;
-    }
-
-    /**
-     * The explanation of the &#x60;messageCode&#x60;.
-     * @return message
-     **/
-    @javax.annotation.Nullable
-    @ApiModelProperty(value = "The explanation of the `messageCode`.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) { this.message = message; }
 
     public CreateUserSuccessResponse user(CreateUserSuccessResponseAllOf1User user) {
         this.user = user;
@@ -93,61 +37,33 @@ public class CreateUserSuccessResponse {
      * @return user
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_USER)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public CreateUserSuccessResponseAllOf1User getUser() {
-        return user;
-    }
-
-    public void setUser(CreateUserSuccessResponseAllOf1User user) {
-        this.user = user;
-    }
+    @JsonProperty("User")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public CreateUserSuccessResponseAllOf1User getUser() { return user; }
+    public void setUser(CreateUserSuccessResponseAllOf1User user) { this.user = user; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CreateUserSuccessResponse createUserSuccessResponse =
-                (CreateUserSuccessResponse)o;
-        return Objects.equals(this.messageCode,
-                createUserSuccessResponse.messageCode) &&
-                Objects.equals(this.message, createUserSuccessResponse.message) &&
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        CreateUserSuccessResponse createUserSuccessResponse = (CreateUserSuccessResponse)o;
+        return super.equals(o) &&
                 Objects.equals(this.user, createUserSuccessResponse.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageCode, message, user);
+        return Objects.hash(super.hashCode(), user);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class CreateUserSuccessResponse {\n");
-        sb.append("    messageCode: ")
-                .append(toIndentedString(messageCode))
-                .append("\n");
-        sb.append("    message: ").append(toIndentedString(message)).append("\n");
+        super.toString(sb);
         sb.append("    user: ").append(toIndentedString(user)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }

@@ -25,16 +25,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Assets.
+ *
+ * Assets contain information about the contents of your data and how to access the data. You
+ * store asset metadata in a catalog and add collaborators from your
+ * organization to analyze data. Your data can reside in a variety of sources.
+ * For example, you can keep your data in your existing on-premises data
+ * sources, cloud data services, or streaming data feeds. By adding connection
+ * information to these remote sources in the catalog, you can allow other
+ * catalog users to access the data with the stored credentials.
+ * Alternatively, you can copy a snapshot of the remote data into the
+ * catalog's encrypted cloud storage.<br/><br/>
+ * All asset types have a common set of properties. Some asset types have additional
+ * properties. When you add an asset to a catalog, you specify these
+ * common properties:
+ * <ul>
+ *     <li>The asset name and an optional description. The name can only contain letters, numbers, underscore, dash, space, and period. The name can't be only blank spaces.</li>
+ *     <li>Privacy. You can choose to restrict access to the asset with the privacy level and asset membership.</li>
+ *     <ul>
+ *         <li>Public (default): No restrictions on finding or using the asset.</li>
+ *         <li>Private: Only asset members can find or use the asset.</li>
+ *     </ul>
+ *     <li>Members. The catalog collaborators can be added as members of the asset. Members are important if you restrict access to the asset. When you create an asset, you are the owner (and a member) of it.</li>
+ *     <li>Tags. Metadata that makes searching for the asset easier. Tags can contain only letters, numbers, underscores, dashes, and the symbols # and @.</li>
+ * </ul>
  */
 public class AssetsApiV2 {
 
@@ -51,48 +73,24 @@ public class AssetsApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Add/Update asset collaborators
-     * Use this API to add or remove collaborators on an asset. You must have
+     * Add or remove collaborators on an asset. You must have
      * Editor or Admin permissions on the catalog and be an asset collaborator to
      * add an asset collaborator.These abilities apply to the public
-     * setting:&lt;br/&gt;All members of the catalog can find the asset and see
-     * its properties. &lt;br/&gt;All members of the catalog who have the Editor,
-     * Auditor, or Admin roles can use the asset. &lt;br/&gt;These abilities apply
-     * to the private setting:&lt;br/&gt;All asset collaborators can find the
-     * asset and see its properties. Asset collaborators with the Editor, Auditor,
-     * or Admin role can use the asset. <p><b>200</b> - OK <p><b>400</b> - Bad
-     * Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>409</b> - Conflict
-     * <p><b>412</b> - Precondition Failed
-     * <p><b>422</b> - Unprocessable Entity
-     * <p><b>500</b> - Internal Server Error
+     * setting:
+     * <ul>
+     *     <li>All members of the catalog can find the asset and see its properties.</li>
+     *     <li>All members of the catalog who have the Editor, Auditor, or Admin roles can use the asset.</li>
+     * </ul>
+     * These abilities apply to the private setting:
+     * <ul>
+     *     <li>All asset collaborators can find the asset and see its properties.</li>
+     *     <li>Asset collaborators with the Editor, Auditor, or Admin role can use the asset.</li>
+     * </ul>
+     * Example body:
+     * <code>[{ "op": "add", "path": "/metadata/rov/collaborator_ids/1000331015", "value": { "user_iam_id": "1000331015" }}]</code>
      * @param assetId Asset GUID
      * @param body JSON array of patch operations as defined in RFC 6902. See
-     *     http://jsonpatch.com/ for more info. &lt;br/&gt;[     {
-     *     \&quot;op\&quot;: \&quot;add\&quot;, \&quot;path\&quot;:
-     *     \&quot;/metadata/rov/collaborator_ids/test-iam-id\&quot;,
-     *     \&quot;value\&quot;:
-     *     {\&quot;user_id\&quot;:\&quot;test@us.ibm.com\&quot;,
-     *     \&quot;user_iam_id\&quot;:\&quot;test-iam-id\&quot;},     {
-     *     \&quot;op\&quot;: \&quot;replace\&quot;, \&quot;path\&quot;:
-     *     \&quot;/metadata/rov/collaborator_ids/test-iam-id\&quot;,
-     *     \&quot;value\&quot;:
-     *     {\&quot;user_id\&quot;:\&quot;test2-iam-id\&quot;},
-     *     \&quot;user_iam_id\&quot;:\&quot;test-iam-id\&quot;    {
-     *     \&quot;op\&quot;: \&quot;remove\&quot;, \&quot;path\&quot;:
-     *     \&quot;/metadata/rov/collaborator_ids/test2-iam-id\&quot;}]
-     *     (DEPRECATED) [     { \&quot;op\&quot;: \&quot;add\&quot;,
-     *     \&quot;path\&quot;:
-     *     \&quot;/metadata/rov/collaborators/test@us.ibm.com\&quot;,
-     *     \&quot;value\&quot;:
-     *     {\&quot;user_id\&quot;:\&quot;test@us.ibm.com\&quot;},     {
-     *     \&quot;op\&quot;: \&quot;replace\&quot;, \&quot;path\&quot;:
-     *     \&quot;/metadata/rov/collaborators/test@us.ibm.com\&quot;,
-     *     \&quot;value\&quot;:
-     *     {\&quot;user_id\&quot;:\&quot;test2@us.ibm.com\&quot;},     {
-     *     \&quot;op\&quot;: \&quot;remove\&quot;, \&quot;path\&quot;:
-     *     \&quot;/metadata/rov/collaborators/test2@us.ibm.com\&quot;} ]
+     *     http://jsonpatch.com/ for more info.
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param projectId You must provide either a catalog id, a project id, or a
@@ -103,24 +101,12 @@ public class AssetsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Asset> addAndUpdateCollaborators(String assetId,
-                                                 List<JSONResourcePatchModel> body,
+    public Mono<Asset> addAndUpdateCollaborators(@NonNull String assetId,
+                                                 @NonNull List<JSONResourcePatchModel> body,
                                                  String catalogId,
                                                  String projectId,
                                                  String spaceId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling addAndUpdateNewAssetCollaboratorsV2");
-        }
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling addAndUpdateNewAssetCollaboratorsV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -150,40 +136,19 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Clone an asset
-     * Use this API to clone catalog asset to project. This will create new copy
-     * of asset metadata, including asset attachments. <p><b>201</b> - Created
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Clone catalog asset to project. This will create new copy
+     * of asset metadata, including asset attachments.
      * @param catalogId catalog_id must be provided
      * @param assetId asset_id
      * @param assetCopyTo copy asset to
-     * @return {@code Mono<AssetCreateResponse>}
+     * @return AssetCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetCreateResponse> clone(String catalogId, String assetId, AssetCopyTo assetCopyTo) throws RestClientException {
+    public Mono<AssetCreateResponse> clone(@NonNull String catalogId,
+                                           @NonNull String assetId,
+                                           @NonNull AssetCopyTo assetCopyTo) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling cloneAssetV2");
-        }
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling cloneAssetV2");
-        }
-        // verify the required parameter 'assetCopyTo' is set
-        if (assetCopyTo == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetCopyTo' when calling cloneAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -210,35 +175,22 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Commit a revision of an asset
-     * Use this API to commit a revision of an asset in project or space.
-     * <p><b>201</b> - Created
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>409</b> - Conflict
-     * <p><b>500</b> - Internal Server Error
+     * Commit a revision of an asset in project or space.
      * @param assetId asset_id
      * @param projectId You must provide either a a project id, or a space id, but
      *     not more than one
      * @param spaceId You must provide either a a project id, or a space id, but
      *     not more than one
      * @param assetCommitOptions Commit options
-     * @return {@code Mono<AssetCreateResponse>}
+     * @return AssetCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetCreateResponse> commitRevision(String assetId,
+    public Mono<AssetCreateResponse> commitRevision(@NonNull String assetId,
                                                     String projectId,
                                                     String spaceId,
                                                     AssetCommitOptions assetCommitOptions) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling commitRevision");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -267,34 +219,7 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Create an asset
-     * Use this API to create an asset in catalog or project. Assets contain
-     * information about the contents of your data and how to access the data. You
-     * store asset metadata in a catalog and add collaborators from your
-     * organization to analyze data. Your data can reside in a variety of sources.
-     * For example, you can keep your data in your existing on-premises data
-     * sources, cloud data services, or streaming data feeds. By adding connection
-     * information to these remote sources in the catalog, you can allow other
-     * catalog users to access the data with the stored credentials.
-     * Alternatively, you can copy a snapshot of the remote data into the
-     * catalog&#39;s encrypted cloud storage.&lt;br/&gt;All asset types have a
-     * common set of properties. Some asset types have additional
-     * properties.&lt;br/&gt;When you add an asset to a catalog, you specify these
-     * common properties:  * The asset name and an optional description. The name
-     * can only contain letters, numbers, underscore, dash, space, and period. The
-     * name can&#39;t be only blank spaces.  * Privacy. You can choose to restrict
-     * access to the asset with the privacy level and asset membership.    *
-     * Public &#x3D; Default. No restrictions on finding or using the asset.   *
-     * Private &#x3D; Only asset members can find or use the asset.  * Members.
-     * The catalog collaborators can be added as members of the asset. Members are
-     * important if you restrict access to the asset. When you create an asset,
-     * you are the owner (and a member) of it.  * Tags. Metadata that makes
-     * searching for the asset easier. Tags can contain only letters, numbers,
-     * underscores, dashes, and the symbols # and @. <p><b>201</b> - Created
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Create an asset in catalog or project.
      * @param asset Asset metadata
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -302,18 +227,15 @@ public class AssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return {@code Mono<AssetCreateResponse>}
+     * @return AssetCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetCreateResponse> create(Asset asset, String catalogId, String projectId, String spaceId) throws RestClientException {
+    public Mono<AssetCreateResponse> create(@NonNull Asset asset,
+                                            String catalogId,
+                                            String projectId,
+                                            String spaceId) throws RestClientException {
 
-        // verify the required parameter 'asset' is set
-        if (asset == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'asset' when calling createNewAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -340,47 +262,15 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Publish an asset from a project which is only referenced in that project
-     * Use this API to publish an asset whose only metadata are only in project as
-     * reference to a target catalog. Assets contain information about the
-     * contents of your data and how to access the data. You store asset metadata
-     * in a catalog and add collaborators from your organization to analyze data.
-     * Your data can reside in a variety of sources. For example, you can keep
-     * your data in your existing on-premises data sources, cloud data services,
-     * or streaming data feeds. By adding connection information to these remote
-     * sources in the catalog, you can allow other catalog users to access the
-     * data with the stored credentials. Alternatively, you can copy a snapshot of
-     * the remote data into the catalog&#39;s encrypted cloud
-     * storage.&lt;br/&gt;All asset types have a common set of properties. Some
-     * asset types have additional properties.&lt;br/&gt;When you add an asset to
-     * a catalog, you specify these common properties:  * The asset name and an
-     * optional description. The name can only contain letters, numbers,
-     * underscore, dash, space, and period. The name can&#39;t be only blank
-     * spaces.  * Privacy. You can choose to restrict access to the asset with the
-     * privacy level and asset membership.    * Public &#x3D; Default. No
-     * restrictions on finding or using the asset.   * Private &#x3D; Only asset
-     * members can find or use the asset.  * Members. The catalog collaborators
-     * can be added as members of the asset. Members are important if you restrict
-     * access to the asset. When you create an asset, you are the owner (and a
-     * member) of it.  * Tags. Metadata that makes searching for the asset easier.
-     * Tags can contain only letters, numbers, underscores, dashes, and the
-     * symbols # and @. <p><b>201</b> - Created <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
-     * @param publishAssetOnlyAssetMetada Asset metadata
-     * @return {@code Mono<AssetCreateResponse>}
+     * Publish an asset whose only metadata are only in project as
+     * reference to a target catalog.
+     * @param publishAssetOnlyAssetMetadata Asset metadata
+     * @return AssetCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetCreateResponse> publishMetadata(PublishAssetOnlyAssetMetada publishAssetOnlyAssetMetada) throws RestClientException {
+    public Mono<AssetCreateResponse> publishMetadata(@NonNull PublishAssetOnlyAssetMetada publishAssetOnlyAssetMetadata) throws RestClientException {
 
-        // verify the required parameter 'publishAssetOnlyAssetMetada' is set
-        if (publishAssetOnlyAssetMetada == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'publishAssetOnlyAssetMetada' when calling createVirtualAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -397,20 +287,15 @@ public class AssetsApiV2 {
         ParameterizedTypeReference<AssetCreateResponse> localVarReturnType = new ParameterizedTypeReference<AssetCreateResponse>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/publish", HttpMethod.POST, pathParams, queryParams,
-                publishAssetOnlyAssetMetada, headerParams, cookieParams, formParams, localVarAccept,
+                publishAssetOnlyAssetMetadata, headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 
     }
 
     /**
-     * Marks an existing asset for delete
-     * Use this API to delete an existing asset properties. You can delete an
+     * Delete an existing asset. You can delete an
      * asset if you are the owner of the asset or a member of the asset with Admin
-     * or Editor permissions on the catalog or project. <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * or Editor permissions on the catalog or project.
      * @param assetId asset_id
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -419,19 +304,17 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param purgeOnDelete If true, asset is also deleted from the trash.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String assetId, String catalogId, String projectId, String spaceId, Boolean purgeOnDelete)
+    public Mono<Void> delete(@NonNull String assetId,
+                             String catalogId,
+                             String projectId,
+                             String spaceId,
+                             Boolean purgeOnDelete)
             throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling deleteNewAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -461,13 +344,7 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Delete an asset rating
-     * Use this API to delete an asset rating.
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Delete an asset rating.
      * @param assetId asset_id
      * @param assetRatingId asset_rating_id
      * @param catalogId You must provide either a catalog id, a project id, or a
@@ -477,31 +354,19 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use "latest" for the most recent
      *     revision.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> deleteRating(String assetId,
-                                   String assetRatingId,
+    public Mono<Void> deleteRating(@NonNull String assetId,
+                                   @NonNull String assetRatingId,
                                    String catalogId,
                                    String projectId,
                                    String spaceId,
                                    String revisionId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling deleteRating");
-        }
-        // verify the required parameter 'assetRatingId' is set
-        if (assetRatingId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetRatingId' when calling deleteRating");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -532,13 +397,7 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Get ratings of an asset
      * Get ratings for the specified asset.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
      * @param assetId asset_id
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -547,24 +406,21 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
-     * @param limit The maximum number of asset ratings to return.&lt;br/&gt;The
+     * @param limit The maximum number of asset ratings to return. The
      *     default value is 25.
      * @param start Bookmark that gives the start of the page.
-     * @param sort Sorting order.&lt;BR/&gt; Valid values:
-     *     &lt;code&gt;updated_at&lt;/code&gt;,
-     *     &lt;code&gt;rating&lt;/code&gt;&lt;BR/&gt; Use hyphen prefix (-) for
-     *     descending order
-     * @param userFilter Filter results by user.&lt;BR/&gt; Valid values:
-     *     &lt;code&gt;all&lt;/code&gt;, &lt;code&gt;user&lt;/code&gt;,
-     *     &lt;code&gt;other&lt;/code&gt;&lt;br/&gt; The default value is
-     *     &lt;code&gt;all&lt;/code&gt;
+     * @param sort Sorting order. Valid values: <code>updated_at</code>, <code>rating</code>.
+     *     Use hyphen prefix (-) for descending order
+     * @param userFilter Filter results by user. Valid values:
+     *     <code>all</code>, <code>user</code>,<code>other</code>. The default value is
+     *     <code>all</code>.
      * @return TokenPaginatedAssetRatingList
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<TokenPaginatedAssetRatingList> getRatings(String assetId,
+    public Mono<TokenPaginatedAssetRatingList> getRatings(@NonNull String assetId,
                                                           String catalogId,
                                                           String projectId,
                                                           String spaceId,
@@ -574,12 +430,6 @@ public class AssetsApiV2 {
                                                           String sort,
                                                           String userFilter) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling getRatings");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -613,13 +463,7 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Get the count of each rating value for the specified asset
      * Get the counts of each rating value for the specified asset.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
      * @param assetId asset_id
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -628,24 +472,18 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
      * @return AssetRatingStatsResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetRatingStatsResponse> getRatingsStats(String assetId,
+    public Mono<AssetRatingStatsResponse> getRatingsStats(@NonNull String assetId,
                                                           String catalogId,
                                                           String projectId,
                                                           String spaceId,
                                                           String revisionId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling getRatingsStats");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -676,52 +514,34 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Promote an asset
-     * Use this API to promote project assets to space. You must have Admin or
-     * Editor permissions on both the project and the space. <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Promote project assets to space. You must have Admin or
+     * Editor permissions on both the project and the space.
+     * <br/><br/>
+     * Example body:
+     * <code>{ "mode": 0, "space_id": "string", "metadata": { "name": "string", "description": "string", "tags": [ "string", "string" ] }}</code>
      * @param projectId project_id must be provided
      * @param assetId asset_id
-     * @param body Asset permission and metadata.  Example: { \&quot;mode\&quot;:
-     *     0, \&quot;space_id\&quot;:\&quot;string\&quot;,
-     *     \&quot;metadata\&quot;:{\&quot;name\&quot;:\&quot;string\&quot;,
-     *     \&quot;description\&quot;:\&quot;string\&quot;,
-     *     \&quot;tags\&quot;:[\&quot;string\&quot;,\&quot;string\&quot;]} }
-     *     Values for mode is 0 (public), 8 (private), 16 (hidden).     If not
+     * @param body Asset permission and metadata.
+     *     Values for mode are 0 (public), 8 (private), 16 (hidden).     If not
      *     supplied, the currently existing mode applies.     space_id is the
      *     target space id.    Metadata may contain attributes to overwrite the
      *     values in original asset; currently only name, description and tags may
      *     be overwritten.
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> promote(String projectId, String assetId, String body, String revisionId) throws RestClientException {
+    public Mono<Void> promote(@NonNull String projectId,
+                              @NonNull String assetId,
+                              @NonNull String body,
+                              String revisionId) throws RestClientException {
 
-        // verify the required parameter 'projectId' is set
-        if (projectId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'projectId' when calling promoteAssetV2");
-        }
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling promoteAssetV2");
-        }
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling promoteAssetV2");
-        }
+        // TODO: replace 'body' parameter with an actual bean defining the structure (and 'mode' with an enumeration)
+        //  (see below for PublishAssetRequest that has similar structure)
+
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -749,24 +569,18 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Publish an asset
-     * Use this API to publish project assets to catalog. You can publish data
+     * Publish project assets to catalog. You can publish data
      * assets from a project into a catalog. You must have Admin or Editor
-     * permissions on both the project and the catalog. <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * permissions on both the project and the catalog.
+     * <br/><br/>
+     * Example body:
+     * <code>{ "mode": 0, "catalog_id": "string", "metadata": { "name": "string", "description": "string", "tags": [ "string", "string" ] }}</code>
      * @param projectId project_id must be provided
      * @param assetId asset_id
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
-     * @param body Asset permission and metadata.  Example: { \&quot;mode\&quot;:
-     *     0, \&quot;catalog_id\&quot;:\&quot;string\&quot;,
-     *     \&quot;metadata\&quot;:{\&quot;name\&quot;:\&quot;string\&quot;,
-     *     \&quot;description\&quot;:\&quot;string\&quot;,
-     *     \&quot;tags\&quot;:[\&quot;string\&quot;,\&quot;string\&quot;]} }
+     * @param body Asset permission and metadata.
      *     Values for mode is 0 (public), 8 (private), 16 (hidden).     If not
      *     supplied, the currently existing mode applies.     catalog_id is the
      *     target catalog id. To support backwards compatibility when it is not
@@ -774,24 +588,15 @@ public class AssetsApiV2 {
      *     project.    Metadata may contain attributes to overwrite the values in
      *     original asset; currently only name, description and tags may be
      *     overwritten.
-     * @return {@code Mono<AssetCreateResponse>}
+     * @return AssetCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetCreateResponse> publishData(String projectId, String assetId, String revisionId, PublishAssetRequest body) throws RestClientException {
+    public Mono<AssetCreateResponse> publishData(@NonNull String projectId,
+                                                 @NonNull String assetId,
+                                                 String revisionId,
+                                                 PublishAssetRequest body) throws RestClientException {
 
-        // verify the required parameter 'projectId' is set
-        if (projectId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'projectId' when calling publishNewAssetV2");
-        }
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling publishNewAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -819,14 +624,7 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Rate an asset
      * Use this API to rate an asset.
-     * <p><b>200</b> - successful operation
-     * <p><b>201</b> - Created
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
      * @param assetId asset_id
      * @param assetRatingEntity Asset rating to be created
      * @param catalogId You must provide either a catalog id, a project id, or a
@@ -836,31 +634,19 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
      * @return AssetRating
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetRating> rateAsset(String assetId,
-                                       AssetRatingEntity assetRatingEntity,
+    public Mono<AssetRating> rateAsset(@NonNull String assetId,
+                                       @NonNull AssetRatingEntity assetRatingEntity,
                                        String catalogId,
                                        String projectId,
                                        String spaceId,
                                        String revisionId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling rateAsset");
-        }
-        // verify the required parameter 'assetRatingEntity' is set
-        if (assetRatingEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetRatingEntity' when calling rateAsset");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -890,17 +676,12 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Get an asset
-     * Use this API to retrieve an asset located in catalog or project. Access to
+     * Retrieve an asset located in catalog or project. Access to
      * an asset is controlled by a combination of the privacy level and the
      * members of the asset. For a governed catalog, data assets are protected
      * from unauthorized access by the governance policies that are defined in
      * Data Catalog. Data assets in ungoverned catalogs are not subject to
-     * governance policies. <p><b>200</b> - OK <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * governance policies.
      * @param assetId asset_id
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -909,24 +690,18 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
-     * @return {@code Mono<MetadataEntityResult>}
+     * @return MetadataEntityResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MetadataEntityResult> get(String assetId,
+    public Mono<MetadataEntityResult> get(@NonNull String assetId,
                                           String catalogId,
                                           String projectId,
                                           String spaceId,
                                           String revisionId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling retrieveNewAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -956,11 +731,8 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Get a list of revisions for an asset
-     * Use this API to retrieve an ordered list of revisions for an asset, most to
-     * least recent. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b>
-     * - Unauthorized <p><b>403</b> - Forbidden <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve an ordered list of revisions for an asset, most to
+     * least recent.
      * @param assetId asset_id
      * @param projectId You must provide either a a project id, or a space id, but
      *     not more than one
@@ -968,20 +740,18 @@ public class AssetsApiV2 {
      *     not more than one
      * @param limit The maximum number of revisions to return. The default is 25.
      *     Maximum is 200
-     * @param start The revision number to start from, or &#39;latest&#39;. Latest
+     * @param start The revision number to start from, or <code>latest</code>. Latest
      *     revision is the default.
-     * @return {@code Mono<FindAssetsResponse>}
+     * @return FindAssetsResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<FindAssetsResponse> getRevisions(String assetId, String projectId, String spaceId, Integer limit, String start) throws RestClientException {
+    public Mono<FindAssetsResponse> getRevisions(@NonNull String assetId,
+                                                 String projectId,
+                                                 String spaceId,
+                                                 Integer limit,
+                                                 String start) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling retrieveRevisions");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1012,14 +782,9 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Update the owner of an asset
-     * Use this API to assign new owner of an asset. You must be the current owner
+     * Assign new owner of an asset. You must be the current owner
      * of the asset or a collaborator of the asset with Admin permissions to
-     * change the owner. <p><b>200</b> - OK <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * change the owner.
      * @param assetId asset_id
      * @param assetOwner Asset Owner
      * @param catalogId You must provide either a catalog id, a project id, or a
@@ -1028,28 +793,16 @@ public class AssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return {@code Mono<MetadataEntityResult>}
+     * @return MetadataEntityResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MetadataEntityResult> updateOwner(String assetId,
-                                                  AssetOwner assetOwner,
+    public Mono<MetadataEntityResult> updateOwner(@NonNull String assetId,
+                                                  @NonNull AssetOwner assetOwner,
                                                   String catalogId,
                                                   String projectId,
                                                   String spaceId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling updateNewAssetOwnerV2");
-        }
-        // verify the required parameter 'assetOwner' is set
-        if (assetOwner == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetOwner' when calling updateNewAssetOwnerV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1078,14 +831,11 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Update privacy settings of an asset
-     * Use this API to change privacy settings on an asset.&lt;br/&gt;  * The
-     * owner of the asset or asset collaborators with the Admin role can change
-     * the owner of the asset or delete the asset.  * Asset collaborators with the
-     * Editor, Auditor, or Admin role can change the asset members or the privacy
-     * setting. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Change privacy settings on an asset.
+     * <ul>
+     *     <li>The owner of the asset or asset collaborators with the Admin role can change the owner of the asset or delete the asset.</li>
+     *     <li>Asset collaborators with the Editor, Auditor, or Admin role can change the asset members or the privacy setting.</li>
+     * </ul>
      * @param assetId asset_id
      * @param assetRovMembers Asset ROV
      * @param catalogId You must provide either a catalog id, a project id, or a
@@ -1094,28 +844,16 @@ public class AssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return {@code Mono<MetadataEntityResult>}
+     * @return MetadataEntityResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MetadataEntityResult> updateRov(String assetId,
-                                                BaseRov assetRovMembers,
+    public Mono<MetadataEntityResult> updateRov(@NonNull String assetId,
+                                                @NonNull BaseRov assetRovMembers,
                                                 String catalogId,
                                                 String projectId,
                                                 String spaceId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling updateNewAssetRovV2");
-        }
-        // verify the required parameter 'assetRovMembers' is set
-        if (assetRovMembers == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetRovMembers' when calling updateNewAssetRovV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1144,51 +882,40 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Update an asset
-     * Use this API to edit  an existing asset properties, if you have proper
+     * Edit an existing asset's properties, if you have proper
      * permissions. Who can edit asset properties depends on the privacy setting
-     * of the asset:&lt;br/&gt;If the asset privacy setting is public, you must
-     * have Editor or Admin permissions on the catalog to edit asset properties.
-     * If the asset privacy setting is private, you must have Editor or Admin
-     * permissions on the catalog and be an asset member to edit asset properties.
-     * You can edit these asset properties:  * Name   * Description   * Tags   *
-     * Classification   * Resource key   *
-     * source_system.last_modification_timestamp, Expected Format:
-     * \&quot;yyyy-MM-ddTHH:mm:ssX\&quot; <p><b>200</b> - OK <p><b>204</b> - No
-     * Content <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * of the asset:
+     * <ul>
+     *     <li>If the asset privacy setting is public, you must have Editor or Admin permissions on the catalog to edit asset properties.</li>
+     *     <li>If the asset privacy setting is private, you must have Editor or Admin permissions on the catalog and be an asset member to edit asset properties.</li>
+     * </ul>
+     * You can edit these asset properties:
+     * <ul>
+     *     <li>Name</li>
+     *     <li>Description</li>
+     *     <li>Tags</li>
+     *     <li>Classification</li>
+     *     <li>Resource key <code>source_system.last_modification_timestamp</code> (with format: <code>yyyy-MM-ddTHH:mm:ssX</code>)</li>
+     * </ul>
      * @param assetId asset_id
      * @param body JSON array of patch operations as defined in RFC
-     *     6902.&lt;br/&gt;
+     *     6902.
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param projectId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return Asset
+     * @return MetadataEntityResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MetadataEntityResult> update(String assetId,
-                                             List<JSONResourcePatchModel> body,
+    public Mono<MetadataEntityResult> update(@NonNull String assetId,
+                                             @NonNull List<JSONResourcePatchModel> body,
                                              String catalogId,
                                              String projectId,
                                              String spaceId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling updateNewAssetV2");
-        }
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling updateNewAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1217,13 +944,7 @@ public class AssetsApiV2 {
     }
 
     /**
-     * Update an asset rating
-     * Use this API to update an asset rating.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Update an asset rating.
      * @param assetId asset_id
      * @param assetRatingId asset_rating_id
      * @param assetRatingEntity Asset rating to be updated
@@ -1234,38 +955,20 @@ public class AssetsApiV2 {
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
      * @return AssetRating
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetRating> updateRating(String assetId,
-                                          String assetRatingId,
-                                          AssetRatingEntity assetRatingEntity,
+    public Mono<AssetRating> updateRating(@NonNull String assetId,
+                                          @NonNull String assetRatingId,
+                                          @NonNull AssetRatingEntity assetRatingEntity,
                                           String catalogId,
                                           String projectId,
                                           String spaceId,
                                           String revisionId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling updateRating");
-        }
-        // verify the required parameter 'assetRatingId' is set
-        if (assetRatingId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetRatingId' when calling updateRating");
-        }
-        // verify the required parameter 'assetRatingEntity' is set
-        if (assetRatingEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetRatingEntity' when calling updateRating");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

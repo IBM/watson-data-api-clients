@@ -21,13 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,17 +50,14 @@ public class RoleManagementApi {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Create role
-     * If the provided roles do not meet your needs, you can create other roles.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
+     * Create role.
+     * If the provided roles do not meet your needs, you can use this method to create other roles.
      * @param createRoleParamsBody Information for creating a role
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> create(CreateRoleParamsBody createRoleParamsBody) throws RestClientException {
+    public Mono<BaseResponse> create(CreateRoleParamsBody createRoleParamsBody) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -76,7 +72,7 @@ public class RoleManagementApi {
         final String[] localVarContentTypes = {"application/json"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 BASE_API, HttpMethod.POST, pathParams, queryParams, createRoleParamsBody,
                 headerParams, cookieParams, formParams, localVarAccept,
@@ -85,25 +81,14 @@ public class RoleManagementApi {
     }
 
     /**
-     * Delete role
      * Delete a role from the cluster.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal error
      * @param roleName The name of the role.
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> delete(String roleName) throws RestClientException {
+    public Mono<BaseResponse> delete(@NonNull String roleName) throws RestClientException {
 
-        // verify the required parameter 'roleName' is set
-        if (roleName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'roleName' when calling deleteRole");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -119,7 +104,7 @@ public class RoleManagementApi {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/{role_name}", HttpMethod.DELETE, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
@@ -128,11 +113,7 @@ public class RoleManagementApi {
     }
 
     /**
-     * List all permissions
-     * Returns all permissions in the cluster.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
+     * List all permissions in the cluster.
      * @return GetPermissionsResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
@@ -161,11 +142,7 @@ public class RoleManagementApi {
     }
 
     /**
-     * List all roles
-     * Returns the user roles in the cluster.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
+     * List all roles in the cluster.
      * @return GetAllRolesResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
@@ -194,25 +171,14 @@ public class RoleManagementApi {
     }
 
     /**
-     * Get role information
-     * Get details about one role.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal error
+     * Get details about a role.
      * @param roleName The name of the role.
      * @return GetRoleResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GetRoleResponse> get(String roleName) throws RestClientException {
+    public Mono<GetRoleResponse> get(@NonNull String roleName) throws RestClientException {
 
-        // verify the required parameter 'roleName' is set
-        if (roleName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'roleName' when calling getRole");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -237,26 +203,16 @@ public class RoleManagementApi {
     }
 
     /**
-     * Update role
      * Update the name, description, and permissions associated with a role.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal error
      * @param roleName The name of the role.
      * @param updateRoleParamsBody The updated role information.
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> update(String roleName, UpdateRoleParamsBody updateRoleParamsBody) throws RestClientException {
+    public Mono<BaseResponse> update(@NonNull String roleName,
+                                     UpdateRoleParamsBody updateRoleParamsBody) throws RestClientException {
 
-        // verify the required parameter 'roleName' is set
-        if (roleName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'roleName' when calling updateRole");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -272,7 +228,7 @@ public class RoleManagementApi {
         final String[] localVarContentTypes = {"application/json"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/{role_name}", HttpMethod.PUT, pathParams, queryParams,
                 updateRoleParamsBody, headerParams, cookieParams, formParams, localVarAccept,

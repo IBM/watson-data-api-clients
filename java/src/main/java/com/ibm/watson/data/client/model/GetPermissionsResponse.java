@@ -17,8 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,20 +25,10 @@ import java.util.Objects;
 /**
  * GetPermissionsResponse
  */
-@JsonPropertyOrder({
-        GetPermissionsResponse.JSON_PROPERTY_MESSAGE_CODE,
-        GetPermissionsResponse.JSON_PROPERTY_MESSAGE,
-        GetPermissionsResponse.JSON_PROPERTY_PERMISSIONS
-})
 public class GetPermissionsResponse {
 
-    public static final String JSON_PROPERTY_MESSAGE_CODE = "messageCode";
     private String messageCode;
-
-    public static final String JSON_PROPERTY_MESSAGE = "message";
     private String message;
-
-    public static final String JSON_PROPERTY_PERMISSIONS = "Permissions";
     private List<String> permissions = null;
 
     public GetPermissionsResponse messageCode(String messageCode) {
@@ -53,17 +41,10 @@ public class GetPermissionsResponse {
      * @return messageCode
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The identifier of the response.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessageCode() {
-        return messageCode;
-    }
-
-    public void setMessageCode(String messageCode) {
-        this.messageCode = messageCode;
-    }
+    @JsonProperty("messageCode")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessageCode() { return messageCode; }
+    public void setMessageCode(String messageCode) { this.messageCode = messageCode; }
 
     public GetPermissionsResponse message(String message) {
         this.message = message;
@@ -75,14 +56,9 @@ public class GetPermissionsResponse {
      * @return message
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The explanation of the `messageCode`.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessage() {
-        return message;
-    }
-
+    @JsonProperty("message")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
     public GetPermissionsResponse permissions(List<String> permissions) {
@@ -103,29 +79,17 @@ public class GetPermissionsResponse {
      * @return permissions
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The array of permissions.")
-    @JsonProperty(JSON_PROPERTY_PERMISSIONS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<String> permissions) {
-        this.permissions = permissions;
-    }
+    @JsonProperty("Permissions")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getPermissions() { return permissions; }
+    public void setPermissions(List<String> permissions) { this.permissions = permissions; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         GetPermissionsResponse getPermissionsResponse = (GetPermissionsResponse)o;
-        return Objects.equals(this.messageCode,
-                getPermissionsResponse.messageCode) &&
+        return Objects.equals(this.messageCode, getPermissionsResponse.messageCode) &&
                 Objects.equals(this.message, getPermissionsResponse.message) &&
                 Objects.equals(this.permissions, getPermissionsResponse.permissions);
     }
@@ -139,13 +103,9 @@ public class GetPermissionsResponse {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class GetPermissionsResponse {\n");
-        sb.append("    messageCode: ")
-                .append(toIndentedString(messageCode))
-                .append("\n");
+        sb.append("    messageCode: ").append(toIndentedString(messageCode)).append("\n");
         sb.append("    message: ").append(toIndentedString(message)).append("\n");
-        sb.append("    permissions: ")
-                .append(toIndentedString(permissions))
-                .append("\n");
+        sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -155,9 +115,7 @@ public class GetPermissionsResponse {
      * (except the first line).
      */
     private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

@@ -17,9 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,21 +24,10 @@ import java.util.Objects;
 /**
  * A list of catalogs.
  */
-@ApiModel(description = "A list of catalogs.")
-@JsonPropertyOrder({
-        Catalogs.JSON_PROPERTY_CATALOGS,
-        Catalogs.JSON_PROPERTY_NEXT_BOOKMARK,
-        Catalogs.JSON_PROPERTY_NEXT_SKIP
-})
 public class Catalogs {
 
-    public static final String JSON_PROPERTY_CATALOGS = "catalogs";
     private List<Catalog> catalogs = null;
-
-    public static final String JSON_PROPERTY_NEXT_BOOKMARK = "nextBookmark";
     private String nextBookmark;
-
-    public static final String JSON_PROPERTY_NEXT_SKIP = "nextSkip";
     private Integer nextSkip;
 
     public Catalogs catalogs(List<Catalog> catalogs) {
@@ -62,17 +48,10 @@ public class Catalogs {
      * @return catalogs
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "A list of catalogs returned in the query results.")
-    @JsonProperty(JSON_PROPERTY_CATALOGS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<Catalog> getCatalogs() {
-        return catalogs;
-    }
-
-    public void setCatalogs(List<Catalog> catalogs) {
-        this.catalogs = catalogs;
-    }
+    @JsonProperty("catalogs")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<Catalog> getCatalogs() { return catalogs; }
+    public void setCatalogs(List<Catalog> catalogs) { this.catalogs = catalogs; }
 
     public Catalogs nextBookmark(String nextBookmark) {
         this.nextBookmark = nextBookmark;
@@ -84,19 +63,10 @@ public class Catalogs {
      * @return nextBookmark
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example = "g1AAAABceJzLYWBgYMxgTmEwT84vTc5ISXIoTynQhbJ1DfSQeHpVqXl6xWXJesk5pcUlqUV6OfnJiTk5QAOYEhmS6v___5-VweRmfz99VgJQLJEtCwBqCx8s",
-            value = "The next bookmark for returned query results.")
-    @JsonProperty(JSON_PROPERTY_NEXT_BOOKMARK)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getNextBookmark() {
-        return nextBookmark;
-    }
-
-    public void setNextBookmark(String nextBookmark) {
-        this.nextBookmark = nextBookmark;
-    }
+    @JsonProperty("nextBookmark")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getNextBookmark() { return nextBookmark; }
+    public void setNextBookmark(String nextBookmark) { this.nextBookmark = nextBookmark; }
 
     public Catalogs nextSkip(Integer nextSkip) {
         this.nextSkip = nextSkip;
@@ -108,24 +78,15 @@ public class Catalogs {
      * @return nextSkip
      */
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example = "0",
-            value = "The next result to skip in the returned query results.")
-    @JsonProperty(JSON_PROPERTY_NEXT_SKIP)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
+    @JsonProperty("nextSkip")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public Integer getNextSkip() { return nextSkip; }
-
     public void setNextSkip(Integer nextSkip) { this.nextSkip = nextSkip; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         Catalogs catalogs = (Catalogs)o;
         return Objects.equals(this.catalogs, catalogs.catalogs) &&
                 Objects.equals(this.nextBookmark, catalogs.nextBookmark) &&
@@ -141,15 +102,9 @@ public class Catalogs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Catalogs {\n");
-        sb.append("    catalogs: ")
-                .append(toIndentedString(catalogs))
-                .append("\n");
-        sb.append("    nextBookmark: ")
-                .append(toIndentedString(nextBookmark))
-                .append("\n");
-        sb.append("    nextSkip: ")
-                .append(toIndentedString(nextSkip))
-                .append("\n");
+        sb.append("    catalogs: ").append(toIndentedString(catalogs)).append("\n");
+        sb.append("    nextBookmark: ").append(toIndentedString(nextBookmark)).append("\n");
+        sb.append("    nextSkip: ").append(toIndentedString(nextSkip)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -159,9 +114,7 @@ public class Catalogs {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

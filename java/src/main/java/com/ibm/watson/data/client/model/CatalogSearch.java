@@ -17,9 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,33 +25,13 @@ import java.util.Objects;
 /**
  * Catalog Search Model
  */
-@ApiModel(description = "Catalog Search Model")
-@JsonPropertyOrder({
-        CatalogSearch.JSON_PROPERTY_QUERY,
-        CatalogSearch.JSON_PROPERTY_LIMIT,
-        CatalogSearch.JSON_PROPERTY_COUNTS,
-        CatalogSearch.JSON_PROPERTY_DRILLDOWN,
-        CatalogSearch.JSON_PROPERTY_SORT,
-        CatalogSearch.JSON_PROPERTY_INCLUDE
-})
 public class CatalogSearch {
 
-    public static final String JSON_PROPERTY_QUERY = "query";
     private String query;
-
-    public static final String JSON_PROPERTY_LIMIT = "limit";
     private Integer limit;
-
-    public static final String JSON_PROPERTY_COUNTS = "counts";
     private List<String> counts = null;
-
-    public static final String JSON_PROPERTY_DRILLDOWN = "drilldown";
     private List<Map<String, List<String>>> drilldown = null;
-
-    public static final String JSON_PROPERTY_SORT = "sort";
     private String sort;
-
-    public static final String JSON_PROPERTY_INCLUDE = "include";
     private String include;
 
     public CatalogSearch query(String query) {
@@ -66,14 +43,9 @@ public class CatalogSearch {
      * Lucene query
      * @return query
      **/
-    @ApiModelProperty(required = true, value = "Lucene query")
-    @JsonProperty(JSON_PROPERTY_QUERY)
+    @JsonProperty("query")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getQuery() {
-        return query;
-    }
-
+    public String getQuery() { return query; }
     public void setQuery(String query) { this.query = query; }
 
     public CatalogSearch limit(Integer limit) {
@@ -86,14 +58,9 @@ public class CatalogSearch {
      * @return limit
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_LIMIT)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Integer getLimit() {
-        return limit;
-    }
-
+    @JsonProperty("limit")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Integer getLimit() { return limit; }
     public void setLimit(Integer limit) { this.limit = limit; }
 
     public CatalogSearch counts(List<String> counts) {
@@ -114,14 +81,9 @@ public class CatalogSearch {
      * @return counts
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_COUNTS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<String> getCounts() {
-        return counts;
-    }
-
+    @JsonProperty("counts")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getCounts() { return counts; }
     public void setCounts(List<String> counts) { this.counts = counts; }
 
     public CatalogSearch drilldown(List<Map<String, List<String>>> drilldown) {
@@ -142,17 +104,10 @@ public class CatalogSearch {
      * @return drilldown
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_DRILLDOWN)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<Map<String, List<String>>> getDrilldown() {
-        return drilldown;
-    }
-
-    public void setDrilldown(List<Map<String, List<String>>> drilldown) {
-        this.drilldown = drilldown;
-    }
+    @JsonProperty("drilldown")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<Map<String, List<String>>> getDrilldown() { return drilldown; }
+    public void setDrilldown(List<Map<String, List<String>>> drilldown) { this.drilldown = drilldown; }
 
     public CatalogSearch sort(String sort) {
         this.sort = sort;
@@ -164,14 +119,9 @@ public class CatalogSearch {
      * @return sort
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Sort order for the query")
-    @JsonProperty(JSON_PROPERTY_SORT)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getSort() {
-        return sort;
-    }
-
+    @JsonProperty("sort")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getSort() { return sort; }
     public void setSort(String sort) { this.sort = sort; }
 
     public CatalogSearch include(String include) {
@@ -184,24 +134,15 @@ public class CatalogSearch {
      * @return include
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "entity", value = "entity")
-    @JsonProperty(JSON_PROPERTY_INCLUDE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getInclude() {
-        return include;
-    }
-
+    @JsonProperty("include")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getInclude() { return include; }
     public void setInclude(String include) { this.include = include; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         CatalogSearch catalogSearch = (CatalogSearch)o;
         return Objects.equals(this.query, catalogSearch.query) &&
                 Objects.equals(this.limit, catalogSearch.limit) &&
@@ -223,9 +164,7 @@ public class CatalogSearch {
         sb.append("    query: ").append(toIndentedString(query)).append("\n");
         sb.append("    limit: ").append(toIndentedString(limit)).append("\n");
         sb.append("    counts: ").append(toIndentedString(counts)).append("\n");
-        sb.append("    drilldown: ")
-                .append(toIndentedString(drilldown))
-                .append("\n");
+        sb.append("    drilldown: ").append(toIndentedString(drilldown)).append("\n");
         sb.append("    sort: ").append(toIndentedString(sort)).append("\n");
         sb.append("    include: ").append(toIndentedString(include)).append("\n");
         sb.append("}");
@@ -237,9 +176,7 @@ public class CatalogSearch {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

@@ -21,13 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,11 +50,7 @@ public class UserManagementApi {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Create user
      * Create a user account for the cluster.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
      * @param createUserParamsBody The new user.
      * @return CreateUserSuccessResponse
      * @throws RestClientException if an error occurs while attempting to invoke
@@ -85,25 +80,14 @@ public class UserManagementApi {
     }
 
     /**
-     * Delete user
      * Delete a user from the cluster.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal error
      * @param userName The user name.
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> delete(String userName) throws RestClientException {
+    public Mono<BaseResponse> delete(@NonNull String userName) throws RestClientException {
 
-        // verify the required parameter 'userName' is set
-        if (userName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'userName' when calling deleteUser");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -119,7 +103,7 @@ public class UserManagementApi {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/{user_name}", HttpMethod.DELETE, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
@@ -128,11 +112,7 @@ public class UserManagementApi {
     }
 
     /**
-     * Get all users
-     * Returns all users in the cluster.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
+     * Retrieve a list of all users in the cluster.
      * @return GetAllUsersResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
@@ -161,25 +141,14 @@ public class UserManagementApi {
     }
 
     /**
-     * Get user information
      * Get details about one user.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal error
      * @param userName The user name.
      * @return GetUserResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GetUserResponse> get(String userName) throws RestClientException {
+    public Mono<GetUserResponse> get(@NonNull String userName) throws RestClientException {
 
-        // verify the required parameter 'userName' is set
-        if (userName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'userName' when calling getUser");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -204,27 +173,17 @@ public class UserManagementApi {
     }
 
     /**
-     * Update user details
-     * Update information about a user account.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found.
-     * <p><b>500</b> - Internal error
+     * Update information about one user.
      * @param userName The user name.
      * @param updateUserParamsBody The updated user information.
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> update(String userName, UpdateUserParamsBody updateUserParamsBody)
+    public Mono<BaseResponse> update(@NonNull String userName,
+                                     UpdateUserParamsBody updateUserParamsBody)
             throws RestClientException {
 
-        // verify the required parameter 'userName' is set
-        if (userName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'userName' when calling updateUser");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -240,7 +199,7 @@ public class UserManagementApi {
         final String[] localVarContentTypes = {"application/json"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/{user_name}", HttpMethod.PUT, pathParams, queryParams,
                 updateUserParamsBody, headerParams, cookieParams, formParams, localVarAccept,

@@ -17,27 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * Catalog
  */
-@JsonPropertyOrder({
-        Catalog.JSON_PROPERTY_METADATA,
-        Catalog.JSON_PROPERTY_ENTITY,
-        Catalog.JSON_PROPERTY_HREF
-})
 public class Catalog {
 
-    public static final String JSON_PROPERTY_METADATA = "metadata";
     private CatalogMetadata metadata;
-
-    public static final String JSON_PROPERTY_ENTITY = "entity";
     private CatalogEntity entity;
-
-    public static final String JSON_PROPERTY_HREF = "href";
     private String href;
 
     public Catalog metadata(CatalogMetadata metadata) {
@@ -50,17 +38,10 @@ public class Catalog {
      * @return metadata
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_METADATA)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public CatalogMetadata getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(CatalogMetadata metadata) {
-        this.metadata = metadata;
-    }
+    @JsonProperty("metadata")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public CatalogMetadata getMetadata() { return metadata; }
+    public void setMetadata(CatalogMetadata metadata) { this.metadata = metadata; }
 
     public Catalog entity(CatalogEntity entity) {
         this.entity = entity;
@@ -72,14 +53,9 @@ public class Catalog {
      * @return entity
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_ENTITY)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public CatalogEntity getEntity() {
-        return entity;
-    }
-
+    @JsonProperty("entity")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public CatalogEntity getEntity() { return entity; }
     public void setEntity(CatalogEntity entity) { this.entity = entity; }
 
     /**
@@ -87,22 +63,15 @@ public class Catalog {
      * @return href
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "URL of the Catalog instance")
-    @JsonProperty(JSON_PROPERTY_HREF)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getHref() {
-        return href;
-    }
+    @JsonProperty("href")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getHref() { return href; }
+    public void setHref(String href) { this.href = href; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         Catalog catalog = (Catalog)o;
         return Objects.equals(this.metadata, catalog.metadata) &&
                 Objects.equals(this.entity, catalog.entity) &&
@@ -130,9 +99,7 @@ public class Catalog {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

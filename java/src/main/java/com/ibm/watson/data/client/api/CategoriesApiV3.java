@@ -26,14 +26,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
+/**
+ * API endpoints dealing with Categories.
+ */
 public class CategoriesApiV3 {
 
     private ApiClient apiClient;
@@ -52,12 +54,7 @@ public class CategoriesApiV3 {
      * Adds an artifact to a category.
      * It can be used to set a primary category for an artifact (replacing an old
      * primary category assignment if existed) as well as to add an artifact to a
-     * secondary category. <p><b>200</b> - An existing category assignment updated
-     * (e.g. changed from secondary to primary). <p><b>201</b> - A new category
-     * assignment created. <p><b>401</b> - Unauthorized <p><b>404</b> - The
-     * category with the given {category_id} or the artifact with the given
-     * {artifact_id} does not exist in the glossary. <p><b>500</b> - Internal
-     * Server Error
+     * secondary category.
      * @param categoryId The artifact ID or the global ID of a category
      * @param artifactId The artifact ID or the global ID of an artifact to be
      *     added to the category
@@ -69,29 +66,11 @@ public class CategoriesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<NewCategoryAssignment> addArtifact(String categoryId,
-                                                   String artifactId,
-                                                   NewCategoryAssignment newCategoryAssignment,
+    public Mono<NewCategoryAssignment> addArtifact(@NonNull String categoryId,
+                                                   @NonNull String artifactId,
+                                                   @NonNull NewCategoryAssignment newCategoryAssignment,
                                                    String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'categoryId' is set
-        if (categoryId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'categoryId' when calling addArtifactToCategory");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling addArtifactToCategory");
-        }
-        // verify the required parameter 'newCategoryAssignment' is set
-        if (newCategoryAssignment == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newCategoryAssignment' when calling addArtifactToCategory");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -121,11 +100,6 @@ public class CategoriesApiV3 {
     /**
      * Creates a category in the glossary.
      * This method can be used to create a new category in the glossary.
-     * <p><b>201</b> - The category has been created successfully.
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>409</b> - UniqueConstraintViolation - category with given name and
-     * parent already exists. <p><b>500</b> - Internal Server Error
      * @param newCategoryEntity Category to be created.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
@@ -133,14 +107,9 @@ public class CategoriesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> create(NewCategoryEntity newCategoryEntity, String runAsTenant) throws RestClientException {
+    public Mono<GlossaryCreateResponse> create(@NonNull NewCategoryEntity newCategoryEntity,
+                                               String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'newCategoryEntity' is set
-        if (newCategoryEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newCategoryEntity' when calling createCategory");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -168,35 +137,20 @@ public class CategoriesApiV3 {
      * Removes an artifact from its secondary category.
      * It can be used to remove a secondary category assignment for an artifact.
      * It does not allow to remove an artifact from a primary category as a
-     * primary category assignment is obligatory. <p><b>204</b> - A secondary
-     * category assignment removed. <p><b>400</b> - Attempt to remove an artifact
-     * from its primary category failed, because a primary category assignment is
-     * mandatory. <p><b>401</b> - Unauthorized <p><b>404</b> - The category with
-     * the given {category_id} does not exist in the glossary. <p><b>500</b> -
-     * Internal Server Error
+     * primary category assignment is obligatory.
      * @param categoryId The artifact ID or the global ID of a category
      * @param artifactId The artifact ID or the global ID of an artifact to be
      *     removed from a (secondary) category
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> removeArtifact(String categoryId, String artifactId, String runAsTenant) throws RestClientException {
+    public Mono<Void> removeArtifact(@NonNull String categoryId,
+                                     @NonNull String artifactId,
+                                     String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'categoryId' is set
-        if (categoryId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'categoryId' when calling deleteArtifactFromCategory");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteArtifactFromCategory");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -226,13 +180,7 @@ public class CategoriesApiV3 {
 
     /**
      * Deletes the category with a given guid.
-     * This method can be used to delete a category.&lt;br&gt;Note! The category
-     * must be empty. It can contain neither child categories nor artifacts.
-     * <p><b>200</b> - The category has been deleted successfully.
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - The category with given {guid} does not exist in the
-     * glossary. <p><b>500</b> - Internal Server Error
+     * Note: The category must be empty. It can contain neither child categories nor artifacts.
      * @param guid Artifact ID or global ID of the artifact
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
@@ -240,14 +188,9 @@ public class CategoriesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryArchiveResponse> delete(String guid, String runAsTenant) throws RestClientException {
+    public Mono<GlossaryArchiveResponse> delete(@NonNull String guid,
+                                                String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling deleteCategoryById");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -276,10 +219,6 @@ public class CategoriesApiV3 {
     /**
      * Retrieves category with given guid.
      * This method can be used for retrieving details of a category.
-     * <p><b>200</b> - The category has been retrieved successfully.
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - The category with given {guid} does not exist in the
-     * glossary. <p><b>500</b> - Internal Server Error
      * @param guid Artifact ID or global ID of the artifact
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
@@ -287,14 +226,9 @@ public class CategoriesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Category> get(String guid, String runAsTenant) throws RestClientException {
+    public Mono<Category> get(@NonNull String guid,
+                              String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getCategoryById");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -321,12 +255,7 @@ public class CategoriesApiV3 {
     }
 
     /**
-     * Retrieves category hierarchy paths for given artifact ids of categories
-     * This method can be used for retrieving hierarchy paths of categories
-     * <p><b>200</b> - The hierarchy paths of categories have been retrieved
-     * successfully <p><b>401</b> - Unauthorized <p><b>404</b> - The category with
-     * given {guid} does not exist in the glossary. <p><b>500</b> - Internal
-     * Server Error
+     * Retrieves category hierarchy paths for given category GUIDs.
      * @param categoryId The id of the category whose path is fetched
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
@@ -367,10 +296,7 @@ public class CategoriesApiV3 {
     /**
      * Retrieves the special [uncategorized] category.
      * This method can be used for retrieving details of the special
-     * [uncategorized] category, which is a default one for all artifacts.
-     * <p><b>200</b> - The category has been retrieved successfully.
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal Server Error
+     * [uncategorized] category, which is the default category for all artifacts.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
      * @return Category
@@ -404,43 +330,24 @@ public class CategoriesApiV3 {
 
     /**
      * Updates category with given id.
-     * This method can be used to update a category with given id.&lt;br&gt;It may
-     * be an update of its name, description, or parent category. <p><b>200</b> -
-     * The category has been updated successfully. <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - The category with given {guid} does not exist in the
-     * glossary. <p><b>409</b> - The category was modified by another user.
-     * <p><b>500</b> - Internal Server Error
+     * It may be an update of its name, description, or parent category.
      * @param guid Artifact ID or global ID of the artifact
-     * @param updatableCategoryEntity Category to be updated.&lt;br&gt;Fields
+     * @param updatableCategoryEntity Category to be updated. Fields
      *     omitted will be unchanged, and fields set to null explicitly will be
-     *     nulled out.&lt;br&gt;For multi-valued attributes &amp; relationships,
+     *     nulled out. For multi-valued attributes and relationships,
      *     the complete list will be replaced by the given list of
-     *     values.&lt;br&gt;Additional
-     *     Example:&lt;br&gt;&lt;pre&gt;{&amp;quot;description&amp;quot; :
-     *     &amp;quot;short desc updated&amp;quot;}&lt;/pre&gt;
+     *     values.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
      * @return Category
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Category> update(String guid, NewCategoryEntity updatableCategoryEntity, String runAsTenant)
+    public Mono<Category> update(@NonNull String guid,
+                                 @NonNull NewCategoryEntity updatableCategoryEntity,
+                                 String runAsTenant)
             throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling updateCategory");
-        }
-        // verify the required parameter 'updatableCategoryEntity' is set
-        if (updatableCategoryEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'updatableCategoryEntity' when calling updateCategory");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

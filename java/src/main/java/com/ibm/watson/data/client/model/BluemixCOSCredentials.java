@@ -22,12 +22,10 @@ import java.util.Objects;
 /**
  * Bluemix COS  Credentials
  */
-public class BluemixCOSCredentials {
+public class BluemixCOSCredentials extends Credentials {
 
     private String apiKey;
     private String serviceId;
-    private String accessKeyId;
-    private String secretAccessKey;
 
     public BluemixCOSCredentials apiKey(String apiKey) {
         this.apiKey = apiKey;
@@ -59,71 +57,30 @@ public class BluemixCOSCredentials {
     public String getServiceId() { return serviceId; }
     public void setServiceId(String serviceId) { this.serviceId = serviceId; }
 
-    public BluemixCOSCredentials accessKeyId(String accessKeyId) {
-        this.accessKeyId = accessKeyId;
-        return this;
-    }
-
-    /**
-     * Get accessKeyId
-     * @return accessKeyId
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("access_key_id")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getAccessKeyId() { return accessKeyId; }
-    public void setAccessKeyId(String accessKeyId) { this.accessKeyId = accessKeyId; }
-
-    public BluemixCOSCredentials secretAccessKey(String secretAccessKey) {
-        this.secretAccessKey = secretAccessKey;
-        return this;
-    }
-
-    /**
-     * Get secretAccessKey
-     * @return secretAccessKey
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("secret_access_key")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getSecretAccessKey() { return secretAccessKey; }
-    public void setSecretAccessKey(String secretAccessKey) { this.secretAccessKey = secretAccessKey; }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         BluemixCOSCredentials bluemixCOSCredentials = (BluemixCOSCredentials)o;
-        return Objects.equals(this.apiKey, bluemixCOSCredentials.apiKey) &&
-                Objects.equals(this.serviceId, bluemixCOSCredentials.serviceId) &&
-                Objects.equals(this.accessKeyId, bluemixCOSCredentials.accessKeyId) &&
-                Objects.equals(this.secretAccessKey, bluemixCOSCredentials.secretAccessKey);
+        return super.equals(o) &&
+                Objects.equals(this.apiKey, bluemixCOSCredentials.apiKey) &&
+                Objects.equals(this.serviceId, bluemixCOSCredentials.serviceId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(apiKey, serviceId, accessKeyId, secretAccessKey);
+        return Objects.hash(super.hashCode(), apiKey, serviceId);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class BluemixCOSCredentials {\n");
+        super.toString(sb);
         sb.append("    apiKey: ").append(toIndentedString(apiKey)).append("\n");
         sb.append("    serviceId: ").append(toIndentedString(serviceId)).append("\n");
-        sb.append("    accessKeyId: ").append(toIndentedString(accessKeyId)).append("\n");
-        sb.append("    secretAccessKey: ").append(toIndentedString(secretAccessKey)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) { return "null"; }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }

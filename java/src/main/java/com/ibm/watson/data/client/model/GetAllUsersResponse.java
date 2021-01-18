@@ -17,8 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +25,8 @@ import java.util.Objects;
 /**
  * GetAllUsersResponse
  */
-@JsonPropertyOrder({
-        BaseResponse.JSON_PROPERTY_MESSAGE_CODE,
-        BaseResponse.JSON_PROPERTY_MESSAGE,
-        GetAllUsersResponse.JSON_PROPERTY_USERS_INFO
-})
 public class GetAllUsersResponse extends BaseResponse {
 
-    public static final String JSON_PROPERTY_USERS_INFO = "UsersInfo";
     private List<UserInfo> usersInfo = null;
 
     public GetAllUsersResponse usersInfo(List<UserInfo> usersInfo) {
@@ -55,26 +47,15 @@ public class GetAllUsersResponse extends BaseResponse {
      * @return usersInfo
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_USERS_INFO)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<UserInfo> getUsersInfo() {
-        return usersInfo;
-    }
-
-    public void setUsersInfo(List<UserInfo> usersInfo) {
-        this.usersInfo = usersInfo;
-    }
+    @JsonProperty("UsersInfo")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<UserInfo> getUsersInfo() { return usersInfo; }
+    public void setUsersInfo(List<UserInfo> usersInfo) { this.usersInfo = usersInfo; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         GetAllUsersResponse getAllUsersResponse = (GetAllUsersResponse)o;
         return super.equals(o) &&
                 Objects.equals(this.usersInfo, getAllUsersResponse.usersInfo);
@@ -82,33 +63,17 @@ public class GetAllUsersResponse extends BaseResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMessageCode(), getMessage(), usersInfo);
+        return Objects.hash(super.hashCode(), usersInfo);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class GetAllUsersResponse {\n");
-        sb.append("    messageCode: ")
-                .append(toIndentedString(getMessageCode()))
-                .append("\n");
-        sb.append("    message: ").append(toIndentedString(getMessage())).append("\n");
-        sb.append("    usersInfo: ")
-                .append(toIndentedString(usersInfo))
-                .append("\n");
+        super.toString(sb);
+        sb.append("    usersInfo: ").append(toIndentedString(usersInfo)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }

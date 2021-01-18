@@ -17,19 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * Description of create transactional project API response body.
  */
-@ApiModel(description = "Description of create transactional project API response body.")
-@JsonPropertyOrder({CreateTransactionProjectResponse.JSON_PROPERTY_LOCATION})
 public class CreateTransactionProjectResponse {
 
-    public static final String JSON_PROPERTY_LOCATION = "location";
     private String location;
 
     public CreateTransactionProjectResponse location(String location) {
@@ -42,24 +36,15 @@ public class CreateTransactionProjectResponse {
      * @return location
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "API to access the newly created project.")
-    @JsonProperty(JSON_PROPERTY_LOCATION)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getLocation() {
-        return location;
-    }
-
+    @JsonProperty("location")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         CreateTransactionProjectResponse createTransactionProjectResponse =
                 (CreateTransactionProjectResponse)o;
         return Objects.equals(this.location,
@@ -85,9 +70,7 @@ public class CreateTransactionProjectResponse {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

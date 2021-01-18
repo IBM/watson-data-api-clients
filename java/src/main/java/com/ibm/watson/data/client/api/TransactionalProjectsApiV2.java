@@ -26,13 +26,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints for dealing with projects through cascading transactional actions. Always use these endpoints over
@@ -53,28 +52,17 @@ public class TransactionalProjectsApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Delete project as a transaction
+     * Delete project as a transaction.
      * Deletes a project with a given GUID, deletes COS bucket and all the files
-     * in it, all credentials and asset container in the order reverse from the
-     * project creation transaction. When deleting projects programmatically,
-     * always use this endpoint, not /v2/projects/{guid}. <p><b>204</b> - No
-     * Content <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * in it, all credentials and asset container in the reverse order from the
+     * project creation transaction.
      * @param guid The GUID for the project to be deleted.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String guid) throws RestClientException {
+    public Mono<Void> delete(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling transactionalDeleteProject");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -100,11 +88,7 @@ public class TransactionalProjectsApiV2 {
     }
 
     /**
-     * Get status of import transaction
-     * Status of import transaction created using create project as a transaction
-     * API <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Get status of transaction created using create project.
      * @param guid The GUID for the project on which transaction was created.
      * @param id The transaction ID provided by create project as a transaction
      *     endpoint.
@@ -112,20 +96,9 @@ public class TransactionalProjectsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<TransactionStatusItem> importStatus(String guid, String id) throws RestClientException {
+    public Mono<TransactionStatusItem> status(@NonNull String guid,
+                                              @NonNull String id) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling transactionalImportStatus");
-        }
-        // verify the required parameter 'id' is set
-        if (id == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'id' when calling transactionalImportStatus");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -151,40 +124,27 @@ public class TransactionalProjectsApiV2 {
     }
 
     /**
-     * Create project as a transaction
+     * Create project as a transaction.
      * Creates a new project with the provided parameters, including all the
      * storage and credentials in a single transaction. This endpoint will create
      * a new COS bucket using generated unique name, all credentials, asset
      * container and call all the required atomic APIs to fully configure a new
      * project. Attempts to use the duplicate project names will result in an
-     * error. &lt;b&gt;NOTE&lt;/b&gt;:  when creating projects programmatically,
-     * always use this endpoint, not /v2/projects.
-     * &lt;br/&gt;&lt;br/&gt;&lt;br/&gt; This endpoint can also be used to create
+     * error.<br/><br/>
+     * This endpoint can also be used to create
      * a project from an exported Watson Studio .zip file. In this case, a new
      * transaction is initiated to create assets under the project. A Transaction
      * ID along with a URL is returned as a response of this API. As this
      * transaction can take time, you can view the current status of the
-     * transaction using the returned URL.&lt;br&gt;&lt;b&gt;NOTE&lt;/b&gt;: This
-     * feature is only available in the private cloud. <p><b>201</b> - Created
-     * <p><b>202</b> - Accepted
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * transaction using the returned URL. (This
+     * feature is only available in the private cloud.)
      * @param newBodyName The newBodyName parameter
      * @return CreateTransactionProjectResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<CreateTransactionProjectResponse> create(TransactionalProjectCreate newBodyName) throws RestClientException {
+    public Mono<CreateTransactionProjectResponse> create(@NonNull TransactionalProjectCreate newBodyName) throws RestClientException {
 
-        // verify the required parameter 'newBodyName' is set
-        if (newBodyName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newBodyName' when calling transactionalPostProject");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

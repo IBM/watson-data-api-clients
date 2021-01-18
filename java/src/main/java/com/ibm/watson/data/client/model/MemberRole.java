@@ -17,19 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * MemberRole
  */
-@JsonPropertyOrder({
-        MemberRole.JSON_PROPERTY_ROLE
-})
 public class MemberRole {
 
-    public static final String JSON_PROPERTY_ROLE = "role";
     private String role;
 
     public MemberRole role(String role) {
@@ -42,24 +36,15 @@ public class MemberRole {
      * @return role
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_ROLE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getRole() {
-        return role;
-    }
-
+    @JsonProperty("role")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         MemberRole memberRole = (MemberRole)o;
         return Objects.equals(this.role, memberRole.role);
     }
@@ -83,9 +68,7 @@ public class MemberRole {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

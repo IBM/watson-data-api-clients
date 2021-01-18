@@ -26,16 +26,61 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
- * API endpoints for dealing with data assets.
+ * API endpoints for dealing with Data Assets.
+ * <br/><br/>
+ * Data assets could be
+ * data from a connection to a data source (ex. tables) or files from your
+ * local system uploaded into cloud object storage associated with Projects or
+ * Catalogs. All asset types have a common set of properties, such as name,
+ * description, asset type, visibility, tags, classifications. Data Assets have
+ * additional attributes such as mime-type, columns with types, and
+ * properties.
+ * <br/><br/>
+ * These endpoints deal with the <em>metadata</em> of data assets, rather than
+ * their actual data. Accessing the actual attached resource requires
+ * additional server calls. Exactly which additional server calls are needed
+ * depends on the kind of attached resource. Follow the steps below to access
+ * an attached resource:
+ * <ul>
+ *     <li>Begin by finding the index i of the item in the <code>attachments</code> array whose <code>asset_type</code> value matches the type of the attached resource you
+ *      want to access. For a <code>data_asset</code> attached resource look for the
+ *      item i where <code>attachments[i].asset_type<code> is
+ *      <code>data_asset</code>.<br/><br/>There are two important pairs of
+ *      fields (among many others) which may appear in <code>attachments[i]</code>.
+ *      Only one of those pairs will actually appear. Which pair appears
+ *      influences which steps to perform next:
+ *      <ul>
+ *          <li><code>connection_id</code> and <code>connection_path</code>: These
+ *              fields will appear in <code>attachments[i]</code> if the value of
+ *              <code>attachments[i].is_remote</code> is true. <code>attachments[i].is_remote</code>
+ *              WILL be true if the attached resource is a database table. In this case, <code>attachments[i].connection_path</code>
+ *              will contain a schema name and table name. <code>attachments[i].is_remote</code> MAY be true if the attached resource is,
+ *              for example, a csv file.  In this case, <code>attachments[i].connection_path</code> will contain a folder path and
+ *              file name. If this pair of fields is present in <code>attachments[i]</code> then the next steps are to:</li>
+ *              <ol>
+ *                  <li>use the value of the <code>attachments[i].connection_id</code> field to make a call to the <code>GET /v2/connections/{connection_id}</code> API. You'll need appropriate credentials.</li>
+ *                  <li>use the values in the <code>entity.properties</code> field of the result from the step above to either create a connection to the database containing the table or to retrieve the file. Note: even if <code>attachments[i].is_remote</code> is true and the above pair of fields are present in <code>attachments[i]</code>, if the attached resource is located in the catalog/project bucket then you may optionally perform the two steps discussed for Pair 2 (<code>object_key</code> and <code>handle</code>) below.</li>
+ *              </ol>
+ *          <li><code>object_key</code> and <code>handle</code>: these fields will appear in
+ *              <code>attachments[i]</code> if the value of <code>attachments[i].is_remote</code>
+ *              is false.  In this case, <code>attachments[i].handle</code> will contain
+ *              information about the attached resource.</li>
+ *              <ol>
+ *                  <li>use the value of the <code>attachments[i].id</code> field as the value for <code>attachment_id</code> in a call to the <code>GET /v2/assets/{asset_id}/attachments/{attachment_id}</code> API. The value to use for <code>asset_id</code> in the call to the attachments API is the same as the value that was used for <code>data_asset_id</code> in the original call to the <code>GET /v2/data_assets/{data_asset_id}</code> API.</li>
+ *                  <li>use the value in the <code>url</code> field of the result from the step above to download (for example, with a browser) a copy of the file.</li>
+ *              </ol>
+ *      </ul>
+ * </ul>
+ * @see AssetAttachmentsApiV2
+ * @see #get(String, String, String, String, String)
  */
 public class DataAssetsApiV2 {
 
@@ -52,19 +97,8 @@ public class DataAssetsApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Create a data asset
-     * You can use this API to add data assets to a catalog. Data assets could be
-     * data from a connection to a data source (ex. tables) or files from your
-     * local system uploaded into cloud object storage associated with Projects or
-     * Catalog.All asset types have a common set of properties, such as name,
-     * description, asset type, visibility, tags, classifications. Data Asset have
-     * additional attributes such as mime type, columns with types, and
-     * properties. Use v2/attachments API to indicate location of data (ex. table
-     * path) from a connection to a data source. <p><b>201</b> - Created
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Create a data asset.
+     * You can use this API to add data assets to a catalog.
      * @param dataAsset Data Asset Metadata
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -72,19 +106,16 @@ public class DataAssetsApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return {@code Mono<AssetCreateResponse>}
+     * @return AssetCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<AssetCreateResponse> create(Asset dataAsset, String catalogId, String projectId, String spaceId)
+    public Mono<AssetCreateResponse> create(@NonNull Asset dataAsset,
+                                            String catalogId,
+                                            String projectId,
+                                            String spaceId)
             throws RestClientException {
 
-        // verify the required parameter 'dataAsset' is set
-        if (dataAsset == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'dataAsset' when calling createDataAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -111,70 +142,22 @@ public class DataAssetsApiV2 {
     }
 
     /**
-     * Get a data asset
-     * Use this API to retrieve _metadata_ about a data asset. The response
-     * document will contain three top-level fields:&lt;br/&gt;  *
-     * **&#39;metadata&#39;:** contains metadata common to all types of assets  *
-     * **&#39;entity&#39;:** contains metadata specific to the asset_type - in
-     * this case &#39;data_asset&#39;  * **&#39;attachments&#39;:** an array
-     * containing one item of metadata per attached
-     * resource&lt;br/&gt;&lt;br/&gt;The data described by the above metadata is
-     * stored in attached resources.  Examples of attached resources are database
+     * Retrieve <em>metadata</em> about a data asset. The response
+     * document will contain three top-level fields:
+     * <ul>
+     *     <li>metadata: contains metadata common to all types of assets</li>
+     *     <li>entity: contains metadata specific to the data_asset</li>
+     *     <li>attachments: an array containing one item of metadata per attached resource</li>
+     * </ul>
+     * The data described by the above metadata is
+     * stored in attached resources. Examples of attached resources are database
      * tables, csv files, word documents, extended metadata documents, etc.
-     * Because an item in the &#39;attachments&#39; array only contains metadata
+     * Because an item in the <code>attachments</code> array only contains metadata
      * about an attached resource, accessing the actual attached resource requires
-     * additional server calls.  Exactly which additional server calls are needed
-     * depends on the kind of attached resource.  Follow the steps below to access
-     * an attached resource.&lt;br/&gt;&lt;br/&gt;     **Step 1**: find the index
-     * i of the item in the above &#39;attachments&#39; array whose
-     * &#39;asset_type&#39; value matches the type of the attached resource you
-     * want to access.  For a &#39;data_asset&#39; attached resource look for the
-     * item i where &#39;attachments[i].asset_type&#39; is
-     * &#39;data_asset&#39;.&lt;br/&gt;&lt;br/&gt;There are two important pairs of
-     * fields (among many others) which may appear in &#39;attachments[i]&#39;.
-     * Only one of those pairs will actually appear.  Which pair appears
-     * influences which steps to perform next.&lt;br/&gt;  *  **Pair 1:**
-     * **&#39;connection_id&#39;** and **&#39;connection_path&#39;**:   * The
-     * above two fields will appear in &#39;attachments[i]&#39; if the value of
-     * &#39;attachments[i].is_remote&#39; is true.   *
-     * &#39;attachments[i].is_remote&#39; WILL be true if the attached resource is
-     * a database table.  In this case, &#39;attachments[i].connection_path&#39;
-     * will contain a schema name and table name.   *
-     * &#39;attachments[i].is_remote&#39; MAY be true if the attached resource is,
-     * for example, a csv file.  In this case,
-     * &#39;attachments[i].connection_path&#39; will contain a folder path and
-     * file name.&lt;br/&gt;&lt;br/&gt;If the above pair of fields are present in
-     * &#39;attachments[i]&#39; then:&lt;br/&gt;     **Step 2**: use the value of
-     * the &#39;attachments[i].connection_id&#39; field to make a call to the
-     * **GET /v2/connections/{connection_id}** API.  You&#39;ll need appropriate
-     * credentials.&lt;br/&gt;     **Step 3**: use the values in the
-     * &#39;entity.properties&#39; field of the result from Step 2 to either
-     * create a connection to the database containing the table or to retrieve the
-     * file.&lt;br/&gt;&lt;br/&gt;Note: even if &#39;attachments[i].is_remote&#39;
-     * is true and the above pair of fields are present in
-     * &#39;attachments[i]&#39;, if the attached resource is located in the
-     * catalog/project bucket then you may optionally perform the two steps
-     * discussed for Pair 2 (&#39;object_key&#39; and &#39;handle&#39;)
-     * below.&lt;br/&gt;  * **Pair 2:** **&#39;object_key&#39;** and
-     * **&#39;handle&#39;**:   * The above two fields will appear in
-     * &#39;attachments[i]&#39; if the value of &#39;attachments[i].is_remote&#39;
-     * is false.  In this case, &#39;attachments[i].handle&#39; will contain
-     * information about the attached resource.&lt;br/&gt;     **Step 2**: use the
-     * value of the &#39;attachments[i].id&#39; field as the value for
-     * &#39;attachment_id&#39; in a call to the **GET
-     * /v2/assets/{asset_id}/attachments/{attachment_id}** API.  The value to use
-     * for &#39;asset_id&#39; in the call to the attachments API is the same as
-     * the value that was used for &#39;data_asset_id&#39; in the original call to
-     * the GET /v2/data_assets/{data_asset_id} API.&lt;br/&gt;     **Step 3**: use
-     * the value in the &#39;url&#39; field of the result from Step 2 to download
-     * (for example, with a browser) a copy of the file. <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * additional server calls.
      * @param dataAssetId data_asset_id
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use &#39;latest&#39; for the most recent
+     *     current asset version. Use <code>latest<code> for the most recent
      *     revision.
      * @param catalogId catalog_id
      * @param projectId project_id (only catalog_id is supported at this time)
@@ -183,15 +166,13 @@ public class DataAssetsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Asset> get(String dataAssetId, String revisionId, String catalogId, String projectId, String spaceId)
+    public Mono<Asset> get(@NonNull String dataAssetId,
+                           String revisionId,
+                           String catalogId,
+                           String projectId,
+                           String spaceId)
             throws RestClientException {
 
-        // verify the required parameter 'dataAssetId' is set
-        if (dataAssetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'dataAssetId' when calling getDataAssetV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

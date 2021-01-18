@@ -26,14 +26,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
+/**
+ * API endpoints dealing with User Tasks in Workflows.
+ */
 public class WorkflowUserTasksApiV3 {
 
     private ApiClient apiClient;
@@ -49,27 +51,14 @@ public class WorkflowUserTasksApiV3 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Get a user task by task id
-     *
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Task not found
-     * <p><b>500</b> - Server Error
+     * Retrieve the details of a user task.
      * @param taskId the task id
      * @return UserTask
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<UserTask> get(String taskId) throws RestClientException {
+    public Mono<UserTask> get(@NonNull String taskId) throws RestClientException {
 
-        // verify the required parameter 'taskId' is set
-        if (taskId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'taskId' when calling getUserTaskUsingGET1");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -95,13 +84,7 @@ public class WorkflowUserTasksApiV3 {
     }
 
     /**
-     * Get all active or completed user tasks where current user is involved
-     *
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Server Error
+     * Retrieve a list of all active or completed user tasks where the current user is involved.
      * @param artifactId only return tasks relate to artifact of the given
      *     artifact_id
      * @param completed indicate if only return active tasks or completed tasks.
@@ -109,12 +92,10 @@ public class WorkflowUserTasksApiV3 {
      * @param hideAuthoringTasks hide authoring tasks
      * @param limit limit
      * @param offset offset
-     * @param sort specify the ordering of returning resources. it can contain any
-     *     one of the valid sort fields or a combination of these fields. prepend
-     *     a field with a &#39;+&#39; or &#39;-&#39; character to indicate
-     *     ascending or descending, if neither of &#39;+&#39; or &#39;-&#39; are
-     *     provided, ascending is used. e.g. &#39;field1&#39;, &#39;-field1&#39;,
-     *     or &#39;+field1,-field2&#39;.&lt;p&gt;valid fields are created_at,
+     * @param sort specify the ordering of returning resources. Can contain any
+     *     one of the valid sort fields or a combination of these fields. Prepend
+     *     a field with a "+" or "-" character to indicate
+     *     ascending or descending order. Valid fields are created_at,
      *     due_date, and completed_at.
      * @param status only return tasks with the given status. status only applies
      *     when complete is set to false.
@@ -164,40 +145,23 @@ public class WorkflowUserTasksApiV3 {
     }
 
     /**
-     * Update a task
-     *
-     * <p><b>204</b> - action was successful
-     * <p><b>400</b> - bad request, expected variables are missing
-     * <p><b>403</b> - forbidden; user is not a candidate user or claimed by
-     * someone else <p><b>404</b> - not found, user task does not exist or has
-     * been completed
+     * Update a task.
      * @param taskId the task id
      * @param userTaskActionPayload payload for submitting a user task action.
-     *     &lt;p&gt;supported actions are claim and complete. &lt;p&gt;assignee is
-     *     optional, only for action claim, if empty or null then task will be
-     *     unclaimed. &lt;p&gt;form_properties are optional, only for action
-     *     complete. each form property has an id and a value of either type
-     *     string, long, date, or enum. only one of the value fields can be
-     *     provided for each variable. for enum type of value, supply the id of
-     *     the enum value in &#39;value&#39; attribute.
-     * @return {@code Mono<Void>}
+     *     Supported actions are "claim" and "complete". Assignee is
+     *     optional, only for action "claim", if empty or null then task will be
+     *     unclaimed. <code>form_properties</code> are optional, only for action
+     *     "complete". Each form property has an id and a value of either type
+     *     string, long, date, or enum. Only one of the value fields can be
+     *     provided for each variable. For enum type of value, supply the id of
+     *     the enum value in "value" attribute.
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> update(String taskId, UserTaskActionPayload userTaskActionPayload) throws RestClientException {
+    public Mono<Void> update(@NonNull String taskId,
+                             @NonNull UserTaskActionPayload userTaskActionPayload) throws RestClientException {
 
-        // verify the required parameter 'taskId' is set
-        if (taskId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'taskId' when calling updateUserTaskUsingPOST1");
-        }
-        // verify the required parameter 'userTaskActionPayload' is set
-        if (userTaskActionPayload == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'userTaskActionPayload' when calling updateUserTaskUsingPOST1");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

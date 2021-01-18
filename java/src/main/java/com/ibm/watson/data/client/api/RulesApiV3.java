@@ -25,14 +25,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
+/**
+ * API endpoints dealing with Rules.
+ */
 public class RulesApiV3 {
 
     private ApiClient apiClient;
@@ -49,12 +51,6 @@ public class RulesApiV3 {
 
     /**
      * Creates a rule in the glossary.
-     * This method is used to create a new rule.
-     * <p><b>201</b> - The rule has been created successfully.
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>409</b> - UniqueConstraintViolation - rule with given name already
-     * exists. <p><b>500</b> - Internal Server Error
      * @param newRuleEntity Rule to be created.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
@@ -65,16 +61,10 @@ public class RulesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> create(NewRuleEntity newRuleEntity,
+    public Mono<GlossaryCreateResponse> create(@NonNull NewRuleEntity newRuleEntity,
                                                String runAsTenant,
                                                Boolean skipWorkflowIfPossible) throws RestClientException {
 
-        // verify the required parameter 'newRuleEntity' is set
-        if (newRuleEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newRuleEntity' when calling createRule");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -101,13 +91,10 @@ public class RulesApiV3 {
     }
 
     /**
-     * Create relationships for an artifact in the glossary.
+     * Create relationships for a rule in the glossary.
      * If it is a published version, it creates a draft from the published version
      * and adds the relationship to the draft version. And, it returns the details
-     * of the draft version. <p><b>201</b> - The relationship(s) have been created
-     * successfully. <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>409</b> - UniqueConstraintViolation - This Relationships is already
-     * exist <p><b>500</b> - Internal Server Error
+     * of the draft version.
      * @param artifactId The artifact ID of the rule to fetch.
      * @param versionId The version ID of the rule to fetch.
      * @param ruleRelationshipsRequest Relationships to be created.
@@ -119,30 +106,12 @@ public class RulesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> createRelationships(String artifactId,
-                                                            String versionId,
-                                                            RuleRelationshipsRequest ruleRelationshipsRequest,
+    public Mono<GlossaryCreateResponse> createRelationships(@NonNull String artifactId,
+                                                            @NonNull String versionId,
+                                                            @NonNull RuleRelationshipsRequest ruleRelationshipsRequest,
                                                             Boolean skipWorkflowIfPossible,
                                                             String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling createRuleRelationships");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling createRuleRelationships");
-        }
-        // verify the required parameter 'ruleRelationshipsRequest' is set
-        if (ruleRelationshipsRequest == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'ruleRelationshipsRequest' when calling createRuleRelationships");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -173,46 +142,28 @@ public class RulesApiV3 {
     }
 
     /**
-     * Deletes a draft or published version of an artifact.
-     * If the artifact state is &lt;code&gt;DRAFT&lt;/code&gt;, then the draft
-     * version is deleted.&lt;br/&gt;&lt;br/&gt; If the artifact state is
-     * &lt;code&gt; PUBLISHED&lt;/code&gt;, a draft version with
-     * &lt;code&gt;marked_for_deletion&lt;/code&gt; is created
-     * .&lt;br/&gt;&lt;br/&gt; If the artifact state is &lt;code&gt;
-     * PUBLISHED&lt;/code&gt; and workflow is skipped, then the published version
-     * is deleted.&lt;br/&gt;&lt;br/&gt; Administrator role is required.
-     * <p><b>200</b> - The artifact has been deleted successfully.
-     * <p><b>201</b> - A draft version has been successfully created for deleting
-     * the published artifact. <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>404</b> - Draft version for the given version ID does
-     * not exist in the glossary. <p><b>500</b> - Internal Server Error
+     * Delete a draft or published version of an artifact.
+     * <ul>
+     *     <li>If the artifact state is <code>DRAFT</code>, then the draft version is deleted.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code>, a draft version with <code>marked_for_deletion</code> is created.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code> and workflow is skipped, then the published version is deleted.</li>
+     * </ul>
+     * Administrator role is required.
      * @param artifactId The artifact id of the rule to delete.
      * @param versionId The version id of the rule to delete.
      * @param skipWorkflowIfPossible If Workflow template is configured, the
      *     published artifact will be deleted by skipping the workflow.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String artifactId,
-                             String versionId,
+    public Mono<Void> delete(@NonNull String artifactId,
+                             @NonNull String versionId,
                              Boolean skipWorkflowIfPossible,
                              String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteRule");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling deleteRule");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -243,12 +194,7 @@ public class RulesApiV3 {
     }
 
     /**
-     * Deletes a relationship of a rule artifact.
-     * This method can be used for deleting a relationship of a rule artifact.
-     * <p><b>200</b> - The relationship of the rule artifact was successfully
-     * deleted. <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - The relationship for the given GUID does not exist in the
-     * glossary. <p><b>500</b> - Internal Server Error
+     * Delete a relationship to a rule artifact.
      * @param artifactId The artifact ID of the rule to fetch.
      * @param versionId The version ID of the rule to fetch.
      * @param relationshipId The guid of the relationship to delete.
@@ -260,30 +206,12 @@ public class RulesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> deleteRelationship(String artifactId,
-                                                           String versionId,
-                                                           String relationshipId,
+    public Mono<GlossaryCreateResponse> deleteRelationship(@NonNull String artifactId,
+                                                           @NonNull String versionId,
+                                                           @NonNull String relationshipId,
                                                            Boolean skipWorkflowIfPossible,
                                                            String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteRuleRelationship");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling deleteRuleRelationship");
-        }
-        // verify the required parameter 'relationshipId' is set
-        if (relationshipId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'relationshipId' when calling deleteRuleRelationship");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -315,18 +243,15 @@ public class RulesApiV3 {
     }
 
     /**
-     * Retrieves rule with given guid.
+     * Retrieve a rule with given guid.
      * This method can be used for retrieving details of an PUBLISHED or DRAFT
-     * rule. <p><b>200</b> - The rule has been retrieved successfully.
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - The rule with given {guid} does not exist in the glossary.
-     * <p><b>500</b> - Internal Server Error
+     * rule.
      * @param artifactId The artifact ID of the rule to fetch.
      * @param versionId The version ID of the rule to fetch.
      * @param includeRelationship Comma separated list of relationship types.
-     *     Allowed values of association types are &lt;code&gt;parent_category,
+     *     Allowed values of association types are <code>parent_category,
      *     categories, terms, rules, reference_data, policies, classifications,
-     *     governs_assets, implemented_by, data_classes, all&lt;/code&gt;
+     *     governs_assets, implemented_by, data_classes, all</code>
      * @param allParents If this parameter is set, then all ancestors in the
      *     hierarchy are returned. You can use this parameter to build complete
      *     ancestor path.
@@ -338,25 +263,13 @@ public class RulesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponseRule> get(String artifactId,
-                                  String versionId,
+    public Mono<ResponseRule> get(@NonNull String artifactId,
+                                  @NonNull String versionId,
                                   String includeRelationship,
                                   Boolean allParents,
                                   String limit,
                                   String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling getRuleByVersionId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling getRuleByVersionId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -390,23 +303,20 @@ public class RulesApiV3 {
 
     /**
      * List the relationships of the given type for the specified rule.
-     * If the result set is larger than the &lt;code&gt;limit&lt;/code&gt;
-     * parameter, it returns the first &lt;code&gt;limit&lt;/code&gt; number of
-     * associations. &lt;br/&gt;To retrieve the next set of relationships, call
+     * If the result set is larger than the <code>limit</code>
+     * parameter, it returns the first <code>limit</code> number of
+     * associations. To retrieve the next set of relationships, call
      * the method again by using the URI in
-     * &lt;code&gt;PaginatedTagsList.next&lt;/code&gt; returned by this
-     * method.&lt;br/&gt;&lt;br/&gt;relationships of a child term, like
-     * &lt;code&gt;SSN&lt;/code&gt;, includes the reof its parent terms, like
-     * &lt;code&gt;Government Identities&lt;/code&gt;. <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal Server Error
+     * <code>PaginatedTagsList.next</code> returned by this
+     * method. Relationships of a child term, like
+     * <code>SSN</code>, includes the rest of its parent terms, like
+     * <code>Government Identities</code>.
      * @param artifactId The artifact ID of the rule to fetch.
      * @param versionId The version ID of the rule to fetch.
      * @param type Comma separated list of relationship types. Allowed values of
-     *     association types are &lt;code&gt;parent_category, categories, terms,
+     *     association types are <code>parent_category, categories, terms,
      *     rules, reference_data, policies, classifications, governs_assets,
-     *     implemented_by, data_classes, all&lt;/code&gt;
+     *     implemented_by, data_classes, all</code>
      * @param allParents If this parameter is set, then all ancestors in the
      *     hierarchy are returned. You can use this parameter to build complete
      *     ancestor path.
@@ -418,31 +328,13 @@ public class RulesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Map<String, PaginatedAbstractRelationshipList>> listRelationships(String artifactId,
-                                                                                  String versionId,
-                                                                                  String type,
+    public Mono<Map<String, PaginatedAbstractRelationshipList>> listRelationships(@NonNull String artifactId,
+                                                                                  @NonNull String versionId,
+                                                                                  @NonNull String type,
                                                                                   Boolean allParents,
                                                                                   Integer limit,
                                                                                   String offset) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling listRuleRelationships");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling listRuleRelationships");
-        }
-        // verify the required parameter 'type' is set
-        if (type == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'type' when calling listRuleRelationships");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -474,24 +366,14 @@ public class RulesApiV3 {
     }
 
     /**
-     * Updates rule with given id.
-     * This method is used to update rule with given id.
-     * <p><b>200</b> - The rule has been updated successfully.
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - The rule with given {guid} does not exist in the glossary.
-     * <p><b>409</b> - The rule was modified by another user.
-     * <p><b>500</b> - Internal Server Error
+     * Update rule with given id.
      * @param artifactId The artifact id of the rule to be updated.
      * @param versionId The version id of the rule to be updated.
-     * @param updatableRuleEntity The rule to be updated.&lt;br&gt;Fields omitted
+     * @param updatableRuleEntity The rule to be updated. Fields omitted
      *     will be unchanged, and fields set to null explicitly will be nulled
-     *     out.&lt;br&gt;For multi-valued attributes &amp; relationships, the
+     *     out. For multi-valued attributes and relationships, the
      *     complete list will be replaced by the given list of
-     *     values.&lt;br&gt;Additional
-     *     Example:&lt;br&gt;&lt;pre&gt;{&amp;quot;description&amp;quot; :
-     *     &amp;quot;description updated&amp;quot;}&lt;/pre&gt;
+     *     values.
      * @param skipWorkflowIfPossible If Workflow template is configured, the
      *     published artifact will be updated by skipping the workflow.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
@@ -500,30 +382,12 @@ public class RulesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponseRule> update(String artifactId,
-                                     String versionId,
-                                     UpdatableRuleEntity updatableRuleEntity,
+    public Mono<ResponseRule> update(@NonNull String artifactId,
+                                     @NonNull String versionId,
+                                     @NonNull UpdatableRuleEntity updatableRuleEntity,
                                      Boolean skipWorkflowIfPossible,
                                      String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling updateRuleByVersionId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling updateRuleByVersionId");
-        }
-        // verify the required parameter 'updatableRuleEntity' is set
-        if (updatableRuleEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'updatableRuleEntity' when calling updateRuleByVersionId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

@@ -15,10 +15,9 @@
  */
 package com.ibm.watson.data.client.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.ibm.watson.data.client.model.enums.MessageReprocessingType;
 
 import java.util.Objects;
 
@@ -29,43 +28,7 @@ public class ReprocessMessagesOptions {
 
     private String guid;
     private Boolean force;
-
-    /**
-     * Gets or Sets lookup
-     */
-    public enum LookupEnum {
-        SELF_AND_PARENTS("SELF_AND_PARENTS"),
-
-        SELF_PARENTS_AND_CHILDREN("SELF_PARENTS_AND_CHILDREN"),
-
-        ALL("ALL");
-
-        private String value;
-
-        LookupEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static LookupEnum fromValue(String value) {
-            for (LookupEnum b : LookupEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    private LookupEnum lookup;
+    private MessageReprocessingType lookup;
 
     public ReprocessMessagesOptions guid(String guid) {
         this.guid = guid;
@@ -97,7 +60,7 @@ public class ReprocessMessagesOptions {
     public Boolean getForce() { return force; }
     public void setForce(Boolean force) { this.force = force; }
 
-    public ReprocessMessagesOptions lookup(LookupEnum lookup) {
+    public ReprocessMessagesOptions lookup(MessageReprocessingType lookup) {
         this.lookup = lookup;
         return this;
     }
@@ -109,8 +72,8 @@ public class ReprocessMessagesOptions {
     @javax.annotation.Nullable
     @JsonProperty("lookup")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public LookupEnum getLookup() { return lookup; }
-    public void setLookup(LookupEnum lookup) { this.lookup = lookup; }
+    public MessageReprocessingType getLookup() { return lookup; }
+    public void setLookup(MessageReprocessingType lookup) { this.lookup = lookup; }
 
     @Override
     public boolean equals(java.lang.Object o) {

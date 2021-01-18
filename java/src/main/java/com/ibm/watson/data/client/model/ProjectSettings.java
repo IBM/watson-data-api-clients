@@ -17,25 +17,14 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * The project settings.
  */
-@ApiModel(description = "The project settings.")
-@JsonPropertyOrder({
-        ProjectSettings.JSON_PROPERTY_ACCESS_RESTRICTIONS,
-        ProjectSettings.JSON_PROPERTY_AUDIT_EVENTS
-})
 public class ProjectSettings {
 
-    public static final String JSON_PROPERTY_ACCESS_RESTRICTIONS = "access_restrictions";
     private SettingsGroupAccessRestrictions accessRestrictions;
-
-    public static final String JSON_PROPERTY_AUDIT_EVENTS = "audit_events";
     private SettingsGroupAuditEvents auditEvents;
 
     public ProjectSettings accessRestrictions(SettingsGroupAccessRestrictions accessRestrictions) {
@@ -48,17 +37,10 @@ public class ProjectSettings {
      * @return accessRestrictions
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_ACCESS_RESTRICTIONS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public SettingsGroupAccessRestrictions getAccessRestrictions() {
-        return accessRestrictions;
-    }
-
-    public void setAccessRestrictions(SettingsGroupAccessRestrictions accessRestrictions) {
-        this.accessRestrictions = accessRestrictions;
-    }
+    @JsonProperty("access_restrictions")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public SettingsGroupAccessRestrictions getAccessRestrictions() { return accessRestrictions; }
+    public void setAccessRestrictions(SettingsGroupAccessRestrictions accessRestrictions) { this.accessRestrictions = accessRestrictions; }
 
     public ProjectSettings auditEvents(SettingsGroupAuditEvents auditEvents) {
         this.auditEvents = auditEvents;
@@ -70,26 +52,15 @@ public class ProjectSettings {
      * @return auditEvents
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_AUDIT_EVENTS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public SettingsGroupAuditEvents getAuditEvents() {
-        return auditEvents;
-    }
-
-    public void setAuditEvents(SettingsGroupAuditEvents auditEvents) {
-        this.auditEvents = auditEvents;
-    }
+    @JsonProperty("audit_events")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public SettingsGroupAuditEvents getAuditEvents() { return auditEvents; }
+    public void setAuditEvents(SettingsGroupAuditEvents auditEvents) { this.auditEvents = auditEvents; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ProjectSettings projectSettings = (ProjectSettings)o;
         return Objects.equals(this.accessRestrictions,
                 projectSettings.accessRestrictions) &&
@@ -105,12 +76,8 @@ public class ProjectSettings {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class ProjectSettings {\n");
-        sb.append("    accessRestrictions: ")
-                .append(toIndentedString(accessRestrictions))
-                .append("\n");
-        sb.append("    auditEvents: ")
-                .append(toIndentedString(auditEvents))
-                .append("\n");
+        sb.append("    accessRestrictions: ").append(toIndentedString(accessRestrictions)).append("\n");
+        sb.append("    auditEvents: ").append(toIndentedString(auditEvents)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -120,9 +87,7 @@ public class ProjectSettings {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

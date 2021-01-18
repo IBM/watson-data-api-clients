@@ -17,25 +17,14 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * A catalog associated with the project.
  */
-@ApiModel(description = "A catalog associated with the project.")
-@JsonPropertyOrder({
-        ProjectCatalog.JSON_PROPERTY_GUID,
-        ProjectCatalog.JSON_PROPERTY_PUBLIC
-})
 public class ProjectCatalog {
 
-    public static final String JSON_PROPERTY_GUID = "guid";
     private String guid;
-
-    public static final String JSON_PROPERTY_PUBLIC = "public";
     private Boolean _public;
 
     public ProjectCatalog guid(String guid) {
@@ -47,15 +36,9 @@ public class ProjectCatalog {
      * The catalog GUID.
      * @return guid
      **/
-    @ApiModelProperty(example = "fcce617b-1fc9-4965-8820-272864f58399",
-            required = true, value = "The catalog GUID.")
-    @JsonProperty(JSON_PROPERTY_GUID)
+    @JsonProperty("guid")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getGuid() {
-        return guid;
-    }
-
+    public String getGuid() { return guid; }
     public void setGuid(String guid) { this.guid = guid; }
 
     public ProjectCatalog _public(Boolean _public) {
@@ -65,29 +48,18 @@ public class ProjectCatalog {
 
     /**
      * A boolean value indicating whether the catalog is public (true) or private
-     *(false).
+     * (false).
      * @return _public
      **/
-    @ApiModelProperty(
-            example = "false", required = true,
-            value = "A boolean value indicating whether the catalog is public (true) or private (false).")
-    @JsonProperty(JSON_PROPERTY_PUBLIC)
+    @JsonProperty("public")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public Boolean getPublic() {
-        return _public;
-    }
-
+    public Boolean getPublic() { return _public; }
     public void setPublic(Boolean _public) { this._public = _public; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ProjectCatalog projectCatalog = (ProjectCatalog)o;
         return Objects.equals(this.guid, projectCatalog.guid) &&
                 Objects.equals(this._public, projectCatalog._public);
@@ -113,9 +85,7 @@ public class ProjectCatalog {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

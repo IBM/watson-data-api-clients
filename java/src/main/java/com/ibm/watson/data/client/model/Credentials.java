@@ -73,17 +73,21 @@ public class Credentials {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Credentials {\n");
-        sb.append("    accessKeyId: ").append(toIndentedString(accessKeyId)).append("\n");
-        sb.append("    secretAccessKey: ").append(toIndentedString(secretAccessKey)).append("\n");
+        toString(sb);
         sb.append("}");
         return sb.toString();
+    }
+
+    protected void toString(StringBuilder sb) {
+        sb.append("    accessKeyId: ").append(toIndentedString(accessKeyId)).append("\n");
+        sb.append("    secretAccessKey: ").append(toIndentedString(secretAccessKey)).append("\n");
     }
 
     /**
      * Convert the given object to string with each line indented by 4 spaces
      * (except the first line).
      */
-    private String toIndentedString(java.lang.Object o) {
+    protected String toIndentedString(java.lang.Object o) {
         if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }

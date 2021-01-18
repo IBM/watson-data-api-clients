@@ -17,24 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Objects;
 
 /**
  * BaseError
  */
-@JsonPropertyOrder({
-        BaseResponse.JSON_PROPERTY_MESSAGE_CODE,
-        BaseResponse.JSON_PROPERTY_MESSAGE
-})
 public class BaseResponse {
 
-    public static final String JSON_PROPERTY_MESSAGE_CODE = "_messageCode_";
     private String messageCode;
-
-    public static final String JSON_PROPERTY_MESSAGE = "message";
     private String message;
 
     public BaseResponse messageCode(String messageCode) {
@@ -47,17 +38,10 @@ public class BaseResponse {
      * @return messageCode
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The identifier of the response.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessageCode() {
-        return messageCode;
-    }
-
-    public void setMessageCode(String messageCode) {
-        this.messageCode = messageCode;
-    }
+    @JsonProperty("_messageCode_")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessageCode() { return messageCode; }
+    public void setMessageCode(String messageCode) { this.messageCode = messageCode; }
 
     public BaseResponse message(String message) {
         this.message = message;
@@ -65,28 +49,19 @@ public class BaseResponse {
     }
 
     /**
-     * The explanation of the &#x60;messageCode&#x60;.
+     * The explanation of the "messageCode".
      * @return message
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The explanation of the `messageCode`.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessage() {
-        return message;
-    }
-
+    @JsonProperty("message")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         BaseResponse baseError = (BaseResponse)o;
         return Objects.equals(this.messageCode, baseError.messageCode) &&
                 Objects.equals(this.message, baseError.message);
@@ -101,22 +76,22 @@ public class BaseResponse {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class BaseError {\n");
-        sb.append("    messageCode: ")
-                .append(toIndentedString(messageCode))
-                .append("\n");
-        sb.append("    message: ").append(toIndentedString(message)).append("\n");
+        toString(sb);
         sb.append("}");
         return sb.toString();
+    }
+
+    protected void toString(StringBuilder sb) {
+        sb.append("    messageCode: ").append(toIndentedString(messageCode)).append("\n");
+        sb.append("    message: ").append(toIndentedString(message)).append("\n");
     }
 
     /**
      * Convert the given object to string with each line indented by 4 spaces
      * (except the first line).
      */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+    protected String toIndentedString(Object o) {
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

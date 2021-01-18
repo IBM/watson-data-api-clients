@@ -22,41 +22,9 @@ import java.util.Objects;
 /**
  * GetMeResponse
  */
-public class GetMeResponse {
+public class GetMeResponse extends BaseResponse {
 
-    private String messageCode;
-    private String message;
     private GetMeResponseAllOf1UserInfo userInfo;
-
-    public GetMeResponse messageCode(String messageCode) {
-        this.messageCode = messageCode;
-        return this;
-    }
-
-    /**
-     * The identifier of the response.
-     * @return messageCode
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("_messageCode_")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getMessageCode() { return messageCode; }
-    public void setMessageCode(String messageCode) { this.messageCode = messageCode; }
-
-    public GetMeResponse message(String message) {
-        this.message = message;
-        return this;
-    }
-
-    /**
-     * The explanation of the &#x60;messageCode&#x60;.
-     * @return message
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("message")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
 
     public GetMeResponse userInfo(GetMeResponseAllOf1UserInfo userInfo) {
         this.userInfo = userInfo;
@@ -78,34 +46,23 @@ public class GetMeResponse {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         GetMeResponse getMeResponse = (GetMeResponse)o;
-        return Objects.equals(this.messageCode, getMeResponse.messageCode) &&
-                Objects.equals(this.message, getMeResponse.message) &&
+        return super.equals(o) &&
                 Objects.equals(this.userInfo, getMeResponse.userInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageCode, message, userInfo);
+        return Objects.hash(super.hashCode(), userInfo);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class GetMeResponse {\n");
-        sb.append("    messageCode: ").append(toIndentedString(messageCode)).append("\n");
-        sb.append("    message: ").append(toIndentedString(message)).append("\n");
+        super.toString(sb);
         sb.append("    userInfo: ").append(toIndentedString(userInfo)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) { return "null"; }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }

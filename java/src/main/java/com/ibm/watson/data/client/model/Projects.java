@@ -17,9 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,17 +24,9 @@ import java.util.Objects;
 /**
  * A list of projects.
  */
-@ApiModel(description = "A list of projects.")
-@JsonPropertyOrder({
-        Projects.JSON_PROPERTY_RESOURCES,
-        Projects.JSON_PROPERTY_TOTAL_RESULTS
-})
 public class Projects {
 
-    public static final String JSON_PROPERTY_RESOURCES = "resources";
     private List<Project> resources = null;
-
-    public static final String JSON_PROPERTY_TOTAL_RESULTS = "total_results";
     private Integer totalResults;
 
     public Projects resources(List<Project> resources) {
@@ -58,17 +47,10 @@ public class Projects {
      * @return resources
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "A list of projects returned in the query results.")
-    @JsonProperty(JSON_PROPERTY_RESOURCES)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<Project> getResources() {
-        return resources;
-    }
-
-    public void setResources(List<Project> resources) {
-        this.resources = resources;
-    }
+    @JsonProperty("resources")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<Project> getResources() { return resources; }
+    public void setResources(List<Project> resources) { this.resources = resources; }
 
     public Projects totalResults(Integer totalResults) {
         this.totalResults = totalResults;
@@ -81,28 +63,15 @@ public class Projects {
      * @return totalResults
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example = "1",
-            value = "The total number of project returned in the query results.")
-    @JsonProperty(JSON_PROPERTY_TOTAL_RESULTS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Integer getTotalResults() {
-        return totalResults;
-    }
-
-    public void setTotalResults(Integer totalResults) {
-        this.totalResults = totalResults;
-    }
+    @JsonProperty("total_results")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Integer getTotalResults() { return totalResults; }
+    public void setTotalResults(Integer totalResults) { this.totalResults = totalResults; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         Projects projects = (Projects)o;
         return Objects.equals(this.resources, projects.resources) &&
                 Objects.equals(this.totalResults, projects.totalResults);
@@ -117,12 +86,8 @@ public class Projects {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Projects {\n");
-        sb.append("    resources: ")
-                .append(toIndentedString(resources))
-                .append("\n");
-        sb.append("    totalResults: ")
-                .append(toIndentedString(totalResults))
-                .append("\n");
+        sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
+        sb.append("    totalResults: ").append(toIndentedString(totalResults)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -132,9 +97,7 @@ public class Projects {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

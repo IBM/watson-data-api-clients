@@ -25,13 +25,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * Platform-level API for managing authentication.
@@ -50,25 +49,14 @@ public class AuthorizationApi {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Get authorization token
      * Generate a bearer token from your Cloud Pak for Data credentials.
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
      * @param loginCredentials The loginCredentials parameter
      * @return LoginResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<LoginResponse> getAuthorizationToken(LoginCredentials loginCredentials) throws RestClientException {
+    public Mono<LoginResponse> getAuthorizationToken(@NonNull LoginCredentials loginCredentials) throws RestClientException {
 
-        // verify the required parameter 'loginCredentials' is set
-        if (loginCredentials == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'loginCredentials' when calling getAuthorizationToken");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -91,25 +79,14 @@ public class AuthorizationApi {
     }
 
     /**
-     * Get authorization token
      * Generate a bearer token from your IBM Cloud public API key.
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
      * @param apiKey The apiKey parameter
      * @return LoginResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<LoginResponse> getAuthorizationToken(String apiKey) throws RestClientException {
+    public Mono<LoginResponse> getAuthorizationToken(@NonNull String apiKey) throws RestClientException {
 
-        // verify the required parameter 'apiKey' is set
-        if (apiKey == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'apiKey' when calling getAuthorizationToken");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

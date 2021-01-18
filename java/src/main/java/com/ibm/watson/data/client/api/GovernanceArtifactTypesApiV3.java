@@ -38,9 +38,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Governance Artifact Types.
@@ -60,12 +60,7 @@ public class GovernanceArtifactTypesApiV3 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Creates custom attribute definition in the glossary.
-     * This method can be used to create custom attribute definition in the
-     * glossary. <p><b>201</b> - The custom attribute definition has been created
-     * successfully. <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>409</b> - UniqueConstraintViolation - custom attribute definition
-     * with given name already exists. <p><b>500</b> - Internal Server Error
+     * Create custom attribute definition in the glossary.
      * @param artifactType The artifact type. Allowed values are all, category,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param newCustomAttributeDefinitionEntity Custom attribute definition to be
@@ -76,22 +71,10 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> createCustomAttributeDefinition(String artifactType,
-                                                                        NewCustomAttributeDefinitionEntity newCustomAttributeDefinitionEntity,
+    public Mono<GlossaryCreateResponse> createCustomAttributeDefinition(@NonNull String artifactType,
+                                                                        @NonNull NewCustomAttributeDefinitionEntity newCustomAttributeDefinitionEntity,
                                                                         String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling createCustomAttributeDefinition");
-        }
-        // verify the required parameter 'newCustomAttributeDefinitionEntity' is set
-        if (newCustomAttributeDefinitionEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newCustomAttributeDefinitionEntity' when calling createCustomAttributeDefinition");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -119,13 +102,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Delete a comment on a draft artifact version
-     *
-     * <p><b>200</b> - Comment deleted successfully
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Draft artifact version not found for given version_id
-     * <p><b>500</b> - Internal Server Error
+     * Delete a comment on a draft artifact version.
      * @param artifactType The artifact type. Allowed values are glossary_term,
      *     classification, data_class, reference_data, policy, rule
      * @param artifactId The artifact id.
@@ -133,40 +110,16 @@ public class GovernanceArtifactTypesApiV3 {
      * @param commentId The comment id.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> deleteComment(String artifactType,
-                                    String artifactId,
-                                    String versionId,
-                                    String commentId,
+    public Mono<Void> deleteComment(@NonNull String artifactType,
+                                    @NonNull String artifactId,
+                                    @NonNull String versionId,
+                                    @NonNull String commentId,
                                     String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling deleteArtifactComments");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteArtifactComments");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling deleteArtifactComments");
-        }
-        // verify the required parameter 'commentId' is set
-        if (commentId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'commentId' when calling deleteArtifactComments");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -198,20 +151,12 @@ public class GovernanceArtifactTypesApiV3 {
 
     /**
      * Delete a list of draft or published versions of given artifact_type.
-     * If the artifact state is &lt;code&gt;DRAFT&lt;/code&gt;, then the draft
-     * version is deleted.&lt;br/&gt;&lt;br/&gt; If the artifact state is
-     * &lt;code&gt; PUBLISHED&lt;/code&gt;, a draft version with
-     * &lt;code&gt;marked_for_deletion&lt;/code&gt; is created
-     * .&lt;br/&gt;&lt;br/&gt; If the artifact state is &lt;code&gt;
-     * PUBLISHED&lt;/code&gt; and workflow is skipped, then the published version
-     * is deleted.&lt;br/&gt;&lt;br/&gt; Administrator role is required.
-     * <p><b>201</b> - A draft version has been successfully created for deleting
-     * the published artifact. <p><b>202</b> - If async_mode is true, then the
-     * method starts an asynchronous process to execute the given action and
-     * returns with ACCEPTED 202 status code. <p><b>204</b> - The artifacts have
-     * been deleted successfully. <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>404</b> - Not found <p><b>500</b> - Internal Server
-     * Error
+     * <ul>
+     *     <li>If the artifact state is <code>DRAFT</code>, then the draft version is deleted.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code>, a draft version with <code>marked_for_deletion</code> is created.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code> and workflow is skipped, then the published version is deleted.</li>
+     * </ul>
+     * Administrator role is required.
      * @param artifactType The artifact type. Allowed values are category,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param glossaryResourceList The list of artifacts to be deleted. All the
@@ -226,23 +171,11 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Response> deleteArtifacts(String artifactType,
-                                          GlossaryResourceList glossaryResourceList,
+    public Mono<Response> deleteArtifacts(@NonNull String artifactType,
+                                          @NonNull GlossaryResourceList glossaryResourceList,
                                           Boolean asyncMode,
                                           String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling deleteArtifacts");
-        }
-        // verify the required parameter 'glossaryResourceList' is set
-        if (glossaryResourceList == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'glossaryResourceList' when calling deleteArtifacts");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -271,12 +204,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Deletes the custom attribute definition with a given guid.
-     * This method is used to delete the custom attribute definition with a given
-     * guid. <p><b>200</b> - The custom attribute definition has been deleted
-     * successfully. <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - The custom attribute definition with given {guid} does not
-     * exist. <p><b>500</b> - Internal Server Error
+     * Delete the custom attribute definition with a given guid.
      * @param artifactType The artifact type. Allowed values are all, category,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param customAttributeDefinitionId The guid of the custom attribute
@@ -287,22 +215,10 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryArchiveResponse> deleteCustomAttributeDefinition(String artifactType,
-                                                                         String customAttributeDefinitionId,
+    public Mono<GlossaryArchiveResponse> deleteCustomAttributeDefinition(@NonNull String artifactType,
+                                                                         @NonNull String customAttributeDefinitionId,
                                                                          String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling deleteCustomAttributeDefinition");
-        }
-        // verify the required parameter 'customAttributeDefinitionId' is set
-        if (customAttributeDefinitionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'customAttributeDefinitionId' when calling deleteCustomAttributeDefinition");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -331,39 +247,22 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Exports values of a specified type to a csv file.
-     * This method can be used to export values of a specified type to a csv file.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - The category with given {guid} does not exist in the
-     * glossary. <p><b>500</b> - Internal Server Error
+     * Export values of a specified type to a csv file.
      * @param artifactType The artifact type. Allowed values are category,
      *     glossary_term, data_class, policy, rule, classification
      * @param categoryId The artifactId of the parent category
      * @param includeSubcategories Whether to include assets from subcategories
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
-     * @return String
+     * @return String of CSV
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<String> exportCSV(String artifactType,
-                                  String categoryId,
+    public Mono<String> exportCSV(@NonNull String artifactType,
+                                  @NonNull String categoryId,
                                   Boolean includeSubcategories,
                                   String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling exportCSV");
-        }
-        // verify the required parameter 'categoryId' is set
-        if (categoryId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'categoryId' when calling exportCSV");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -393,25 +292,15 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Get development logs &amp; Comments for a draft artifact version
-     *
-     * <p><b>200</b> - Development logs &amp; Comments retrieved successfully
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Draft artifact version not found for given version_id
-     * <p><b>500</b> - Internal Server Error
+     * Get development logs and comments for a draft artifact version.
      * @param artifactType The artifact type. Allowed values are glossary_term,
      *     classification, data_class, reference_data, policy, rule
      * @param artifactId The artifact id.
      * @param versionId The version id.
-     * @param timeZoneOffset Time zone offset based on which the day wise grouping
-     *     is to be performed. The offset will be of format [+-]hh:mm where hh
-     *     stands for hour digit and mm for minute digit. &lt;br/&gt;e.g. +05:30
-     *     indicates IST. If [+-] is not provided by default + will be appended.
-     *     e.g 05:30 indicates +05:30. &lt;br/&gt;If hour digit is single like
-     *     +h:mm provided, then it will be considered as +0h:mm. e.g. +5:30
-     *     indicates +05:30. &lt;br/&gt;The range of offsets is restricted to
+     * @param timeZoneOffset Time zone offset based on which the day-wise grouping
+     *     is to be performed. The offset will be of format [+/-]hh:mm where hh
+     *     stands for hour digit and mm for minute digit. For example, +05:30
+     *     indicates IST. The range of offsets is restricted to
      *     -17:59 to +17:59 inclusive.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
@@ -423,32 +312,14 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedAssetAggregatedCommentsList> getAggregatedLog(String artifactType,
-                                                                       String artifactId,
-                                                                       String versionId,
+    public Mono<PaginatedAssetAggregatedCommentsList> getAggregatedLog(@NonNull String artifactType,
+                                                                       @NonNull String artifactId,
+                                                                       @NonNull String versionId,
                                                                        String timeZoneOffset,
                                                                        String runAsTenant,
                                                                        Integer limit,
                                                                        String offset) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling getAggregatedArtifactComments");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling getAggregatedArtifactComments");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling getAggregatedArtifactComments");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -482,14 +353,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Get development logs &amp; Comments for a draft artifact version
-     *
-     * <p><b>200</b> - Development logs &amp; Comments retrieved successfully
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Draft artifact version not found for given version_id
-     * <p><b>500</b> - Internal Server Error
+     * Get development logs and comments for a draft artifact version.
      * @param artifactType The artifact type. Allowed values are glossary_term,
      *     classification, data_class, reference_data, policy, rule
      * @param artifactId The artifact id.
@@ -504,31 +368,13 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedAssetCommentList> getLog(String artifactType,
-                                                  String artifactId,
-                                                  String versionId,
+    public Mono<PaginatedAssetCommentList> getLog(@NonNull String artifactType,
+                                                  @NonNull String artifactId,
+                                                  @NonNull String versionId,
                                                   String runAsTenant,
                                                   Integer limit,
                                                   String offset) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling getArtifactComments");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling getArtifactComments");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling getArtifactComments");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -561,15 +407,8 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Get development logs &amp; Comments for a draft artifact version with
-     * development log id.
-     *
-     * <p><b>200</b> - Development logs &amp; Comments retrieved successfully
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Draft artifact version not found for given version_id
-     * <p><b>500</b> - Internal Server Error
+     * Get development logs and comments for a draft artifact version with
+     * the provided development log id.
      * @param artifactType The artifact type. Allowed values are glossary_term,
      *     classification, data_class, reference_data, policy, rule
      * @param artifactId The artifact id.
@@ -585,38 +424,14 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedAssetCommentsModificationDetails> getLogEntry(String artifactType,
-                                                                       String artifactId,
-                                                                       String versionId,
-                                                                       String modId,
+    public Mono<PaginatedAssetCommentsModificationDetails> getLogEntry(@NonNull String artifactType,
+                                                                       @NonNull String artifactId,
+                                                                       @NonNull String versionId,
+                                                                       @NonNull String modId,
                                                                        String runAsTenant,
                                                                        Integer limit,
                                                                        String offset) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling getArtifactCommentsByDevelopmentLogId");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling getArtifactCommentsByDevelopmentLogId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling getArtifactCommentsByDevelopmentLogId");
-        }
-        // verify the required parameter 'modId' is set
-        if (modId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'modId' when calling getArtifactCommentsByDevelopmentLogId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -650,12 +465,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Retrieves custom attribute definition with given guid.
-     * This method can be used for retrieving details of a custom attribute
-     * definition. <p><b>200</b> - The custom attribute definition has been
-     * retrieved successfully. <p><b>401</b> - Unauthorized <p><b>404</b> - The
-     * custom attribute definition with given {guid} does not exist. <p><b>500</b>
-     * - Internal Server Error
+     * Retrieve custom attribute definition with given guid.
      * @param artifactType The artifact type. Allowed values are all, category,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param customAttributeDefinitionId The guid of the custom attribute
@@ -666,22 +476,10 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<CustomAttributeDefinition> getCustomAttributeDefinition(String artifactType,
-                                                                        String customAttributeDefinitionId,
+    public Mono<CustomAttributeDefinition> getCustomAttributeDefinition(@NonNull String artifactType,
+                                                                        @NonNull String customAttributeDefinitionId,
                                                                         String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling getCustomAttributeDefinition");
-        }
-        // verify the required parameter 'customAttributeDefinitionId' is set
-        if (customAttributeDefinitionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'customAttributeDefinitionId' when calling getCustomAttributeDefinition");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -710,12 +508,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Retrieves custom attribute definitions with given artifact type.
-     * This method can be used for retrieving details of custom attribute
-     * definitions. <p><b>200</b> - The custom attribute definitions have been
-     * retrieved successfully. <p><b>401</b> - Unauthorized <p><b>404</b> - The
-     * custom attribute definition with given {guid} does not exist. <p><b>500</b>
-     * - Internal Server Error
+     * Retrieve custom attribute definitions with given artifact type.
      * @param artifactType The artifact type. Allowed values are all, category,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
@@ -724,15 +517,9 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<List<CustomAttributeDefinition>> listCustomAttributeDefinitions(String artifactType,
+    public Mono<List<CustomAttributeDefinition>> listCustomAttributeDefinitions(@NonNull String artifactType,
                                                                                 String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling getCustomAttributeDefinitions");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -761,11 +548,6 @@ public class GovernanceArtifactTypesApiV3 {
 
     /**
      * Get draft artifacts.
-     * This method can be used for retrieving draft artifact.
-     * <p><b>200</b> - The custom attribute definition has been retrieved
-     * successfully. <p><b>401</b> - Unauthorized <p><b>404</b> - The custom
-     * attribute definition with given {guid} does not exist. <p><b>500</b> -
-     * Internal Server Error
      * @param artifactType The artifact type. Allowed values are all,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param startsWith First character of artifact
@@ -774,8 +556,8 @@ public class GovernanceArtifactTypesApiV3 {
      * @param createdBy Filter by creator of artifact
      * @param modifiedBy Filter by editor of artifact
      * @param enabled Filter Results based on enabled flag for dataclass,
-     *     &#x60;yes&#x60; will give enabled dataclass, &#x60;no&#x60; will give
-     *     disabled and &#x60;both&#x60; shall return all
+     *     "yes" will give enabled dataclass, "no" will give
+     *     disabled and "both" shall return all
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
      * @param limit The maximum number of relationship to return - must be at
@@ -783,13 +565,13 @@ public class GovernanceArtifactTypesApiV3 {
      * @param offset Index of the beginning of the page. At present, the offset
      *     value can be 0 (zero) or a multiple of limit value.
      * @param sort Value on which results need to be sort,Valid sort parameters
-     *     are  NAME, MODIFIED, CREATED, TYPE.Prefix hyphen (-) for descending
+     *     are NAME, MODIFIED, CREATED, TYPE. Prefix hyphen (-) for descending
      *     order
      * @return PaginatedDraftArtifactsList
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedDraftArtifactsList> getDraftArtifacts(String artifactType,
+    public Mono<PaginatedDraftArtifactsList> getDraftArtifacts(@NonNull String artifactType,
                                                                String startsWith,
                                                                String subString,
                                                                String workflowStatus,
@@ -801,12 +583,6 @@ public class GovernanceArtifactTypesApiV3 {
                                                                String offset,
                                                                String sort) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling getDraftArtifacts");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -844,12 +620,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Gets the permissions for any artifact for authenticated user.
-     * This method can be used for retrieving permissions for any artifact.
-     * <p><b>200</b> - Permissions have been fetched properly
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Permissions are not found for this artifact type
-     * <p><b>500</b> - Internal Server Error
+     * Get the permissions for the artifact for the authenticated user.
      * @param artifactType The artifact type. Allowed values are all, category,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
@@ -858,15 +629,9 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<List<GovernancePermission>> getPermissions(String artifactType,
+    public Mono<List<GovernancePermission>> getPermissions(@NonNull String artifactType,
                                                            String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling getPermissions");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -895,41 +660,26 @@ public class GovernanceArtifactTypesApiV3 {
 
     /**
      * Import values from specified csv file.
-     * This method can be used to import values from specified csv file.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal Server Error
      * @param artifactType The artifact type. Allowed values are all, category,
      *     glossary_term, data_class policy, rule, classification
      * @param body The CSV contents to import
-     * @param mergeOption Import merge option, valid values: &lt;br/&gt;all -
-     *     imported values will replace existing values in
-     *     catalog&lt;br/&gt;specified - imported values that are not empty
-     *     replace existing values in catalog&lt;br/&gt;empty - imported values
-     *     replace only empty values in catalog&lt;br/&gt; if not specified: empty
+     * @param mergeOption Import merge option, valid values:
+     *     <ul>
+     *         <li>all - imported values will replace existing values in catalog</li>
+     *         <li>specified - imported values that are not empty replace existing values in catalog</li>
+     *         <li>empty (default) - imported values replace only empty values in catalog</li>
+     *     </ul>
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
      * @return GlossaryImportResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public ResponseEntity<GlossaryImportResult> importCSV(String artifactType,
-                                                          File body,
+    public ResponseEntity<GlossaryImportResult> importCSV(@NonNull String artifactType,
+                                                          @NonNull File body,
                                                           String mergeOption,
                                                           String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling importCSV");
-        }
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling importCSV");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -958,14 +708,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Add a comment for a draft artifact version
-     *
-     * <p><b>201</b> - Comment added successfully
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Draft artifact version not found for given version_id
-     * <p><b>500</b> - Internal Server Error
+     * Add a comment for a draft artifact version.
      * @param artifactType The artifact type. Allowed values are glossary_term,
      *     classification, data_class, reference_data, policy, rule
      * @param artifactId The artifact id.
@@ -977,36 +720,12 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<CommentByUser> logComment(String artifactType,
-                                          String artifactId,
-                                          String versionId,
-                                          CommentByUser commentByUser,
+    public Mono<CommentByUser> logComment(@NonNull String artifactType,
+                                          @NonNull String artifactId,
+                                          @NonNull String versionId,
+                                          @NonNull CommentByUser commentByUser,
                                           String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling logUserComment");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling logUserComment");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling logUserComment");
-        }
-        // verify the required parameter 'commentByUser' is set
-        if (commentByUser == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'commentByUser' when calling logUserComment");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1036,13 +755,7 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Update a comment on a draft artifact version
-     *
-     * <p><b>200</b> - Comment updated successfully
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Draft artifact version not found for given version_id
-     * <p><b>500</b> - Internal Server Error
+     * Update a comment on a draft artifact version.
      * @param artifactType The artifact type. Allowed values are glossary_term,
      *     classification, data_class, reference_data, policy, rule
      * @param artifactId The artifact id.
@@ -1055,43 +768,13 @@ public class GovernanceArtifactTypesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<CommentByUser> updateComment(String artifactType,
-                                             String artifactId,
-                                             String versionId,
-                                             String commentId,
-                                             CommentByUser commentByUser,
+    public Mono<CommentByUser> updateComment(@NonNull String artifactType,
+                                             @NonNull String artifactId,
+                                             @NonNull String versionId,
+                                             @NonNull String commentId,
+                                             @NonNull CommentByUser commentByUser,
                                              String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling updateArtifactComments");
-        }
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling updateArtifactComments");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling updateArtifactComments");
-        }
-        // verify the required parameter 'commentId' is set
-        if (commentId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'commentId' when calling updateArtifactComments");
-        }
-        // verify the required parameter 'commentByUser' is set
-        if (commentByUser == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'commentByUser' when calling updateArtifactComments");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1122,55 +805,27 @@ public class GovernanceArtifactTypesApiV3 {
     }
 
     /**
-     * Updates custom attribute definition with given id.
-     * This method is used to update custom attribute definition with given id.
-     * <p><b>200</b> - The custom attribute definition has been updated
-     * successfully. <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - The custom attribute definition with given {guid} does not
-     * exist. <p><b>409</b> - The custom attribute definition was modified by
-     * another user. <p><b>500</b> - Internal Server Error
+     * Update custom attribute definition with given id.
      * @param artifactType The artifact type. Allowed values are all, category,
      *     glossary_term, classification, data_class, reference_data, policy, rule
      * @param customAttributeDefinitionId The guid of the custom attribute
      *     definition to be updated.
      * @param updatableCustomAttributeDefinitionEntity Custom attribute definition
-     *     to be updated.&lt;br&gt;Fields omitted will be unchanged, and fields
-     *     set to null explicitly will be nulled out.&lt;br&gt;For multi-valued
-     *     attributes &amp; relationships, the complete list will be replaced by
-     *     the given list of values.&lt;br&gt;Additional
-     *     Example:&lt;br&gt;&lt;pre&gt;{&amp;quot;business_description&amp;quot;
-     *     : &amp;quot;business desc updated&amp;quot;}&lt;/pre&gt;
+     *     to be updated. Fields omitted will be unchanged, and fields
+     *     set to null explicitly will be nulled out. For multi-valued
+     *     attributes and relationships, the complete list will be replaced by
+     *     the given list of values.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
      * @return CustomAttributeDefinition
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<CustomAttributeDefinition> updateCustomAttributeDefinition(String artifactType,
-                                                                           String customAttributeDefinitionId,
-                                                                           NewCustomAttributeDefinitionEntity updatableCustomAttributeDefinitionEntity,
+    public Mono<CustomAttributeDefinition> updateCustomAttributeDefinition(@NonNull String artifactType,
+                                                                           @NonNull String customAttributeDefinitionId,
+                                                                           @NonNull NewCustomAttributeDefinitionEntity updatableCustomAttributeDefinitionEntity,
                                                                            String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactType' is set
-        if (artifactType == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactType' when calling updateCustomAttributeDefinition");
-        }
-        // verify the required parameter 'customAttributeDefinitionId' is set
-        if (customAttributeDefinitionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'customAttributeDefinitionId' when calling updateCustomAttributeDefinition");
-        }
-        // verify the required parameter 'updatableCustomAttributeDefinitionEntity'
-        // is set
-        if (updatableCustomAttributeDefinitionEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'updatableCustomAttributeDefinitionEntity' when calling updateCustomAttributeDefinition");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

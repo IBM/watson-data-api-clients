@@ -17,8 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,12 +24,8 @@ import java.util.Objects;
 /**
  * MemberSet
  */
-@JsonPropertyOrder({
-        MemberSet.JSON_PROPERTY_MEMBERS
-})
 public class MemberSet {
 
-    public static final String JSON_PROPERTY_MEMBERS = "members";
     private List<Member> members = new ArrayList<>();
 
     public MemberSet members(List<Member> members) {
@@ -48,24 +42,15 @@ public class MemberSet {
      * Get members
      * @return members
      **/
-    @ApiModelProperty(required = true, value = "")
-    @JsonProperty(JSON_PROPERTY_MEMBERS)
+    @JsonProperty("members")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public List<Member> getMembers() {
-        return members;
-    }
-
+    public List<Member> getMembers() { return members; }
     public void setMembers(List<Member> members) { this.members = members; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         MemberSet memberSet = (MemberSet)o;
         return Objects.equals(this.members, memberSet.members);
     }
@@ -89,9 +74,7 @@ public class MemberSet {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

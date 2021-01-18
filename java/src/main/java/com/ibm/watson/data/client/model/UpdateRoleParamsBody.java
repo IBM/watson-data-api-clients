@@ -17,8 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +25,9 @@ import java.util.Objects;
 /**
  * UpdateRoleParamsBody
  */
-@JsonPropertyOrder({
-        UpdateRoleParamsBody.JSON_PROPERTY_DESCRIPTION,
-        UpdateRoleParamsBody.JSON_PROPERTY_PERMISSIONS
-})
 public class UpdateRoleParamsBody {
 
-    public static final String JSON_PROPERTY_DESCRIPTION = "description";
     private String description;
-
-    public static final String JSON_PROPERTY_PERMISSIONS = "permissions";
     private List<String> permissions = new ArrayList<>();
 
     public UpdateRoleParamsBody description(String description) {
@@ -49,17 +40,10 @@ public class UpdateRoleParamsBody {
      * @return description
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The description of the role.")
-    @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @JsonProperty("description")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public UpdateRoleParamsBody permissions(List<String> permissions) {
         this.permissions = permissions;
@@ -75,27 +59,15 @@ public class UpdateRoleParamsBody {
      * The permissions associated with the role.
      * @return permissions
      **/
-    @ApiModelProperty(required = true,
-            value = "The permissions associated with the role.")
-    @JsonProperty(JSON_PROPERTY_PERMISSIONS)
+    @JsonProperty("permissions")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public List<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<String> permissions) {
-        this.permissions = permissions;
-    }
+    public List<String> getPermissions() { return permissions; }
+    public void setPermissions(List<String> permissions) { this.permissions = permissions; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         UpdateRoleParamsBody updateRoleParamsBody = (UpdateRoleParamsBody)o;
         return Objects.equals(this.description, updateRoleParamsBody.description) &&
                 Objects.equals(this.permissions, updateRoleParamsBody.permissions);
@@ -110,12 +82,8 @@ public class UpdateRoleParamsBody {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UpdateRoleParamsBody {\n");
-        sb.append("    description: ")
-                .append(toIndentedString(description))
-                .append("\n");
-        sb.append("    permissions: ")
-                .append(toIndentedString(permissions))
-                .append("\n");
+        sb.append("    description: ").append(toIndentedString(description)).append("\n");
+        sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -125,9 +93,7 @@ public class UpdateRoleParamsBody {
      * (except the first line).
      */
     private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

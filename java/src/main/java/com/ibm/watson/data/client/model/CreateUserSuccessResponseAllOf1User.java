@@ -17,24 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Objects;
 
 /**
  * CreateUserSuccessResponseAllOf1User
  */
-@JsonPropertyOrder({
-        CreateUserSuccessResponseAllOf1User.JSON_PROPERTY_I_D,
-        CreateUserSuccessResponseAllOf1User.JSON_PROPERTY_PASSWORD
-})
 public class CreateUserSuccessResponseAllOf1User {
 
-    public static final String JSON_PROPERTY_I_D = "ID";
     private String ID;
-
-    public static final String JSON_PROPERTY_PASSWORD = "password";
     private String password;
 
     public CreateUserSuccessResponseAllOf1User ID(String ID) {
@@ -47,14 +38,9 @@ public class CreateUserSuccessResponseAllOf1User {
      * @return ID
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "admin", value = "The user name.")
-    @JsonProperty(JSON_PROPERTY_I_D)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getID() {
-        return ID;
-    }
-
+    @JsonProperty("ID")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getID() { return ID; }
     public void setID(String ID) { this.ID = ID; }
 
     public CreateUserSuccessResponseAllOf1User password(String password) {
@@ -67,29 +53,18 @@ public class CreateUserSuccessResponseAllOf1User {
      * @return password
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Auto generated password for the new user")
-    @JsonProperty(JSON_PROPERTY_PASSWORD)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getPassword() {
-        return password;
-    }
-
+    @JsonProperty("password")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CreateUserSuccessResponseAllOf1User createUserSuccessResponseAllOf1User =
-                (CreateUserSuccessResponseAllOf1User)o;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        CreateUserSuccessResponseAllOf1User createUserSuccessResponseAllOf1User = (CreateUserSuccessResponseAllOf1User)o;
         return Objects.equals(this.ID, createUserSuccessResponseAllOf1User.ID) &&
-                Objects.equals(this.password,
-                        createUserSuccessResponseAllOf1User.password);
+                Objects.equals(this.password, createUserSuccessResponseAllOf1User.password);
     }
 
     @Override
@@ -112,9 +87,7 @@ public class CreateUserSuccessResponseAllOf1User {
      * (except the first line).
      */
     private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

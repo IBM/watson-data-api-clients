@@ -17,21 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * The GitHub repository associated with the project.
  */
-@ApiModel(description = "The GitHub repository associated with the project.")
-@JsonPropertyOrder({
-        ProjectGithub.JSON_PROPERTY_REPOSITORY
-})
 public class ProjectGithub {
 
-    public static final String JSON_PROPERTY_REPOSITORY = "repository";
     private String repository;
 
     public ProjectGithub repository(String repository) {
@@ -40,29 +32,19 @@ public class ProjectGithub {
     }
 
     /**
-     * Allows for project integration with GitHub. Must be a valid URL to a Github repository.
+     * Allows for project integration with GitHub. Must be a valid URL to a Github repository
+     * (eg. 'git@github.ibm.com:dap/ngp-projects-api.git').
      * @return repository
      **/
-    @ApiModelProperty(
-            example = "git@github.ibm.com:dap/ngp-projects-api.git", required = true,
-            value = "Allows for project integration with GitHub. Must be a valid URL to a Github repository.")
-    @JsonProperty(JSON_PROPERTY_REPOSITORY)
+    @JsonProperty("repository")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getRepository() {
-        return repository;
-    }
-
+    public String getRepository() { return repository; }
     public void setRepository(String repository) { this.repository = repository; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ProjectGithub projectGithub = (ProjectGithub)o;
         return Objects.equals(this.repository, projectGithub.repository);
     }
@@ -76,9 +58,7 @@ public class ProjectGithub {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class ProjectGithub {\n");
-        sb.append("    repository: ")
-                .append(toIndentedString(repository))
-                .append("\n");
+        sb.append("    repository: ").append(toIndentedString(repository)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -88,9 +68,7 @@ public class ProjectGithub {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

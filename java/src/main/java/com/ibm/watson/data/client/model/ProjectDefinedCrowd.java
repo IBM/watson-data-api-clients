@@ -17,25 +17,14 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * The Defined Crowd feature integration with the project.
  */
-@ApiModel(description = "The Defined Crowd feature integration with the project.")
-@JsonPropertyOrder({
-        ProjectDefinedCrowd.JSON_PROPERTY_ACCESS_KEY_ID,
-        ProjectDefinedCrowd.JSON_PROPERTY_ACCESS_KEY_SECRET
-})
 public class ProjectDefinedCrowd {
 
-    public static final String JSON_PROPERTY_ACCESS_KEY_ID = "access_key_id";
     private String accessKeyId;
-
-    public static final String JSON_PROPERTY_ACCESS_KEY_SECRET = "access_key_secret";
     private String accessKeySecret;
 
     public ProjectDefinedCrowd accessKeyId(String accessKeyId) {
@@ -47,19 +36,10 @@ public class ProjectDefinedCrowd {
      * The access key ID for a defined crowd resource.
      * @return accessKeyId
      **/
-    @ApiModelProperty(example = "lpUZRB2HC68XPUHzZ5J7u6PlOe+Z9a88L1n9snEkzag=",
-            required = true,
-            value = "The access key ID for a defined crowd resource.")
-    @JsonProperty(JSON_PROPERTY_ACCESS_KEY_ID)
+    @JsonProperty("access_key_id")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getAccessKeyId() {
-        return accessKeyId;
-    }
-
-    public void setAccessKeyId(String accessKeyId) {
-        this.accessKeyId = accessKeyId;
-    }
+    public String getAccessKeyId() { return accessKeyId; }
+    public void setAccessKeyId(String accessKeyId) { this.accessKeyId = accessKeyId; }
 
     public ProjectDefinedCrowd accessKeySecret(String accessKeySecret) {
         this.accessKeySecret = accessKeySecret;
@@ -70,29 +50,15 @@ public class ProjectDefinedCrowd {
      * The access key secret for a defined crowd resource.
      * @return accessKeySecret
      **/
-    @ApiModelProperty(
-            example = "oMwaSqESnNF7SJz1N/qb/yXLs898USwAlUtmpGpD6OBeWcPZbCI4Iq3Bgxv2kFpgU9r1Vd0yNP9Fslk+yf0sag==",
-            required = true,
-            value = "The access key secret for a defined crowd resource.")
-    @JsonProperty(JSON_PROPERTY_ACCESS_KEY_SECRET)
+    @JsonProperty("access_key_secret")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getAccessKeySecret() {
-        return accessKeySecret;
-    }
-
-    public void setAccessKeySecret(String accessKeySecret) {
-        this.accessKeySecret = accessKeySecret;
-    }
+    public String getAccessKeySecret() { return accessKeySecret; }
+    public void setAccessKeySecret(String accessKeySecret) { this.accessKeySecret = accessKeySecret; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ProjectDefinedCrowd projectDefinedCrowd = (ProjectDefinedCrowd)o;
         return Objects.equals(this.accessKeyId, projectDefinedCrowd.accessKeyId) &&
                 Objects.equals(this.accessKeySecret,
@@ -108,12 +74,8 @@ public class ProjectDefinedCrowd {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class ProjectDefinedCrowd {\n");
-        sb.append("    accessKeyId: ")
-                .append(toIndentedString(accessKeyId))
-                .append("\n");
-        sb.append("    accessKeySecret: ")
-                .append(toIndentedString(accessKeySecret))
-                .append("\n");
+        sb.append("    accessKeyId: ").append(toIndentedString(accessKeyId)).append("\n");
+        sb.append("    accessKeySecret: ").append(toIndentedString(accessKeySecret)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -123,9 +85,7 @@ public class ProjectDefinedCrowd {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

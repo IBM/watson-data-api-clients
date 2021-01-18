@@ -17,21 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * The Figure Eight feature integration with the project.
  */
-@ApiModel(description = "The Figure Eight feature integration with the project.")
-@JsonPropertyOrder({
-        ProjectFigureEight.JSON_PROPERTY_API_KEY
-})
 public class ProjectFigureEight {
 
-    public static final String JSON_PROPERTY_API_KEY = "api_key";
     private String apiKey;
 
     public ProjectFigureEight apiKey(String apiKey) {
@@ -43,25 +35,15 @@ public class ProjectFigureEight {
      * The API key for a figure eight resource.
      * @return apiKey
      **/
-    @ApiModelProperty(example = "R_nsJW2Cy57JwsZB9MXP", required = true,
-            value = "The API key for a figure eight resource.")
-    @JsonProperty(JSON_PROPERTY_API_KEY)
+    @JsonProperty("api_key")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
+    public String getApiKey() { return apiKey; }
     public void setApiKey(String apiKey) { this.apiKey = apiKey; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         ProjectFigureEight projectFigureEight = (ProjectFigureEight)o;
         return Objects.equals(this.apiKey, projectFigureEight.apiKey);
     }
@@ -85,9 +67,7 @@ public class ProjectFigureEight {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

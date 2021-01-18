@@ -17,24 +17,14 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * A project object.
  */
-@ApiModel(description = "A project object.")
-@JsonPropertyOrder({
-        Project.JSON_PROPERTY_ENTITY, Project.JSON_PROPERTY_METADATA
-})
 public class Project {
 
-    public static final String JSON_PROPERTY_ENTITY = "entity";
     private ProjectEntity entity;
-
-    public static final String JSON_PROPERTY_METADATA = "metadata";
     private ProjectMetadata metadata;
 
     public Project entity(ProjectEntity entity) {
@@ -47,14 +37,9 @@ public class Project {
      * @return entity
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_ENTITY)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public ProjectEntity getEntity() {
-        return entity;
-    }
-
+    @JsonProperty("entity")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public ProjectEntity getEntity() { return entity; }
     public void setEntity(ProjectEntity entity) { this.entity = entity; }
 
     public Project metadata(ProjectMetadata metadata) {
@@ -67,26 +52,15 @@ public class Project {
      * @return metadata
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_METADATA)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public ProjectMetadata getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(ProjectMetadata metadata) {
-        this.metadata = metadata;
-    }
+    @JsonProperty("metadata")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public ProjectMetadata getMetadata() { return metadata; }
+    public void setMetadata(ProjectMetadata metadata) { this.metadata = metadata; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         Project project = (Project)o;
         return Objects.equals(this.entity, project.entity) &&
                 Objects.equals(this.metadata, project.metadata);
@@ -112,9 +86,7 @@ public class Project {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

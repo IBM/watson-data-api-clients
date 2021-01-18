@@ -48,7 +48,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <swagger-annotations-version>1.6.2</swagger-annotations-version>
         <spring-web-version>5.3.3</spring-web-version>
         <jackson-version>2.12.1</jackson-version>
         <jackson-databind-version>2.12.1</jackson-databind-version>
@@ -64,11 +63,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-annotations-version}</version>
-        </dependency>
 
         <!-- @Nullable annotation -->
         <dependency>

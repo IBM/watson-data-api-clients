@@ -25,14 +25,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
+/**
+ * API endpoints dealing with Policies.
+ */
 public class PoliciesApiV3 {
 
     private ApiClient apiClient;
@@ -48,13 +50,7 @@ public class PoliciesApiV3 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Creates a policy in the glossary.
-     * Creates a policy in the glossary.
-     * <p><b>201</b> - The policy has been created successfully.
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>409</b> - UniqueConstraintViolation - policy with given name already
-     * exists. <p><b>500</b> - Internal Server Error
+     * Create a policy in the glossary.
      * @param newPolicyEntity Policy to be created.
      * @param skipWorkflowIfPossible If Workflow template is configured, the
      *     artifact will be created in the published state by skipping the
@@ -65,16 +61,10 @@ public class PoliciesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> create(NewPolicyEntity newPolicyEntity,
+    public Mono<GlossaryCreateResponse> create(@NonNull NewPolicyEntity newPolicyEntity,
                                                Boolean skipWorkflowIfPossible,
                                                String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'newPolicyEntity' is set
-        if (newPolicyEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newPolicyEntity' when calling createPolicy");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -101,21 +91,13 @@ public class PoliciesApiV3 {
     }
 
     /**
-     * Deletes a draft or published version of an artifact.
-     * If the artifact state is &lt;code&gt;DRAFT&lt;/code&gt;, then the draft
-     * version is deleted.&lt;br/&gt;&lt;br/&gt; If the artifact state is
-     * &lt;code&gt; PUBLISHED&lt;/code&gt;, a draft version with
-     * &lt;code&gt;marked_for_deletion&lt;/code&gt; is created
-     * .&lt;br/&gt;&lt;br/&gt; If the artifact state is &lt;code&gt;
-     * PUBLISHED&lt;/code&gt; and workflow is skipped, then the published version
-     * is deleted.&lt;br/&gt;&lt;br/&gt; Administrator role is required.
-     * <p><b>200</b> - The artifact has been deleted successfully.
-     * <p><b>201</b> - A draft version has been successfully created for deleting
-     * the published artifact. <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Policy with sub-policies cannot be deleted.
-     * Try again after re-parenting sub-policies. <p><b>404</b> - Policy with
-     * given artifact and version ids does not exist in the glossary.
-     * <p><b>500</b> - Internal Server Error
+     * Delete a draft or published version of an artifact.
+     * <ul>
+     *     <li>If the artifact state is <code>DRAFT</code>, then the draft version is deleted.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code>, a draft version with <code>marked_for_deletion</code> is created.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code> and workflow is skipped, then the published version is deleted.</li>
+     * </ul>
+     * Administrator role is required.
      * @param artifactId The artifact ID of the policy.
      * @param versionId The version id of the policy to delete or to create
      *     mark-for-delete draft copy.
@@ -127,23 +109,11 @@ public class PoliciesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponsePolicy> delete(String artifactId,
-                                       String versionId,
+    public Mono<ResponsePolicy> delete(@NonNull String artifactId,
+                                       @NonNull String versionId,
                                        Boolean skipWorkflowIfPossible,
                                        String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteDraftByVersionId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling deleteDraftByVersionId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -173,13 +143,7 @@ public class PoliciesApiV3 {
     }
 
     /**
-     * Deletes a relationship from a draft policy.
-     * Deletes a relationship from a draft policy.
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
+     * Delete a relationship from a draft policy.
      * @param artifactId The artifact ID of the policy to fetch.
      * @param versionId The version ID of the policy to fetch.
      * @param relationshipId The artifact ID of the relationships to delete.
@@ -191,30 +155,12 @@ public class PoliciesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> deleteRelationship(String artifactId,
-                                                           String versionId,
-                                                           String relationshipId,
+    public Mono<GlossaryCreateResponse> deleteRelationship(@NonNull String artifactId,
+                                                           @NonNull String versionId,
+                                                           @NonNull String relationshipId,
                                                            Boolean skipWorkflowIfPossible,
                                                            String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteRelationships");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling deleteRelationships");
-        }
-        // verify the required parameter 'relationshipId' is set
-        if (relationshipId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'relationshipId' when calling deleteRelationships");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -246,18 +192,13 @@ public class PoliciesApiV3 {
     }
 
     /**
-     * Retrieves versions of a policy for the given artifact_id and status.
+     * Retrieve versions of a policy for the given artifact_id and status.
      * Retrieval of the versions of ACTIVE state is supported.
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
      * @param guid Artifact ID or global ID of the artifact
      * @param status Filter by policy status
      * @param includeRelationship Comma separated list of relationship types.
      *     Allowed values of association types are
-     *     &lt;code&gt;parent_policy,sub_policies,parent_category,categories,terms,classifications,rules,data_protection_rules,all&lt;/code&gt;
+     *     <code>parent_policy,sub_policies,parent_category,categories,terms,classifications,rules,data_protection_rules,all</code>
      * @param limit The maximum number of relationship to return - must be at
      *     least 1 and cannot exceed 200. The default value is 10.
      * @param offset Index of the beginning of the page. At present, the offset
@@ -268,19 +209,13 @@ public class PoliciesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedPolicyList> get(String guid,
+    public Mono<PaginatedPolicyList> get(@NonNull String guid,
                                          String status,
                                          String includeRelationship,
                                          String limit,
                                          String offset,
                                          String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getPolicyByArtifactId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -312,43 +247,26 @@ public class PoliciesApiV3 {
     }
 
     /**
-     * Retrieves versions of a policy for the given artifact_id and status.
-     * Retrieval of the versions of ACTIVE state is supported.
-     * <p><b>200</b> - The policy has been retrieved successfully.
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - The policy with given {guid} does not exist in the
-     * glossary. <p><b>500</b> - Internal Server Error
+     * Retrieve the specified version of a policy.
      * @param artifactId The artifact ID of the policy to fetch.
      * @param versionId The version ID of the policy to fetch.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
      * @param includeRelationship Comma separated list of relationship types.
      *     Allowed values of association types are
-     *     &lt;code&gt;parent_policy,sub_policies,parent_category,categories,terms,classifications,rules,data_protection_rules,all&lt;/code&gt;
+     *     <code>parent_policy,sub_policies,parent_category,categories,terms,classifications,rules,data_protection_rules,all</code>
      * @param limit The maximum number of relationship to return - must be at
      *     least 1 and cannot exceed 200. The default value is 10.
      * @return ResponsePolicy
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponsePolicy> getVersion(String artifactId,
-                                           String versionId,
+    public Mono<ResponsePolicy> getVersion(@NonNull String artifactId,
+                                           @NonNull String versionId,
                                            String runAsTenant,
                                            String includeRelationship,
                                            String limit) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling getPolicyByVersionId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling getPolicyByVersionId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -380,54 +298,31 @@ public class PoliciesApiV3 {
 
     /**
      * List the relationships for the specified policy.
-     * If the result set is larger than the &lt;code&gt;limit&lt;/code&gt;
-     * parameter, it returns the first &lt;code&gt;limit&lt;/code&gt; number of
-     * associations. &lt;br/&gt;To retrieve the next set of associations, call the
+     * If the result set is larger than the <code>limit</code>
+     * parameter, it returns the first <code>limit</code> number of
+     * associations. To retrieve the next set of associations, call the
      * method again by using the URI in
-     * &lt;code&gt;PaginatedTagsList.next&lt;/code&gt; returned by this method.
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal Server Error
+     * <code>PaginatedTagsList.next</code> returned by this method.
      * @param artifactId The guid of the Policy
      * @param versionId The versionID of the Policy
      * @param type Comma separated list of relationship types. Allowed values of
      *     association types are
-     *     &lt;code&gt;parent_policy,sub_policies,parent_category,categories,terms,classifications,rules,data_protection_rules,all&lt;/code&gt;
+     *     <code>parent_policy,sub_policies,parent_category,categories,terms,classifications,rules,data_protection_rules,all</code>
      * @param limit The maximum number of relationship to return - must be at
      *     least 1 and cannot exceed 200. The default value is 10.
      * @param offset Index of the beginning of the page. At present, the offset
      *     value can be 0 (zero) or a multiple of limit value.
-     * @return Map&lt;String,
-     *     AbstractOffsetPaginatedListRelationshipAbstractRelationshipEntity&gt;
+     * @return {@code Map<String, PaginatedAbstractRelationshipList>}
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Map<String, PaginatedAbstractRelationshipList>> listRelationships(String artifactId,
-                                                                                  String versionId,
-                                                                                  String type,
+    public Mono<Map<String, PaginatedAbstractRelationshipList>> listRelationships(@NonNull String artifactId,
+                                                                                  @NonNull String versionId,
+                                                                                  @NonNull String type,
                                                                                   Integer limit,
                                                                                   String offset)
             throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling listRelationships");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling listRelationships");
-        }
-        // verify the required parameter 'type' is set
-        if (type == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'type' when calling listRelationships");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -458,24 +353,16 @@ public class PoliciesApiV3 {
     }
 
     /**
-     * Updates policy with given artifact id and version id. If the policy is in
-     * published state then first creates a draft and applies the changes to the
-     * newly created draft. Updates policy with given artifact id and version id.
+     * Update policy with given artifact id and version id.
      * If the policy is in published state then first creates a draft and applies
-     * the changes to the newly created draft. <p><b>200</b> - The policy has been
-     * updated successfully. <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden <p><b>404</b> - The policy with
-     * given {guid} does not exist in the glossary. <p><b>409</b> - The policy was
-     * modified by another user. <p><b>500</b> - Internal Server Error
+     * the changes to the newly created draft.
      * @param artifactId The artifact id of the policy to be updated.
      * @param versionId The version id of the policy to be updated.
-     * @param updatablePolicyEntity The policy to be updated.&lt;br&gt;Fields
+     * @param updatablePolicyEntity The policy to be updated. Fields
      *     omitted will be unchanged, and fields set to null explicitly will be
-     *     nulled out.&lt;br&gt;For multi-valued attributes &amp; relationships,
+     *     nulled out. For multi-valued attributes and relationships,
      *     the complete list will be replaced by the given list of
-     *     values.&lt;br&gt;Additional
-     *     Example:&lt;br&gt;&lt;pre&gt;{&amp;quot;description&amp;quot; :
-     *     &amp;quot;description updated&amp;quot;}&lt;/pre&gt;
+     *     values.
      * @param skipWorkflowIfPossible If Workflow template is configured, the
      *     published artifact will be updated by skipping the workflow.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
@@ -484,30 +371,12 @@ public class PoliciesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponsePolicy> update(String artifactId,
-                                       String versionId,
-                                       UpdatablePolicyEntity updatablePolicyEntity,
+    public Mono<ResponsePolicy> update(@NonNull String artifactId,
+                                       @NonNull String versionId,
+                                       @NonNull UpdatablePolicyEntity updatablePolicyEntity,
                                        Boolean skipWorkflowIfPossible,
                                        String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling updatePolicyByVersionId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling updatePolicyByVersionId");
-        }
-        // verify the required parameter 'updatablePolicyEntity' is set
-        if (updatablePolicyEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'updatablePolicyEntity' when calling updatePolicyByVersionId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -537,14 +406,8 @@ public class PoliciesApiV3 {
     }
 
     /**
-     * Updates DPR rule relationships of a published policy using its artifact id
-     * and version id. Updates DPR rule relationships of a published policy using
-     * its artifact id and version id. <p><b>200</b> - The policy has been updated
-     * successfully. <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - The policy with given {guid} does not exist in the
-     * glossary. <p><b>409</b> - The policy was modified by another user.
-     * <p><b>500</b> - Internal Server Error
+     * Updates Data Protection Rule (DPR) relationships of a published policy using its artifact id
+     * and version id.
      * @param artifactId The artifact id of the policy to be updated.
      * @param versionId The version id of the policy to be updated.
      * @param newRelationship Adds new DPR rule relationships and deletes any
@@ -555,29 +418,11 @@ public class PoliciesApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponsePolicy> updateDataProtectionRuleRelationships(String artifactId,
-                                                                      String versionId,
-                                                                      List<NewRelationship> newRelationship,
+    public Mono<ResponsePolicy> updateDataProtectionRuleRelationships(@NonNull String artifactId,
+                                                                      @NonNull String versionId,
+                                                                      @NonNull List<NewRelationship> newRelationship,
                                                                       String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling updatePolicyDprRuleRelationships");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling updatePolicyDprRuleRelationships");
-        }
-        // verify the required parameter 'newRelationship' is set
-        if (newRelationship == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newRelationship' when calling updatePolicyDprRuleRelationships");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

@@ -105,6 +105,10 @@ public class ApiClient {
 
     private Authentication authentication;
 
+    /**
+     * Constructs a base ApiClient
+     * @param disableSSLVerification will disable SSL verification if set to true
+     */
     public ApiClient(boolean disableSSLVerification) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);

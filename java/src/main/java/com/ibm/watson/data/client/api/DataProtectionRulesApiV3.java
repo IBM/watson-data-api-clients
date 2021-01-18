@@ -27,10 +27,73 @@ import org.springframework.http.*;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
+/**
+ * API endpoints for dealing with Data Protection Rules.
+ * <br/><br/>
+ * A rule has two key properties:
+ * <ul>
+ *     <li>a trigger defining when the rule should be enforced</li>
+ *     <li>an action describing what operations to perform or outcome to enforce</li>
+ * </ul>
+ * <em>Trigger</em><br/>
+ * A trigger is a boolean expression represented using nested arrays. The
+ * following describes the syntax:
+ * <code>
+ * Expression: [ -conditions- ]
+ * 
+ * Conditions:
+ * -predicate-
+ * "NOT", -predicate-
+ * -predicate-, "AND"|"OR", -conditions-
+ * "NOT", -predicate-, "AND"|"OR", -conditions-
+ *
+ * Predicate:
+ * [ "$-term-", "EXISTS" ]
+ * [ "$-term-", "EQUALS"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS", "#-literal-"|"$-term-" ]
+ * -expression-
+ * </code>
+ * where:
+ * <ul>
+ *     <li><code>-term-</code>is a technical term defined in the term glossary.</li>
+ *     <li><code>-literal-</code>is a literal. For numerics a string representation of the number should be specified. For times, milliseconds are used (from Unix epoch). For boolean, <code>#true</code> and <code>#false</code> are used.</li>
+ * </ul>
+ * The definition of the operators in a predicate:
+ * <ul>
+ *     <li>EXISTS -- means that the term has a value of some kind.</li>
+ *     <li>EQUALS -- evaluates to true if the left and right sides are equal.</li>
+ *     <li>LESS_THAN -- evaluates to true if the left is less in numeric value than the right.</li>
+ *     <li>GREATER_THAN -- evaluates to true if the left is greater in numeric value than the right.</li>
+ *     <li>CONTAINS -- is meant to test an array term (such as Asset.Tags) with a single value. It evaluates to true if the value on the right side equals one of the values on the array on the left side. However it will also supports  a single value on the left, in which case it behaves just like EQUALS -- regular expressions or wildcards are not supported.</li>
+ * </ul>
+ * For all of the operators (except EXISTS), if the right hand side evaluates to an array,
+ * each value of the array is compared to the left side, according to the operator definition,
+ * and if any comparison is true then the result of the evaluation is true.  Examples:
+ * <code>
+ * [["$Asset.Type", "EQUALS", "#Project"]]
+ * ["NOT", ["$Asset.Tags", "CONTAINS", "#sensitive"], "AND", ["NOT", "$Asset.Tags", "CONTAINS", "#confidential"]]
+ * [["$User.Name", "EQUALS", "$Asset.Owner"]]
+ * </code>
+ * <em>Action</em>
+ * The action is a name with optional parameters or sub-action describing an operation to perform.
+ * For simple actions like Deny, only the action name will be provided.  For actions such as
+ * Transform, a sub-action with parameters describing the type of transform is
+ * also provided. The allowed actions depends on the governance type.
+ * Examples:
+ * <code>
+ * {"name": "Deny"}
+ * {"name": "Transform", "subaction": {"name": "anonymizeColumns", "parameters": [{"name": "column_name", "value": "CCN"}]}}
+ * </code>
+ * The maximum length allowed
+ * for "name" parameter is 80 characters, maximum length allowed for
+ * "description" parameter: 1000 characters. Allowed characters for
+ * the "name" parameter: letters from any language, numbers in any
+ * script, space, dot, underscore, hyphen. Strings with characters other than
+ * these are rejected (only for the name parameter).
+ */
 public class DataProtectionRulesApiV3 {
 
     private ApiClient apiClient;
@@ -46,75 +109,14 @@ public class DataProtectionRulesApiV3 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * create a rule
-     * Creates a rule.  A rule has two key properties:  1)  a trigger defining
-     * when the rule should be enforced, and  2)  an action describing what
-     * operations to perform or outcome to enforce.    &lt;b&gt;Trigger&lt;/b&gt;
-     * A trigger is a boolean expression represented using nested arrays.  The
-     * following describes the syntax:             Expression:       [
-     * -conditions- ]             Conditions:       -predicate- \&quot;NOT\&quot;,
-     * -predicate-       -predicate-, \&quot;AND\&quot;|\&quot;OR\&quot;,
-     * -conditions-       \&quot;NOT\&quot;, -predicate-,
-     * \&quot;AND\&quot;|\&quot;OR\&quot;, -conditions-             Predicate: [
-     * \&quot;$-term-\&quot;, \&quot;EXISTS\&quot; ]       [
-     * \&quot;$-term-\&quot;,
-     * \&quot;EQUALS\&quot;|\&quot;LESS_THAN\&quot;|\&quot;GREATER_THAN\&quot;|\&quot;CONTAINS\&quot;,
-     * \&quot;#-literal-\&quot;|\&quot;$-term-\&quot; ]       -expression- where:
-     * - -term- is a technical term defined in the term glossary.  - -literal- is
-     * a literal.  For numerics a string representation of the number should be
-     * specified.  For times, milliseconds are used (from Unix epoch).  For
-     * boolean, #true and #false are used.  The definition of the operators in a
-     * predicate:  - EXISTS -- means that the term has a value of some kind.   -
-     * EQUALS -- evaluates to true if the left and right sides are equal.   -
-     * LESS_THAN -- evaluates to true if the left is less in numeric value than
-     * the right.  - GREATER_THAN -- evaluates to true if the left is greater in
-     * numeric value than the right.  - CONTAINS -- is meant to test an array term
-     * (such as Asset.Tags) with a single value.  It evaluates to true if the
-     * value on the right side equals one of the values on the array on the left
-     * side.   However it will also supports  a single value on the left, in which
-     * case it behaves just like EQUALS -- regular expressions or wildcards are
-     * not supported.   For all of the operators (except EXISTS), if the right
-     * hand side evaluates to an array, each value of the array is compared to the
-     * left side, according to the operator definition, and if any comparison is
-     * true then the result of the evaluation is true.  Examples:
-     * [[\&quot;$Asset.Type\&quot;, \&quot;EQUALS\&quot;, \&quot;#Project\&quot;]]
-     * [\&quot;NOT\&quot;, [\&quot;$Asset.Tags\&quot;, \&quot;CONTAINS\&quot;,
-     * \&quot;#sensitive\&quot;], \&quot;AND\&quot;, [\&quot;NOT\&quot;,
-     * \&quot;$Asset.Tags\&quot;, \&quot;CONTAINS\&quot;,
-     * \&quot;#confidential\&quot;]]       [[\&quot;$User.Name\&quot;,
-     * \&quot;EQUALS\&quot;, \&quot;$Asset.Owner\&quot;]]
-     * &lt;b&gt;Action&lt;/b&gt;   The action is an name with optional parameters
-     * or subaction describing an operation to perform.  For simple actions like
-     * Deny, only the action name will be provided.  For actions such as
-     * Transform, a subaction with parameters describing the type of transform is
-     * also provided.  The allowed actions depends on the governance type.
-     * Examples:        {\&quot;name\&quot;: \&quot;Deny\&quot;}
-     * {\&quot;name\&quot;: \&quot;Transform\&quot;, \&quot;subaction\&quot;:
-     * {\&quot;name\&quot;: \&quot;anonymizeColumns\&quot;,
-     * \&quot;parameters\&quot;: [{\&quot;name\&quot;: \&quot;column_name\&quot;,
-     * \&quot;value\&quot;: \&quot;CCN\&quot;}]}}    The maximum length allowed
-     * for &#39;name&#39; parameter is 80 characters, maximum length allowed for
-     * &#39;description&#39; parameter: 1000 characters. Allowed characters for
-     * the &#39;name&#39; parameter: letters from any language, numbers in any
-     * script, space, dot, underscore, hyphen. Strings with characters other than
-     * these are rejected (only for the name parameter). <p><b>200</b> -
-     * successful operation <p><b>201</b> - Created <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Create a rule.
      * @param policyRuleRequest Rule json
      * @return PolicyRuleResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PolicyRuleResponse> create(PolicyRuleEntity policyRuleRequest) throws RestClientException {
+    public Mono<PolicyRuleResponse> create(@NonNull PolicyRuleEntity policyRuleRequest) throws RestClientException {
 
-        // verify the required parameter 'policyRuleRequest' is set
-        if (policyRuleRequest == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'policyRuleRequest' when calling createRule0");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -137,27 +139,15 @@ public class DataProtectionRulesApiV3 {
     }
 
     /**
-     * delete a rule
-     * Deletes a rule.  A rule can only be deleted if it is not currently
-     * associated with any policy (in any state). <p><b>204</b> - No Content (OK)
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Delete a rule.  A rule can only be deleted if it is not currently
+     * associated with any policy (in any state).
      * @param ruleId Rule ID
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String ruleId) throws RestClientException {
+    public Mono<Void> delete(@NonNull String ruleId) throws RestClientException {
 
-        // verify the required parameter 'ruleId' is set
-        if (ruleId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'ruleId' when calling deleteRule0");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -183,18 +173,13 @@ public class DataProtectionRulesApiV3 {
     }
 
     /**
-     * export all rules
-     * Export all defined rules as JSON.This includes all rules associated with
-     * policies and rules not associated with any policy. <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Export all defined rules as JSON. This includes all rules associated with
+     * policies and rules not associated with any policy.
      * @param limit The maximum number of Rules to export. The default value is
      *     1000.
      * @param offset The index of the first matching Rule to include in the
      *     result. The default value is 0.
-     * @return {@code Mono<DataProtectionRuleExportFile>}
+     * @return DataProtectionRuleExportFile
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
@@ -225,21 +210,15 @@ public class DataProtectionRulesApiV3 {
     }
 
     /**
-     * list all rules
-     * Lists all defined rules.  This includes all rules associated with policies
+     * List all defined rules.  This includes all rules associated with policies
      * and rules not associated with any policy.  When more than one filter
      * criteria is specified, the resulting collection satisfies all the criteria.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
-     * @param name Specify name of the rule to search for or use filter of the
-     *     form &#39;contains:xx&#39; to search for rules containing provided
-     *     phrase as part of name or use filter of the form &#39;exact:xx&#39; to
+     * @param name Specify name of the rule to search for, or use filter of the
+     *     form "contains:xx" to search for rules containing provided
+     *     phrase as part of name, or use filter of the form "exact:xx" to
      *     search for rules with exact name.
-     * @param description Specify description of the rule to search for or use
-     *     filter of the form &#39;contains:xx&#39; to search for rules containing
+     * @param description Specify description of the rule to search for, or use
+     *     filter of the form "contains:xx" to search for rules containing
      *     provided phrase as part of description.
      * @param trigger If specified, only rules with a matching trigger expression
      *     will be returned.
@@ -247,12 +226,11 @@ public class DataProtectionRulesApiV3 {
      *     returned.
      * @param state If specified, only rules in the matching state will be
      *     returned.
-     * @param governanceType If speficied, only rules with the matching governance
+     * @param governanceType If specified, only rules with the matching governance
      *     type/types will be returned.
      * @param sort The order to sort the rules.  The following values are allowed:
-     *     - name, -name -- ascending or descending order by the name -
-     *     modified_date, -modified_date -- ascending or descending order by
-     *     modified date
+     *     <code>name</code>, <code>modified_date</code>. Prefix the value with a
+     *     hyphen (-) to sort the results in descending order.
      * @param limit The maximum number of Rules to return. The default value
      *     is 50.
      * @param offset The index of the first matching Rule to include in the
@@ -303,27 +281,14 @@ public class DataProtectionRulesApiV3 {
     }
 
     /**
-     * retrieve a rule
-     * Retrieves detailed information on a rule given the rule&#39;s identifier.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve detailed information on a rule given the rule's identifier.
      * @param ruleId Rule ID
      * @return PolicyRuleResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PolicyRuleResponse> get(String ruleId) throws RestClientException {
+    public Mono<PolicyRuleResponse> get(@NonNull String ruleId) throws RestClientException {
 
-        // verify the required parameter 'ruleId' is set
-        if (ruleId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'ruleId' when calling getRule0");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -349,27 +314,14 @@ public class DataProtectionRulesApiV3 {
     }
 
     /**
-     * retrieve terms used in a rule
-     * Retrieves the names of all terms used in a rule.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve the names of all terms used in a rule.
      * @param ruleId Rule ID
      * @return PolicyRuleTermListResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PolicyRuleTermListResponse> getTerms(String ruleId) throws RestClientException {
+    public Mono<PolicyRuleTermListResponse> getTerms(@NonNull String ruleId) throws RestClientException {
 
-        // verify the required parameter 'ruleId' is set
-        if (ruleId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'ruleId' when calling getRuleTerms0");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -395,30 +347,16 @@ public class DataProtectionRulesApiV3 {
     }
 
     /**
-     * import rules
-     * Imports rules using content recieved as application/octet-stream media
-     * type.  Assumes content to be in UTF-8 charset.  Expects \&quot;rules\&quot;
-     * JSON array contained in a JSON objects. Ignores other fields.  Rule GUID is
-     * prerserved.  Retruns JSON array containing GUIDs of newly imported rules.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>413</b> - Content cannot be more than 1MB
-     * <p><b>500</b> - Internal Server Error
+     * Import rules using specified content. Assumes content to be in UTF-8 charset.
+     * Expects "rules" JSON array contained in a JSON object. Ignores other fields. Rule GUID is
+     * preserved. Returns JSON array containing GUIDs of newly imported rules.
      * @param body The input file for reading imported rules
      * @return ImportRuleResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ImportRuleResponse> load(DataProtectionRuleExportFile body) throws RestClientException {
+    public Mono<ImportRuleResponse> load(@NonNull DataProtectionRuleExportFile body) throws RestClientException {
 
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling importrules0");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -440,37 +378,22 @@ public class DataProtectionRulesApiV3 {
     }
 
     /**
-     * update a rule
-     * Updates a rule.  Maximum length allowed for &#39;name&#39; parameter: 80
-     * characters, maximum length allowed for &#39;description&#39; parameter:
-     * 1000 characters. If the parameter &#39;name&#39; is modified, allowed
-     * characters for the &#39;name&#39; parameter: letters from any language,
+     * Update a rule.  Maximum length allowed for "name" parameter: 80
+     * characters, maximum length allowed for "description" parameter:
+     * 1000 characters. If the parameter "name" is modified, allowed
+     * characters for the "name" parameter: letters from any language,
      * numbers in any script, space, dot, underscore, hyphen. Strings with
      * characters other than these are rejected (only for the name parameter). The
-     * governance_type_id cannot be modified. <p><b>200</b> - OK <p><b>400</b> -
-     * Bad Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * governance_type_id cannot be modified.
      * @param ruleId Rule ID
      * @param policyRuleRequest Rule json
      * @return PolicyRuleResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PolicyRuleResponse> update(String ruleId, PolicyRuleEntity policyRuleRequest) throws RestClientException {
+    public Mono<PolicyRuleResponse> update(@NonNull String ruleId,
+                                           @NonNull PolicyRuleEntity policyRuleRequest) throws RestClientException {
 
-        // verify the required parameter 'ruleId' is set
-        if (ruleId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'ruleId' when calling ruleUpdate0");
-        }
-        // verify the required parameter 'policyRuleRequest' is set
-        if (policyRuleRequest == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'policyRuleRequest' when calling ruleUpdate0");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

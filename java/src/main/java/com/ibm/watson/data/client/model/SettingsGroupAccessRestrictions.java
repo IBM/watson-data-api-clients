@@ -17,21 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * The access restrictions settings group.
  */
-@ApiModel(description = "The access restrictions settings group.")
-@JsonPropertyOrder({
-        SettingsGroupAccessRestrictions.JSON_PROPERTY_DATA
-})
 public class SettingsGroupAccessRestrictions {
 
-    public static final String JSON_PROPERTY_DATA = "data";
     private Boolean data = false;
 
     public SettingsGroupAccessRestrictions data(Boolean data) {
@@ -43,24 +35,15 @@ public class SettingsGroupAccessRestrictions {
      * Restrict access to project data.
      * @return data
      **/
-    @ApiModelProperty(required = true, value = "Restrict access to project data.")
-    @JsonProperty(JSON_PROPERTY_DATA)
+    @JsonProperty("data")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public Boolean getData() {
-        return data;
-    }
-
+    public Boolean getData() { return data; }
     public void setData(Boolean data) { this.data = data; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         SettingsGroupAccessRestrictions settingsGroupAccessRestrictions =
                 (SettingsGroupAccessRestrictions)o;
         return Objects.equals(this.data, settingsGroupAccessRestrictions.data);
@@ -85,9 +68,7 @@ public class SettingsGroupAccessRestrictions {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

@@ -25,13 +25,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Catalogs.
@@ -51,25 +50,15 @@ public class CatalogsApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Activate OMRS services
-     * Use this to activate the OMRS services for a catalog, using the stored
-     * configuration information <p><b>200</b> - OK <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Activate the OMRS services for a catalog, using the stored
+     * configuration information.
      * @param catalogId catalog GUID of the participating catalog
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> activateOMRSServer(String catalogId) throws RestClientException {
+    public Mono<Void> activateOMRSServer(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling activateOMRSServer");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -94,39 +83,12 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Creating IGC-WKC default (aka sync) catalog
      * Use this to create the default catalog, configure and start the OMAG
-     * server. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden <p><b>409</b> - Conflict
-     * <p><b>500</b> - Internal Server Error
-     * @param createDefaultCatalogRequest {   \&quot;catalog\&quot;: {
-     *     \&quot;name\&quot;: \&quot;The Default Catalog\&quot;,
-     *     \&quot;generator\&quot;: \&quot;Catalog-OMRS-Synced\&quot;,
-     *     \&quot;description\&quot;: \&quot;The default (aka sync)
-     *     catalog\&quot;,     \&quot;bss_account_id\&quot;: \&quot;999\&quot;,
-     *     \&quot;is_governed\&quot;: \&quot;true\&quot;, \&quot;bucket\&quot;: {
-     *     \&quot;bucket_type\&quot;: \&quot;assetfiles\&quot;     }   },
-     *     \&quot;event_bus\&quot;: {     \&quot;producer\&quot;: {
-     *     \&quot;bootstrap.servers\&quot;: \&quot;kafka:9093\&quot;,
-     *     \&quot;acks\&quot;: \&quot;all\&quot;,       \&quot;retries\&quot;:
-     *     \&quot;1\&quot;,       \&quot;batch.size\&quot;: \&quot;16384\&quot;,
-     *     \&quot;linger.ms\&quot;: \&quot;1\&quot;, \&quot;buffer.memory\&quot;:
-     *     \&quot;33554432\&quot;,       \&quot;max.request.size\&quot;:
-     *     \&quot;10485760\&quot;,       \&quot;key.serializer\&quot;:
-     *     \&quot;org.apache.kafka.common.serialization.StringSerializer\&quot;,
-     *     \&quot;value.serializer\&quot;:
-     *     \&quot;org.apache.kafka.common.serialization.StringSerializer\&quot; },
-     *     \&quot;consumer\&quot;: {       \&quot;bootstrap.servers\&quot;:
-     *     \&quot;kafka:9093\&quot;, \&quot;zookeeper.session.timeout.ms\&quot;:
-     *     \&quot;300000\&quot;,       \&quot;zookeeper.sync.time.ms\&quot;:
-     *     \&quot;2000\&quot;,       \&quot;fetch.message.max.bytes\&quot;:
-     *     \&quot;10485760\&quot;,       \&quot;max.partition.fetch.bytes\&quot;:
-     *     \&quot;10485760\&quot;,       \&quot;max.poll.interval.ms\&quot;:
-     *     \&quot;2000000000\&quot;,       \&quot;key.deserializer\&quot;:
-     *     \&quot;org.apache.kafka.common.serialization.StringDeserializer\&quot;,
-     *     \&quot;value.deserializer\&quot;:
-     *     \&quot;org.apache.kafka.common.serialization.StringDeserializer\&quot;
-     *     }   } }
+     * server.
+     * <br/><br/>
+     * Example request:
+     * <code>{ "catalog": { "name": "The Default Catalog", "generator": "Catalog-OMRS-Synced", "description": "The default (aka sync) catalog", "bss_account_id": "999", "is_governed": "true", "bucket": { "bucket_type": "assetfiles"  } }, "event_bus": { "producer": { "bootstrap.servers": "kafka:9093", "acks": "all", "retries": "1", "batch.size": "16384", "linger.ms": "1", "buffer.memory": "33554432", "max.request.size": "10485760", "key.serializer": "org.apache.kafka.common.serialization.StringSerializer", "value.serializer": "org.apache.kafka.common.serialization.StringSerializer" }, "consumer": { "bootstrap.servers": "kafka:9093", "zookeeper.session.timeout.ms": "300000", "zookeeper.sync.time.ms": "2000", "fetch.message.max.bytes": "10485760", "max.partition.fetch.bytes": "10485760", "max.poll.interval.ms": "2000000000", "key.deserializer": "org.apache.kafka.common.serialization.StringDeserializer", "value.deserializer": "org.apache.kafka.common.serialization.StringDeserializer" } } }</code>
+     * @param createDefaultCatalogRequest details for the default catalog configuration
      * @param checkBucketExistence Whether an existence check should be performed
      *     on the catalog bucket
      * @param topicUrlRoot common root of the topics used by the open metadata
@@ -135,16 +97,10 @@ public class CatalogsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Response> createCatalogOnOmrsOneCatalogCohort(CreateDefaultCatalogRequest createDefaultCatalogRequest,
+    public Mono<Response> createCatalogOnOmrsOneCatalogCohort(@NonNull CreateDefaultCatalogRequest createDefaultCatalogRequest,
                                                               Boolean checkBucketExistence,
                                                               String topicUrlRoot) throws RestClientException {
 
-        // verify the required parameter 'createDefaultCatalogRequest' is set
-        if (createDefaultCatalogRequest == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'createDefaultCatalogRequest' when calling createCatalogOnOmrsOneCatalogCohort");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -170,36 +126,22 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Create a catalog
-     * Use this API to create a catalog to organize your assets and collaborators.
+     * Create a catalog to organize your assets and collaborators.
      * You can use a catalog to easily to find and share data for your
      * organization, regardless of the location or format of the data.  You must
-     * have the Admin role for Data Catalog in your organization&#39;s IBM Watson
-     * Data Platform account on Bluemix.&lt;br/&gt; When you create a catalog, you
+     * have the Admin role for Data Catalog. When you create a catalog, you
      * must supply credentials for IBM Cloud Object Storage (S3 API), which
      * provides encrypted storage for the assets that you copy to the catalog.
-     * <p><b>200</b> - successful operation
-     * <p><b>201</b> - Created
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * @param catalogEntity {  \&quot;name\&quot;:\&quot;Test Catalog\&quot;,
-     *     \&quot;generator\&quot;:\&quot;test@us.ibm.com\&quot;,
-     *     \&quot;description\&quot;:\&quot;a new catalog\&quot; }
+     * @param catalogEntity <code>{ "name":"Test Catalog", "generator":"test@us.ibm.com", "description":"a new catalog" }</code>
      * @param checkBucketExistence Whether an existence check should be performed
      *     on the catalog bucket
      * @return Catalog
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Catalog> create(CatalogEntity catalogEntity, Boolean checkBucketExistence) throws RestClientException {
+    public Mono<Catalog> create(@NonNull CatalogEntity catalogEntity,
+                                Boolean checkBucketExistence) throws RestClientException {
 
-        // verify the required parameter 'catalogEntity' is set
-        if (catalogEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogEntity' when calling createCatalogV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -224,12 +166,9 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Configure catalog to participate in an OMRS cohort
-     * Use this to configure a catalog to participate in an OMRS cohort.  An OMRS
+     * Configure a catalog to participate in an OMRS cohort.  An OMRS
      * configuration document is created or updated with the specified cohort
-     * information. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden <p><b>500</b> - Internal Server
-     * Error
+     * information.
      * @param catalogId catalog GUID of the participating catalog
      * @param cohortName name of the cohort
      * @param topicUrlRoot common root of the topics used by the open metadata
@@ -240,23 +179,11 @@ public class CatalogsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<OMAGServerConfig> createOMRSServerConfig(String catalogId,
-                                                         String cohortName,
+    public Mono<OMAGServerConfig> createOMRSServerConfig(@NonNull String catalogId,
+                                                         @NonNull String cohortName,
                                                          String topicUrlRoot,
                                                          Map<String, Object> requestBody) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling createOMRSServerConfig");
-        }
-        // verify the required parameter 'cohortName' is set
-        if (cohortName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'cohortName' when calling createOMRSServerConfig");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -285,28 +212,16 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Permanently deactivate OMRS services and unregister from all cohorts
-     * Use this to permanently deactivate OMRS services for a catalog, and
+     * Permanently deactivate OMRS services for a catalog, and
      * unregister the catalog from all OMRS cohorts. The OMRS config document and
      * corresponding registrystore documents for the catalog are deleted.
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
      * @param catalogId catalog GUID of the participating catalog
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> deactivateOMRSServer(String catalogId) throws RestClientException {
+    public Mono<Void> deactivateOMRSServer(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling deactivateOMRSServer");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -332,27 +247,18 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Delete a catalog by catalog ID
-     * Use this API to delete a catalog if you have the Admin role.Deleting a
+     * Delete a catalog if you have the Admin role. Deleting a
      * catalog removes all items that are associated with the catalog, such as
-     * metadata for all assets in the catalog. <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
+     * metadata for all assets in the catalog.
      * @param catalogId Catalog GUID
      * @param deleteBucket delete_bucket
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String catalogId, Boolean deleteBucket) throws RestClientException {
+    public Mono<Void> delete(@NonNull String catalogId,
+                             Boolean deleteBucket) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling deleteCatalogV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -379,32 +285,17 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Unregister from an OMRS cohort
      * Unregister a catalog from an OMRS cohort. Once unregistered, the catalog
-     * can no longer send or receive messages from the cohort. <p><b>204</b> - No
-     * Content <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * can no longer send or receive messages from the cohort.
      * @param catalogId catalog GUID of the participating catalog
      * @param cohortName name of the cohort
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> disableAccessToCohort(String catalogId, String cohortName) throws RestClientException {
+    public Mono<Void> disableAccessToCohort(@NonNull String catalogId,
+                                            @NonNull String cohortName) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling disableAccessToCohort");
-        }
-        // verify the required parameter 'cohortName' is set
-        if (cohortName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'cohortName' when calling disableAccessToCohort");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -432,34 +323,22 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Get OMRS assets that have not yet been propagated into WKC
      * Gets a list of OMRS asset that have not yet been propagated into WKC.
-     * Either connections or data assets can be found. <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Either connections or data assets can be found.
      * @param catalogId catalog GUID of the participating catalog
-     * @param type The type of the asset to find.  Must be either DATA_ASSET or
-     *     CONNECTION.  Defaults to DATA_ASSET
+     * @param type The type of the asset to find.  Must be either <code>data_asset</code> or
+     *     <code>connection</code>.  Defaults to <code>data_asset</code>.
      * @param limit Limit to use when finding pending assets.  Defaults to 25
      * @param bookmark Optional bookmark to use when finding pending assets.
      * @return OmrsProcessingStatusResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<OmrsProcessingStatusResponse> findPendingAssets(String catalogId,
+    public Mono<OmrsProcessingStatusResponse> findPendingAssets(@NonNull String catalogId,
                                                                 String type,
                                                                 Integer limit,
                                                                 String bookmark) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling findPendingAssets");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -489,26 +368,14 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * List all properties of a catalog
-     * Use this API to get all properties of catalog.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * List all properties of a catalog.
      * @param catalogId catalog GUID
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> getAllProperties(String catalogId) throws RestClientException {
+    public Mono<Void> getAllProperties(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getAllCatalogPropertiesV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -536,12 +403,8 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Retrieve the default catalog for OMRS sync processing
-     * Use this to retrieve the default catalog for OMRS sync processing.  This
-     * catalog is configured on the one_catalog OMRS cohort. <p><b>200</b> - OK
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve the default catalog for OMRS sync processing.
+     * This catalog is configured on the <code>one_catalog</code> OMRS cohort.
      * @return Catalog
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
@@ -570,33 +433,16 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Get a single property in a catalog
-     *  Use this API to get the property of catalog by given property key.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Get a single property in a catalog by the given property key.
      * @param catalogId catalog GUID
      * @param propertyKey catalog property key
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> getProperty(String catalogId, String propertyKey) throws RestClientException {
+    public Mono<Void> getProperty(@NonNull String catalogId,
+                                  @NonNull String propertyKey) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getCatalogPropertyV2");
-        }
-        // verify the required parameter 'propertyKey' is set
-        if (propertyKey == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'propertyKey' when calling getCatalogPropertyV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -613,6 +459,8 @@ public class CatalogsApiV2 {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
+        // TODO: this should not be a Void response, but need some examples to see how to model it
+
         ParameterizedTypeReference<Void> localVarReturnType = new ParameterizedTypeReference<Void>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/{catalog_id}/properties/{property_key}", HttpMethod.GET,
@@ -622,18 +470,11 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Retrieve OMRS audit logs
-     * Use this to retrieve the OMRS audit logs for a catalog.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve the OMRS audit logs for a catalog.
      * @param catalogId catalog GUID of the participating catalog
      * @param startTimestamp timestamp value to start searching for new messages
      * @param messageIdPrefix Prefix value to filter message_id -- for example,
-     *     &#39;OCF-KAFKA&#39; or &#39;OMRS-AUDIT&#39;.
+     *     <code>OCF-KAFKA</code> or <code>OMRS-AUDIT</code>.
      * @param severity Comma delimited values of severity --
      *     OMRSAuditLogRecordSeverity (Error, Exception, Action, Information,
      *     Decision, etc.)
@@ -643,19 +484,13 @@ public class CatalogsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<OMRSAuditLogMapResponse> getOMRSAuditLogs(String catalogId,
+    public Mono<OMRSAuditLogMapResponse> getOMRSAuditLogs(@NonNull String catalogId,
                                                           Long startTimestamp,
                                                           String messageIdPrefix,
                                                           String severity,
                                                           Integer since)
             throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getOMRSAuditLogs");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -685,32 +520,16 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Retrieve the OMRS Kafka certificate
-     * Use this to retrieve the OMRS Kafka certificate document for a catalog and
-     * cohort. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve the OMRS Kafka certificate document for a catalog and cohort.
      * @param catalogId catalog GUID of the participating catalog
      * @param cohortName name of the cohort
      * @return OMAGCertificateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<OMAGCertificateResponse> getOMRSCertificateDocument(String catalogId,
-                                                                    String cohortName) throws RestClientException {
+    public Mono<OMAGCertificateResponse> getOMRSCertificateDocument(@NonNull String catalogId,
+                                                                    @NonNull String cohortName) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getOMRSCertificateDocument");
-        }
-        // verify the required parameter 'cohortName' is set
-        if (cohortName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'cohortName' when calling getOMRSCertificateDocument");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -737,27 +556,16 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Retrieve the OMRS configuration document
-     * Use this to retrieve the OMRS configuration document for a catalog. The
-     * configuration document will contain details about all OMRS cohorts in which
-     * the catalog participates. <p><b>200</b> - OK <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve the OMRS configuration document for a catalog.
+     * The configuration document will contain details about all OMRS cohorts in which
+     * the catalog participates.
      * @param catalogId catalog GUID of the participating catalog
      * @return OMAGServerConfig
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<OMAGServerConfig> getOMRSConfigDocument(String catalogId) throws RestClientException {
+    public Mono<OMAGServerConfig> getOMRSConfigDocument(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getOMRSConfigDocument");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -782,33 +590,16 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Retrieve the OMRS registry store
-     * Use this to retrieve the OMRS registry store document for a specified
-     * catalog and cohort. <p><b>200</b> - OK <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve the OMRS registry store document for a specified catalog and cohort.
      * @param catalogId catalog GUID of the participating catalog
      * @param cohortName name of the cohort
      * @return CohortMembership
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<CohortMembership> getOMRSRegistryStore(String catalogId, String cohortName) throws RestClientException {
+    public Mono<CohortMembership> getOMRSRegistryStore(@NonNull String catalogId,
+                                                       @NonNull String cohortName) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getOMRSRegistryStore");
-        }
-        // verify the required parameter 'cohortName' is set
-        if (cohortName == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'cohortName' when calling getOMRSRegistryStore");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -835,53 +626,33 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Get OMRS entity info
      * Generates a report showing the known information about the sync status of
-     * an OMRS entity <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b>
-     * - Unauthorized <p><b>403</b> - Forbidden <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * an OMRS entity.
      * @param catalogId catalog GUID of the participating catalog
      * @param guid OMRS entity guid to lookup
      * @param showAssets Whether to include the asset list in the output
      * @param showDeletedAssets Whether to include deleted assets in the output
      * @param showGraph Whether to include the reachability graph in the output
      * @param lookup Lookup options for getting the entity info.  Allowed values:
-     *     SELF_AND_PARENTS, SELF_PARENTS_AND_CHILDREN, ALL&lt;br&gt;&lt;table
-     *     border&#x3D;\&quot;1\&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Option&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;code&gt;SELF_AND_PARENTS&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Includes
-     *     the logical OMRS asset that the guid belongs to and its parents.  The
-     *     graph traveral is restricted to a single WKC
-     *     asset.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;code&gt;SELF_PARENTS_AND_CHILDREN&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Includes
-     *     the logical OMRS asset that the guid belongs to along with its parents
-     *     and children.  The graph traversal is restricted to a single WKC
-     *     asset.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;code&gt;ALL&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Includes
-     *     all logical OMRS assets that can be reached from the specified
-     *     guid.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+     *     <ul>
+     *               <li>SELF_AND_PARENTS: Includes the logical OMRS asset that the guid belongs to and its parents. The graph traversal is restricted to a single WKC asset.</li>
+     *               <li>SELF_PARENTS_AND_CHILDREN: Includes the logical OMRS asset that the guid belongs to along with its parents and children. The graph traversal is restricted to a single WKC asset.</li>
+     *               <li>ALL: Includes all logical OMRS assets that can be reached from the specified guid.</li>
+     *     </ul>
      * @param assetFilter Filter for assets to show.  Allowed values: NONE,
      *     UNSYNCED_ONLY, FAILED_ONLY
      * @return EntityInfoResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<EntityInfoResponse> getOmrsEntityInfo(String catalogId,
-                                                      String guid,
+    public Mono<EntityInfoResponse> getOmrsEntityInfo(@NonNull String catalogId,
+                                                      @NonNull String guid,
                                                       Boolean showAssets,
                                                       Boolean showDeletedAssets,
                                                       Boolean showGraph,
                                                       String lookup,
                                                       String assetFilter) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getOmrsEntityInfo");
-        }
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getOmrsEntityInfo");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -913,27 +684,14 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * OMRS instance health check
-     * Use this to perform a health check on the OMRS instance for a catalog
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * Perform a health check on the OMRS instance for a catalog.
      * @param catalogId catalog GUID of the participating catalog
      * @return OMRSHealthCheckResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<OMRSHealthCheckResponse> getOmrsHealthCheck(String catalogId) throws RestClientException {
+    public Mono<OMRSHealthCheckResponse> getOmrsHealthCheck(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getOmrsHealthCheck");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -958,11 +716,8 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Get OMRS sync status
      * Generates a report showing the current status of OMRS sync processing for a
-     * catalog <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * catalog.
      * @param catalogId catalog GUID of the participating catalog
      * @param startTimestamp timestamp value to start searching for OMRS activity
      * @param since Time before current time to set start_timestamp (eg 15m, 1h,
@@ -971,16 +726,10 @@ public class CatalogsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<OmrsProcessingStatusResponse> getOmrsProcessingStatus(String catalogId,
+    public Mono<OmrsProcessingStatusResponse> getOmrsProcessingStatus(@NonNull String catalogId,
                                                                       Long startTimestamp,
                                                                       String since) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling getOmrsProcessingStatus");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1008,35 +757,26 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * List all catalogs for a specific account
-     * Use this API to get a list of catalogs or projects or spaces, or to get the
-     * total number of public catalogs, for a given account.&lt;br/&gt;  *
-     * Standard Callers: to list all catalogs where caller is collaborator, omit
-     * \&quot;bss_account_id\&quot; field and \&quot;include\&quot;
-     * field.&lt;br/&gt;  * Accredited Services: to list all catalogs or projects
-     * or spaces for a specific account, enter bss account value in
-     * \&quot;bss_account_id\&quot; field and one of &#39;catalogs&#39;,
-     * &#39;projects&#39;, or &#39;spaces&#39; in \&quot;include\&quot;
-     * field.&lt;br/&gt;  * Accredited Services: to get the number of public
-     * catalogs for a specific account, enter bss account value in
-     * \&quot;bss_account_id\&quot; field and &#39;total_count&#39; in
-     * \&quot;include\&quot; field. <p><b>200</b> - OK <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
+     * List all catalogs for a specific account.
+     * <ul>
+     *     <li>Standard Callers: to list all catalogs where caller is collaborator, omit "bss_account_id" field and "include" field.</li>
+     *     <li>Accredited Services: to list all catalogs or projects or spaces for a specific account, enter bss account value in "bss_account_id" field and one of <code>catalogs</code>, <code>projects</code>, or <code>spaces</code> in "include" field.</li>
+     *     <li>Accredited Services: to get the number of public catalogs for a specific account, enter bss account value in "bss_account_id" field and <code>total_count</code> in "include" field.</li>
+     * </ul>
      * @param limit limit
      * @param bookmark bookmark
      * @param skip skip
      * @param include Limited to use by accredited services (which must also
-     *     supply &#39;bss_account_id&#39;). Currently, the only supported values
-     *     are &#39;catalogs&#39;, &#39;projects&#39;, &#39;spaces&#39; or
-     *     &#39;total_count&#39;. Not supplying any of these values results in
-     *     public &#39;catalogs&#39;, &#39;projects&#39;, AND &#39;spaces&#39;
-     *     being returned for a specific account.&lt;br/&gt;  * Use
-     *     &#39;catalogs&#39; for including all public catalogs for a specific
-     *     bss_account_id.&lt;br/&gt;  * Use &#39;projects&#39; for including all
-     *     projects for a specific bss_account_id.&lt;br/&gt;  * Use
-     *     &#39;spaces&#39; for including all spaces for a specific
-     *     bss_account_id.&lt;br/&gt;  * Use &#39;total_count&#39; for including
+     *     supply <code>bss_account_id</code>). Currently, the only supported values
+     *     are <code>catalogs</code>, <code>projects</code>, <code>spaces</code> or
+     *     <code>total_count</code>. Not supplying any of these values results in
+     *     public <code>catalogs</code>, <code>projects</code, AND <code>spaces</code>
+     *     being returned for a specific account. Use
+     *     <code>catalogs</code> for including all public catalogs for a specific
+     *     bss_account_id. Use <code>projects</code> for including all
+     *     projects for a specific bss_account_id. Use
+     *     <code>spaces</code> for including all spaces for a specific
+     *     bss_account_id. Use <code>total_count</code> for including
      *     total number of public catalogs for a specific account.
      * @param bssAccountId Limited to use by accredited services. Must be supplied
      *     when caller is an accredited service. Used for listing catalogs,
@@ -1080,37 +820,19 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Update catalog properties
-     * Use this API to patch catalog properties.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>409</b> - Conflict
-     * <p><b>500</b> - Internal Server Error
+     * Update catalog properties.
+     * Example body:
+     * <code>[ { "op": "add", "path": "/properties/new-property", "value": "new-value" } ]</code>
      * @param catalogId catalog GUID
      * @param body JSON array of patch operations as defined in RFC
-     *     6902.&lt;br/&gt;[ { \&quot;op\&quot;: \&quot;add\&quot;,
-     *     \&quot;path\&quot;: \&quot;/properties/new-property\&quot;,
-     *     \&quot;value\&quot;: \&quot;new-value\&quot; } ]
-     * @return {@code Mono<Void>}
+     *     6902.
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> updateProperties(String catalogId, Object body) throws RestClientException {
+    public Mono<Void> updateProperties(@NonNull String catalogId,
+                                       @NonNull List<JSONResourcePatchModel> body) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling patchCatalogPropertiesV2");
-        }
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling patchCatalogPropertiesV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1136,27 +858,14 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Update catalog connections
-     * Use this API to patch catalog properties.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>409</b> - Conflict
-     * <p><b>500</b> - Internal Server Error
+     * Update catalog connection properties.
      * @param catalogId catalog GUID
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> reconfigure(String catalogId) throws RestClientException {
+    public Mono<Void> reconfigure(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling patchCatalogReconfigureV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1182,40 +891,19 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Update catalog
-     * Use this API to update  the name or description of the catalog.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>409</b> - Conflict
-     * <p><b>500</b> - Internal Server Error
+     * Update the name or description of the catalog.
+     * Example body:
+     * <code>[ { "op": "replace", "path": "/entity/name", "value": "new-name" } ]</code>
      * @param catalogId catalog GUID
      * @param body JSON array of patch operations as defined in RFC
-     *     6902.&lt;br/&gt;[ { \&quot;op\&quot;: \&quot;replace\&quot;,
-     *     \&quot;path\&quot;: \&quot;/entity/name\&quot;, \&quot;value\&quot;:
-     *     \&quot;new-name\&quot; },&lt;br/&gt;{ \&quot;op\&quot;:
-     *     \&quot;replace\&quot;, \&quot;path\&quot;:
-     *     \&quot;/entity/description\&quot;, \&quot;value\&quot;:
-     *     \&quot;new-description\&quot; } ]
+     *     6902.
      * @return Catalog
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Catalog> update(String catalogId, List<JSONResourcePatchModel> body) throws RestClientException {
+    public Mono<Catalog> update(@NonNull String catalogId,
+                                @NonNull List<JSONResourcePatchModel> body) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling patchCatalogV2");
-        }
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling patchCatalogV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1240,13 +928,9 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Reprocesses messsages from OMRS
-     * Reprocesses messages from OMRS whose processing failed or is incomplete.
+     * Reprocesses messsages from OMRS whose processing failed or is incomplete.
      * The set of messages checked is determined by performing a graph traversal
-     * starting at the specified guid. <p><b>202</b> - Accepted <p><b>400</b> -
-     * Bad Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
-     * <p><b>500</b> - Internal Server Error
+     * starting at the specified guid.
      * @param catalogId catalog GUID of the participating catalog
      * @param guid OMRS entity guid to reprocess
      * @param force Forces reprocessing of messages for assets previously
@@ -1257,23 +941,11 @@ public class CatalogsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ReprocessMessagesResponse> reprocessMessage(String catalogId,
-                                                            String guid,
+    public Mono<ReprocessMessagesResponse> reprocessMessage(@NonNull String catalogId,
+                                                            @NonNull String guid,
                                                             Boolean force,
                                                             String lookup) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling reprocessMessage");
-        }
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling reprocessMessage");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1302,23 +974,16 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Get a catalog by catalog ID
+     * Get a catalog by catalog ID.
      * Members of the catalog can use this API to retrieve information about a
-     * catalog. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden
+     * catalog.
      * @param catalogId Catalog GUID
      * @return Catalog
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Catalog> get(String catalogId) throws RestClientException {
+    public Mono<Catalog> get(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling retrieveCatalogV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -1343,27 +1008,16 @@ public class CatalogsApiV2 {
     }
 
     /**
-     * Deactivate OMRS services
-     * Use this to temporarily deactivate OMRS services for a catalog.  The
-     * services can be reactivated using POST
-     * /v2/{catalog_id}/open-metadata/instance <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Temporarily deactivate OMRS services for a catalog.
+     * The services can be reactivated using POST to
+     * <code>/v2/{catalog_id}/open-metadata/instance</code>
      * @param catalogId catalog GUID of the participating catalog
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> stopOMRSServer(String catalogId) throws RestClientException {
+    public Mono<Void> stopOMRSServer(@NonNull String catalogId) throws RestClientException {
 
-        // verify the required parameter 'catalogId' is set
-        if (catalogId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'catalogId' when calling stopOMRSServer");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

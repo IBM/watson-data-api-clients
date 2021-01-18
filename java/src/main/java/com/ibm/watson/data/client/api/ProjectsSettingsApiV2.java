@@ -25,13 +25,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Project settings.
@@ -51,26 +50,14 @@ public class ProjectsSettingsApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Get access restrictions settings
      * Get access restrictions settings.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @return SettingsGroupAccessRestrictions
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<SettingsGroupAccessRestrictions> getAccessRestrictions(String guid) throws RestClientException {
+    public Mono<SettingsGroupAccessRestrictions> getAccessRestrictions(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getAccessRestrictionsSettings");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -96,26 +83,14 @@ public class ProjectsSettingsApiV2 {
     }
 
     /**
-     * Get audit events settings
      * Get audit events settings.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @return SettingsGroupAuditEvents
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<SettingsGroupAuditEvents> getAuditEvents(String guid) throws RestClientException {
+    public Mono<SettingsGroupAuditEvents> getAuditEvents(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getAuditEventsSettings");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -142,13 +117,7 @@ public class ProjectsSettingsApiV2 {
     }
 
     /**
-     * Update access restrictions settings
      * Update access restrictions settings.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param settingsGroupAccessRestrictions The settingsGroupAccessRestrictions
      *     parameter
@@ -156,22 +125,10 @@ public class ProjectsSettingsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<SettingsGroupAccessRestrictions> updateAccessRestrictions(String guid,
-                                                                          SettingsGroupAccessRestrictions settingsGroupAccessRestrictions)
+    public Mono<SettingsGroupAccessRestrictions> updateAccessRestrictions(@NonNull String guid,
+                                                                          @NonNull SettingsGroupAccessRestrictions settingsGroupAccessRestrictions)
             throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling updateAccessRestrictionsSettings");
-        }
-        // verify the required parameter 'settingsGroupAccessRestrictions' is set
-        if (settingsGroupAccessRestrictions == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'settingsGroupAccessRestrictions' when calling updateAccessRestrictionsSettings");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -197,35 +154,17 @@ public class ProjectsSettingsApiV2 {
     }
 
     /**
-     * Update audit events settings
      * Update audit events settings.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param settingsGroupAuditEvents The settingsGroupAuditEvents parameter
      * @return SettingsGroupAuditEvents
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<SettingsGroupAuditEvents> updateAuditEvents(String guid,
-                                                            SettingsGroupAuditEvents settingsGroupAuditEvents)
+    public Mono<SettingsGroupAuditEvents> updateAuditEvents(@NonNull String guid,
+                                                            @NonNull SettingsGroupAuditEvents settingsGroupAuditEvents)
             throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling updateAuditEventsSettings");
-        }
-        // verify the required parameter 'settingsGroupAuditEvents' is set
-        if (settingsGroupAuditEvents == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'settingsGroupAuditEvents' when calling updateAuditEventsSettings");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

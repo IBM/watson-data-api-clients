@@ -108,7 +108,7 @@ public class UserManagementTest extends AbstractExpectations {
         UpdateUserParamsBody body = readRequestFromFile("update", new TypeReference<UpdateUserParamsBody>() {});
         // TODO: currently the API throws a 500 internal server error
         assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_USER_NAME, body).block());
-        /*PlatformSuccessResponse response = api.update(MockConstants.NEW_USER_NAME, body).block();
+        /*BaseResponse response = api.update(MockConstants.NEW_USER_NAME, body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "???");*/
@@ -116,7 +116,7 @@ public class UserManagementTest extends AbstractExpectations {
 
     @Test
     public void testDelete() {
-        PlatformSuccessResponse response = api.delete(MockConstants.NEW_USER_NAME).block();
+        BaseResponse response = api.delete(MockConstants.NEW_USER_NAME).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "User deleted successfully.");

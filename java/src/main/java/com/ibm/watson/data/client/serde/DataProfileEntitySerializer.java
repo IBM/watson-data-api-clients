@@ -24,7 +24,7 @@ import com.ibm.watson.data.client.model.DataProfileEntity;
 import java.io.IOException;
 
 /**
- * Custom serialization for DataProfileEntity's
+ * Custom serialization for DataProfileEntities.
  */
 public class DataProfileEntitySerializer extends StdSerializer<DataProfileEntity> {
 

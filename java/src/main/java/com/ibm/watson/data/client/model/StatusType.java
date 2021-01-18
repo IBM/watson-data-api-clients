@@ -15,10 +15,10 @@
  */
 package com.ibm.watson.data.client.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.ibm.watson.data.client.model.enums.StatusFamily;
+
 import java.util.Objects;
 
 /**
@@ -27,49 +27,7 @@ import java.util.Objects;
 public class StatusType {
 
     private Integer statusCode;
-
-    /**
-     * Gets or Sets family
-     */
-    public enum FamilyEnum {
-        INFORMATIONAL("INFORMATIONAL"),
-
-        SUCCESSFUL("SUCCESSFUL"),
-
-        REDIRECTION("REDIRECTION"),
-
-        CLIENT_ERROR("CLIENT_ERROR"),
-
-        SERVER_ERROR("SERVER_ERROR"),
-
-        OTHER("OTHER");
-
-        private String value;
-
-        FamilyEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static FamilyEnum fromValue(String value) {
-            for (FamilyEnum b : FamilyEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    private FamilyEnum family;
+    private StatusFamily family;
     private String reasonPhrase;
 
     public StatusType statusCode(Integer statusCode) {
@@ -87,7 +45,7 @@ public class StatusType {
     public Integer getStatusCode() { return statusCode; }
     public void setStatusCode(Integer statusCode) { this.statusCode = statusCode; }
 
-    public StatusType family(FamilyEnum family) {
+    public StatusType family(StatusFamily family) {
         this.family = family;
         return this;
     }
@@ -99,8 +57,8 @@ public class StatusType {
     @javax.annotation.Nullable
     @JsonProperty("family")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public FamilyEnum getFamily() { return family; }
-    public void setFamily(FamilyEnum family) { this.family = family; }
+    public StatusFamily getFamily() { return family; }
+    public void setFamily(StatusFamily family) { this.family = family; }
 
     public StatusType reasonPhrase(String reasonPhrase) {
         this.reasonPhrase = reasonPhrase;

@@ -26,13 +26,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Projects.
@@ -52,11 +51,7 @@ public class ProjectsApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Create project
      * Creates a new project with the provided parameters.
-     * <p><b>201</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
      * @param createProjectBody The createProjectBody parameter
      * @return Project
      * @throws RestClientException if an error occurs while attempting to invoke
@@ -65,14 +60,8 @@ public class ProjectsApiV2 {
      * @see TransactionalProjectsApiV2#create(TransactionalProjectCreate)
      */
     @Deprecated
-    public Mono<Project> create(CreateProjectBody createProjectBody) throws RestClientException {
+    public Mono<Project> create(@NonNull CreateProjectBody createProjectBody) throws RestClientException {
 
-        // verify the required parameter 'createProjectBody' is set
-        if (createProjectBody == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'createProjectBody' when calling createProject");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -94,29 +83,17 @@ public class ProjectsApiV2 {
     }
 
     /**
-     * Delete project
      * Deletes a project with a given GUID.
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      * @deprecated in favour of transactional equivalent
      * @see TransactionalProjectsApiV2#delete(String)
      */
     @Deprecated
-    public Mono<Void> delete(String guid) throws RestClientException {
+    public Mono<Void> delete(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling deleteProject");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -140,14 +117,7 @@ public class ProjectsApiV2 {
     }
 
     /**
-     * Get project
-     * Returns data for a single project identified by the guid.
-     * <p><b>200</b> - OK
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Retrieve data for a single project.
      * @param guid The project GUID.
      * @param include A list of comma-separated project metadata sections to
      *     include in the query results.
@@ -155,14 +125,9 @@ public class ProjectsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Project> get(String guid, List<String> include) throws RestClientException {
+    public Mono<Project> get(@NonNull String guid,
+                             List<String> include) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getProject");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -190,11 +155,9 @@ public class ProjectsApiV2 {
     }
 
     /**
-     * Get all projects
-     * Returns a list of projects that are meeting the provided query parameters.
+     * Retrieve a list of all projects that meet the provided query parameters.
      * By default, the list returns projects that the authenticated user is a
-     * member of. <p><b>200</b> - OK <p><b>204</b> - No Content <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden
+     * member of.
      * @param name A project name to use to filter the query results by name
      *     (exact match).
      * @param member A project member to use to filter the query results by
@@ -210,19 +173,22 @@ public class ProjectsApiV2 {
      *     include in the query results.
      * @param limit The limit to use to restrict the number of projects returned
      *     in the query results. Used for pagination in conjunction with the
-     *     &#39;skip&#39; query parameter.
+     *     "skip" query parameter.
      * @param skip The offset to use to define the starting index of projects to
      *     return in the query results. Used for pagination in conjunction with
-     *     the &#39;limit&#39; query parameter.
+     *     the "limit" query parameter.
      * @return Projects
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Projects> list(String name, String member,
-                               List<String> roles, List<String> tags,
-                               List<String> guids, List<String> include,
-                               Integer limit, Integer skip)
-            throws RestClientException {
+    public Mono<Projects> list(String name,
+                               String member,
+                               List<String> roles,
+                               List<String> tags,
+                               List<String> guids,
+                               List<String> include,
+                               Integer limit,
+                               Integer skip) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -262,33 +228,16 @@ public class ProjectsApiV2 {
     }
 
     /**
-     * Update project
      * Partially updates the project with only a subset of properties.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param updateProjectBody The updateProjectBody parameter
      * @return Project
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Project> update(String guid, UpdateProjectBody updateProjectBody) throws RestClientException {
+    public Mono<Project> update(@NonNull String guid,
+                                @NonNull UpdateProjectBody updateProjectBody) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling updateProject");
-        }
-        // verify the required parameter 'updateProjectBody' is set
-        if (updateProjectBody == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'updateProjectBody' when calling updateProject");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
