@@ -15,10 +15,8 @@
  */
 package com.ibm.watson.data.client.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.ibm.watson.data.client.model.enums.AssetCategory;
 import com.ibm.watson.data.client.model.enums.ConnectionFlag;
 
@@ -44,40 +42,6 @@ public class ConnectionEntity {
     private Map<String, Object> properties = new HashMap<>();
     private ConnectionInteractionProperties interactionProperties;
     private Map<String, Object> sourceSystem = null;
-
-    /**
-     * The asset category
-     */
-    public enum AssetCategoryEnum {
-        USER("user"),
-
-        SYSTEM("system");
-
-        private String value;
-
-        AssetCategoryEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static AssetCategoryEnum fromValue(String value) {
-            for (AssetCategoryEnum b : AssetCategoryEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
     private AssetCategory assetCategory;
     private List<Map<String, Object>> childSourceSystems = null;
     private List<String> tags = null;

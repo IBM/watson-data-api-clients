@@ -27,14 +27,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
+/**
+ * API endpoints dealing with Workflows.
+ */
 public class WorkflowsApiV3 {
 
     private ApiClient apiClient;
@@ -50,13 +52,8 @@ public class WorkflowsApiV3 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Get artifacts managed by the workflow
-     * The artifacts are sorted by internal order
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Server Error
+     * Get artifacts managed by the workflow.
+     * The artifacts are sorted by internal order.
      * @param workflowId the workflow id
      * @param limit limit
      * @param offset offset
@@ -64,14 +61,10 @@ public class WorkflowsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedResourceArtifact> listArtifacts(String workflowId, String limit, String offset) throws RestClientException {
+    public Mono<PaginatedResourceArtifact> listArtifacts(@NonNull String workflowId,
+                                                         String limit,
+                                                         String offset) throws RestClientException {
 
-        // verify the required parameter 'workflowId' is set
-        if (workflowId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'workflowId' when calling getWorkflowArtifactsUsingGET1");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -100,14 +93,7 @@ public class WorkflowsApiV3 {
     }
 
     /**
-     * Get a workflow by workflow id
-     *
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Workflow not found
-     * <p><b>500</b> - Server Error
+     * Retrieve details for a workflow.
      * @param workflowId the workflow id
      * @param includeArtifacts max number of artifacts to include in result
      * @param includeUserTasks if include user tasks in result
@@ -116,17 +102,11 @@ public class WorkflowsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Workflow> get(String workflowId,
+    public Mono<Workflow> get(@NonNull String workflowId,
                               String includeArtifacts,
                               Boolean includeUserTasks,
                               Boolean includeVariables) throws RestClientException {
 
-        // verify the required parameter 'workflowId' is set
-        if (workflowId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'workflowId' when calling getWorkflowUsingGET1");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -155,13 +135,8 @@ public class WorkflowsApiV3 {
     }
 
     /**
-     * Get all available workflows
-     * The workflows are sorted by internal order
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Server Error
+     * Retrieve a list of all available workflows.
+     * The workflows are sorted by internal order.
      * @param artifactId only return workflows relate to artifact of the given
      *     artifact_id
      * @param includeArtifacts max number of artifacts to include in result
@@ -212,13 +187,8 @@ public class WorkflowsApiV3 {
     }
 
     /**
-     * Query available workflows
-     * The workflows are sorted by internal order
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Server Error
+     * Query available workflows.
+     * The workflows are sorted by internal order.
      * @param workflowQuery query criteria
      * @param includeArtifacts max number of artifacts to include in result
      * @param includeUserTasks if include user tasks in result
@@ -231,19 +201,13 @@ public class WorkflowsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedResourceWorkflow> search(WorkflowQuery workflowQuery,
+    public Mono<PaginatedResourceWorkflow> search(@NonNull WorkflowQuery workflowQuery,
                                                   String includeArtifacts,
                                                   Boolean includeUserTasks,
                                                   Boolean includeVariables,
                                                   String limit,
                                                   String offset) throws RestClientException {
 
-        // verify the required parameter 'workflowQuery' is set
-        if (workflowQuery == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'workflowQuery' when calling queryWorkflowsUsingPOST1");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

@@ -15,10 +15,10 @@
  */
 package com.ibm.watson.data.client.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.ibm.watson.data.client.model.enums.TargetModelType;
+
 import java.util.Objects;
 
 /**
@@ -26,45 +26,10 @@ import java.util.Objects;
  */
 public class ErrorTargetModel {
 
-    /**
-     * Gets or Sets type
-     */
-    public enum TypeEnum {
-        FIELD("field"),
-
-        PARAMETER("parameter"),
-
-        HEADER("header");
-
-        private String value;
-
-        TypeEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static TypeEnum fromValue(String value) {
-            for (TypeEnum b : TypeEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    private TypeEnum type;
+    private TargetModelType type;
     private String name;
 
-    public ErrorTargetModel type(TypeEnum type) {
+    public ErrorTargetModel type(TargetModelType type) {
         this.type = type;
         return this;
     }
@@ -75,8 +40,8 @@ public class ErrorTargetModel {
      **/
     @JsonProperty("type")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public TypeEnum getType() { return type; }
-    public void setType(TypeEnum type) { this.type = type; }
+    public TargetModelType getType() { return type; }
+    public void setType(TargetModelType type) { this.type = type; }
 
     public ErrorTargetModel name(String name) {
         this.name = name;

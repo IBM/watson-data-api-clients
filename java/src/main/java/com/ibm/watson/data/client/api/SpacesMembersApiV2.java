@@ -25,13 +25,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with (deployment) Space membership.
@@ -51,32 +50,17 @@ public class SpacesMembersApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Create members
-     * Adds new project members with the provided roles. A space must always
-     * have at least one admin. <p><b>200</b> - OK <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Adds new space members with the provided roles.
+     * A space must always have at least one admin.
      * @param guid The project GUID.
      * @param spaceMembers The spaceMembers parameter
      * @return SpaceMembers
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<SpaceMembers> add(String guid, WriteableSpaceMembers spaceMembers) throws RestClientException {
+    public Mono<SpaceMembers> add(@NonNull String guid,
+                                  @NonNull WriteableSpaceMembers spaceMembers) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling createMembers");
-        }
-        // verify the required parameter 'spaceMembers' is set
-        if (spaceMembers == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'spaceMembers' when calling createMembers");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -101,32 +85,16 @@ public class SpacesMembersApiV2 {
     }
 
     /**
-     * Delete member
-     * Deletes a member with a given user name from a space with the given
-     * user ID. <p><b>204</b> - No Content <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Delete a member from a space.
      * @param guid The project GUID.
      * @param userId The username of the space member.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String guid, String userId) throws RestClientException {
+    public Mono<Void> delete(@NonNull String guid,
+                             @NonNull String userId) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling deleteMember");
-        }
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'userId' when calling deleteMember");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -153,33 +121,16 @@ public class SpacesMembersApiV2 {
     }
 
     /**
-     * Get member
-     * Returns the space member with the specified &#39;user_id&#39; if any.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Retrieve the space member with the specified userId, if any.
      * @param guid The space GUID.
      * @param userId The user ID of the space member.
      * @return SpaceMember
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<SpaceMember> get(String guid, String userId) throws RestClientException {
+    public Mono<SpaceMember> get(@NonNull String guid,
+                                 @NonNull String userId) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getMember");
-        }
-        // verify the required parameter 'userName' is set
-        if (userId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'userId' when calling getMember");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -206,26 +157,14 @@ public class SpacesMembersApiV2 {
     }
 
     /**
-     * Get members
-     * Returns the list of space members.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Retrieve a list of space members.
      * @param guid The project GUID.
      * @return ProjectMembers
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<SpaceMembers> list(String guid) throws RestClientException {
+    public Mono<SpaceMembers> list(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling listMembers");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

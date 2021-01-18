@@ -21,7 +21,6 @@ import com.ibm.watson.data.client.model.CreateTokenBody;
 import com.ibm.watson.data.client.model.ProjectToken;
 import com.ibm.watson.data.client.model.ProjectTokens;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +28,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Project tokens.
@@ -55,33 +53,16 @@ public class ProjectsTokensApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Create token
      * Issues (creates) a new tenant access token for the project (tenant).
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param createTokenBody The createTokenBody parameter
      * @return ProjectToken
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ProjectToken> create(String guid, CreateTokenBody createTokenBody) throws RestClientException {
+    public Mono<ProjectToken> create(@NonNull String guid,
+                                     @NonNull CreateTokenBody createTokenBody) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling createToken");
-        }
-        // verify the required parameter 'createTokenBody' is set
-        if (createTokenBody == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'createTokenBody' when calling createToken");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -106,31 +87,17 @@ public class ProjectsTokensApiV2 {
     }
 
     /**
-     * Revoke token
      * Revokes (deletes) a single tenant access token previously issued (created)
-     * for the project (tenant). <p><b>204</b> - No Content <p><b>400</b> - Bad
-     * Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * for the project (tenant).
      * @param guid The project GUID.
      * @param tguid The token GUID.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String guid, String tguid) throws RestClientException {
+    public Mono<Void> delete(@NonNull String guid,
+                             @NonNull String tguid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling deleteToken");
-        }
-        // verify the required parameter 'tguid' is set
-        if (tguid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'tguid' when calling deleteToken");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -157,24 +124,15 @@ public class ProjectsTokensApiV2 {
     }
 
     /**
-     * Revoke all tokens
      * Revokes (deletes) all tenant access tokens previously issued (created) for
-     * the project (tenant). <p><b>204</b> - No Content <p><b>400</b> - Bad
-     * Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * the project (tenant).
      * @param guid The project GUID.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> deleteAll(String guid) throws RestClientException {
+    public Mono<Void> deleteAll(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling deleteTokens");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -199,10 +157,8 @@ public class ProjectsTokensApiV2 {
     }
 
     /**
-     * Introspect token
      * Validates a tenant access token specified via the Authorization HTTP
-     * header. <p><b>200</b> - OK <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized
+     * header.
      * @param token to validate
      * @return ProjectToken
      * @throws RestClientException if an error occurs while attempting to invoke
@@ -236,26 +192,14 @@ public class ProjectsTokensApiV2 {
     }
 
     /**
-     * List tokens
      * List tenant access tokens issued (created) for the project (tenant).
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @return ProjectTokens
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ProjectTokens> list(String guid) throws RestClientException {
+    public Mono<ProjectTokens> list(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling listTokens");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

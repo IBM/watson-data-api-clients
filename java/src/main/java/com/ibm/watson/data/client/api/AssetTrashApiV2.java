@@ -26,13 +26,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Assets that have been soft-deleted.
@@ -52,28 +51,26 @@ public class AssetTrashApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * List all assets in the trash (Marked for delete)
-     *  Retrieve all assets in the trash (Marked for delete.
-     * <p><b>201</b> - Created
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Retrieve all assets in the trash (marked for delete).
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param projectId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @param olderThan older than Timestamp in UTC time. Format: &#39;yyyy-MM-dd
-     *     hh:mm:ss.sss&#39; Example &#39;2017-11-23 00:00:00.000&#39;
-     * @param newerThan newer than Timestamp in UTC time. Format: &#39;yyyy-MM-dd
-     *     hh:mm:ss.sss&#39; Example &#39;2017-11-23 00:00:00.000&#39;
-     * @return {@code Mono<ListTrashResponse>}
+     * @param olderThan older than Timestamp in UTC time. Format: <code>yyyy-MM-dd
+     *     hh:mm:ss.sss</code> Example <code>2017-11-23 00:00:00.000</code>
+     * @param newerThan newer than Timestamp in UTC time. Format: <code>yyyy-MM-dd
+     *     hh:mm:ss.sss</code> Example <code>2017-11-23 00:00:00.000</code>
+     * @return ListTrashResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ListTrashResponse> list(String catalogId, String projectId, String spaceId, String olderThan, String newerThan)
+    public Mono<ListTrashResponse> list(String catalogId,
+                                        String projectId,
+                                        String spaceId,
+                                        String olderThan,
+                                        String newerThan)
             throws RestClientException {
 
         // create path and map variables
@@ -104,13 +101,7 @@ public class AssetTrashApiV2 {
     }
 
     /**
-     * Get a soft-deleted object from trash
-     *  Get a soft-deleted object from trash.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
+     * Get a soft-deleted object from trash.
      * @param assetId asset_id
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -118,18 +109,15 @@ public class AssetTrashApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return {@code Mono<MetadataEntityResult>}
+     * @return MetadataEntityResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MetadataEntityResult> get(String assetId, String catalogId, String projectId, String spaceId) throws RestClientException {
+    public Mono<MetadataEntityResult> get(@NonNull String assetId,
+                                          String catalogId,
+                                          String projectId,
+                                          String spaceId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling getTrashedAssetNewV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -158,13 +146,7 @@ public class AssetTrashApiV2 {
     }
 
     /**
-     * Delete an asset from the trash
      * Purge an asset from the trash.
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
      * @param assetId asset_id
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -172,18 +154,15 @@ public class AssetTrashApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> purge(String assetId, String catalogId, String projectId, String spaceId) throws RestClientException {
+    public Mono<Void> purge(@NonNull String assetId,
+                            String catalogId,
+                            String projectId,
+                            String spaceId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling purgeAssetNewV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -213,13 +192,7 @@ public class AssetTrashApiV2 {
     }
 
     /**
-     * Restore an asset from the trash
      * Restore an asset from the trash.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>500</b> - Internal Server Error
      * @param assetId asset_id
      * @param catalogId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
@@ -227,18 +200,15 @@ public class AssetTrashApiV2 {
      *     space id, but not more than one
      * @param spaceId You must provide either a catalog id, a project id, or a
      *     space id, but not more than one
-     * @return {@code Mono<MetadataEntityResult>}
+     * @return MetadataEntityResult
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<MetadataEntityResult> restore(String assetId, String catalogId, String projectId, String spaceId) throws RestClientException {
+    public Mono<MetadataEntityResult> restore(@NonNull String assetId,
+                                              String catalogId,
+                                              String projectId,
+                                              String spaceId) throws RestClientException {
 
-        // verify the required parameter 'assetId' is set
-        if (assetId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'assetId' when calling restoreAssetNewV2");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

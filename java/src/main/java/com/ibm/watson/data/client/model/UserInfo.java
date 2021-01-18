@@ -17,8 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,56 +25,19 @@ import java.util.Objects;
 /**
  * UserInfo
  */
-@JsonPropertyOrder({
-        UserInfo.JSON_PROPERTY_APPROVAL_STATUS,
-        UserInfo.JSON_PROPERTY_AUTHENTICATOR,
-        UserInfo.JSON_PROPERTY_CREATED_TIMESTAMP,
-        UserInfo.JSON_PROPERTY_CURRENT_ACCOUNT_STATUS,
-        UserInfo.JSON_PROPERTY_DISPLAY_NAME,
-        UserInfo.JSON_PROPERTY_EMAIL,
-        UserInfo.JSON_PROPERTY_LAST_MODIFIED_TIMESTAMP,
-        UserInfo.JSON_PROPERTY_PERMISSIONS,
-        UserInfo.JSON_PROPERTY_ROLE,
-        UserInfo.JSON_PROPERTY_UID,
-        UserInfo.JSON_PROPERTY_USER_ROLES,
-        UserInfo.JSON_PROPERTY_USERNAME
-})
 public class UserInfo {
 
-    public static final String JSON_PROPERTY_APPROVAL_STATUS = "approval_status";
     private String approvalStatus;
-
-    public static final String JSON_PROPERTY_AUTHENTICATOR = "authenticator";
     private String authenticator;
-
-    public static final String JSON_PROPERTY_CREATED_TIMESTAMP = "created_timestamp";
     private String createdTimestamp;
-
-    public static final String JSON_PROPERTY_CURRENT_ACCOUNT_STATUS = "current_account_status";
     private String currentAccountStatus;
-
-    public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
     private String displayName;
-
-    public static final String JSON_PROPERTY_EMAIL = "email";
     private String email;
-
-    public static final String JSON_PROPERTY_LAST_MODIFIED_TIMESTAMP = "last_modified_timestamp";
     private String lastModifiedTimestamp;
-
-    public static final String JSON_PROPERTY_PERMISSIONS = "permissions";
     private List<String> permissions = null;
-
-    public static final String JSON_PROPERTY_ROLE = "role";
     private String role;
-
-    public static final String JSON_PROPERTY_UID = "uid";
     private String uid;
-
-    public static final String JSON_PROPERTY_USER_ROLES = "user_roles";
     private List<String> userRoles = null;
-
-    public static final String JSON_PROPERTY_USERNAME = "username";
     private String username;
 
     public UserInfo approvalStatus(String approvalStatus) {
@@ -85,23 +46,14 @@ public class UserInfo {
     }
 
     /**
-     * The status of the user&#39;s access to the web client.
+     * The status of the user's access to the web client.
      * @return approvalStatus
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example = "approved",
-            value = "The status of the user's access to the web client.")
-    @JsonProperty(JSON_PROPERTY_APPROVAL_STATUS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
-    }
+    @JsonProperty("approval_status")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getApprovalStatus() { return approvalStatus; }
+    public void setApprovalStatus(String approvalStatus) { this.approvalStatus = approvalStatus; }
 
     public UserInfo authenticator(String authenticator) {
         this.authenticator = authenticator;
@@ -113,18 +65,10 @@ public class UserInfo {
      * @return authenticator
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "default",
-            value = "The authenticator for the user.")
-    @JsonProperty(JSON_PROPERTY_AUTHENTICATOR)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getAuthenticator() {
-        return authenticator;
-    }
-
-    public void setAuthenticator(String authenticator) {
-        this.authenticator = authenticator;
-    }
+    @JsonProperty("authenticator")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getAuthenticator() { return authenticator; }
+    public void setAuthenticator(String authenticator) { this.authenticator = authenticator; }
 
     public UserInfo createdTimestamp(String createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
@@ -136,19 +80,10 @@ public class UserInfo {
      * @return createdTimestamp
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example = "2018-10-08T21:53:14.855Z",
-            value = "The date and time that the user account was created.")
-    @JsonProperty(JSON_PROPERTY_CREATED_TIMESTAMP)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getCreatedTimestamp() {
-        return createdTimestamp;
-    }
-
-    public void setCreatedTimestamp(String createdTimestamp) {
-        this.createdTimestamp = createdTimestamp;
-    }
+    @JsonProperty("created_timestamp")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getCreatedTimestamp() { return createdTimestamp; }
+    public void setCreatedTimestamp(String createdTimestamp) { this.createdTimestamp = createdTimestamp; }
 
     public UserInfo currentAccountStatus(String currentAccountStatus) {
         this.currentAccountStatus = currentAccountStatus;
@@ -156,22 +91,14 @@ public class UserInfo {
     }
 
     /**
-     * The current status of the user&#39;s account.
+     * The current status of the user's account.
      * @return currentAccountStatus
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "enabled",
-            value = "The current status of the user's account.")
-    @JsonProperty(JSON_PROPERTY_CURRENT_ACCOUNT_STATUS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getCurrentAccountStatus() {
-        return currentAccountStatus;
-    }
-
-    public void setCurrentAccountStatus(String currentAccountStatus) {
-        this.currentAccountStatus = currentAccountStatus;
-    }
+    @JsonProperty("current_account_status")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getCurrentAccountStatus() { return currentAccountStatus; }
+    public void setCurrentAccountStatus(String currentAccountStatus) { this.currentAccountStatus = currentAccountStatus; }
 
     public UserInfo displayName(String displayName) {
         this.displayName = displayName;
@@ -183,18 +110,10 @@ public class UserInfo {
      * @return displayName
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "admin",
-            value = "The name that is displayed for this user.")
-    @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
+    @JsonProperty("displayName")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDisplayName() { return displayName; }
+    public void setDisplayName(String displayName) { this.displayName = displayName; }
 
     public UserInfo email(String email) {
         this.email = email;
@@ -202,18 +121,13 @@ public class UserInfo {
     }
 
     /**
-     * The user&#39;s email address.
+     * The user's email address.
      * @return email
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "approved", value = "The user's email address.")
-    @JsonProperty(JSON_PROPERTY_EMAIL)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getEmail() {
-        return email;
-    }
-
+    @JsonProperty("email")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
     public UserInfo lastModifiedTimestamp(String lastModifiedTimestamp) {
@@ -226,18 +140,10 @@ public class UserInfo {
      * @return lastModifiedTimestamp
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "2018-10-08T21:53:14.855Z",
-            value = "The date and time the account was last modified.")
-    @JsonProperty(JSON_PROPERTY_LAST_MODIFIED_TIMESTAMP)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getLastModifiedTimestamp() {
-        return lastModifiedTimestamp;
-    }
-
-    public void setLastModifiedTimestamp(String lastModifiedTimestamp) {
-        this.lastModifiedTimestamp = lastModifiedTimestamp;
-    }
+    @JsonProperty("last_modified_timestamp")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getLastModifiedTimestamp() { return lastModifiedTimestamp; }
+    public void setLastModifiedTimestamp(String lastModifiedTimestamp) { this.lastModifiedTimestamp = lastModifiedTimestamp; }
 
     public UserInfo permissions(List<String> permissions) {
         this.permissions = permissions;
@@ -257,17 +163,10 @@ public class UserInfo {
      * @return permissions
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The permissions associated with the user.")
-    @JsonProperty(JSON_PROPERTY_PERMISSIONS)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<String> permissions) {
-        this.permissions = permissions;
-    }
+    @JsonProperty("permissions")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getPermissions() { return permissions; }
+    public void setPermissions(List<String> permissions) { this.permissions = permissions; }
 
     public UserInfo role(String role) {
         this.role = role;
@@ -279,14 +178,9 @@ public class UserInfo {
      * @return role
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "admin", value = "The role assigned to the user.")
-    @JsonProperty(JSON_PROPERTY_ROLE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getRole() {
-        return role;
-    }
-
+    @JsonProperty("role")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
     public UserInfo uid(String uid) {
@@ -299,15 +193,9 @@ public class UserInfo {
      * @return uid
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "1001",
-            value = "The unique identifier for the user.")
-    @JsonProperty(JSON_PROPERTY_UID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getUid() {
-        return uid;
-    }
-
+    @JsonProperty("uid")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getUid() { return uid; }
     public void setUid(String uid) { this.uid = uid; }
 
     public UserInfo userRoles(List<String> userRoles) {
@@ -328,17 +216,10 @@ public class UserInfo {
      * @return userRoles
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The roles assigned to the user.")
-    @JsonProperty(JSON_PROPERTY_USER_ROLES)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public List<String> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<String> userRoles) {
-        this.userRoles = userRoles;
-    }
+    @JsonProperty("user_roles")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getUserRoles() { return userRoles; }
+    public void setUserRoles(List<String> userRoles) { this.userRoles = userRoles; }
 
     public UserInfo username(String username) {
         this.username = username;
@@ -350,54 +231,28 @@ public class UserInfo {
      * @return username
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "Admin", value = "The user name.")
-    @JsonProperty(JSON_PROPERTY_USERNAME)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getUsername() {
-        return username;
-    }
-
+    @JsonProperty("username")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        UserInfo
-                getAllUsersResponseAllOf1UsersInfoItems =
-                (UserInfo)o;
-        return Objects.equals(
-                this.approvalStatus,
-                getAllUsersResponseAllOf1UsersInfoItems.approvalStatus) &&
-                Objects.equals(this.authenticator,
-                        getAllUsersResponseAllOf1UsersInfoItems.authenticator) &&
-                Objects.equals(
-                        this.createdTimestamp,
-                        getAllUsersResponseAllOf1UsersInfoItems.createdTimestamp) &&
-                Objects.equals(
-                        this.currentAccountStatus,
-                        getAllUsersResponseAllOf1UsersInfoItems.currentAccountStatus) &&
-                Objects.equals(this.displayName,
-                        getAllUsersResponseAllOf1UsersInfoItems.displayName) &&
-                Objects.equals(this.email,
-                        getAllUsersResponseAllOf1UsersInfoItems.email) &&
-                Objects.equals(
-                        this.lastModifiedTimestamp,
-                        getAllUsersResponseAllOf1UsersInfoItems.lastModifiedTimestamp) &&
-                Objects.equals(this.permissions,
-                        getAllUsersResponseAllOf1UsersInfoItems.permissions) &&
-                Objects.equals(this.role,
-                        getAllUsersResponseAllOf1UsersInfoItems.role) &&
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        UserInfo getAllUsersResponseAllOf1UsersInfoItems = (UserInfo)o;
+        return Objects.equals(this.approvalStatus, getAllUsersResponseAllOf1UsersInfoItems.approvalStatus) &&
+                Objects.equals(this.authenticator, getAllUsersResponseAllOf1UsersInfoItems.authenticator) &&
+                Objects.equals(this.createdTimestamp, getAllUsersResponseAllOf1UsersInfoItems.createdTimestamp) &&
+                Objects.equals(this.currentAccountStatus, getAllUsersResponseAllOf1UsersInfoItems.currentAccountStatus) &&
+                Objects.equals(this.displayName, getAllUsersResponseAllOf1UsersInfoItems.displayName) &&
+                Objects.equals(this.email, getAllUsersResponseAllOf1UsersInfoItems.email) &&
+                Objects.equals(this.lastModifiedTimestamp, getAllUsersResponseAllOf1UsersInfoItems.lastModifiedTimestamp) &&
+                Objects.equals(this.permissions, getAllUsersResponseAllOf1UsersInfoItems.permissions) &&
+                Objects.equals(this.role, getAllUsersResponseAllOf1UsersInfoItems.role) &&
                 Objects.equals(this.uid, getAllUsersResponseAllOf1UsersInfoItems.uid) &&
-                Objects.equals(this.userRoles,
-                        getAllUsersResponseAllOf1UsersInfoItems.userRoles) &&
-                Objects.equals(this.username,
-                        getAllUsersResponseAllOf1UsersInfoItems.username);
+                Objects.equals(this.userRoles, getAllUsersResponseAllOf1UsersInfoItems.userRoles) &&
+                Objects.equals(this.username, getAllUsersResponseAllOf1UsersInfoItems.username);
     }
 
     @Override
@@ -412,46 +267,32 @@ public class UserInfo {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UserInfo {\n");
-        sb.append("    approvalStatus: ")
-                .append(toIndentedString(approvalStatus))
-                .append("\n");
-        sb.append("    authenticator: ")
-                .append(toIndentedString(authenticator))
-                .append("\n");
-        sb.append("    createdTimestamp: ")
-                .append(toIndentedString(createdTimestamp))
-                .append("\n");
-        sb.append("    currentAccountStatus: ")
-                .append(toIndentedString(currentAccountStatus))
-                .append("\n");
-        sb.append("    displayName: ")
-                .append(toIndentedString(displayName))
-                .append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    lastModifiedTimestamp: ")
-                .append(toIndentedString(lastModifiedTimestamp))
-                .append("\n");
-        sb.append("    permissions: ")
-                .append(toIndentedString(permissions))
-                .append("\n");
-        sb.append("    role: ").append(toIndentedString(role)).append("\n");
-        sb.append("    uid: ").append(toIndentedString(uid)).append("\n");
-        sb.append("    userRoles: ")
-                .append(toIndentedString(userRoles))
-                .append("\n");
-        sb.append("    username: ").append(toIndentedString(username)).append("\n");
+        toString(sb);
         sb.append("}");
         return sb.toString();
+    }
+
+    protected void toString(StringBuilder sb) {
+        sb.append("    approvalStatus: ").append(toIndentedString(approvalStatus)).append("\n");
+        sb.append("    authenticator: ").append(toIndentedString(authenticator)).append("\n");
+        sb.append("    createdTimestamp: ").append(toIndentedString(createdTimestamp)).append("\n");
+        sb.append("    currentAccountStatus: ").append(toIndentedString(currentAccountStatus)).append("\n");
+        sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+        sb.append("    email: ").append(toIndentedString(email)).append("\n");
+        sb.append("    lastModifiedTimestamp: ").append(toIndentedString(lastModifiedTimestamp)).append("\n");
+        sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");
+        sb.append("    role: ").append(toIndentedString(role)).append("\n");
+        sb.append("    uid: ").append(toIndentedString(uid)).append("\n");
+        sb.append("    userRoles: ").append(toIndentedString(userRoles)).append("\n");
+        sb.append("    username: ").append(toIndentedString(username)).append("\n");
     }
 
     /**
      * Convert the given object to string with each line indented by 4 spaces
      * (except the first line).
      */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+    protected String toIndentedString(Object o) {
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

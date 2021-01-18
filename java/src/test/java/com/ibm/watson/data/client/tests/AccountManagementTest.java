@@ -57,7 +57,7 @@ public class AccountManagementTest extends AbstractExpectations {
 
     @Test
     public void testChangePassword() {
-        PlatformSuccessResponse response = api.changePassword("abc123", "def456").block();
+        BaseResponse response = api.changePassword("abc123", "def456").block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "Password changed successfully.");

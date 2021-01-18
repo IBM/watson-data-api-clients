@@ -24,13 +24,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints for dealing with project integrations (JupyterLab).
@@ -50,26 +49,14 @@ public class ProjectsIntegrationsApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Delete JupyterLab integration
      * Delete JupyterLab integration.
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> deleteJupyterlabIntegration(String guid) throws RestClientException {
+    public Mono<Void> deleteJupyterlabIntegration(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling deleteJupyterlabIntegration");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -94,26 +81,14 @@ public class ProjectsIntegrationsApiV2 {
     }
 
     /**
-     * Get JupyterLab integration
-     * Get JupyterLab integration.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Retrieve JupyterLab integration.
      * @param guid The project GUID.
      * @return IntegrationJupyterLab
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<IntegrationJupyterLab> getJupyterlabIntegration(String guid) throws RestClientException {
+    public Mono<IntegrationJupyterLab> getJupyterlabIntegration(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getJupyterlabIntegration");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -139,34 +114,17 @@ public class ProjectsIntegrationsApiV2 {
     }
 
     /**
-     * Update JupyterLab integration
      * Update JupyterLab integration.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The project GUID.
      * @param integrationJupyterLab The integrationJupyterLab parameter
      * @return IntegrationJupyterLab
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<IntegrationJupyterLab> updateJupyterlabIntegration(String guid, IntegrationJupyterLab integrationJupyterLab)
+    public Mono<IntegrationJupyterLab> updateJupyterlabIntegration(@NonNull String guid,
+                                                                   @NonNull IntegrationJupyterLab integrationJupyterLab)
             throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling updateJupyterlabIntegration");
-        }
-        // verify the required parameter 'integrationJupyterLab' is set
-        if (integrationJupyterLab == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'integrationJupyterLab' when calling updateJupyterlabIntegration");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

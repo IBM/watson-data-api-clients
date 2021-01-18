@@ -17,8 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,24 +25,11 @@ import java.util.Objects;
 /**
  * CreateUserParamsBody
  */
-@JsonPropertyOrder({
-        CreateUserParamsBody.JSON_PROPERTY_DISPLAY_NAME,
-        CreateUserParamsBody.JSON_PROPERTY_EMAIL,
-        CreateUserParamsBody.JSON_PROPERTY_USER_NAME,
-        CreateUserParamsBody.JSON_PROPERTY_USER_ROLES
-})
 public class CreateUserParamsBody {
 
-    public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
     private String displayName;
-
-    public static final String JSON_PROPERTY_EMAIL = "email";
     private String email;
-
-    public static final String JSON_PROPERTY_USER_NAME = "user_name";
     private String userName;
-
-    public static final String JSON_PROPERTY_USER_ROLES = "user_roles";
     private List<String> userRoles = new ArrayList<>();
 
     public CreateUserParamsBody displayName(String displayName) {
@@ -56,18 +41,10 @@ public class CreateUserParamsBody {
      * The name that is displayed for this user.
      * @return displayName
      **/
-    @ApiModelProperty(required = true,
-            value = "The name that is displayed for this user.")
-    @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
+    @JsonProperty("displayName")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
+    public String getDisplayName() { return displayName; }
+    public void setDisplayName(String displayName) { this.displayName = displayName; }
 
     public CreateUserParamsBody email(String email) {
         this.email = email;
@@ -75,17 +52,12 @@ public class CreateUserParamsBody {
     }
 
     /**
-     * The user&#39;s email address.
+     * The user's email address.
      * @return email
      **/
-    @ApiModelProperty(required = true, value = "The user's email address.")
-    @JsonProperty(JSON_PROPERTY_EMAIL)
+    @JsonProperty("email")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getEmail() {
-        return email;
-    }
-
+    public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
     public CreateUserParamsBody userName(String userName) {
@@ -97,14 +69,9 @@ public class CreateUserParamsBody {
      * The user name.
      * @return userName
      **/
-    @ApiModelProperty(required = true, value = "The user name.")
-    @JsonProperty(JSON_PROPERTY_USER_NAME)
+    @JsonProperty("user_name")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getUserName() {
-        return userName;
-    }
-
+    public String getUserName() { return userName; }
     public void setUserName(String userName) { this.userName = userName; }
 
     public CreateUserParamsBody userRoles(List<String> userRoles) {
@@ -121,26 +88,15 @@ public class CreateUserParamsBody {
      * The roles assigned to the user.
      * @return userRoles
      **/
-    @ApiModelProperty(required = true, value = "The roles assigned to the user.")
-    @JsonProperty(JSON_PROPERTY_USER_ROLES)
+    @JsonProperty("user_roles")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public List<String> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<String> userRoles) {
-        this.userRoles = userRoles;
-    }
+    public List<String> getUserRoles() { return userRoles; }
+    public void setUserRoles(List<String> userRoles) { this.userRoles = userRoles; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         CreateUserParamsBody createUserParamsBody = (CreateUserParamsBody)o;
         return Objects.equals(this.displayName, createUserParamsBody.displayName) &&
                 Objects.equals(this.email, createUserParamsBody.email) &&
@@ -157,14 +113,10 @@ public class CreateUserParamsBody {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class CreateUserParamsBody {\n");
-        sb.append("    displayName: ")
-                .append(toIndentedString(displayName))
-                .append("\n");
+        sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
-        sb.append("    userRoles: ")
-                .append(toIndentedString(userRoles))
-                .append("\n");
+        sb.append("    userRoles: ").append(toIndentedString(userRoles)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -174,9 +126,7 @@ public class CreateUserParamsBody {
      * (except the first line).
      */
     private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

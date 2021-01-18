@@ -17,27 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * LoginResponse
  */
-@JsonPropertyOrder({
-        LoginResponse.JSON_PROPERTY_MESSAGE_CODE,
-        LoginResponse.JSON_PROPERTY_MESSAGE,
-        LoginResponse.JSON_PROPERTY_TOKEN
-})
 public class LoginResponse {
 
-    public static final String JSON_PROPERTY_MESSAGE_CODE = "messageCode";
     private String messageCode;
-
-    public static final String JSON_PROPERTY_MESSAGE = "message";
     private String message;
-
-    public static final String JSON_PROPERTY_TOKEN = "token";
     private String token;
 
     public LoginResponse messageCode(String messageCode) {
@@ -50,17 +38,10 @@ public class LoginResponse {
      * @return messageCode
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The identifier of the response.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessageCode() {
-        return messageCode;
-    }
-
-    public void setMessageCode(String messageCode) {
-        this.messageCode = messageCode;
-    }
+    @JsonProperty("messageCode")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessageCode() { return messageCode; }
+    public void setMessageCode(String messageCode) { this.messageCode = messageCode; }
 
     public LoginResponse message(String message) {
         this.message = message;
@@ -68,18 +49,13 @@ public class LoginResponse {
     }
 
     /**
-     * The explanation of the &#x60;messageCode&#x60;.
+     * The explanation of the "messageCode".
      * @return message
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The explanation of the `messageCode`.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessage() {
-        return message;
-    }
-
+    @JsonProperty("message")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
     public LoginResponse token(String token) {
@@ -92,26 +68,15 @@ public class LoginResponse {
      * @return token
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(
-            example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-            value = "The bearer token associated with a user name.")
-    @JsonProperty(JSON_PROPERTY_TOKEN)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getToken() {
-        return token;
-    }
-
+    @JsonProperty("token")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         LoginResponse loginResponse = (LoginResponse)o;
         return Objects.equals(this.messageCode, loginResponse.messageCode) &&
                 Objects.equals(this.message, loginResponse.message) &&
@@ -127,9 +92,7 @@ public class LoginResponse {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class LoginResponse {\n");
-        sb.append("    messageCode: ")
-                .append(toIndentedString(messageCode))
-                .append("\n");
+        sb.append("    messageCode: ").append(toIndentedString(messageCode)).append("\n");
         sb.append("    message: ").append(toIndentedString(message)).append("\n");
         sb.append("    token: ").append(toIndentedString(token)).append("\n");
         sb.append("}");
@@ -141,9 +104,7 @@ public class LoginResponse {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

@@ -17,8 +17,6 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,20 +25,10 @@ import java.util.Objects;
 /**
  * CreateRoleParamsBody
  */
-@JsonPropertyOrder({
-        CreateRoleParamsBody.JSON_PROPERTY_DESCRIPTION,
-        CreateRoleParamsBody.JSON_PROPERTY_PERMISSIONS,
-        CreateRoleParamsBody.JSON_PROPERTY_ROLE_NAME
-})
 public class CreateRoleParamsBody {
 
-    public static final String JSON_PROPERTY_DESCRIPTION = "description";
     private String description;
-
-    public static final String JSON_PROPERTY_PERMISSIONS = "permissions";
     private List<String> permissions = new ArrayList<>();
-
-    public static final String JSON_PROPERTY_ROLE_NAME = "role_name";
     private String roleName;
 
     public CreateRoleParamsBody description(String description) {
@@ -53,17 +41,10 @@ public class CreateRoleParamsBody {
      * @return description
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "Description of the role.")
-    @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @JsonProperty("description")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public CreateRoleParamsBody permissions(List<String> permissions) {
         this.permissions = permissions;
@@ -79,18 +60,10 @@ public class CreateRoleParamsBody {
      * The permissions associated with the role.
      * @return permissions
      **/
-    @ApiModelProperty(required = true,
-            value = "The permissions associated with the role.")
-    @JsonProperty(JSON_PROPERTY_PERMISSIONS)
+    @JsonProperty("permissions")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public List<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<String> permissions) {
-        this.permissions = permissions;
-    }
+    public List<String> getPermissions() { return permissions; }
+    public void setPermissions(List<String> permissions) { this.permissions = permissions; }
 
     public CreateRoleParamsBody roleName(String roleName) {
         this.roleName = roleName;
@@ -101,24 +74,15 @@ public class CreateRoleParamsBody {
      * Name for the role.
      * @return roleName
      **/
-    @ApiModelProperty(required = true, value = "Name for the role.")
-    @JsonProperty(JSON_PROPERTY_ROLE_NAME)
+    @JsonProperty("role_name")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getRoleName() {
-        return roleName;
-    }
-
+    public String getRoleName() { return roleName; }
     public void setRoleName(String roleName) { this.roleName = roleName; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         CreateRoleParamsBody createRoleParamsBody = (CreateRoleParamsBody)o;
         return Objects.equals(this.description, createRoleParamsBody.description) &&
                 Objects.equals(this.permissions, createRoleParamsBody.permissions) &&
@@ -134,12 +98,8 @@ public class CreateRoleParamsBody {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class CreateRoleParamsBody {\n");
-        sb.append("    description: ")
-                .append(toIndentedString(description))
-                .append("\n");
-        sb.append("    permissions: ")
-                .append(toIndentedString(permissions))
-                .append("\n");
+        sb.append("    description: ").append(toIndentedString(description)).append("\n");
+        sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");
         sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
         sb.append("}");
         return sb.toString();
@@ -150,9 +110,7 @@ public class CreateRoleParamsBody {
      * (except the first line).
      */
     private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

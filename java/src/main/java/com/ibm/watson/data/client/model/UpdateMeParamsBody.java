@@ -17,24 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Objects;
 
 /**
  * UpdateMeParamsBody
  */
-@JsonPropertyOrder({
-        UpdateMeParamsBody.JSON_PROPERTY_DISPLAY_NAME,
-        UpdateMeParamsBody.JSON_PROPERTY_EMAIL
-})
 public class UpdateMeParamsBody {
 
-    public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
     private String displayName;
-
-    public static final String JSON_PROPERTY_EMAIL = "email";
     private String email;
 
     public UpdateMeParamsBody displayName(String displayName) {
@@ -47,17 +38,10 @@ public class UpdateMeParamsBody {
      * @return displayName
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The name that is displayed for this user.")
-    @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
+    @JsonProperty("displayName")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getDisplayName() { return displayName; }
+    public void setDisplayName(String displayName) { this.displayName = displayName; }
 
     public UpdateMeParamsBody email(String email) {
         this.email = email;
@@ -65,28 +49,19 @@ public class UpdateMeParamsBody {
     }
 
     /**
-     * The user&#39;s email address.
+     * The user's email address.
      * @return email
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "The user's email address.")
-    @JsonProperty(JSON_PROPERTY_EMAIL)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getEmail() {
-        return email;
-    }
-
+    @JsonProperty("email")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         UpdateMeParamsBody updateMeParamsBody = (UpdateMeParamsBody)o;
         return Objects.equals(this.displayName, updateMeParamsBody.displayName) &&
                 Objects.equals(this.email, updateMeParamsBody.email);
@@ -101,9 +76,7 @@ public class UpdateMeParamsBody {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UpdateMeParamsBody {\n");
-        sb.append("    displayName: ")
-                .append(toIndentedString(displayName))
-                .append("\n");
+        sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("}");
         return sb.toString();
@@ -114,9 +87,7 @@ public class UpdateMeParamsBody {
      * (except the first line).
      */
     private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

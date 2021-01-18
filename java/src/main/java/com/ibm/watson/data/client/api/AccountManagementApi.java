@@ -17,19 +17,18 @@ package com.ibm.watson.data.client.api;
 
 import com.ibm.watson.data.client.ApiClient;
 import com.ibm.watson.data.client.model.GetMeResponse;
-import com.ibm.watson.data.client.model.PlatformSuccessResponse;
+import com.ibm.watson.data.client.model.BaseResponse;
 import com.ibm.watson.data.client.model.UpdateMeParamsBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,31 +52,16 @@ public class AccountManagementApi {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Change my password
-     * Change the logged in user&#39;s password.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
+     * Change the logged in user's password.
      * @param currentPassword Current password.
      * @param newPassword New password.
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> changePassword(String currentPassword, String newPassword) throws RestClientException {
+    public Mono<BaseResponse> changePassword(@NonNull String currentPassword,
+                                             @NonNull String newPassword) throws RestClientException {
 
-        // verify the required parameter 'currentPassword' is set
-        if (currentPassword == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'currentPassword' when calling changePassword");
-        }
-        // verify the required parameter 'newPassword' is set
-        if (newPassword == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newPassword' when calling changePassword");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -94,7 +78,7 @@ public class AccountManagementApi {
         final String[] localVarContentTypes = {"multipart/form-data"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 API_BASE + "/changepassword", HttpMethod.POST, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
@@ -103,11 +87,7 @@ public class AccountManagementApi {
     }
 
     /**
-     * Get my account information
      * Get details about the logged in user.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
      * @return GetMeResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
@@ -136,17 +116,13 @@ public class AccountManagementApi {
     }
 
     /**
-     * Update my information
      * Update the display name or email address for the logged in user.
-     * <p><b>200</b> - Success
-     * <p><b>401</b> - Unauthorized
-     * <p><b>500</b> - Internal error
      * @param updateMeParamsBody The updated user information.
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> updateMe(UpdateMeParamsBody updateMeParamsBody) throws RestClientException {
+    public Mono<BaseResponse> updateMe(UpdateMeParamsBody updateMeParamsBody) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -161,7 +137,7 @@ public class AccountManagementApi {
         final String[] localVarContentTypes = {"application/json"};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 API_BASE + "/me", HttpMethod.PUT, pathParams, queryParams, updateMeParamsBody,
                 headerParams, cookieParams, formParams, localVarAccept,

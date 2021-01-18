@@ -16,7 +16,7 @@
 package com.ibm.watson.data.client.api;
 
 import com.ibm.watson.data.client.ApiClient;
-import com.ibm.watson.data.client.model.PlatformSuccessResponse;
+import com.ibm.watson.data.client.model.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -50,13 +50,11 @@ public class MonitorApi {
     /**
      * Check server status
      * Indicates whether your Cloud Pak for Data API server is running.
-     * <p><b>200</b> - Success
-     * <p><b>0</b> - Error
-     * @return PlatformSuccessResponse
+     * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PlatformSuccessResponse> getMonitor() throws RestClientException {
+    public Mono<BaseResponse> getMonitor() throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -71,7 +69,7 @@ public class MonitorApi {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<PlatformSuccessResponse> localVarReturnType = new ParameterizedTypeReference<PlatformSuccessResponse>() {};
+        ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
                 "/icp4d-api/v1/monitor", HttpMethod.GET, pathParams, queryParams, null,
                 headerParams, cookieParams, formParams, localVarAccept,

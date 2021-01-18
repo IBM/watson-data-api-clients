@@ -25,14 +25,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
+/**
+ * API endpoints dealing with Classifications.
+ */
 public class ClassificationsApiV3 {
 
     private ApiClient apiClient;
@@ -49,13 +51,6 @@ public class ClassificationsApiV3 {
 
     /**
      * Creates a classification in the glossary.
-     * This method is used to create a classification in the glossary.
-     * <p><b>201</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found
-     * <p><b>409</b> - Unique constraint violated because of optimistic locking or
-     * some other constraint. <p><b>500</b> - Internal Server Error
      * @param newClassificationEntity Classification to be created.
      * @param skipWorkflowIfPossible If Workflow template is configured, the
      *     artifact will be created in the published state by skipping the
@@ -66,16 +61,10 @@ public class ClassificationsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> create(NewClassificationEntity newClassificationEntity,
+    public Mono<GlossaryCreateResponse> create(@NonNull NewClassificationEntity newClassificationEntity,
                                                Boolean skipWorkflowIfPossible,
                                                String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'newClassificationEntity' is set
-        if (newClassificationEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'newClassificationEntity' when calling createClassification");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -105,10 +94,7 @@ public class ClassificationsApiV3 {
      * Create relationships for an artifact in the glossary.
      * If it is a published version, it creates a draft from the published version
      * and adds the relationship to the draft version. And, it returns the details
-     * of the draft version. <p><b>201</b> - Success <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
+     * of the draft version.
      * @param artifactId The artifact id of the classification to fetch.
      * @param versionId The version id of the classification to fetch.
      * @param classificationRelationshipsRequest Relationships to be created.
@@ -120,30 +106,12 @@ public class ClassificationsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> createRelationships(String artifactId,
-                                                            String versionId,
-                                                            ClassificationRelationshipsRequest classificationRelationshipsRequest,
+    public Mono<GlossaryCreateResponse> createRelationships(@NonNull String artifactId,
+                                                            @NonNull String versionId,
+                                                            @NonNull ClassificationRelationshipsRequest classificationRelationshipsRequest,
                                                             Boolean skipWorkflowIfPossible,
                                                             String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling createClassificationRelationships");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling createClassificationRelationships");
-        }
-        // verify the required parameter 'classificationRelationshipsRequest' is set
-        if (classificationRelationshipsRequest == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'classificationRelationshipsRequest' when calling createClassificationRelationships");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -175,45 +143,27 @@ public class ClassificationsApiV3 {
 
     /**
      * Deletes a draft or published version of an artifact.
-     * If the artifact state is &lt;code&gt;DRAFT&lt;/code&gt;, then the draft
-     * version is deleted.&lt;br/&gt;&lt;br/&gt; If the artifact state is
-     * &lt;code&gt; PUBLISHED&lt;/code&gt;, a draft version with
-     * &lt;code&gt;marked_for_deletion&lt;/code&gt; is created
-     * .&lt;br/&gt;&lt;br/&gt; If the artifact state is &lt;code&gt;
-     * PUBLISHED&lt;/code&gt; and workflow is skipped, then the published version
-     * is deleted.&lt;br/&gt;&lt;br/&gt; Administrator role is required.
-     * <p><b>200</b> - The artifact has been deleted successfully.
-     * <p><b>201</b> - A draft version has been successfully created for deleting
-     * the published artifact. <p><b>400</b> - Bad Request <p><b>401</b> -
-     * Unauthorized <p><b>404</b> - Not found <p><b>500</b> - Internal Server
-     * Error
+     * <ul>
+     *     <li>If the artifact state is <code>DRAFT</code>, then the draft version is deleted.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code>, a draft version with <code>marked_for_deletion</code> is created.</li>
+     *     <li>If the artifact state is <code>PUBLISHED</code> and workflow is skipped, then the published version is deleted.</li>
+     * </ul>
+     * Administrator role is required.
      * @param artifactId The guid of the classification to fetch.
      * @param versionId The version id of the classification to delete.
      * @param skipWorkflowIfPossible If Workflow template is configured, the
      *     published artifact will be deleted by skipping the workflow.
      * @param runAsTenant Runs the operation as a different tenant.  Requires the
      *     FunctionalUser role.  Format: accountId[:userId]
-     * @return {@code Mono<GlossaryCreateResponse>}
+     * @return GlossaryCreateResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> delete(String artifactId,
-                                               String versionId,
+    public Mono<GlossaryCreateResponse> delete(@NonNull String artifactId,
+                                               @NonNull String versionId,
                                                Boolean skipWorkflowIfPossible,
                                                String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteClassification");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling deleteClassification");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -247,9 +197,7 @@ public class ClassificationsApiV3 {
      * Deletes relationships for an artifact in the glossary.
      * If it is a published version, it creates a draft from the published version
      * and deletes the relationship from the draft version. And, it returns the
-     * details of the draft version. <p><b>200</b> - Success <p><b>400</b> - Bad
-     * Request <p><b>401</b> - Unauthorized <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
+     * details of the draft version.
      * @param artifactId The artifact id of the classification to fetch.
      * @param versionId The version id of the classification to fetch.
      * @param relationshipId The guid of the relationship to delete.
@@ -261,30 +209,12 @@ public class ClassificationsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GlossaryCreateResponse> deleteRelationship(String artifactId,
-                                                           String versionId,
-                                                           String relationshipId,
+    public Mono<GlossaryCreateResponse> deleteRelationship(@NonNull String artifactId,
+                                                           @NonNull String versionId,
+                                                           @NonNull String relationshipId,
                                                            Boolean skipWorkflowIfPossible,
                                                            String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling deleteReltionship");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling deleteReltionship");
-        }
-        // verify the required parameter 'relationshipId' is set
-        if (relationshipId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'relationshipId' when calling deleteReltionship");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -318,14 +248,12 @@ public class ClassificationsApiV3 {
     /**
      * Retrieves classification with given guid and status.
      * This method can be used for retrieving details of an ACTIVE classification.
-     * Only ACTIVE is supported <p><b>200</b> - Success <p><b>400</b> - Bad
-     * Request <p><b>401</b> - Unauthorized <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
+     * Only ACTIVE is supported.
      * @param guid Artifact ID or global ID of the artifact
      * @param status Filter by classification status
      * @param includeRelationship Comma separated list of relationship
      *     types.Allowed values of relationship types are
-     *     &lt;code&gt;is_a_type_of_classification,has_types_classifications,categoriesparent_category,,terms,data_classes,policies,rules,reference_data,all&lt;/code&gt;
+     *     <code>is_a_type_of_classification,has_types_classifications,categories,parent_category,terms,data_classes,policies,rules,reference_data,all</code>
      * @param allParents If this parameter is set, then all ancestors in the
      *     hierarchy are returned. You can use this parameter to build complete
      *     ancestor path.
@@ -339,7 +267,7 @@ public class ClassificationsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<PaginatedClassificationList> get(String guid,
+    public Mono<PaginatedClassificationList> get(@NonNull String guid,
                                                  String status,
                                                  String includeRelationship,
                                                  Boolean allParents,
@@ -347,12 +275,6 @@ public class ClassificationsApiV3 {
                                                  String offset,
                                                  String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getClassificationByArtifactId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -388,15 +310,12 @@ public class ClassificationsApiV3 {
     /**
      * Retrieves classification with given guid.
      * This method can be used for retrieving details of an ACTIVE or DRAFT
-     * classification. <p><b>200</b> - Success <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
+     * classification.
      * @param artifactId The artifact id of the classification to fetch.
      * @param versionId The version id of the classification to fetch.
      * @param includeRelationship Comma separated list of relationship
      *     types.Allowed values of relationship types are
-     *     &lt;code&gt;is_a_type_of_classification,has_types_classifications,categoriesparent_category,,terms,data_classes,policies,rules,reference_data,all&lt;/code&gt;
+     *     <code>is_a_type_of_classification,has_types_classifications,categories,parent_category,terms,data_classes,policies,rules,reference_data,all</code>
      * @param allParents If this parameter is set, then all ancestors in the
      *     hierarchy are returned. You can use this parameter to build complete
      *     ancestor path.
@@ -408,25 +327,13 @@ public class ClassificationsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponseClassification> getVersion(String artifactId,
-                                                   String versionId,
+    public Mono<ResponseClassification> getVersion(@NonNull String artifactId,
+                                                   @NonNull String versionId,
                                                    String includeRelationship,
                                                    Boolean allParents,
                                                    String limit,
                                                    String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling getClassificationByVersionId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling getClassificationByVersionId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -461,15 +368,10 @@ public class ClassificationsApiV3 {
     /**
      * Retrieves all classifications.
      * This method can be used for retrieving details of all classifications.
-     * <p><b>200</b> - Success
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
      * @param status Filter by term status
      * @param includeRelationship Comma separated list of relationship
      *     types.Allowed values of relationship types are
-     *     &lt;code&gt;is_a_type_of_classification,has_types_classifications,categoriesparent_category,,terms,data_classes,policies,rules,reference_data,all&lt;/code&gt;
+     *     <code>is_a_type_of_classification,has_types_classifications,categories,parent_category,terms,data_classes,policies,rules,reference_data,all</code>
      * @param allParents If this parameter is set, then all ancestors in the
      *     hierarchy are returned. You can use this parameter to build complete
      *     ancestor path.
@@ -522,22 +424,19 @@ public class ClassificationsApiV3 {
 
     /**
      * List the associations of the given type for the specified classification.
-     * If the result set is larger than the &lt;code&gt;limit&lt;/code&gt;
-     * parameter, it returns the first &lt;code&gt;limit&lt;/code&gt; number of
-     * associations. &lt;br/&gt;To retrieve the next set of associations, call the
+     * If the result set is larger than the <code>limit</code>
+     * parameter, it returns the first <code>limit</code> number of
+     * associations. To retrieve the next set of associations, call the
      * method again by using the URI in
-     * &lt;code&gt;PaginatedTagsList.next&lt;/code&gt; returned by this
-     * method.&lt;br/&gt;&lt;br/&gt;Associations of a child term, like
-     * &lt;code&gt;SSN&lt;/code&gt;, includes the associations of its parent
-     * terms, like &lt;code&gt;Government Identities&lt;/code&gt;. <p><b>200</b> -
-     * Success <p><b>400</b> - Bad Request <p><b>401</b> - Unauthorized
-     * <p><b>404</b> - Not found
-     * <p><b>500</b> - Internal Server Error
+     * <code>PaginatedTagsList.next</code> returned by this
+     * method. Associations of a child term, like
+     * <code>SSN</code>, includes the associations of its parent
+     * terms, like <code>Government Identities</code>.
      * @param artifactId The artifactId of the classification
      * @param versionId The versionId of the classification
      * @param type Comma separated list of relationship types.Allowed values of
      *     relationship types are
-     *     &lt;code&gt;is_a_type_of_classification,has_types_classifications,categoriesparent_category,,terms,data_classes,policies,rules,reference_data,all&lt;/code&gt;
+     *     <code>is_a_type_of_classification,has_types_classifications,categories,parent_category,terms,data_classes,policies,rules,reference_data,all</code>
      * @param allParents If this parameter is set, then all ancestors in the
      *     hierarchy are returned. You can use this parameter to build complete
      *     ancestor path.
@@ -549,31 +448,13 @@ public class ClassificationsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Map<String, PaginatedAbstractRelationshipList>> listRelationships(String artifactId,
-                                                                                  String versionId,
-                                                                                  String type,
+    public Mono<Map<String, PaginatedAbstractRelationshipList>> listRelationships(@NonNull String artifactId,
+                                                                                  @NonNull String versionId,
+                                                                                  @NonNull String type,
                                                                                   Boolean allParents,
                                                                                   Integer limit,
                                                                                   String offset) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling listClassificationRelationships");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling listClassificationRelationships");
-        }
-        // verify the required parameter 'type' is set
-        if (type == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'type' when calling listClassificationRelationships");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -610,20 +491,14 @@ public class ClassificationsApiV3 {
      * is updated with the requested changes and returned. If any relationships of
      * the artifact are updated, then the updated relationships are returned as a
      * paginated list limited by the give limit parameter. The relationships that
-     * are not updated are not returned. <p><b>200</b> - Success <p><b>400</b> -
-     * Bad Request <p><b>401</b> - Unauthorized <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not found
-     * <p><b>409</b> - Unique constraint violated because of optimistic locking or
-     * some other constraint. <p><b>500</b> - Internal Server Error
+     * are not updated are not returned.
      * @param artifactId The artifact id of the classification to be updated.
      * @param versionId The version id of the classification to be updated.
      * @param updatableClassificationEntity The classification to be
-     *     updated.&lt;br&gt;Fields omitted will be unchanged, and fields set to
-     *     null explicitly will be nulled out.&lt;br&gt;For multi-valued
-     *     attributes &amp; relationships, the complete list will be replaced by
-     *     the given list of values.&lt;br&gt;Additional
-     *     Example:&lt;br&gt;&lt;pre&gt;{&amp;quot;description&amp;quot; :
-     *     &amp;quot;description updated&amp;quot;}&lt;/pre&gt;
+     *     updated. Fields omitted will be unchanged, and fields set to
+     *     null explicitly will be nulled out. For multi-valued
+     *     attributes and relationships, the complete list will be replaced by
+     *     the given list of values.
      * @param limit The maximum number of relationship to return - must be at
      *     least 1 and cannot exceed 200. The default value is 10.
      * @param skipWorkflowIfPossible If Workflow template is configured, the
@@ -634,31 +509,13 @@ public class ClassificationsApiV3 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<ResponseClassification> update(String artifactId,
-                                               String versionId,
-                                               UpdatableClassificationEntity updatableClassificationEntity,
+    public Mono<ResponseClassification> update(@NonNull String artifactId,
+                                               @NonNull String versionId,
+                                               @NonNull UpdatableClassificationEntity updatableClassificationEntity,
                                                String limit,
                                                Boolean skipWorkflowIfPossible,
                                                String runAsTenant) throws RestClientException {
 
-        // verify the required parameter 'artifactId' is set
-        if (artifactId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'artifactId' when calling updateClassificationByVersionId");
-        }
-        // verify the required parameter 'versionId' is set
-        if (versionId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'versionId' when calling updateClassificationByVersionId");
-        }
-        // verify the required parameter 'updatableClassificationEntity' is set
-        if (updatableClassificationEntity == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'updatableClassificationEntity' when calling updateClassificationByVersionId");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

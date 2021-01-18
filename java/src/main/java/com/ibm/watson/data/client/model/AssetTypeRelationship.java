@@ -19,6 +19,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.ibm.watson.data.client.model.enums.DeleteTarget;
+import com.ibm.watson.data.client.model.enums.PropagationType;
+
 import java.util.Objects;
 
 /**
@@ -28,122 +31,9 @@ public class AssetTypeRelationship {
 
     private String key;
     private String targetAssetType;
-
-    /**
-     * Determines processing of the source object when a reference target is
-     * deleted.  Allowed values: CASCADE - delete the object that contains the
-     * reference, DISCONNECT - disconnect the reference to the target asset.
-     * IGNORE - leave the reference to the target asset unmodified so it continues
-     * to point to the deleted asset.  This creates a dangling reference. Default:
-     * IGNORE
-     */
-    public enum OnDeleteTargetEnum {
-        CASCADE("CASCADE"),
-
-        DISCONNECT("DISCONNECT"),
-
-        IGNORE("IGNORE");
-
-        private String value;
-
-        OnDeleteTargetEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static OnDeleteTargetEnum fromValue(String value) {
-            for (OnDeleteTargetEnum b : OnDeleteTargetEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    private OnDeleteTargetEnum onDeleteTarget;
-
-    /**
-     * Determines processing of the reference target when the source object is
-     * deleted.  Allowed values: CASCADE - delete the referenced object, IGNORE -
-     * do not delete the referenced object.  Default: IGNORE
-     */
-    public enum OnDeleteEnum {
-        CASCADE("CASCADE"),
-
-        IGNORE("IGNORE");
-
-        private String value;
-
-        OnDeleteEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static OnDeleteEnum fromValue(String value) {
-            for (OnDeleteEnum b : OnDeleteEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    private OnDeleteEnum onDelete;
-
-    /**
-     * Determines processing of the source object when a reference target is
-     * cloned.  Allowed values: CASCADE - clone the object that contains the
-     * reference, IGNORE - ignore the reference.  Default: IGNORE
-     */
-    public enum OnCloneTargetEnum {
-        CASCADE("CASCADE"),
-
-        IGNORE("IGNORE");
-
-        private String value;
-
-        OnCloneTargetEnum(String value) { this.value = value; }
-
-        @JsonValue
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static OnCloneTargetEnum fromValue(String value) {
-            for (OnCloneTargetEnum b : OnCloneTargetEnum.values()) {
-                if (b.value.equals(value)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + value + "'");
-        }
-    }
-
-    private OnCloneTargetEnum onCloneTarget;
+    private DeleteTarget onDeleteTarget;
+    private PropagationType onDelete;
+    private PropagationType onCloneTarget;
 
     public AssetTypeRelationship key(String key) {
         this.key = key;
@@ -173,59 +63,59 @@ public class AssetTypeRelationship {
     public String getTargetAssetType() { return targetAssetType; }
     public void setTargetAssetType(String targetAssetType) { this.targetAssetType = targetAssetType; }
 
-    public AssetTypeRelationship onDeleteTarget(OnDeleteTargetEnum onDeleteTarget) {
+    public AssetTypeRelationship onDeleteTarget(DeleteTarget onDeleteTarget) {
         this.onDeleteTarget = onDeleteTarget;
         return this;
     }
 
     /**
      * Determines processing of the source object when a reference target is
-     *deleted.  Allowed values: CASCADE - delete the object that contains the
-     *reference, DISCONNECT - disconnect the reference to the target asset. IGNORE
-     *- leave the reference to the target asset unmodified so it continues to
-     *point to the deleted asset.  This creates a dangling reference.  Default:
-     *IGNORE
+     * deleted.  Allowed values: CASCADE - delete the object that contains the
+     * reference, DISCONNECT - disconnect the reference to the target asset. IGNORE
+     * - leave the reference to the target asset unmodified so it continues to
+     * point to the deleted asset.  This creates a dangling reference.  Default:
+     * IGNORE
      * @return onDeleteTarget
      **/
     @javax.annotation.Nullable
     @JsonProperty("on_delete_target")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OnDeleteTargetEnum getOnDeleteTarget() { return onDeleteTarget; }
-    public void setOnDeleteTarget(OnDeleteTargetEnum onDeleteTarget) { this.onDeleteTarget = onDeleteTarget; }
+    public DeleteTarget getOnDeleteTarget() { return onDeleteTarget; }
+    public void setOnDeleteTarget(DeleteTarget onDeleteTarget) { this.onDeleteTarget = onDeleteTarget; }
 
-    public AssetTypeRelationship onDelete(OnDeleteEnum onDelete) {
+    public AssetTypeRelationship onDelete(PropagationType onDelete) {
         this.onDelete = onDelete;
         return this;
     }
 
     /**
      * Determines processing of the reference target when the source object is
-     *deleted.  Allowed values: CASCADE - delete the referenced object, IGNORE -
-     *do not delete the referenced object.  Default: IGNORE
+     * deleted.  Allowed values: CASCADE - delete the referenced object, IGNORE -
+     * do not delete the referenced object.  Default: IGNORE
      * @return onDelete
      **/
     @javax.annotation.Nullable
     @JsonProperty("on_delete")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OnDeleteEnum getOnDelete() { return onDelete; }
-    public void setOnDelete(OnDeleteEnum onDelete) { this.onDelete = onDelete; }
+    public PropagationType getOnDelete() { return onDelete; }
+    public void setOnDelete(PropagationType onDelete) { this.onDelete = onDelete; }
 
-    public AssetTypeRelationship onCloneTarget(OnCloneTargetEnum onCloneTarget) {
+    public AssetTypeRelationship onCloneTarget(PropagationType onCloneTarget) {
         this.onCloneTarget = onCloneTarget;
         return this;
     }
 
     /**
      * Determines processing of the source object when a reference target is
-     *cloned.  Allowed values: CASCADE - clone the object that contains the
-     *reference, IGNORE - ignore the reference.  Default: IGNORE
+     * cloned.  Allowed values: CASCADE - clone the object that contains the
+     * reference, IGNORE - ignore the reference.  Default: IGNORE
      * @return onCloneTarget
      **/
     @javax.annotation.Nullable
     @JsonProperty("on_clone_target")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public OnCloneTargetEnum getOnCloneTarget() { return onCloneTarget; }
-    public void setOnCloneTarget(OnCloneTargetEnum onCloneTarget) { this.onCloneTarget = onCloneTarget; }
+    public PropagationType getOnCloneTarget() { return onCloneTarget; }
+    public void setOnCloneTarget(PropagationType onCloneTarget) { this.onCloneTarget = onCloneTarget; }
 
     @Override
     public boolean equals(java.lang.Object o) {

@@ -17,48 +17,24 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import java.util.Date;
 import java.util.Objects;
 
 /**
  * Source System Info
  */
-@ApiModel(description = "Source System Info")
-@JsonPropertyOrder({
-        SourceSystem.JSON_PROPERTY_CREATION_TIMESTAMP,
-        SourceSystem.JSON_PROPERTY_CREATED,
-        SourceSystem.JSON_PROPERTY_LAST_MODIFICATION_TIMESTAMP,
-        SourceSystem.JSON_PROPERTY_LAST_MODIFIED,
-        SourceSystem.JSON_PROPERTY_ASSET_IDENTIFIER,
-        SourceSystem.JSON_PROPERTY_SOURCE,
-        SourceSystem.JSON_PROPERTY_SOURCE_SYSTEM_ID
-})
 public class SourceSystem {
 
-    public static final String JSON_PROPERTY_CREATION_TIMESTAMP = "creation_timestamp";
-    private String creationTimestamp;
-
-    public static final String JSON_PROPERTY_CREATED = "created";
+    private Date creationTimestamp;
     private Long created;
-
-    public static final String JSON_PROPERTY_LAST_MODIFICATION_TIMESTAMP = "last_modification_timestamp";
-    private String lastModificationTimestamp;
-
-    public static final String JSON_PROPERTY_LAST_MODIFIED = "last_modified";
+    private Date lastModificationTimestamp;
     private Long lastModified;
-
-    public static final String JSON_PROPERTY_ASSET_IDENTIFIER = "asset_identifier";
     private String assetIdentifier;
-
-    public static final String JSON_PROPERTY_SOURCE = "source";
     private String source;
-
-    public static final String JSON_PROPERTY_SOURCE_SYSTEM_ID = "source_system_id";
     private String sourceSystemId;
 
-    public SourceSystem creationTimestamp(String creationTimestamp) {
+    public SourceSystem creationTimestamp(Date creationTimestamp) {
         this.creationTimestamp = creationTimestamp;
         return this;
     }
@@ -68,17 +44,10 @@ public class SourceSystem {
      * @return creationTimestamp
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "2018-03-21T12:47:43", value = "")
-    @JsonProperty(JSON_PROPERTY_CREATION_TIMESTAMP)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getCreationTimestamp() {
-        return creationTimestamp;
-    }
-
-    public void setCreationTimestamp(String creationTimestamp) {
-        this.creationTimestamp = creationTimestamp;
-    }
+    @JsonProperty("creation_timestamp")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Date getCreationTimestamp() { return creationTimestamp; }
+    public void setCreationTimestamp(Date creationTimestamp) { this.creationTimestamp = creationTimestamp; }
 
     public SourceSystem created(Long created) {
         this.created = created;
@@ -90,17 +59,12 @@ public class SourceSystem {
      * @return created
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "1531854592", value = "")
-    @JsonProperty(JSON_PROPERTY_CREATED)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Long getCreated() {
-        return created;
-    }
-
+    @JsonProperty("created")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Long getCreated() { return created; }
     public void setCreated(Long created) { this.created = created; }
 
-    public SourceSystem lastModificationTimestamp(String lastModificationTimestamp) {
+    public SourceSystem lastModificationTimestamp(Date lastModificationTimestamp) {
         this.lastModificationTimestamp = lastModificationTimestamp;
         return this;
     }
@@ -110,17 +74,10 @@ public class SourceSystem {
      * @return lastModificationTimestamp
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "2018-03-21T12:47:43", value = "")
-    @JsonProperty(JSON_PROPERTY_LAST_MODIFICATION_TIMESTAMP)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getLastModificationTimestamp() {
-        return lastModificationTimestamp;
-    }
-
-    public void setLastModificationTimestamp(String lastModificationTimestamp) {
-        this.lastModificationTimestamp = lastModificationTimestamp;
-    }
+    @JsonProperty("last_modification_timestamp")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Date getLastModificationTimestamp() { return lastModificationTimestamp; }
+    public void setLastModificationTimestamp(Date lastModificationTimestamp) { this.lastModificationTimestamp = lastModificationTimestamp; }
 
     public SourceSystem lastModified(Long lastModified) {
         this.lastModified = lastModified;
@@ -132,17 +89,10 @@ public class SourceSystem {
      * @return lastModified
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "1531854592", value = "")
-    @JsonProperty(JSON_PROPERTY_LAST_MODIFIED)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public Long getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Long lastModified) {
-        this.lastModified = lastModified;
-    }
+    @JsonProperty("last_modified")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Long getLastModified() { return lastModified; }
+    public void setLastModified(Long lastModified) { this.lastModified = lastModified; }
 
     public SourceSystem assetIdentifier(String assetIdentifier) {
         this.assetIdentifier = assetIdentifier;
@@ -154,17 +104,10 @@ public class SourceSystem {
      * @return assetIdentifier
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "String", value = "")
-    @JsonProperty(JSON_PROPERTY_ASSET_IDENTIFIER)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getAssetIdentifier() {
-        return assetIdentifier;
-    }
-
-    public void setAssetIdentifier(String assetIdentifier) {
-        this.assetIdentifier = assetIdentifier;
-    }
+    @JsonProperty("asset_identifier")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getAssetIdentifier() { return assetIdentifier; }
+    public void setAssetIdentifier(String assetIdentifier) { this.assetIdentifier = assetIdentifier; }
 
     public SourceSystem source(String source) {
         this.source = source;
@@ -176,14 +119,9 @@ public class SourceSystem {
      * @return source
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "DASHDB", value = "")
-    @JsonProperty(JSON_PROPERTY_SOURCE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getSource() {
-        return source;
-    }
-
+    @JsonProperty("source")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getSource() { return source; }
     public void setSource(String source) { this.source = source; }
 
     public SourceSystem sourceSystemId(String sourceSystemId) {
@@ -196,32 +134,19 @@ public class SourceSystem {
      * @return sourceSystemId
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(example = "String", value = "")
-    @JsonProperty(JSON_PROPERTY_SOURCE_SYSTEM_ID)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getSourceSystemId() {
-        return sourceSystemId;
-    }
-
-    public void setSourceSystemId(String sourceSystemId) {
-        this.sourceSystemId = sourceSystemId;
-    }
+    @JsonProperty("source_system_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getSourceSystemId() { return sourceSystemId; }
+    public void setSourceSystemId(String sourceSystemId) { this.sourceSystemId = sourceSystemId; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         SourceSystem sourceSystem = (SourceSystem)o;
-        return Objects.equals(this.creationTimestamp,
-                sourceSystem.creationTimestamp) &&
+        return Objects.equals(this.creationTimestamp, sourceSystem.creationTimestamp) &&
                 Objects.equals(this.created, sourceSystem.created) &&
-                Objects.equals(this.lastModificationTimestamp,
-                        sourceSystem.lastModificationTimestamp) &&
+                Objects.equals(this.lastModificationTimestamp, sourceSystem.lastModificationTimestamp) &&
                 Objects.equals(this.lastModified, sourceSystem.lastModified) &&
                 Objects.equals(this.assetIdentifier, sourceSystem.assetIdentifier) &&
                 Objects.equals(this.source, sourceSystem.source) &&
@@ -238,23 +163,13 @@ public class SourceSystem {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class SourceSystem {\n");
-        sb.append("    creationTimestamp: ")
-                .append(toIndentedString(creationTimestamp))
-                .append("\n");
+        sb.append("    creationTimestamp: ").append(toIndentedString(creationTimestamp)).append("\n");
         sb.append("    created: ").append(toIndentedString(created)).append("\n");
-        sb.append("    lastModificationTimestamp: ")
-                .append(toIndentedString(lastModificationTimestamp))
-                .append("\n");
-        sb.append("    lastModified: ")
-                .append(toIndentedString(lastModified))
-                .append("\n");
-        sb.append("    assetIdentifier: ")
-                .append(toIndentedString(assetIdentifier))
-                .append("\n");
+        sb.append("    lastModificationTimestamp: ").append(toIndentedString(lastModificationTimestamp)).append("\n");
+        sb.append("    lastModified: ").append(toIndentedString(lastModified)).append("\n");
+        sb.append("    assetIdentifier: ").append(toIndentedString(assetIdentifier)).append("\n");
         sb.append("    source: ").append(toIndentedString(source)).append("\n");
-        sb.append("    sourceSystemId: ")
-                .append(toIndentedString(sourceSystemId))
-                .append("\n");
+        sb.append("    sourceSystemId: ").append(toIndentedString(sourceSystemId)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -264,9 +179,7 @@ public class SourceSystem {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

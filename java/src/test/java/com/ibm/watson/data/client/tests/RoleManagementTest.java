@@ -59,7 +59,7 @@ public class RoleManagementTest extends AbstractExpectations {
     @Test
     public void testCreate() {
         CreateRoleParamsBody body = readRequestFromFile("create", new TypeReference<CreateRoleParamsBody>() {});
-        PlatformSuccessResponse response = api.create(body).block();
+        BaseResponse response = api.create(body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "Role created successfully.");
@@ -109,7 +109,7 @@ public class RoleManagementTest extends AbstractExpectations {
         UpdateRoleParamsBody body = readRequestFromFile("update", new TypeReference<UpdateRoleParamsBody>() {});
         // TODO: currently the API throws a 500 internal server error
         assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_ROLE_NAME, body).block());
-        /*PlatformSuccessResponse response = api.update(MockConstants.NEW_ROLE_NAME, body).block();
+        /*BaseResponse response = api.update(MockConstants.NEW_ROLE_NAME, body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");
         assertEquals(response.getMessage(), "???");*/
@@ -119,7 +119,7 @@ public class RoleManagementTest extends AbstractExpectations {
     public void testDelete() {
         // TODO: currently the API throws a 500 internal server error
         assertThrows(WebClientResponseException.InternalServerError.class, () -> api.delete(MockConstants.NEW_ROLE_NAME).block());
-        /*PlatformSuccessResponse response = api.delete(MockConstants.NEW_ROLE_NAME).block();
+        /*BaseResponse response = api.delete(MockConstants.NEW_ROLE_NAME).block();
         assertNotNull(response);*/
     }
 

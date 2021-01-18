@@ -17,71 +17,15 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Objects;
 
 /**
  * GetUserResponse
  */
-@JsonPropertyOrder({
-        GetUserResponse.JSON_PROPERTY_MESSAGE_CODE,
-        GetUserResponse.JSON_PROPERTY_MESSAGE,
-        GetUserResponse.JSON_PROPERTY_USER_INFO
-})
-public class GetUserResponse {
+public class GetUserResponse extends BaseResponse {
 
-    public static final String JSON_PROPERTY_MESSAGE_CODE = "_messageCode_";
-    private String messageCode;
-
-    public static final String JSON_PROPERTY_MESSAGE = "message";
-    private String message;
-
-    public static final String JSON_PROPERTY_USER_INFO = "UserInfo";
     private ExtendedUserInfo userInfo;
-
-    public GetUserResponse messageCode(String messageCode) {
-        this.messageCode = messageCode;
-        return this;
-    }
-
-    /**
-     * The identifier of the response.
-     * @return messageCode
-     **/
-    @javax.annotation.Nullable
-    @ApiModelProperty(value = "The identifier of the response.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessageCode() {
-        return messageCode;
-    }
-
-    public void setMessageCode(String messageCode) {
-        this.messageCode = messageCode;
-    }
-
-    public GetUserResponse message(String message) {
-        this.message = message;
-        return this;
-    }
-
-    /**
-     * The explanation of the &#x60;messageCode&#x60;.
-     * @return message
-     **/
-    @javax.annotation.Nullable
-    @ApiModelProperty(value = "The explanation of the `messageCode`.")
-    @JsonProperty(JSON_PROPERTY_MESSAGE)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) { this.message = message; }
 
     public GetUserResponse userInfo(ExtendedUserInfo userInfo) {
         this.userInfo = userInfo;
@@ -93,59 +37,33 @@ public class GetUserResponse {
      * @return userInfo
      **/
     @javax.annotation.Nullable
-    @ApiModelProperty(value = "")
-    @JsonProperty(JSON_PROPERTY_USER_INFO)
-    @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-    public ExtendedUserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(ExtendedUserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
+    @JsonProperty("UserInfo")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public ExtendedUserInfo getUserInfo() { return userInfo; }
+    public void setUserInfo(ExtendedUserInfo userInfo) { this.userInfo = userInfo; }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         GetUserResponse getUserResponse = (GetUserResponse)o;
-        return Objects.equals(this.messageCode, getUserResponse.messageCode) &&
-                Objects.equals(this.message, getUserResponse.message) &&
+        return super.equals(o) &&
                 Objects.equals(this.userInfo, getUserResponse.userInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageCode, message, userInfo);
+        return Objects.hash(super.hashCode(), userInfo);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class GetUserResponse {\n");
-        sb.append("    messageCode: ")
-                .append(toIndentedString(messageCode))
-                .append("\n");
-        sb.append("    message: ").append(toIndentedString(message)).append("\n");
+        super.toString(sb);
         sb.append("    userInfo: ").append(toIndentedString(userInfo)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }

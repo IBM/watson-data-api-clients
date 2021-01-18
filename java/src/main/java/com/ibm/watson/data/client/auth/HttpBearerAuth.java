@@ -26,14 +26,29 @@ public class HttpBearerAuth implements Authentication {
     private final String scheme;
     private String bearerToken;
 
+    /**
+     * Construct a new bearer token for the specified scheme
+     * @param scheme for the authentication (usually just 'Bearer')
+     */
     public HttpBearerAuth(String scheme) { this.scheme = scheme; }
 
+    /**
+     * Retrieve the bearer token
+     * @return String
+     */
     public String getBearerToken() { return bearerToken; }
 
+    /**
+     * Set the bearer token to the provided value
+     * @param bearerToken to set
+     */
     public void setBearerToken(String bearerToken) {
         this.bearerToken = bearerToken;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void applyToParams(MultiValueMap<String, String> queryParams,
                               HttpHeaders headerParams,

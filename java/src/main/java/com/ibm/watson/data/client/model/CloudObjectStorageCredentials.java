@@ -17,32 +17,18 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * The Bluemix Cloud Object Storage (BMCOS) credentials.
  */
-@ApiModel(description = "The Bluemix Cloud Object Storage (BMCOS) credentials.")
-@JsonPropertyOrder({
-        CloudObjectStorageCredentials.JSON_PROPERTY_ADMIN,
-        CloudObjectStorageCredentials.JSON_PROPERTY_EDITOR,
-        CloudObjectStorageCredentials.JSON_PROPERTY_VIEWER
-})
 public class CloudObjectStorageCredentials {
 
-    public static final String JSON_PROPERTY_ADMIN = "admin";
-    private BMCOSCredentialsAdmin admin;
-
-    public static final String JSON_PROPERTY_EDITOR = "editor";
+    private BluemixCOSCredentials admin;
     private BMCOSCredentialsEditor editor;
-
-    public static final String JSON_PROPERTY_VIEWER = "viewer";
     private BMCOSCredentialsEditor viewer;
 
-    public CloudObjectStorageCredentials admin(BMCOSCredentialsAdmin admin) {
+    public CloudObjectStorageCredentials admin(BluemixCOSCredentials admin) {
         this.admin = admin;
         return this;
     }
@@ -51,15 +37,10 @@ public class CloudObjectStorageCredentials {
      * Get admin
      * @return admin
      **/
-    @ApiModelProperty(required = true, value = "")
-    @JsonProperty(JSON_PROPERTY_ADMIN)
+    @JsonProperty("admin")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public BMCOSCredentialsAdmin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(BMCOSCredentialsAdmin admin) { this.admin = admin; }
+    public BluemixCOSCredentials getAdmin() { return admin; }
+    public void setAdmin(BluemixCOSCredentials admin) { this.admin = admin; }
 
     public CloudObjectStorageCredentials editor(BMCOSCredentialsEditor editor) {
         this.editor = editor;
@@ -70,14 +51,9 @@ public class CloudObjectStorageCredentials {
      * Get editor
      * @return editor
      **/
-    @ApiModelProperty(required = true, value = "")
-    @JsonProperty(JSON_PROPERTY_EDITOR)
+    @JsonProperty("editor")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public BMCOSCredentialsEditor getEditor() {
-        return editor;
-    }
-
+    public BMCOSCredentialsEditor getEditor() { return editor; }
     public void setEditor(BMCOSCredentialsEditor editor) { this.editor = editor; }
 
     public CloudObjectStorageCredentials viewer(BMCOSCredentialsEditor viewer) {
@@ -89,26 +65,16 @@ public class CloudObjectStorageCredentials {
      * Get viewer
      * @return viewer
      **/
-    @ApiModelProperty(required = true, value = "")
-    @JsonProperty(JSON_PROPERTY_VIEWER)
+    @JsonProperty("viewer")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public BMCOSCredentialsEditor getViewer() {
-        return viewer;
-    }
-
+    public BMCOSCredentialsEditor getViewer() { return viewer; }
     public void setViewer(BMCOSCredentialsEditor viewer) { this.viewer = viewer; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CloudObjectStorageCredentials cloudObjectStorageCredentials =
-                (CloudObjectStorageCredentials)o;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        CloudObjectStorageCredentials cloudObjectStorageCredentials = (CloudObjectStorageCredentials)o;
         return Objects.equals(this.admin, cloudObjectStorageCredentials.admin) &&
                 Objects.equals(this.editor, cloudObjectStorageCredentials.editor) &&
                 Objects.equals(this.viewer, cloudObjectStorageCredentials.viewer);
@@ -135,9 +101,7 @@ public class CloudObjectStorageCredentials {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

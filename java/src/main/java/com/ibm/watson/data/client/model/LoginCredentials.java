@@ -17,23 +17,14 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * LoginCredentials
  */
-@JsonPropertyOrder({
-        LoginCredentials.JSON_PROPERTY_PASSWORD,
-        LoginCredentials.JSON_PROPERTY_USERNAME
-})
 public class LoginCredentials {
 
-    public static final String JSON_PROPERTY_PASSWORD = "password";
     private String password;
-
-    public static final String JSON_PROPERTY_USERNAME = "username";
     private String username;
 
     public LoginCredentials password(String password) {
@@ -45,14 +36,9 @@ public class LoginCredentials {
      * IBM Cloud Pak for Data password.
      * @return password
      **/
-    @ApiModelProperty(required = true, value = "IBM Cloud Pak for Data password.")
-    @JsonProperty(JSON_PROPERTY_PASSWORD)
+    @JsonProperty("password")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getPassword() {
-        return password;
-    }
-
+    public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
     public LoginCredentials username(String username) {
@@ -64,25 +50,15 @@ public class LoginCredentials {
      * IBM Cloud Pak for Data user name.
      * @return username
      **/
-    @ApiModelProperty(required = true,
-            value = "IBM Cloud Pak for Data user name.")
-    @JsonProperty(JSON_PROPERTY_USERNAME)
+    @JsonProperty("username")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getUsername() {
-        return username;
-    }
-
+    public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         LoginCredentials loginCredentials = (LoginCredentials)o;
         return Objects.equals(this.password, loginCredentials.password) &&
                 Objects.equals(this.username, loginCredentials.username);
@@ -108,9 +84,7 @@ public class LoginCredentials {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 

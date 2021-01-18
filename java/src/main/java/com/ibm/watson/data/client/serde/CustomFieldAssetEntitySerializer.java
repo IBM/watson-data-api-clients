@@ -24,8 +24,7 @@ import com.ibm.watson.data.client.model.CustomFieldAssetEntity;
 import java.io.IOException;
 
 /**
- * Custom serialization for Dates, to handle the variations that exist in the API endpoints
- * and underlying meta-model, where some dates have millisecond-level detail and others do not.
+ * Custom serialization for CustomfieldAssetEntities.
  */
 public class CustomFieldAssetEntitySerializer extends StdSerializer<CustomFieldAssetEntity> {
 

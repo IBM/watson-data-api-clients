@@ -27,13 +27,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with Jobs.
@@ -59,30 +58,19 @@ public class JobsApiV2 {
      * to finish, then a 202 response will be returned and the deletion will
      * continue asynchronously. All the jobs runs associated with the job will
      * also be deleted. If the job is still running, it will not be deleted.
-     * <p><b>204</b> - The requested operation completed successfully.
-     * <p><b>400</b> - Bad request. See the error message for details.
-     * <p><b>401</b> - You are not authorized to access the service. See response
-     * for more information. <p><b>403</b> - You are not permitted to perform this
-     * action. See response for more information. <p><b>404</b> - The resources
-     * you specified cannot be found. <p><b>0</b> - An error occurred. See
-     * response for more information.
      * @param jobId The ID of the job to use. Each job has a unique ID.
      * @param projectId The ID of the project to use. project_id or space_id is
      *     required.
      * @param spaceId The ID of the space to use. catalog_id, project_id, or
      *     space_id is required.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String jobId, String projectId, String spaceId) throws RestClientException {
+    public Mono<Void> delete(@NonNull String jobId,
+                             String projectId,
+                             String spaceId) throws RestClientException {
 
-        // verify the required parameter 'jobId' is set
-        if (jobId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'jobId' when calling deleteJob");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -112,12 +100,7 @@ public class JobsApiV2 {
     /**
      * Get list of jobs under a project or a space.
      * Lists the jobs in the specified project or space (either project_id or
-     * space_id must be set). <p><b>200</b> - Success. <p><b>400</b> - Bad
-     * request. See the error message for details. <p><b>401</b> - You are not
-     * authorized to access the service. See response for more information.
-     * <p><b>403</b> - You are not permitted to perform this action. See response
-     * for more information. <p><b>404</b> - The resources you specified cannot be
-     * found. <p><b>0</b> - An error occurred. See response for more information.
+     * space_id must be set).
      * @param projectId The ID of the project to use. project_id or space_id is
      *     required.
      * @param spaceId The ID of the space to use. catalog_id, project_id, or
@@ -127,8 +110,7 @@ public class JobsApiV2 {
      *     asset ref type.
      * @param runId The ID of the job run. Can be used to search parent job of a
      *     job run
-     * @param limit The limit of the number of items to return, for example
-     *     limit&#x3D;50. If not specified a default of 100 will be  used.
+     * @param limit The limit of the number of items to return. If not specified a default of 100 will be used.
      * @return ListJobResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
@@ -169,15 +151,9 @@ public class JobsApiV2 {
     }
 
     /**
-     * Get the information of job identified by the ID.
-     * Gets the info for a single job associated from the specified project or
-     * space (either project_id or space_id must be set). <p><b>200</b> - Success.
-     * <p><b>400</b> - Bad request. See the error message for details.
-     * <p><b>401</b> - You are not authorized to access the service. See response
-     * for more information. <p><b>403</b> - You are not permitted to perform this
-     * action. See response for more information. <p><b>404</b> - The resources
-     * you specified cannot be found. <p><b>0</b> - An error occurred. See
-     * response for more information.
+     * Get the detailed job information identified for the provided ID.
+     * Gets the info for a single job from the specified project or
+     * space (either project_id or space_id must be set).
      * @param jobId The ID of the job to use. Each job has a unique ID.
      * @param projectId The ID of the project to use. project_id or space_id is
      *     required.
@@ -187,14 +163,10 @@ public class JobsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Job> get(String jobId, String projectId, String spaceId) throws RestClientException {
+    public Mono<Job> get(@NonNull String jobId,
+                         String projectId,
+                         String spaceId) throws RestClientException {
 
-        // verify the required parameter 'jobId' is set
-        if (jobId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'jobId' when calling v2JobsJobIdGet");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -222,17 +194,12 @@ public class JobsApiV2 {
     }
 
     /**
-     * Update information of a job.
+     * Update a job.
      * Updates specific attributes of a job in the specified project or space
      * (either project_id or space_id must be set). You must specify the updates
      * by using the JSON patch format, described in RFC 6902. Use
-     * &#39;last_run_initiator&#39; for the initiator of the last job run, use
-     * &#39;last_run_status&#39; for the status of the last job run. <p><b>200</b>
-     * - Success. <p><b>401</b> - You are not authorized to access the service.
-     * See response for more information. <p><b>403</b> - You are not permitted to
-     * perform this action. See response for more information. <p><b>404</b> - The
-     * resources you specified cannot be found. <p><b>0</b> - An error occurred.
-     * See response for more information.
+     * "last_run_initiator" for the initiator of the last job run, use
+     * "last_run_status" for the status of the last job run.
      * @param jobId The ID of the job to use. Each job has a unique ID.
      * @param requestBody Updates to make to the job run.
      * @param projectId The ID of the project to use. project_id or space_id is
@@ -243,23 +210,11 @@ public class JobsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Job> update(String jobId,
-                            List<JSONResourcePatchModel> requestBody,
+    public Mono<Job> update(@NonNull String jobId,
+                            @NonNull List<JSONResourcePatchModel> requestBody,
                             String projectId,
                             String spaceId) throws RestClientException {
 
-        // verify the required parameter 'jobId' is set
-        if (jobId == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'jobId' when calling v2JobsJobIdPatch");
-        }
-        // verify the required parameter 'requestBody' is set
-        if (requestBody == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'requestBody' when calling v2JobsJobIdPatch");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -289,12 +244,7 @@ public class JobsApiV2 {
     /**
      * Create a new job.
      * Creates a new job in the specified project or space (either project_id or
-     * space_id must be set). <p><b>201</b> - Created. <p><b>400</b> - Bad
-     * request. See the error message for details. <p><b>401</b> - You are not
-     * authorized to access the service. See response for more information.
-     * <p><b>403</b> - You are not permitted to perform this action. See response
-     * for more information. <p><b>0</b> - An error occurred. See response for
-     * more information.
+     * space_id must be set).
      * @param jobPostBody The job to be created.
      * @param projectId The ID of the project to use. project_id or space_id is
      *     required.
@@ -304,14 +254,10 @@ public class JobsApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Job> create(JobPostBody jobPostBody, String projectId, String spaceId) throws RestClientException {
+    public Mono<Job> create(@NonNull JobPostBody jobPostBody,
+                            String projectId,
+                            String spaceId) throws RestClientException {
 
-        // verify the required parameter 'jobPostBody' is set
-        if (jobPostBody == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'jobPostBody' when calling v2JobsPost");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

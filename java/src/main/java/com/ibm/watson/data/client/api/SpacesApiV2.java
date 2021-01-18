@@ -26,13 +26,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints dealing with (deployment) Spaces.
@@ -52,24 +51,14 @@ public class SpacesApiV2 {
     public void setApiClient(ApiClient apiClient) { this.apiClient = apiClient; }
 
     /**
-     * Create space
-     * Creates a new space with the provided parameters.
-     * <p><b>201</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
+     * Create a space.
      * @param createSpaceBody The createSpaceBody parameter
      * @return Space
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Space> create(WriteableSpace createSpaceBody) throws RestClientException {
+    public Mono<Space> create(@NonNull WriteableSpace createSpaceBody) throws RestClientException {
 
-        // verify the required parameter 'createSpaceBody' is set
-        if (createSpaceBody == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'createSpaceBody' when calling createSpace");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -91,26 +80,14 @@ public class SpacesApiV2 {
     }
 
     /**
-     * Delete space
-     * Deletes a space with a given GUID.
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Delete a space.
      * @param guid The space GUID.
-     * @return {@code Mono<Void>}
+     * @return Void
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Void> delete(String guid) throws RestClientException {
+    public Mono<Void> delete(@NonNull String guid) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling deleteSpace");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -134,14 +111,7 @@ public class SpacesApiV2 {
     }
 
     /**
-     * Get space
-     * Returns data for a single space identified by the guid.
-     * <p><b>200</b> - OK
-     * <p><b>204</b> - No Content
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
+     * Retrieve details about a space.
      * @param guid The space GUID.
      * @param include A list of comma-separated project metadata sections to
      *     include in the query results.
@@ -149,14 +119,9 @@ public class SpacesApiV2 {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Space> get(String guid, List<String> include) throws RestClientException {
+    public Mono<Space> get(@NonNull String guid,
+                           List<String> include) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling getSpace");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 
@@ -182,15 +147,13 @@ public class SpacesApiV2 {
     }
 
     /**
-     * Get all spaces
-     * Returns a list of spaces that are meeting the provided query parameters.
+     * Retrieve a list of all spaces that meet the provided query parameters.
      * By default, the list returns spaces that the authenticated user is a
-     * member of. <p><b>200</b> - OK <p><b>204</b> - No Content <p><b>401</b> -
-     * Unauthorized <p><b>403</b> - Forbidden
+     * member of.
      * @param name A space name to use to filter the query results by name (exact match).
      * @param member A space member to use to filter the query results by membership.
      * @param roles A list of space roles to use to filter the
-     *     query results. Must be used in conjunction with the &#39;member&#39;
+     *     query results. Must be used in conjunction with the "member"
      *     query parameter.
      * @param tags A list of user-defined tags to use to filter the query results.
      * @param guids A list of space GUIDs to use to filter the query results.
@@ -198,19 +161,22 @@ public class SpacesApiV2 {
      *     include in the query results.
      * @param limit The limit to use to restrict the number of projects returned
      *     in the query results. Used for pagination in conjunction with the
-     *     &#39;skip&#39; query parameter.
+     *     "skip" query parameter.
      * @param skip The offset to use to define the starting index of projects to
      *     return in the query results. Used for pagination in conjunction with
-     *     the &#39;limit&#39; query parameter.
+     *     the "limit" query parameter.
      * @return Spaces
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Spaces> list(String name, String member,
-                             List<String> roles, List<String> tags,
-                             List<String> guids, List<String> include,
-                             Integer limit, Integer skip)
-            throws RestClientException {
+    public Mono<Spaces> list(String name,
+                             String member,
+                             List<String> roles,
+                             List<String> tags,
+                             List<String> guids,
+                             List<String> include,
+                             Integer limit,
+                             Integer skip) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -242,37 +208,16 @@ public class SpacesApiV2 {
     }
 
     /**
-     * Update space
      * Partially updates the space with only a subset of properties.
-     * <p><b>200</b> - OK
-     * <p><b>400</b> - Bad Request
-     * <p><b>401</b> - Unauthorized
-     * <p><b>403</b> - Forbidden
-     * <p><b>404</b> - Not Found
      * @param guid The space GUID.
-     * @param body JSON array of patch operations as defined in RFC
-     *     6902.&lt;br/&gt;[ { \&quot;op\&quot;:
-     *     \&quot;replace\&quot;, \&quot;path\&quot;:
-     *     \&quot;/description\&quot;, \&quot;value\&quot;:
-     *     \&quot;new-description\&quot; } ]
+     * @param body JSON array of patch operations as defined in RFC 6902.
      * @return Space
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<Space> update(String guid, List<JSONResourcePatchModel> body) throws RestClientException {
+    public Mono<Space> update(@NonNull String guid,
+                              @NonNull List<JSONResourcePatchModel> body) throws RestClientException {
 
-        // verify the required parameter 'guid' is set
-        if (guid == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'guid' when calling updateSpace");
-        }
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new HttpClientErrorException(
-                    HttpStatus.BAD_REQUEST,
-                    "Missing the required parameter 'body' when calling updateSpace");
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
 

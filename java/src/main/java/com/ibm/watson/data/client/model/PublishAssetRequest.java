@@ -17,6 +17,8 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ibm.watson.data.client.model.enums.PermissionMode;
+
 import java.util.Objects;
 
 /**
@@ -24,19 +26,19 @@ import java.util.Objects;
  */
 public class PublishAssetRequest {
 
-    private Integer mode;
+    private PermissionMode mode;
     private String catalogId;
     private MetadataMutable metadata;
 
-    public PublishAssetRequest mode(Integer mode) {
+    public PublishAssetRequest mode(PermissionMode mode) {
         this.mode = mode;
         return this;
     }
 
     @JsonProperty("mode")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Integer getMode() { return mode; }
-    public void setMode(Integer mode) { this.mode = mode; }
+    public PermissionMode getMode() { return mode; }
+    public void setMode(PermissionMode mode) { this.mode = mode; }
 
     public PublishAssetRequest catalogId(String catalogId) {
         this.catalogId = catalogId;
@@ -81,8 +83,8 @@ public class PublishAssetRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class PublishAssetRequest {\n");
-        sb.append("    metadata: ").append(toIndentedString(mode)).append("\n");
-        sb.append("    metadata: ").append(toIndentedString(catalogId)).append("\n");
+        sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
+        sb.append("    catalogId: ").append(toIndentedString(catalogId)).append("\n");
         sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
         sb.append("}");
         return sb.toString();

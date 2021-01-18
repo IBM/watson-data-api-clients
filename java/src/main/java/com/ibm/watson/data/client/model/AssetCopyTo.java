@@ -17,17 +17,13 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
  * Copy Asset Model
  */
-@ApiModel(description = "Copy Asset Model")
 public class AssetCopyTo {
 
-    public static final String JSON_PROPERTY_PROJECT_ID = "project_id";
     private String projectId;
 
     public AssetCopyTo projectId(String projectId) {
@@ -39,24 +35,15 @@ public class AssetCopyTo {
      * Get projectId
      * @return projectId
      **/
-    @ApiModelProperty(required = true, value = "")
-    @JsonProperty(JSON_PROPERTY_PROJECT_ID)
+    @JsonProperty("project_id")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-    public String getProjectId() {
-        return projectId;
-    }
-
+    public String getProjectId() { return projectId; }
     public void setProjectId(String projectId) { this.projectId = projectId; }
 
     @Override
     public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
         AssetCopyTo assetCopyTo = (AssetCopyTo)o;
         return Objects.equals(this.projectId, assetCopyTo.projectId);
     }
@@ -70,9 +57,7 @@ public class AssetCopyTo {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class AssetCopyTo {\n");
-        sb.append("    projectId: ")
-                .append(toIndentedString(projectId))
-                .append("\n");
+        sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -82,9 +67,7 @@ public class AssetCopyTo {
      * (except the first line).
      */
     private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
+        if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }
 
