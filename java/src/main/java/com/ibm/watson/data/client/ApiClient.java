@@ -110,13 +110,23 @@ public class ApiClient {
      * @param disableSSLVerification will disable SSL verification if set to true
      */
     public ApiClient(boolean disableSSLVerification) {
+        this(disableSSLVerification, 1);
+    }
+
+    /**
+     * Constructs a base ApiClient
+     * @param disableSSLVerification will disable SSL verification if set to true
+     * @param bufferSizeInMb maximum size of buffer to allow for WebClient
+     */
+    public ApiClient(boolean disableSSLVerification, int bufferSizeInMb) {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         JsonNullableModule jnm = new JsonNullableModule();
         mapper.registerModule(jnm);
 
-        this.webClient = buildWebClient(mapper, disableSSLVerification);
+        this.webClient = buildWebClient(mapper, bufferSizeInMb, disableSSLVerification);
         this.restTemplate = buildRestTemplate(mapper, disableSSLVerification);
         this.init();
     }
@@ -128,10 +138,11 @@ public class ApiClient {
     /**
      * Build the WebClient used to make HTTP requests.
      * @param mapper object mapper
+     * @param bufferSizeInMb maximum size of buffer to allow for WebClient
      * @param disableSSLVerification set to true to disable SSL verification
      * @return WebClient
      */
-    public static WebClient buildWebClient(ObjectMapper mapper, boolean disableSSLVerification) {
+    public static WebClient buildWebClient(ObjectMapper mapper, int bufferSizeInMb, boolean disableSSLVerification) {
         ExchangeStrategies strategies =
                 ExchangeStrategies.builder()
                         .codecs(clientDefaultCodecsConfigurer -> {
@@ -139,6 +150,7 @@ public class ApiClient {
                                     new Jackson2JsonEncoder(mapper, MediaType.APPLICATION_JSON));
                             clientDefaultCodecsConfigurer.defaultCodecs().jackson2JsonDecoder(
                                     new Jackson2JsonDecoder(mapper, MediaType.APPLICATION_JSON));
+                            clientDefaultCodecsConfigurer.defaultCodecs().maxInMemorySize(bufferSizeInMb * 1024 * 1024);
                         })
                         .build();
         WebClient.Builder webClient;
