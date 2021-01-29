@@ -43,17 +43,18 @@ import reactor.util.annotation.NonNull;
  * information to these remote sources in the catalog, you can allow other
  * catalog users to access the data with the stored credentials.
  * Alternatively, you can copy a snapshot of the remote data into the
- * catalog's encrypted cloud storage.<br/><br/>
+ * catalog's encrypted cloud storage.<br><br>
  * All asset types have a common set of properties. Some asset types have additional
  * properties. When you add an asset to a catalog, you specify these
  * common properties:
  * <ul>
  *     <li>The asset name and an optional description. The name can only contain letters, numbers, underscore, dash, space, and period. The name can't be only blank spaces.</li>
- *     <li>Privacy. You can choose to restrict access to the asset with the privacy level and asset membership.</li>
+ *     <li>Privacy. You can choose to restrict access to the asset with the privacy level and asset membership.
  *     <ul>
  *         <li>Public (default): No restrictions on finding or using the asset.</li>
  *         <li>Private: Only asset members can find or use the asset.</li>
  *     </ul>
+ *     </li>
  *     <li>Members. The catalog collaborators can be added as members of the asset. Members are important if you restrict access to the asset. When you create an asset, you are the owner (and a member) of it.</li>
  *     <li>Tags. Metadata that makes searching for the asset easier. Tags can contain only letters, numbers, underscores, dashes, and the symbols # and @.</li>
  * </ul>
@@ -516,7 +517,7 @@ public class AssetsApiV2 {
     /**
      * Promote project assets to space. You must have Admin or
      * Editor permissions on both the project and the space.
-     * <br/><br/>
+     * <br><br>
      * Example body:
      * <code>{ "mode": 0, "space_id": "string", "metadata": { "name": "string", "description": "string", "tags": [ "string", "string" ] }}</code>
      * @param projectId project_id must be provided
@@ -572,7 +573,7 @@ public class AssetsApiV2 {
      * Publish project assets to catalog. You can publish data
      * assets from a project into a catalog. You must have Admin or Editor
      * permissions on both the project and the catalog.
-     * <br/><br/>
+     * <br><br>
      * Example body:
      * <code>{ "mode": 0, "catalog_id": "string", "metadata": { "name": "string", "description": "string", "tags": [ "string", "string" ] }}</code>
      * @param projectId project_id must be provided

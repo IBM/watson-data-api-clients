@@ -267,12 +267,12 @@ public class DeploymentsApi {
      * "hardware_spec.id" is mandatory for "hardware_spec" schema, a valid value such as "XS",
      * "S" must be specified for "hardware_spec.name" parameter. Alternatively,
      * users can also specify a valid ID of a hardware specification in "hardware_spec.id" parameter.
-     * However, changes related to "hardware_spec.name" or "hardware_spec.id" will not be applied for online deployments.<br/><br/>
+     * However, changes related to "hardware_spec.name" or "hardware_spec.id" will not be applied for online deployments.<br><br>
      * In case of batch deployments, users can update the hardware specification so that subsequent
      * batch deployment jobs can make use of the updated compute configurations. To update the compute
      * configuration, users must specify a valid value for either "hardware_spec.name" or
      * "hardware_spec.id" of the hardware specification that suits their requirement. In the batch
-     * deployment context, "hardware_spec.num_nodes" parameter is not currently supported.<br/><br/>
+     * deployment context, "hardware_spec.num_nodes" parameter is not currently supported.<br><br>
      * When "asset" is patched with id/rev:
      * <ul>
      *     <li>Deployment with the patched id/rev is started.</li>

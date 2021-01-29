@@ -35,7 +35,7 @@ import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints for dealing with Data Assets.
- * <br/><br/>
+ * <br><br>
  * Data assets could be
  * data from a connection to a data source (ex. tables) or files from your
  * local system uploaded into cloud object storage associated with Projects or
@@ -43,7 +43,7 @@ import reactor.util.annotation.NonNull;
  * description, asset type, visibility, tags, classifications. Data Assets have
  * additional attributes such as mime-type, columns with types, and
  * properties.
- * <br/><br/>
+ * <br><br>
  * These endpoints deal with the <em>metadata</em> of data assets, rather than
  * their actual data. Accessing the actual attached resource requires
  * additional server calls. Exactly which additional server calls are needed
@@ -52,8 +52,8 @@ import reactor.util.annotation.NonNull;
  * <ul>
  *     <li>Begin by finding the index i of the item in the <code>attachments</code> array whose <code>asset_type</code> value matches the type of the attached resource you
  *      want to access. For a <code>data_asset</code> attached resource look for the
- *      item i where <code>attachments[i].asset_type<code> is
- *      <code>data_asset</code>.<br/><br/>There are two important pairs of
+ *      item i where <code>attachments[i].asset_type</code> is
+ *      <code>data_asset</code>.<br><br>There are two important pairs of
  *      fields (among many others) which may appear in <code>attachments[i]</code>.
  *      Only one of those pairs will actually appear. Which pair appears
  *      influences which steps to perform next:
@@ -64,22 +64,24 @@ import reactor.util.annotation.NonNull;
  *              WILL be true if the attached resource is a database table. In this case, <code>attachments[i].connection_path</code>
  *              will contain a schema name and table name. <code>attachments[i].is_remote</code> MAY be true if the attached resource is,
  *              for example, a csv file.  In this case, <code>attachments[i].connection_path</code> will contain a folder path and
- *              file name. If this pair of fields is present in <code>attachments[i]</code> then the next steps are to:</li>
+ *              file name. If this pair of fields is present in <code>attachments[i]</code> then the next steps are to:
  *              <ol>
  *                  <li>use the value of the <code>attachments[i].connection_id</code> field to make a call to the <code>GET /v2/connections/{connection_id}</code> API. You'll need appropriate credentials.</li>
  *                  <li>use the values in the <code>entity.properties</code> field of the result from the step above to either create a connection to the database containing the table or to retrieve the file. Note: even if <code>attachments[i].is_remote</code> is true and the above pair of fields are present in <code>attachments[i]</code>, if the attached resource is located in the catalog/project bucket then you may optionally perform the two steps discussed for Pair 2 (<code>object_key</code> and <code>handle</code>) below.</li>
  *              </ol>
+ *          </li>
  *          <li><code>object_key</code> and <code>handle</code>: these fields will appear in
  *              <code>attachments[i]</code> if the value of <code>attachments[i].is_remote</code>
  *              is false.  In this case, <code>attachments[i].handle</code> will contain
- *              information about the attached resource.</li>
+ *              information about the attached resource.
  *              <ol>
  *                  <li>use the value of the <code>attachments[i].id</code> field as the value for <code>attachment_id</code> in a call to the <code>GET /v2/assets/{asset_id}/attachments/{attachment_id}</code> API. The value to use for <code>asset_id</code> in the call to the attachments API is the same as the value that was used for <code>data_asset_id</code> in the original call to the <code>GET /v2/data_assets/{data_asset_id}</code> API.</li>
  *                  <li>use the value in the <code>url</code> field of the result from the step above to download (for example, with a browser) a copy of the file.</li>
  *              </ol>
+ *          </li>
  *      </ul>
+ *    </li>
  * </ul>
- * @see AssetAttachmentsApiV2
  * @see #get(String, String, String, String, String)
  */
 public class DataAssetsApiV2 {
@@ -157,7 +159,7 @@ public class DataAssetsApiV2 {
      * additional server calls.
      * @param dataAssetId data_asset_id
      * @param revisionId Revision id (1, 2, 3, ...), or leave empty for the
-     *     current asset version. Use <code>latest<code> for the most recent
+     *     current asset version. Use <code>latest</code> for the most recent
      *     revision.
      * @param catalogId catalog_id
      * @param projectId project_id (only catalog_id is supported at this time)

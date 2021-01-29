@@ -33,13 +33,13 @@ import reactor.util.annotation.NonNull;
 
 /**
  * API endpoints for dealing with Data Protection Rules.
- * <br/><br/>
+ * <br><br>
  * A rule has two key properties:
  * <ul>
  *     <li>a trigger defining when the rule should be enforced</li>
  *     <li>an action describing what operations to perform or outcome to enforce</li>
  * </ul>
- * <em>Trigger</em><br/>
+ * <em>Trigger</em><br>
  * A trigger is a boolean expression represented using nested arrays. The
  * following describes the syntax:
  * <code>
