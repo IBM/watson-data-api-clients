@@ -130,7 +130,7 @@ public class TransactionalProjectsApiV2 {
      * a new COS bucket using generated unique name, all credentials, asset
      * container and call all the required atomic APIs to fully configure a new
      * project. Attempts to use the duplicate project names will result in an
-     * error.<br/><br/>
+     * error.<br><br>
      * This endpoint can also be used to create
      * a project from an exported Watson Studio .zip file. In this case, a new
      * transaction is initiated to create assets under the project. A Transaction
