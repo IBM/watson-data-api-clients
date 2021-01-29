@@ -435,7 +435,7 @@ public class BusinessTermsApiV3 {
      * method again by using the URI in
      * <code>PaginatedTagsList.next</code> returned by this
      * method.
-     * <br/><br/>
+     * <br><br>
      * Associations of a child term, like
      * <code>SSN</code>, includes the associations of its parent
      * terms, like <code>Government Identities</code>.

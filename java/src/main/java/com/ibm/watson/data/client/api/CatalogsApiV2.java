@@ -85,7 +85,7 @@ public class CatalogsApiV2 {
     /**
      * Use this to create the default catalog, configure and start the OMAG
      * server.
-     * <br/><br/>
+     * <br><br>
      * Example request:
      * <code>{ "catalog": { "name": "The Default Catalog", "generator": "Catalog-OMRS-Synced", "description": "The default (aka sync) catalog", "bss_account_id": "999", "is_governed": "true", "bucket": { "bucket_type": "assetfiles"  } }, "event_bus": { "producer": { "bootstrap.servers": "kafka:9093", "acks": "all", "retries": "1", "batch.size": "16384", "linger.ms": "1", "buffer.memory": "33554432", "max.request.size": "10485760", "key.serializer": "org.apache.kafka.common.serialization.StringSerializer", "value.serializer": "org.apache.kafka.common.serialization.StringSerializer" }, "consumer": { "bootstrap.servers": "kafka:9093", "zookeeper.session.timeout.ms": "300000", "zookeeper.sync.time.ms": "2000", "fetch.message.max.bytes": "10485760", "max.partition.fetch.bytes": "10485760", "max.poll.interval.ms": "2000000000", "key.deserializer": "org.apache.kafka.common.serialization.StringDeserializer", "value.deserializer": "org.apache.kafka.common.serialization.StringDeserializer" } } }</code>
      * @param createDefaultCatalogRequest details for the default catalog configuration
@@ -770,7 +770,7 @@ public class CatalogsApiV2 {
      *     supply <code>bss_account_id</code>). Currently, the only supported values
      *     are <code>catalogs</code>, <code>projects</code>, <code>spaces</code> or
      *     <code>total_count</code>. Not supplying any of these values results in
-     *     public <code>catalogs</code>, <code>projects</code, AND <code>spaces</code>
+     *     public <code>catalogs</code>, <code>projects</code>, AND <code>spaces</code>
      *     being returned for a specific account. Use
      *     <code>catalogs</code> for including all public catalogs for a specific
      *     bss_account_id. Use <code>projects</code> for including all
