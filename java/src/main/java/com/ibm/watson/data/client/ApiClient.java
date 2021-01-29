@@ -120,6 +120,7 @@ public class ApiClient {
      */
     public ApiClient(boolean disableSSLVerification, int bufferSizeInMb) {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         JsonNullableModule jnm = new JsonNullableModule();
