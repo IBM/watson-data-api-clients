@@ -21,7 +21,7 @@
     <artifactId>watson-data-api-client</artifactId>
     <packaging>jar</packaging>
     <name>watson-data-api-client</name>
-    <version>0.3</version>
+    <version>0.4-SNAPSHOT</version>
     <url>https://github.com/IBM/watson-data-api-clients/java</url>
     <description>IBM Watson Data API Java Client</description>
     <scm>
@@ -268,7 +268,7 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
             <!-- Testing -->
