@@ -18,20 +18,18 @@ package com.ibm.watson.data.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
- * Metadata about an asset, as a result
+ * Data Profile
  */
-public class MetadataAssetResult {
+public class DataProfile {
 
-    private MetadataAsset metadata;
-    private List<Attachment> attachments = null;
+    private MetadataDataProfile metadata;
+    private EntityDataProfile entity;
     private String href;
 
-    public MetadataAssetResult metadata(MetadataAsset metadata) {
+    public DataProfile metadata(MetadataDataProfile metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -39,29 +37,21 @@ public class MetadataAssetResult {
     @javax.annotation.Nullable
     @JsonProperty("metadata")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public MetadataAsset getMetadata() { return metadata; }
-    public void setMetadata(MetadataAsset metadata) { this.metadata = metadata; }
+    public MetadataDataProfile getMetadata() { return metadata; }
+    public void setMetadata(MetadataDataProfile metadata) { this.metadata = metadata; }
 
-    public MetadataAssetResult attachments(List<Attachment> attachments) {
-        this.attachments = attachments;
-        return this;
-    }
-
-    public MetadataAssetResult addAttachmentsItem(Attachment attachmentsItem) {
-        if (this.attachments == null) {
-            this.attachments = new ArrayList<>();
-        }
-        this.attachments.add(attachmentsItem);
+    public DataProfile entity(EntityDataProfile entity) {
+        this.entity = entity;
         return this;
     }
 
     @javax.annotation.Nullable
-    @JsonProperty("attachments")
+    @JsonProperty("entity")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<Attachment> getAttachments() { return attachments; }
-    public void setAttachments(List<Attachment> attachments) { this.attachments = attachments; }
+    public EntityDataProfile getEntity() { return entity; }
+    public void setEntity(EntityDataProfile entity) { this.entity = entity; }
 
-    public MetadataAssetResult href(String href) {
+    public DataProfile href(String href) {
         this.href = href;
         return this;
     }
@@ -76,39 +66,33 @@ public class MetadataAssetResult {
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        MetadataAssetResult metadataAsset = (MetadataAssetResult)o;
-        return Objects.equals(this.metadata, metadataAsset.metadata) &&
-                Objects.equals(this.attachments, metadataAsset.attachments) &&
-                Objects.equals(this.href, metadataAsset.href);
+        DataProfile that = (DataProfile)o;
+        return Objects.equals(this.metadata, that.metadata) &&
+                Objects.equals(this.entity, that.entity) &&
+                Objects.equals(this.href, that.href);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(metadata, attachments, href);
+        return Objects.hash(metadata, entity, href);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class MetadataAssetResult {\n");
-        toString(sb);
+        sb.append("class DataProfile {\n");
+        sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+        sb.append("    entity: ").append(toIndentedString(entity)).append("\n");
+        sb.append("    href: ").append(toIndentedString(href)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    protected void toString(StringBuilder sb) {
-        sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
-        sb.append("    attachments: ").append(toIndentedString(attachments)).append("\n");
-        sb.append("    href: ").append(toIndentedString(href)).append("\n");
     }
 
     /**
      * Convert the given object to string with each line indented by 4 spaces
      * (except the first line).
-     * @param o to indent
-     * @return String indented
      */
-    protected String toIndentedString(java.lang.Object o) {
+    private String toIndentedString(java.lang.Object o) {
         if (o == null) { return "null"; }
         return o.toString().replace("\n", "\n    ");
     }

@@ -67,18 +67,18 @@ public class AbstractAssetEntityDeserializer extends StdDeserializer<AbstractAss
                     break;
                 case "data_profile":
                     DataProfileEntity dpe = new DataProfileEntity();
-                    Map<String, Object> dpeProfiles = new HashMap<>();
+                    Map<String, DataProfile> dpeProfiles = new HashMap<>();
                     while (fieldNames.hasNext()) {
                         String fieldName = fieldNames.next();
                         TreeNode value = node.get(fieldName);
                         if (fieldName.equals("attribute_classes")) {
-                            dpe.setAttributeClasses(p.getCodec().readValue(value.traverse(), new TypeReference<List<String>>() {
-                            }));
+                            dpe.setAttributeClasses(p.getCodec().readValue(value.traverse(), new TypeReference<List<String>>() {}));
                         } else if (fieldName.equals("attribute_classification_manual")) {
-                            dpe.setAttributeClassificationManual(p.getCodec().readValue(value.traverse(), new TypeReference<List<ClassificationOverride>>() {
-                            }));
+                            dpe.setAttributeClassificationManual(p.getCodec().readValue(value.traverse(), new TypeReference<List<AttributeClassificationOverride>>() {}));
+                        } else if (fieldName.equals("data_classification_manual")) {
+                            dpe.setDataClassificationManual(p.getCodec().readValue(value.traverse(), new TypeReference<List<DataClassificationOverride>>() {}));
                         } else {
-                            Object details = p.getCodec().treeToValue(value, ColumnInfoDetails.class);
+                            DataProfile details = p.getCodec().treeToValue(value, DataProfile.class);
                             dpeProfiles.put(fieldName, details);
                         }
                     }

@@ -17,277 +17,335 @@ package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
 import java.util.Objects;
 
 /**
  * Attachment
  */
-public class Attachment {
+public class Attachment extends AttachmentHeader {
 
-    private String assetType;
-    private String name;
-    private String description;
-    private String mime;
-    private Integer dataPartitions;
-    private Long testDoc;
-    private Boolean privateUrl;
-    private String connectionId;
-    private String connectionPath;
-    private String objectKey;
-    private Boolean objectKeyIsReadOnly;
-    private Object userData;
-    private Boolean isPartitioned;
+    private String id;
+    private Double version;
+    private String attachmentId;
+    private String datasourceType;
+    // TODO: this should probably be an enumeration
+    private String attachmentType;
+    private String href;
+    private Date createdAt;
+    private String message;
+    private String creatorId;
+    private Long createTime;
+    private Long size;
+    private Boolean isRemote;
+    private Boolean isManaged;
+    private Boolean isReferenced;
+    private Boolean isObjectKeyReadOnly;
+    private Boolean isUserProvidedPathKey;
+    private Boolean transferComplete;
+    private Long completeTimeTicks;
+    private AttachmentHandle handle;
+    private MetadataUsage usage;
 
-    public Attachment assetType(String assetType) {
-        this.assetType = assetType;
+    public Attachment id(String id) {
+        this.id = id;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+
+    public Attachment attachmentId(String attachmentId) {
+        this.attachmentId = attachmentId;
         return this;
     }
 
     /**
-     * Get assetType
-     * @return assetType
-     **/
-    @JsonProperty("asset_type")
-    @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getAssetType() { return assetType; }
-    public void setAssetType(String assetType) { this.assetType = assetType; }
-
-    public Attachment name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    /**
-     * Get name
-     * @return name
+     * Get attachmentId
+     * @return attachmentId
      **/
     @javax.annotation.Nullable
-    @JsonProperty("name")
+    @JsonProperty("attachment_id")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getAttachmentId() { return attachmentId; }
+    public void setAttachmentId(String attachmentId) { this.attachmentId = attachmentId; }
 
-    public Attachment description(String description) {
-        this.description = description;
+    public Attachment version(Double version) {
+        this.version = version;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("version")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Double getVersion() { return version; }
+    public void setVersion(Double version) { this.version = version; }
+
+    public Attachment datasourceType(String datasourceType) {
+        this.datasourceType = datasourceType;
         return this;
     }
 
     /**
-     * Get description
-     * @return description
-     **/
+     * Get datasourceType GUID
+     * @return datasourceType
+     */
     @javax.annotation.Nullable
-    @JsonProperty("description")
+    @JsonProperty("datasource_type")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getDatasourceType() { return datasourceType; }
+    public void setDatasourceType(String datasourceType) { this.datasourceType = datasourceType; }
 
-    public Attachment mime(String mime) {
-        this.mime = mime;
+    public Attachment attachmentType(String attachmentType) {
+        this.attachmentType = attachmentType;
         return this;
     }
 
     /**
-     * Get mime
-     * @return mime
-     **/
+     * Get attachment type
+     * @return attachmentType
+     */
     @javax.annotation.Nullable
-    @JsonProperty("mime")
+    @JsonProperty("attachment_type")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getMime() { return mime; }
-    public void setMime(String mime) { this.mime = mime; }
+    public String getAttachmentType() { return attachmentType; }
+    public void setAttachmentType(String attachmentType) { this.attachmentType = attachmentType; }
 
-    public Attachment dataPartitions(Integer dataPartitions) {
-        this.dataPartitions = dataPartitions;
+    public Attachment href(String href) {
+        this.href = href;
         return this;
     }
 
     /**
-     * Get dataPartitions
-     * @return dataPartitions
-     **/
+     * Get href
+     * @return href
+     */
     @javax.annotation.Nullable
-    @JsonProperty("data_partitions")
+    @JsonProperty("href")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Integer getDataPartitions() { return dataPartitions; }
-    public void setDataPartitions(Integer dataPartitions) { this.dataPartitions = dataPartitions; }
+    public String getHref() { return href; }
+    public void setHref(String href) { this.href = href; }
 
-    public Attachment testDoc(Long testDoc) {
-        this.testDoc = testDoc;
+    public Attachment createdAt(Date createdAt) {
+        this.createdAt = createdAt;
         return this;
     }
 
-    /**
-     * Get testDoc
-     * @return testDoc
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("test_doc")
+    @JsonProperty("created_at")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Long getTestDoc() { return testDoc; }
-    public void setTestDoc(Long testDoc) { this.testDoc = testDoc; }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
-    public Attachment privateUrl(Boolean privateUrl) {
-        this.privateUrl = privateUrl;
+    public Attachment message(String message) {
+        this.message = message;
         return this;
     }
 
-    /**
-     * Get privateUrl
-     * @return privateUrl
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("private_url")
+    @JsonProperty("message")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Boolean getPrivateUrl() { return privateUrl; }
-    public void setPrivateUrl(Boolean privateUrl) { this.privateUrl = privateUrl; }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 
-    public Attachment connectionId(String connectionId) {
-        this.connectionId = connectionId;
+    public Attachment creatorId(String creatorId) {
+        this.creatorId = creatorId;
         return this;
     }
 
-    /**
-     * Get connectionId
-     * @return connectionId
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("connection_id")
+    @JsonProperty("creator_id")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getConnectionId() { return connectionId; }
-    public void setConnectionId(String connectionId) { this.connectionId = connectionId; }
+    public String getCreatorId() { return creatorId; }
+    public void setCreatorId(String creatorId) { this.creatorId = creatorId; }
 
-    public Attachment connectionPath(String connectionPath) {
-        this.connectionPath = connectionPath;
+    public Attachment createTime(Long createTime) {
+        this.createTime = createTime;
         return this;
     }
 
-    /**
-     * Get connectionPath
-     * @return connectionPath
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("connection_path")
+    @JsonProperty("create_time")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getConnectionPath() { return connectionPath; }
-    public void setConnectionPath(String connectionPath) { this.connectionPath = connectionPath; }
+    public Long getCreateTime() { return createTime; }
+    public void setCreateTime(Long createTime) { this.createTime = createTime; }
 
-    public Attachment objectKey(String objectKey) {
-        this.objectKey = objectKey;
+    public Attachment size(Long size) {
+        this.size = size;
         return this;
     }
 
-    /**
-     * Get objectKey
-     * @return objectKey
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("object_key")
+    @JsonProperty("size")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getObjectKey() { return objectKey; }
-    public void setObjectKey(String objectKey) { this.objectKey = objectKey; }
+    public Long getSize() { return size; }
+    public void setSize(Long size) { this.size = size; }
 
-    public Attachment objectKeyIsReadOnly(Boolean objectKeyIsReadOnly) {
-        this.objectKeyIsReadOnly = objectKeyIsReadOnly;
+    public Attachment isRemote(Boolean isRemote) {
+        this.isRemote = isRemote;
         return this;
     }
 
-    /**
-     * Get objectKeyIsReadOnly
-     * @return objectKeyIsReadOnly
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("object_key_is_read_only")
+    @JsonProperty("is_remote")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Boolean getObjectKeyIsReadOnly() { return objectKeyIsReadOnly; }
-    public void setObjectKeyIsReadOnly(Boolean objectKeyIsReadOnly) { this.objectKeyIsReadOnly = objectKeyIsReadOnly; }
+    public Boolean getRemote() { return isRemote; }
+    public void setRemote(Boolean remote) { isRemote = remote; }
 
-    public Attachment userData(Object userData) {
-        this.userData = userData;
+    public Attachment isManaged(Boolean isManaged) {
+        this.isManaged = isManaged;
         return this;
     }
 
-    /**
-     * Get userData
-     * @return userData
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("user_data")
+    @JsonProperty("is_managed")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Object getUserData() { return userData; }
-    public void setUserData(Object userData) { this.userData = userData; }
+    public Boolean getManaged() { return isManaged; }
+    public void setManaged(Boolean managed) { isManaged = managed; }
 
-    public Attachment isPartitioned(Boolean isPartitioned) {
-        this.isPartitioned = isPartitioned;
+    public Attachment isReferenced(Boolean isReferenced) {
+        this.isReferenced = isReferenced;
         return this;
     }
 
-    /**
-     * Get isPartitioned
-     * @return isPartitioned
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("is_partitioned")
+    @JsonProperty("is_referenced")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Boolean getIsPartitioned() { return isPartitioned; }
-    public void setIsPartitioned(Boolean isPartitioned) { this.isPartitioned = isPartitioned; }
+    public Boolean getReferenced() { return isReferenced; }
+    public void setReferenced(Boolean referenced) { isReferenced = referenced; }
+
+    public Attachment isObjectKeyReadOnly(Boolean isObjectKeyReadOnly) {
+        this.isObjectKeyReadOnly = isObjectKeyReadOnly;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("is_object_key_read_only")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getObjectKeyReadOnly() { return isObjectKeyReadOnly; }
+    public void setObjectKeyReadOnly(Boolean objectKeyReadOnly) { isObjectKeyReadOnly = objectKeyReadOnly; }
+
+    public Attachment isUserProvidedPathKey(Boolean isUserProvidedPathKey) {
+        this.isUserProvidedPathKey = isUserProvidedPathKey;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("is_user_provided_path_key")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getUserProvidedPathKey() { return isUserProvidedPathKey; }
+    public void setUserProvidedPathKey(Boolean userProvidedPathKey) { isUserProvidedPathKey = userProvidedPathKey; }
+
+    public Attachment transferComplete(Boolean transferComplete) {
+        this.transferComplete = transferComplete;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("transfer_complete")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getTransferComplete() { return transferComplete; }
+    public void setTransferComplete(Boolean transferComplete) { this.transferComplete = transferComplete; }
+
+    public Attachment completeTimeTicks(Long completeTimeTicks) {
+        this.completeTimeTicks = completeTimeTicks;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("complete_time_ticks")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Long getCompleteTimeTicks() { return completeTimeTicks; }
+    public void setCompleteTimeTicks(Long completeTimeTicks) { this.completeTimeTicks = completeTimeTicks; }
+
+    public Attachment handle(AttachmentHandle handle) {
+        this.handle = handle;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("handle")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public AttachmentHandle getHandle() { return handle; }
+    public void setHandle(AttachmentHandle handle) { this.handle = handle; }
+
+    public Attachment usage(MetadataUsage usage) {
+        this.usage = usage;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("usage")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public MetadataUsage getUsage() { return usage; }
+    public void setUsage(MetadataUsage usage) { this.usage = usage; }
 
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
-        Attachment attachment = (Attachment)o;
-        return Objects.equals(this.assetType, attachment.assetType) &&
-                Objects.equals(this.name, attachment.name) &&
-                Objects.equals(this.description, attachment.description) &&
-                Objects.equals(this.mime, attachment.mime) &&
-                Objects.equals(this.dataPartitions, attachment.dataPartitions) &&
-                Objects.equals(this.testDoc, attachment.testDoc) &&
-                Objects.equals(this.privateUrl, attachment.privateUrl) &&
-                Objects.equals(this.connectionId, attachment.connectionId) &&
-                Objects.equals(this.connectionPath, attachment.connectionPath) &&
-                Objects.equals(this.objectKey, attachment.objectKey) &&
-                Objects.equals(this.objectKeyIsReadOnly, attachment.objectKeyIsReadOnly) &&
-                Objects.equals(this.userData, attachment.userData) &&
-                Objects.equals(this.isPartitioned, attachment.isPartitioned);
+        Attachment that = (Attachment)o;
+        return super.equals(o) &&
+                Objects.equals(this.id, that.id) &&
+                Objects.equals(this.version, that.version) &&
+                Objects.equals(this.attachmentId, that.attachmentId) &&
+                Objects.equals(this.datasourceType, that.datasourceType) &&
+                Objects.equals(this.attachmentType, that.attachmentType) &&
+                Objects.equals(this.href, that.href) &&
+                Objects.equals(this.createdAt, that.createdAt) &&
+                Objects.equals(this.message, that.message) &&
+                Objects.equals(this.creatorId, that.creatorId) &&
+                Objects.equals(this.createTime, that.createTime) &&
+                Objects.equals(this.size, that.size) &&
+                Objects.equals(this.isRemote, that.isRemote) &&
+                Objects.equals(this.isManaged, that.isManaged) &&
+                Objects.equals(this.isReferenced, that.isReferenced) &&
+                Objects.equals(this.isObjectKeyReadOnly, that.isObjectKeyReadOnly) &&
+                Objects.equals(this.isUserProvidedPathKey, that.isUserProvidedPathKey) &&
+                Objects.equals(this.transferComplete, that.transferComplete) &&
+                Objects.equals(this.completeTimeTicks, that.completeTimeTicks) &&
+                Objects.equals(this.handle, that.handle) &&
+                Objects.equals(this.usage, that.usage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(assetType, name, description, mime, dataPartitions,
-                testDoc, privateUrl, connectionId, connectionPath,
-                objectKey, objectKeyIsReadOnly, userData,
-                isPartitioned);
+        return Objects.hash(super.hashCode(), id, version, attachmentId, datasourceType, attachmentType, href,
+                createdAt, message, creatorId, createTime, size, isRemote, isManaged, isReferenced, isObjectKeyReadOnly,
+                isUserProvidedPathKey, transferComplete, completeTimeTicks, handle, usage);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class Attachment {\n");
-        sb.append("    assetType: ").append(toIndentedString(assetType)).append("\n");
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    description: ").append(toIndentedString(description)).append("\n");
-        sb.append("    mime: ").append(toIndentedString(mime)).append("\n");
-        sb.append("    dataPartitions: ").append(toIndentedString(dataPartitions)).append("\n");
-        sb.append("    testDoc: ").append(toIndentedString(testDoc)).append("\n");
-        sb.append("    privateUrl: ").append(toIndentedString(privateUrl)).append("\n");
-        sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
-        sb.append("    connectionPath: ").append(toIndentedString(connectionPath)).append("\n");
-        sb.append("    objectKey: ").append(toIndentedString(objectKey)).append("\n");
-        sb.append("    objectKeyIsReadOnly: ").append(toIndentedString(objectKeyIsReadOnly)).append("\n");
-        sb.append("    userData: ").append(toIndentedString(userData)).append("\n");
-        sb.append("    isPartitioned: ").append(toIndentedString(isPartitioned)).append("\n");
+        super.toString(sb);
+        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    version: ").append(toIndentedString(version)).append("\n");
+        sb.append("    attachmentId: ").append(toIndentedString(attachmentId)).append("\n");
+        sb.append("    datasourceType: ").append(toIndentedString(datasourceType)).append("\n");
+        sb.append("    attachmentType: ").append(toIndentedString(attachmentType)).append("\n");
+        sb.append("    href: ").append(toIndentedString(href)).append("\n");
+        sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+        sb.append("    message: ").append(toIndentedString(message)).append("\n");
+        sb.append("    creatorId: ").append(toIndentedString(creatorId)).append("\n");
+        sb.append("    createTime: ").append(toIndentedString(createTime)).append("\n");
+        sb.append("    size: ").append(toIndentedString(size)).append("\n");
+        sb.append("    isRemote: ").append(toIndentedString(isRemote)).append("\n");
+        sb.append("    isManaged: ").append(toIndentedString(isManaged)).append("\n");
+        sb.append("    isReferenced: ").append(toIndentedString(isReferenced)).append("\n");
+        sb.append("    isObjectKeyReadOnly: ").append(toIndentedString(isObjectKeyReadOnly)).append("\n");
+        sb.append("    isUserProvidedPathKey: ").append(toIndentedString(isUserProvidedPathKey)).append("\n");
+        sb.append("    transferComplete: ").append(toIndentedString(transferComplete)).append("\n");
+        sb.append("    completeTimeTicks: ").append(toIndentedString(completeTimeTicks)).append("\n");
+        sb.append("    handle: ").append(toIndentedString(handle)).append("\n");
+        sb.append("    usage: ").append(toIndentedString(usage)).append("\n");
         sb.append("}");
         return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) { return "null"; }
-        return o.toString().replace("\n", "\n    ");
     }
 
 }
