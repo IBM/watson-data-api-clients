@@ -5,38 +5,600 @@
       "collaborator_ids": {}
     },
     "usage": {
-      "last_updated_at": "2020-07-23T08:40:46Z",
-      "last_updater_id": "1000331004",
-      "last_update_time": 1595493646713,
-      "last_accessed_at": "2020-07-23T08:40:46Z",
-      "last_access_time": 1595493646713,
-      "last_accessor_id": "1000331004",
+      "last_updated_at": "2021-01-26T22:15:07Z",
+      "last_updater_id": "1000330999",
+      "last_update_time": 1611699307638,
+      "last_accessed_at": "2021-01-26T22:15:07Z",
+      "last_access_time": 1611699307638,
+      "last_accessor_id": "1000330999",
       "access_count": 0
     },
-    "name": "Test Asset",
-    "description": "A test asset to validate the API client works as expected.",
-    "tags": [],
-    "asset_type": "test_type",
-    "origin_country": "gb",
+    "name": "CUSTOMER",
+    "description": "",
+    "tags": [
+      "info_asset",
+      "CP4DEMO"
+    ],
+    "asset_type": "data_asset",
+    "origin_country": "us",
     "rating": 0.0,
     "total_ratings": 0,
-    "catalog_id": "0f85f071-7528-4ff9-9db8-ab7c7b0244bf",
-    "created": 1595493646713,
-    "created_at": "2020-07-23T08:40:46Z",
-    "owner_id": "1000331004",
-    "size": 0,
+    "catalog_id": "92b84496-9961-47d8-ab1b-23212ab8a944",
+    "created": 1607516804207,
+    "created_at": "2020-12-09T12:26:44Z",
+    "owner_id": "1000331001",
+    "size": 159322,
     "version": 2.0,
     "asset_state": "available",
     "asset_attributes": [
-      "test_type"
+      "data_asset",
+      "column_info",
+      "data_profile",
+      "asset_terms"
     ],
-    "asset_id": "fdbf3f03-545b-497b-a2ea-3353aaed7dd1",
-    "asset_category": "USER"
+    "asset_id": "91636d5b-b322-4f86-a942-9ffb3b53ea3e",
+    "asset_category": "USER",
+    "source_system": {
+      "creation_timestamp": "2020-12-09T12:26:15Z",
+      "created": 1607516775000,
+      "last_modification_timestamp": "2020-12-09T12:26:15Z",
+      "last_modified": 1607516775000,
+      "asset_identifier": "b1c497ce.54bd3a08.0ij7chrnb.i99cd86.3orge8.meja7j15c2c5j4ujjpead",
+      "source": "OMRS_COHORT_RelationalTable",
+      "source_system_id": "df5ab456-5d64-4e7f-9b93-ab7ad16c63ad"
+    },
+    "child_source_systems": [
+      {
+        "creation_timestamp": "2020-12-09T12:26:15Z",
+        "created": 1607516775000,
+        "last_modification_timestamp": "2020-12-09T12:26:15Z",
+        "last_modified": 1607516775000,
+        "asset_identifier": "b1c497ce.c1fb060b.0ij7chrnb.i9pshth.kjabor.qcn33ukhth87rv8t554dc",
+        "source": "OMRS_COHORT_DeployedDatabaseSchema",
+        "source_system_id": "df5ab456-5d64-4e7f-9b93-ab7ad16c63ad"
+      },
+      {
+        "creation_timestamp": "2020-12-09T12:26:15Z",
+        "created": 1607516775000,
+        "last_modification_timestamp": "2020-12-09T12:26:15Z",
+        "last_modified": 1607516775000,
+        "asset_identifier": "b1c497ce.c1fb060b.0ij7chrnb.i9pshth.kjabor.qcn33ukhth87rv8t554dc#RDST",
+        "source": "OMRS_COHORT_RelationalDBSchemaType",
+        "source_system_id": "df5ab456-5d64-4e7f-9b93-ab7ad16c63ad"
+      }
+    ]
   },
   "entity": {
-    "test_type": {
-      "test_field": "Sample value for the asset's custom field."
+    "data_asset": {
+      "mime_type": "application/octet-stream",
+      "dataset": true,
+      "columns": [
+        {
+          "name": "ID",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9plmb2.45erkb.n788t8ib1df396dv6e350",
+          "position": 1.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 10.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "FNAME",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pi8t4.8h4gu0.20jj7mn5ne6qaa832hr8n",
+          "position": 2.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 30.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "LNAME",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pu2di.ta4r6n.t9r08695ers2eismdd3f2",
+          "position": 3.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 30.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "ADDRESS",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pru18.vj4omr.qhqj9ju19tmhnmn1suq7k",
+          "position": 4.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 200.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "PRIPHONE",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9po404.i1ks9p.qcg8ahghkejv7kmuj1lco",
+          "position": 5.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 12.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "SECPHONE",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pt8op.g015ni.gu55e20cus1dho0rd10hs",
+          "position": 6.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 12.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "EMAIL",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9porun.rc6rh7.qsgsrhehd1dhf325h64ro",
+          "position": 7.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 50.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "EMPLDUR",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9ps2uf.kppjti.u2ehif4lntn8rvrbr87cc",
+          "position": 8.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 10.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "SEX",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pjp0j.kno2d9.t4eqj2aqhi2usds27c01f",
+          "position": 9.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 6.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "RESIDUR",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i99a2q2.rq4bp3.20pfnnjqgc9r9qqckns75",
+          "position": 10.0,
+          "type": {
+            "type": "SMALLINT",
+            "nullable": true,
+            "length": 0.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "OWNSPROP",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9ps6r4.5mvqm1.mh7g0n7upb6aqbdvukd2c",
+          "position": 11.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 17.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "AGE",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i99eoid.mrktrm.3615h8ao9i2ul9a27n11j",
+          "position": 12.0,
+          "type": {
+            "type": "SMALLINT",
+            "nullable": true,
+            "length": 0.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "HOUSING",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pijbn.p9lsa8.emuau55e40g18oqj9puan",
+          "position": 13.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 4.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "JOB",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i99d9lt.u1oi4q.kjpunt2ub0emu1vbska2t",
+          "position": 14.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 24.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "DEPENDNT",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pmi5b.59ufm0.hpfdk3iacc42ht4tvk46g",
+          "position": 15.0,
+          "type": {
+            "type": "SMALLINT",
+            "nullable": true,
+            "length": 0.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        },
+        {
+          "name": "TELEPHON",
+          "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pl06g.hg0qqr.qibh5q96t4clfits2blbv",
+          "position": 16.0,
+          "type": {
+            "type": "VARCHAR",
+            "nullable": true,
+            "length": 4.0,
+            "isUnique": false,
+            "signed": false,
+            "scale": 0.0
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "table_name",
+          "value": "CUSTOMER"
+        },
+        {
+          "name": "schema_name",
+          "value": "CP4DEMO"
+        }
+      ]
+    },
+    "column_info": {
+      "DEPENDNT": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pmi5b.59ufm0.hpfdk3iacc42ht4tvk46g",
+        "column_terms": [
+          {
+            "term_display_name": "Dependents",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_c7430c21-ba50-446b-8311-0b563baedde8",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "EMPLDUR": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9ps2uf.kppjti.u2ehif4lntn8rvrbr87cc",
+        "column_terms": [
+          {
+            "term_display_name": "Employment Duration",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_5e93bbb3-ab5b-43f9-ab14-2857bd83f0b5",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "LNAME": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pu2di.ta4r6n.t9r08695ers2eismdd3f2",
+        "column_terms": [
+          {
+            "term_display_name": "Last Name",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_2acff9f3-0038-42b5-bd54-5e702a770b82",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "SEX": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pjp0j.kno2d9.t4eqj2aqhi2usds27c01f",
+        "column_terms": [
+          {
+            "term_display_name": "Sex",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_da28e084-6412-4199-9eea-e6e47815be0b",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "RESIDUR": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i99a2q2.rq4bp3.20pfnnjqgc9r9qqckns75",
+        "column_terms": [
+          {
+            "term_display_name": "Current Residence Duration",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_972955cc-a494-446f-9d2e-7afc776fc3ce",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "EMAIL": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9porun.rc6rh7.qsgsrhehd1dhf325h64ro",
+        "column_terms": [
+          {
+            "term_display_name": "Email Address",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_93e66cee-36f7-42e2-a4ec-0b76d8f98b2f",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "FNAME": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pi8t4.8h4gu0.20jj7mn5ne6qaa832hr8n",
+        "column_terms": [
+          {
+            "term_display_name": "First Name",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_b5e8bd8b-9717-49ac-b135-37929bcec21f",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "SECPHONE": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pt8op.g015ni.gu55e20cus1dho0rd10hs",
+        "column_terms": [
+          {
+            "term_display_name": "Secondary Phone Number",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_1d26ce00-fcdb-4ee0-bde1-894dd542c8db",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "TELEPHON": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pl06g.hg0qqr.qibh5q96t4clfits2blbv",
+        "column_terms": [
+          {
+            "term_display_name": "Telephone",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_28728be6-25ab-440f-b782-04246357d045",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "ADDRESS": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pru18.vj4omr.qhqj9ju19tmhnmn1suq7k",
+        "column_terms": [
+          {
+            "term_display_name": "Address",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_11b83270-ed7c-4775-8973-d576329eded7",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "HOUSING": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9pijbn.p9lsa8.emuau55e40g18oqj9puan",
+        "column_terms": [
+          {
+            "term_display_name": "Housing",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_8f529f73-b8c9-4233-8ce7-4c0b44611952",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "ID": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9plmb2.45erkb.n788t8ib1df396dv6e350"
+      },
+      "JOB": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i99d9lt.u1oi4q.kjpunt2ub0emu1vbska2t",
+        "column_terms": [
+          {
+            "term_display_name": "Job",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_b40f96e7-b93b-4fa2-b6df-e8dfb7b5370b",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "OWNSPROP": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9ps6r4.5mvqm1.mh7g0n7upb6aqbdvukd2c",
+        "column_terms": [
+          {
+            "term_display_name": "Owns Property",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_ca38c949-2a14-495a-8d8e-99a848ef06ef",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "AGE": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i99eoid.mrktrm.3615h8ao9i2ul9a27n11j",
+        "column_terms": [
+          {
+            "term_display_name": "Age",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_7f87ae23-6fcf-406b-966b-f1f1cd39beb0",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      },
+      "PRIPHONE": {
+        "omrs_guid": "b1c497ce.60641b50.0ij7chrnb.i9po404.i1ks9p.qcg8ahghkejv7kmuj1lco",
+        "column_terms": [
+          {
+            "term_display_name": "Primary Phone Number",
+            "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_1d29d62b-9db0-4ce4-84e0-f8525a7e7f58",
+            "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+          }
+        ]
+      }
+    },
+    "data_profile": {
+      "f4efc9d0-62f7-4600-9175-01bf983dd970": {
+        "metadata": {
+          "guid": "f4efc9d0-62f7-4600-9175-01bf983dd970",
+          "asset_id": "f4efc9d0-62f7-4600-9175-01bf983dd970",
+          "dataset_id": "91636d5b-b322-4f86-a942-9ffb3b53ea3e",
+          "url": "https://internal-nginx-svc:12443/v2/data_profiles/f4efc9d0-62f7-4600-9175-01bf983dd970?catalog_id=92b84496-9961-47d8-ab1b-23212ab8a944&dataset_id=91636d5b-b322-4f86-a942-9ffb3b53ea3e",
+          "catalog_id": "92b84496-9961-47d8-ab1b-23212ab8a944",
+          "created_at": "2020-12-09T12:26:45.842Z",
+          "accessed_at": "2020-12-09T12:26:45.842Z",
+          "owner": "icp4d-dev",
+          "owner_id": "icp4d-dev",
+          "last_updater_id": "icp4d-dev"
+        },
+        "entity": {
+          "data_profile": {
+            "options": {
+              "disable_profiling": false,
+              "max_row_count": 5000.0,
+              "max_distribution_size": 100.0,
+              "max_numeric_stats_bins": 100.0,
+              "max_columns_per_task": 250.0,
+              "max_rows_per_batch": 250.0,
+              "enable_fast_classification": false,
+              "enable_dqa": true,
+              "classification_options": {
+                "disabled": false,
+                "use_all_ibm_classes": true,
+                "use_all_custom_classes": true,
+                "ibm_class_codes": [],
+                "custom_class_codes": []
+              }
+            },
+            "execution": {
+              "status": "finished",
+              "is_supported": true,
+              "dataflow_id": "27dd7a81-d37e-4f98-8452-d43ab82e0b67",
+              "dataflow_run_id": "42e5f476-f9ad-4c02-8544-23050012f014"
+            },
+            "columns": [],
+            "attachment_id": "704347ba-0184-4bdc-84f5-9072992e6c1c"
+          }
+        },
+        "href": "https://internal-nginx-svc:12443/v2/data_profiles/f4efc9d0-62f7-4600-9175-01bf983dd970?catalog_id=92b84496-9961-47d8-ab1b-23212ab8a944&dataset_id=91636d5b-b322-4f86-a942-9ffb3b53ea3e"
+      },
+      "attribute_classes": [
+        "US Phone Number",
+        "City",
+        "Month",
+        "Ethnicity",
+        "Email Address",
+        "US County",
+        "Fortune 1000 Company",
+        "State/Province Name",
+        "US Street Name",
+        "Boolean",
+        "Country Name",
+        "Gender",
+        "Color",
+        "Name Suffix",
+        "Honorific"
+      ],
+      "attribute_classification_manual": [
+        {
+          "name": "HOUSING",
+          "overwritten_class": {
+            "class": {
+              "code": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_3a8af035-6f30-4756-80e9-b418236a9880",
+              "name": "Code"
+            }
+          }
+        }
+      ],
+      "data_classification_manual": [
+        {
+          "id": "303a23e3-d861-4b4b-bd93-e093f84181d0",
+          "name": "Test",
+          "global_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_303a23e3-d861-4b4b-bd93-e093f84181d0"
+        }
+      ]
+    },
+    "asset_terms": {
+      "list": [
+        {
+          "term_display_name": "Customer",
+          "term_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5_f2a436fb-dae4-40e8-9417-3c602234834f",
+          "source_metadata_collection_id": "5d2d5419-0032-4c64-90e2-ce68c6997bb5"
+        }
+      ]
     }
   },
-  "href": "/v2/assets/fdbf3f03-545b-497b-a2ea-3353aaed7dd1?catalog_id=0f85f071-7528-4ff9-9db8-ab7c7b0244bf"
+  "attachments": [
+    {
+      "id": "18d97b03-0c74-4672-b6e1-159e48336b04",
+      "version": 2.0,
+      "asset_type": "data_asset",
+      "name": "CUSTOMER",
+      "description": "",
+      "mime": "application/octet-stream",
+      "connection_id": "68cc3069-6d14-401b-aa64-6f615e543558",
+      "connection_path": "/CP4DEMO/CUSTOMER",
+      "datasource_type": "8c1a4480-1c29-4b33-9086-9cb799d7b157",
+      "creator_id": "icp4d-dev",
+      "create_time": 1607516804667,
+      "size": 0,
+      "is_remote": true,
+      "is_managed": false,
+      "is_referenced": false,
+      "is_object_key_read_only": false,
+      "is_user_provided_path_key": true,
+      "transfer_complete": true,
+      "is_partitioned": false,
+      "complete_time_ticks": 1607516804667,
+      "test_doc": 0,
+      "usage": {
+        "access_count": 0.0,
+        "last_accessor_id": "icp4d-dev",
+        "last_access_time": 1.607516804667E12
+      }
+    },
+    {
+      "id": "704347ba-0184-4bdc-84f5-9072992e6c1c",
+      "version": 2.0,
+      "asset_type": "data_profile",
+      "name": "data_profile_f4efc9d0-62f7-4600-9175-01bf983dd970",
+      "datasource_type": "81bafdbd-b7c6-45c5-a4fd-6ec135f66f4e",
+      "object_key": "data_profile_f4efc9d0-62f7-4600-9175-01bf983dd970",
+      "creator_id": "icp4d-dev",
+      "create_time": 1607516917217,
+      "size": 159322,
+      "is_remote": false,
+      "is_managed": false,
+      "is_referenced": true,
+      "is_object_key_read_only": false,
+      "is_user_provided_path_key": true,
+      "transfer_complete": true,
+      "is_partitioned": false,
+      "complete_time_ticks": 1607516917217,
+      "user_data": {},
+      "test_doc": 0,
+      "handle": {
+        "key": "data_profile_f4efc9d0-62f7-4600-9175-01bf983dd970",
+        "upload_id": "done",
+        "max_part_num": 1
+      },
+      "usage": {
+        "access_count": 0.0,
+        "last_accessor_id": "icp4d-dev",
+        "last_access_time": 1.607516917217E12
+      }
+    }
+  ],
+  "href": "/v2/assets/91636d5b-b322-4f86-a942-9ffb3b53ea3e?catalog_id=92b84496-9961-47d8-ab1b-23212ab8a944"
 }

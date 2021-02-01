@@ -34,16 +34,16 @@ import java.util.Objects;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class DataProfileEntity extends AbstractAssetEntity {
 
-    // TODO: this should be more than just an Object, profiles themselves have a more detailed object...
     @JsonIgnore
-    private Map<String, Object> profiles;
+    private Map<String, DataProfile> profiles;
 
     private List<String> attributeClasses;
-    private List<ClassificationOverride> attributeClassificationManual;
+    private List<AttributeClassificationOverride> attributeClassificationManual;
+    private List<DataClassificationOverride> dataClassificationManual;
 
     @JsonIgnore
-    public Map<String, Object> getProfiles() { return profiles; }
-    public void setProfiles(Map<String, Object> profiles) { this.profiles = profiles; }
+    public Map<String, DataProfile> getProfiles() { return profiles; }
+    public void setProfiles(Map<String, DataProfile> profiles) { this.profiles = profiles; }
 
     @javax.annotation.Nullable
     @JsonProperty("attribute_classes")
@@ -54,8 +54,14 @@ public class DataProfileEntity extends AbstractAssetEntity {
     @javax.annotation.Nullable
     @JsonProperty("attribute_classification_manual")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public List<ClassificationOverride> getAttributeClassificationManual() { return attributeClassificationManual; }
-    public void setAttributeClassificationManual(List<ClassificationOverride> attributeClassificationManual) { this.attributeClassificationManual = attributeClassificationManual; }
+    public List<AttributeClassificationOverride> getAttributeClassificationManual() { return attributeClassificationManual; }
+    public void setAttributeClassificationManual(List<AttributeClassificationOverride> attributeClassificationManual) { this.attributeClassificationManual = attributeClassificationManual; }
+
+    @javax.annotation.Nullable
+    @JsonProperty("data_classification_manual")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<DataClassificationOverride> getDataClassificationManual() { return dataClassificationManual; }
+    public void setDataClassificationManual(List<DataClassificationOverride> dataClassificationManual) { this.dataClassificationManual = dataClassificationManual; }
 
     @Override
     public boolean equals(Object o) {
@@ -64,12 +70,13 @@ public class DataProfileEntity extends AbstractAssetEntity {
         DataProfileEntity that = (DataProfileEntity) o;
         return Objects.equals(profiles, that.profiles) &&
                 Objects.equals(attributeClasses, that.attributeClasses) &&
-                Objects.equals(attributeClassificationManual, that.attributeClassificationManual);
+                Objects.equals(attributeClassificationManual, that.attributeClassificationManual) &&
+                Objects.equals(dataClassificationManual, that.dataClassificationManual);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(profiles, attributeClasses, attributeClassificationManual);
+        return Objects.hash(profiles, attributeClasses, attributeClassificationManual, dataClassificationManual);
     }
 
     @Override
@@ -79,6 +86,7 @@ public class DataProfileEntity extends AbstractAssetEntity {
         sb.append("    profiles: ").append(toIndentedString(profiles)).append("\n");
         sb.append("    attributeClasses: ").append(toIndentedString(attributeClasses)).append("\n");
         sb.append("    attributeClassificationManual: ").append(toIndentedString(attributeClassificationManual)).append("\n");
+        sb.append("    dataClassificationManual: ").append(toIndentedString(dataClassificationManual)).append("\n");
         sb.append("}");
         return sb.toString();
     }
