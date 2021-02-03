@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -35,7 +36,7 @@ public class SearchResultRow {
     private SearchResultCategories categories;
     private List<CustomAttribute> customAttributes = null;
     private SearchResultMetadata metadata;
-    private Object entity;
+    private Map<String, AbstractSearchResultEntity> entity;
 
     public SearchResultRow providerTypeId(String providerTypeId) {
         this.providerTypeId = providerTypeId;
@@ -133,7 +134,7 @@ public class SearchResultRow {
     public SearchResultMetadata getMetadata() { return metadata; }
     public void setMetadata(SearchResultMetadata metadata) { this.metadata = metadata; }
 
-    public SearchResultRow entity(Object entity) {
+    public SearchResultRow entity(Map<String, AbstractSearchResultEntity> entity) {
         this.entity = entity;
         return this;
     }
@@ -141,8 +142,8 @@ public class SearchResultRow {
     @javax.annotation.Nullable
     @JsonProperty("entity")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public Object getEntity() { return entity; }
-    public void setEntity(Object entity) { this.entity = entity; }
+    public Map<String, AbstractSearchResultEntity> getEntity() { return entity; }
+    public void setEntity(Map<String, AbstractSearchResultEntity> entity) { this.entity = entity; }
 
     @Override
     public boolean equals(java.lang.Object o) {

@@ -104,9 +104,37 @@ public class SearchTest extends AbstractExpectations {
         assertNotNull(one.getCustomAttributes());
         assertEquals(one.getCustomAttributes().size(), 0);
         assertEquals(one.getScore(), Double.valueOf(7.5404444));
-        assertNotNull(one.getMetadata());
-        assertNotNull(one.getEntity());
+        validateSearchResultMetadata(one.getMetadata());
+        Map<String, AbstractSearchResultEntity> entityMap = one.getEntity();
+        assertNotNull(entityMap);
+        assertEquals(entityMap.size(), 1);
+        assertTrue(entityMap.containsKey("artifacts"));
+        validateSearchResultEntity(entityMap.get("artifacts"));
         assertNotNull(results.getAggregations());
+    }
+
+    private void validateSearchResultMetadata(SearchResultMetadata metadata) {
+        assertNotNull(metadata);
+        assertNotNull(metadata.getModifiedOn());
+        assertEquals(metadata.getArtifactType(), "policy");
+        assertEquals(metadata.getName(), "Test Policy");
+        assertEquals(metadata.getModifiedBy(), EXSTUSER_GUID);
+        assertEquals(metadata.getDescription(), "Now with a long description.");
+        assertEquals(metadata.getState(), "PUBLISHED");
+        assertNotNull(metadata.getStewardIds());
+        assertTrue(metadata.getStewardIds().isEmpty());
+        assertNotNull(metadata.getTags());
+        assertTrue(metadata.getTags().isEmpty());
+    }
+
+    private void validateSearchResultEntity(AbstractSearchResultEntity entity) {
+        assertNotNull(entity);
+        assertTrue(entity instanceof ArtifactSearchResultEntity);
+        ArtifactSearchResultEntity asre = (ArtifactSearchResultEntity) entity;
+        assertEquals(asre.getGlobalId(), REPOSITORY_ID + "_" + NEW_POLICY_GUID);
+        assertNotNull(asre.getEffectiveStartDate());
+        assertEquals(asre.getVersionId(), "3d297087-3e85-4fb9-bc54-2677a9313884_0");
+        assertEquals(asre.getArtifactId(), NEW_POLICY_GUID);
     }
 
 }
