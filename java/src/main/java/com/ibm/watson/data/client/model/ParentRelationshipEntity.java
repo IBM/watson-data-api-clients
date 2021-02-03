@@ -34,6 +34,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
     private String parentHref;
     private Boolean parentEnabled;
     private String childId;
+    private String childCategoryId;
     private String childGlobalId;
     private String childName;
     private String childHref;
@@ -124,6 +125,17 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
     public String getChildId() { return childId; }
     public void setChildId(String childId) { this.childId = childId; }
 
+    public ParentRelationshipEntity childCategoryId(String childCategoryId) {
+        this.childCategoryId = childCategoryId;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("child_category_id")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getChildCategoryId() { return childCategoryId; }
+    public void setChildCategoryId(String childCategoryId) { this.childCategoryId = childCategoryId; }
+
     public ParentRelationshipEntity childGlobalId(String childGlobalId) {
         this.childGlobalId = childGlobalId;
         return this;
@@ -181,6 +193,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
                 Objects.equals(this.parentHref, parentRelationshipEntity.parentHref) &&
                 Objects.equals(this.parentEnabled, parentRelationshipEntity.parentEnabled) &&
                 Objects.equals(this.childId, parentRelationshipEntity.childId) &&
+                Objects.equals(this.childCategoryId, parentRelationshipEntity.childCategoryId) &&
                 Objects.equals(this.childGlobalId, parentRelationshipEntity.childGlobalId) &&
                 Objects.equals(this.childName, parentRelationshipEntity.childName) &&
                 Objects.equals(this.childHref, parentRelationshipEntity.childHref);
@@ -189,8 +202,8 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), parentId, parentGlobalId, parentName,
-                parentHref, parentEnabled, childId, childGlobalId, childName,
-                childHref);
+                parentHref, parentEnabled, childId, childCategoryId, childGlobalId,
+                childName, childHref);
     }
 
     @Override
@@ -204,6 +217,7 @@ public class ParentRelationshipEntity extends AbstractRelationshipEntity {
         sb.append("    parentHref: ").append(toIndentedString(parentHref)).append("\n");
         sb.append("    parentEnabled: ").append(toIndentedString(parentEnabled)).append("\n");
         sb.append("    childId: ").append(toIndentedString(childId)).append("\n");
+        sb.append("    childCategoryId: ").append(toIndentedString(childCategoryId)).append("\n");
         sb.append("    childGlobalId: ").append(toIndentedString(childGlobalId)).append("\n");
         sb.append("    childName: ").append(toIndentedString(childName)).append("\n");
         sb.append("    childHref: ").append(toIndentedString(childHref)).append("\n");
