@@ -1,0 +1,25 @@
+{
+  "collaborators": [
+    {
+      "category_artifact_id": "a06c6237-32a4-468b-bdfe-9a09ab9bf06b",
+      "category_name": "Test Category",
+      "role": "owner",
+      "principal_id": "1000331001",
+      "id": "2c1a5978-4b74-4d44-b0f7-d8a6f369247c",
+      "dps_rule_id": "4d550e27-7eb1-4170-89e9-cc8e318f3f7d_0001",
+      "user_type": "USER",
+      "create_time": "2020-12-07T10:25:56.342Z"
+    },
+    {
+      "category_artifact_id": "a06c6237-32a4-468b-bdfe-9a09ab9bf06b",
+      "category_name": "Test Category",
+      "role": "viewer",
+      "principal_id": "1000331004",
+      "id": "7626efde-f531-4f34-b854-364e7c7a1af0",
+      "dps_rule_id": "5c1a3b88-842d-485e-ad9a-d26e03da0cd9_0011",
+      "user_type": "USER",
+      "create_time": "2021-01-28T15:17:44.093Z"
+    }
+  ],
+  "total_results": 2
+}

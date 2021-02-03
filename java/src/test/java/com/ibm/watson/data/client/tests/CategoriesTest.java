@@ -20,7 +20,9 @@ import com.ibm.watson.data.client.api.CategoriesApiV3;
 import com.ibm.watson.data.client.mocks.AbstractExpectations;
 import com.ibm.watson.data.client.mocks.MockConstants;
 import com.ibm.watson.data.client.model.*;
+import com.ibm.watson.data.client.model.enums.BootstrapState;
 import com.ibm.watson.data.client.model.enums.GlossaryObjectState;
+import com.ibm.watson.data.client.model.enums.UserType;
 import org.junit.Test;
 import org.mockserver.client.MockServerClient;
 
@@ -44,14 +46,20 @@ public class CategoriesTest extends AbstractExpectations {
     }
 
     private final Map<String, List<String>> categoryParams = new HashMap<>();
+    private final Map<String, List<String>> relationshipParams = new HashMap<>();
     private void setupParams() {
         List<String> categories = new ArrayList<>();
         categories.add(NEW_CATEGORY_ID);
         categoryParams.put("category_id", categories);
+        List<String> relationships = new ArrayList<>();
+        relationships.add("parent_category");
+        relationshipParams.put("type", relationships);
     }
 
     private static final String categoryEndpoint = "/" + NEW_CATEGORY_ID;
     private static final String artifactEndpoint = categoryEndpoint + "/artifacts/" + NEW_TERM_GUID;
+
+    private static final String collaboratorId = "6b86df2d-b611-41c2-9cc6-c6f1e72c94bd";
 
     @Override
     public void init(MockServerClient client) {
@@ -64,6 +72,129 @@ public class CategoriesTest extends AbstractExpectations {
         setupTest(client, "GET", "/hierarchy", "getHierarchyPaths");
         setupTest(client, "GET", "/uncategorized", "getUncategorizedCategory");
         setupTest(client, "PATCH", categoryEndpoint, "update");
+        // v3.5 additions
+        setupTest(client, "POST", "/collaborators/bootstrap", "startBootstrap", 202);
+        setupTest(client, "GET", categoryEndpoint + "/collaborators", "getCollaborators");
+        setupTest(client, "GET", "/collaborators/bootstrap/status", "getBootstrapStatus");
+        setupTest(client, "POST", "/relationships/search", relationshipParams, "findRelationships");
+        setupTest(client, "POST", categoryEndpoint + "/collaborators", "createCollaborator", 201);
+        setupTest(client, "DELETE", categoryEndpoint + "/collaborators/" + collaboratorId, "deleteCollaborator", 204);
+    }
+
+    @Test
+    public void testDeleteCollaborator() {
+        api.deleteCollaborator(NEW_CATEGORY_ID, collaboratorId, null).block();
+    }
+
+    @Test
+    public void testCreateCollaborator() {
+        NewRoleAssignment body = readRequestFromFile("createCollaborator", new TypeReference<NewRoleAssignment>() {});
+        RoleAssignment response = api.createCollaborator(NEW_CATEGORY_ID, body, null).block();
+        assertNotNull(response);
+        assertEquals(response.getCategoryArtifactId(), NEW_CATEGORY_ID);
+        assertEquals(response.getCategoryName(), "Test Category");
+        assertEquals(response.getRole(), "viewer");
+        assertEquals(response.getPrincipalId(), "1000331002");
+        assertEquals(response.getId(), collaboratorId);
+        assertEquals(response.getDpsRuleId(), "d8dca78e-435b-477d-b7f4-637890324b2d_0011");
+        assertEquals(response.getUserType(), UserType.USER);
+        assertNotNull(response.getCreateTime());
+    }
+
+    @Test
+    public void testFindRelationships() {
+        GlossaryResourceList body = readRequestFromFile("findRelationships", new TypeReference<GlossaryResourceList>() {});
+        ArtifactRelationshipsResponse response = api.findRelationships("parent_category", body, null, null, null).block();
+        assertNotNull(response);
+        assertNotNull(response.getArtifacts());
+        assertEquals(response.getArtifacts().size(), 1);
+        ArtifactRelationships ar = response.getArtifacts().get(0);
+        assertEquals(ar.getArtifactId(), "77270aa6-a1c3-4cba-b190-9f5daa9edf43");
+        assertNotNull(ar.getRelationships());
+        assertEquals(ar.getRelationships().size(), 1);
+        assertTrue(ar.getRelationships().containsKey("parent_category"));
+        PaginatedAbstractRelationshipList list = ar.getRelationships().get("parent_category");
+        assertNotNull(list);
+        assertEquals(list.getOffset(), Integer.valueOf(0));
+        assertNotNull(list.getLast());
+        assertNotNull(list.getLast().getHref());
+        assertNotNull(list.getResources());
+        assertEquals(list.getResources().size(), 1);
+        AbstractRelationship one = list.getResources().get(0);
+        assertNotNull(one.getMetadata());
+        assertEquals(one.getMetadata().getArtifactType(), "relationship");
+        assertEquals(one.getMetadata().getArtifactId(), "0b9123ed-2b22-4f30-a382-47d1e62803b0");
+        assertEquals(one.getMetadata().getVersionId(), "0e762683-c717-4362-953e-aa6b235cc401_0");
+        assertEquals(one.getMetadata().getSourceRepositoryId(), REPOSITORY_ID);
+        assertEquals(one.getMetadata().getGlobalId(), REPOSITORY_ID + "_0b9123ed-2b22-4f30-a382-47d1e62803b0");
+        assertEquals(one.getMetadata().getCreatedBy(), "1000331001");
+        assertNotNull(one.getMetadata().getCreatedAt());
+        assertEquals(one.getMetadata().getModifiedBy(), "1000331001");
+        assertNotNull(one.getMetadata().getModifiedAt());
+        assertEquals(one.getMetadata().getRevision(), "0");
+        assertEquals(one.getMetadata().getState(), GlossaryObjectState.PUBLISHED);
+        assertFalse(one.getMetadata().getReadOnly());
+        assertFalse(one.getMetadata().getRemoveStartDate());
+        assertFalse(one.getMetadata().getRemoveEndDate());
+        assertTrue(one.getMetadata().getUserAccess());
+        AbstractRelationshipEntity entity = one.getEntity();
+        assertTrue(entity instanceof ParentRelationshipEntity);
+        ParentRelationshipEntity pre = (ParentRelationshipEntity) entity;
+        assertEquals(pre.getParentId(), "7a75da89-be07-44fc-9a3d-103ac6e1cd18");
+        assertEquals(pre.getParentName(), "Samples");
+        assertTrue(pre.getParentEnabled());
+        assertEquals(pre.getChildId(), "77270aa6-a1c3-4cba-b190-9f5daa9edf43");
+        assertEquals(pre.getChildCategoryId(), "7a75da89-be07-44fc-9a3d-103ac6e1cd18");
+        assertEquals(pre.getChildName(), "Banking");
+        assertEquals(pre.getRelationshipType(), "parent_category");
+        assertEquals(pre.getSourceType(), "category");
+        assertEquals(pre.getTargetType(), "category");
+        assertEquals(list.getLimit(), Integer.valueOf(10));
+        assertEquals(list.getCount(), Long.valueOf(1));
+        assertNotNull(list.getFirst());
+        assertNotNull(list.getFirst().getHref());
+    }
+
+    @Test
+    public void testGetBootstrapStatus() {
+        BootstrapStatus response = api.getBootstrapStatus(null).block();
+        assertNotNull(response);
+        assertEquals(response.getStatus(), BootstrapState.SUCCEEDED);
+        assertEquals(response.getCompletionMessage(), "Bootstrap process completed");
+        assertEquals(response.getCompletedRecords(), Integer.valueOf(3));
+        assertEquals(response.getTotalRecords(), Integer.valueOf(3));
+    }
+
+    @Test
+    public void testGetCollaborators() {
+        RoleAssignmentResponse response = api.getCollaborators(NEW_CATEGORY_ID, null, null, null).block();
+        assertNotNull(response);
+        assertEquals(response.getTotalResults(), Integer.valueOf(2));
+        assertNotNull(response.getCollaborators());
+        assertEquals(response.getCollaborators().size(), 2);
+        RoleAssignment one = response.getCollaborators().get(0);
+        assertEquals(one.getCategoryArtifactId(), NEW_CATEGORY_ID);
+        assertEquals(one.getCategoryName(), "Test Category");
+        assertEquals(one.getRole(), "owner");
+        assertEquals(one.getPrincipalId(), "1000331001");
+        assertEquals(one.getId(), "2c1a5978-4b74-4d44-b0f7-d8a6f369247c");
+        assertEquals(one.getDpsRuleId(), "4d550e27-7eb1-4170-89e9-cc8e318f3f7d_0001");
+        assertEquals(one.getUserType(), UserType.USER);
+        assertNotNull(one.getCreateTime());
+        one = response.getCollaborators().get(1);
+        assertEquals(one.getCategoryArtifactId(), NEW_CATEGORY_ID);
+        assertEquals(one.getCategoryName(), "Test Category");
+        assertEquals(one.getRole(), "viewer");
+        assertEquals(one.getPrincipalId(), EXSTUSER_GUID);
+        assertEquals(one.getId(), "7626efde-f531-4f34-b854-364e7c7a1af0");
+        assertEquals(one.getDpsRuleId(), "5c1a3b88-842d-485e-ad9a-d26e03da0cd9_0011");
+        assertEquals(one.getUserType(), UserType.USER);
+        assertNotNull(one.getCreateTime());
+    }
+
+    @Test
+    public void testStartBootstrap() {
+        api.startBoostrap(null).block();
     }
 
     @Test

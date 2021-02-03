@@ -56,6 +56,7 @@ public class GlossaryObjectMetadata {
     private Boolean readOnly;
     private Boolean removeStartDate;
     private Boolean removeEndDate;
+    private Boolean userAccess;
 
     public GlossaryObjectMetadata artifactType(String artifactType) {
         this.artifactType = artifactType;
@@ -467,6 +468,21 @@ public class GlossaryObjectMetadata {
     public Boolean getRemoveEndDate() { return removeEndDate; }
     public void setRemoveEndDate(Boolean removeEndDate) { this.removeEndDate = removeEndDate; }
 
+    public GlossaryObjectMetadata userAccess(Boolean userAccess) {
+        this.userAccess = userAccess;
+        return this;
+    }
+
+    /**
+     * Get userAccess
+     * @return userAccess
+     **/
+    @javax.annotation.Nullable
+    @JsonProperty("user_access")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getUserAccess() { return userAccess; }
+    public void setUserAccess(Boolean userAccess) { this.userAccess = userAccess; }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) { return true; }
@@ -497,7 +513,8 @@ public class GlossaryObjectMetadata {
                 Objects.equals(this.workflowState, glossaryObjectMetadata.workflowState) &&
                 Objects.equals(this.readOnly, glossaryObjectMetadata.readOnly) &&
                 Objects.equals(this.removeStartDate, glossaryObjectMetadata.removeStartDate) &&
-                Objects.equals(this.removeEndDate, glossaryObjectMetadata.removeEndDate);
+                Objects.equals(this.removeEndDate, glossaryObjectMetadata.removeEndDate) &&
+                Objects.equals(this.userAccess, glossaryObjectMetadata.userAccess);
     }
 
     @Override
@@ -507,7 +524,7 @@ public class GlossaryObjectMetadata {
                 globalId, workflowId, draftMode, publishedAncestorId, draftAncestorId,
                 effectiveStartDate, effectiveEndDate, createdBy, createdAt, modifiedBy,
                 modifiedAt, revision, name, shortDescription, state, tags, stewardIds,
-                workflowState, readOnly, removeStartDate, removeEndDate);
+                workflowState, readOnly, removeStartDate, removeEndDate, userAccess);
     }
 
     @Override
@@ -540,6 +557,7 @@ public class GlossaryObjectMetadata {
         sb.append("    readOnly: ").append(toIndentedString(readOnly)).append("\n");
         sb.append("    removeStartDate: ").append(toIndentedString(removeStartDate)).append("\n");
         sb.append("    removeEndDate: ").append(toIndentedString(removeEndDate)).append("\n");
+        sb.append("    userAccess: ").append(toIndentedString(userAccess)).append("\n");
         sb.append("}");
         return sb.toString();
     }

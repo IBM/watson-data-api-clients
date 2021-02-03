@@ -134,6 +134,46 @@ public class CategoriesApiV3 {
     }
 
     /**
+     * Creates single collaborator for given category.
+     * To create collaborator one needs to provide id of the collaborating user and the name
+     * of the role she will be permitted. Collaborator is effective for given category and whole
+     * tree of its subcategories.
+     * @param categoryId The artifact ID or the global ID of a category
+     * @param newRoleAssignment Collaborator's data: user id and assigned role.
+     * @param runAsTenant Runs the operation as a different tenant.  Requires the FunctionalUser role.  Format: accountId[:userId]
+     * @return RoleAssignment
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public Mono<RoleAssignment> createCollaborator(@NonNull String categoryId,
+                                                   @NonNull NewRoleAssignment newRoleAssignment,
+                                                   String runAsTenant) throws RestClientException {
+
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<>();
+
+        pathParams.put("category_id", categoryId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
+
+        if (runAsTenant != null)
+            headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
+        final String[] localVarAccepts = { "application/json" };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { "application/json" };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        ParameterizedTypeReference<RoleAssignment> localVarReturnType = new ParameterizedTypeReference<RoleAssignment>() {};
+        return apiClient.invokeAPI(
+                BASE_API + "/{category_id}/collaborators", HttpMethod.POST, pathParams, queryParams,
+                newRoleAssignment, headerParams, cookieParams, formParams, localVarAccept,
+                localVarContentType, localVarReturnType);
+
+    }
+
+    /**
      * Removes an artifact from its secondary category.
      * It can be used to remove a secondary category assignment for an artifact.
      * It does not allow to remove an artifact from a primary category as a
@@ -217,6 +257,122 @@ public class CategoriesApiV3 {
     }
 
     /**
+     * Deletes single collaborator.
+     * Collaborator represents single user together with single role that gives her certain
+     * privileges in context of given category.
+     * @param categoryId The artifact ID or the global ID of a category
+     * @param collaboratorId The id of the collaborator.
+     * @param runAsTenant Runs the operation as a different tenant.  Requires the FunctionalUser role.  Format: accountId[:userId]
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public Mono<Void> deleteCollaborator(@NonNull String categoryId,
+                                         @NonNull String collaboratorId,
+                                         String runAsTenant) throws RestClientException {
+
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<>();
+
+        pathParams.put("category_id", categoryId);
+        pathParams.put("collaborator_id", collaboratorId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
+
+        if (runAsTenant != null)
+            headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
+        final String[] localVarAccepts = { "application/json" };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        ParameterizedTypeReference<Void> localVarReturnType = new ParameterizedTypeReference<Void>() {};
+        return apiClient.invokeAPI(
+                BASE_API + "/{category_id}/collaborators/{collaborator_id}", HttpMethod.DELETE, pathParams, queryParams,
+                null, headerParams, cookieParams, formParams, localVarAccept,
+                localVarContentType, localVarReturnType);
+
+    }
+
+    /**
+     * Retrieve the relationships for the specified artifacts.
+     * If the result set is larger than the <code>limit</code> parameter, it returns the first
+     * <code>limit</code> number of relationships. To retrieve the next set of relationships,
+     * call the method again by using the URI in <code>PaginatedRelationshipsList.next</code> returned
+     * by this method.
+     * @param type Comma separated list of relationship types. Allowed values of relationship types are <code>parent_category</code>
+     * @param glossaryResourceList The list of artifact IDs.
+     * @param runAsTenant Runs the operation as a different tenant.  Requires the FunctionalUser role.  Format: accountId[:userId]
+     * @param allParents If this parameter is set, then all ancestors in the hierarchy are returned. You can use this parameter to build complete ancestor path.
+     * @param limit The maximum number of relationship to return - must be at least 1 and cannot exceed 200. The default value is 10.
+     * @return ArtifactRelationshipsResponse
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public Mono<ArtifactRelationshipsResponse> findRelationships(@NonNull String type,
+                                                                 @NonNull GlossaryResourceList glossaryResourceList,
+                                                                 String runAsTenant,
+                                                                 Boolean allParents,
+                                                                 String limit) throws RestClientException {
+
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<>();
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "type", type));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "all_parents", allParents));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "limit", limit));
+
+        if (runAsTenant != null)
+            headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
+        final String[] localVarAccepts = { "application/json" };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { "application/json" };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        ParameterizedTypeReference<ArtifactRelationshipsResponse> localVarReturnType = new ParameterizedTypeReference<ArtifactRelationshipsResponse>() {};
+        return apiClient.invokeAPI(
+                BASE_API + "/relationships/search", HttpMethod.POST, pathParams, queryParams,
+                glossaryResourceList, headerParams, cookieParams, formParams, localVarAccept,
+                localVarContentType, localVarReturnType);
+    }
+
+    /**
+     * Get status of category bootstrap process.
+     * @param runAsTenant Runs the operation as a different tenant.  Requires the FunctionalUser role.  Format: accountId[:userId]
+     * @return BootstrapStatus
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public Mono<BootstrapStatus> getBootstrapStatus(String runAsTenant) throws RestClientException {
+
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<>();
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
+
+        if (runAsTenant != null)
+            headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
+        final String[] localVarAccepts = { "application/json" };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        ParameterizedTypeReference<BootstrapStatus> localVarReturnType = new ParameterizedTypeReference<BootstrapStatus>() {};
+        return apiClient.invokeAPI(
+                BASE_API + "/collaborators/bootstrap/status", HttpMethod.GET, pathParams, queryParams,
+                null, headerParams, cookieParams, formParams, localVarAccept,
+                localVarContentType, localVarReturnType);
+
+    }
+
+    /**
      * Retrieves category with given guid.
      * This method can be used for retrieving details of a category.
      * @param guid Artifact ID or global ID of the artifact
@@ -228,6 +384,23 @@ public class CategoriesApiV3 {
      */
     public Mono<Category> get(@NonNull String guid,
                               String runAsTenant) throws RestClientException {
+        return get(guid, runAsTenant, false);
+    }
+
+    /**
+     * Retrieves category with given guid.
+     * This method can be used for retrieving details of a category.
+     * @param guid Artifact ID or global ID of the artifact
+     * @param runAsTenant Runs the operation as a different tenant.  Requires the
+     *     FunctionalUser role.  Format: accountId[:userId]
+     * @param includeRelationships When set to true fetch all category relationships user has access to
+     * @return Category
+     * @throws RestClientException if an error occurs while attempting to invoke
+     *     the API
+     */
+    public Mono<Category> get(@NonNull String guid,
+                              String runAsTenant,
+                              boolean includeRelationships) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -239,6 +412,8 @@ public class CategoriesApiV3 {
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
 
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_relationships", includeRelationships));
+
         if (runAsTenant != null)
             headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
         final String[] localVarAccepts = {"application/json"};
@@ -249,6 +424,50 @@ public class CategoriesApiV3 {
         ParameterizedTypeReference<Category> localVarReturnType = new ParameterizedTypeReference<Category>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/{guid}", HttpMethod.GET, pathParams, queryParams,
+                null, headerParams, cookieParams, formParams, localVarAccept,
+                localVarContentType, localVarReturnType);
+
+    }
+
+    /**
+     * Retrieves collaborators for given artifact id of a category.
+     * Single collaborator is an users with assigned roles in context of given category.
+     * A role comes with rights to access the category, its sub-categories and artifacts and potential responsibilities.
+     * @param categoryId The artifact ID or the global ID of a category
+     * @param runAsTenant Runs the operation as a different tenant.  Requires the FunctionalUser role.  Format: accountId[:userId]
+     * @param includeInherited If this parameter is true, the returned list contains collaborators not only for given category, but also for all parent categories, up to root category.
+     * @param role If set then the returned list will be reduced to collaborators with given role only.
+     * @return RoleAssignmentResponse
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public Mono<RoleAssignmentResponse> getCollaborators(@NonNull String categoryId,
+                                                         String runAsTenant,
+                                                         Boolean includeInherited,
+                                                         String role) throws RestClientException {
+
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<>();
+
+        pathParams.put("category_id", categoryId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_inherited", includeInherited));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "role", role));
+
+        if (runAsTenant != null)
+            headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
+        final String[] localVarAccepts = { "application/json" };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        ParameterizedTypeReference<RoleAssignmentResponse> localVarReturnType = new ParameterizedTypeReference<RoleAssignmentResponse>() {};
+        return apiClient.invokeAPI(
+                BASE_API + "/{category_id}/collaborators", HttpMethod.GET, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 
@@ -323,6 +542,37 @@ public class CategoriesApiV3 {
         ParameterizedTypeReference<Category> localVarReturnType = new ParameterizedTypeReference<Category>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/uncategorized", HttpMethod.GET, pathParams, queryParams,
+                null, headerParams, cookieParams, formParams, localVarAccept,
+                localVarContentType, localVarReturnType);
+
+    }
+
+    /**
+     * Start category boostrap process.
+     * Assigns default owners and view permissions for root categories without any role assignments set.
+     * @param runAsTenant Runs the operation as a different tenant.  Requires the FunctionalUser role.  Format: accountId[:userId]
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public Mono<Void> startBoostrap(String runAsTenant) throws RestClientException {
+
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<>();
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
+
+        if (runAsTenant != null)
+            headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
+        final String[] localVarAccepts = {"application/json"};
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        ParameterizedTypeReference<Void> localVarReturnType = new ParameterizedTypeReference<Void>() {};
+        return apiClient.invokeAPI(
+                BASE_API + "/collaborators/bootstrap", HttpMethod.POST, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 
