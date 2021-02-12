@@ -400,7 +400,7 @@ public class CategoriesApiV3 {
      */
     public Mono<Category> get(@NonNull String guid,
                               String runAsTenant,
-                              boolean includeRelationships) throws RestClientException {
+                              Boolean includeRelationships) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -412,7 +412,9 @@ public class CategoriesApiV3 {
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
 
-        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_relationships", includeRelationships));
+        if (includeRelationships != null) {
+            queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_relationships", includeRelationships));
+        }
 
         if (runAsTenant != null)
             headerParams.add("Run-As-Tenant", apiClient.parameterToString(runAsTenant));
