@@ -1,0 +1,6 @@
+{
+  "code": 409,
+  "error": "Conflict",
+  "reason": "Root directory already exists",
+  "message": "The action will not be processed due to a conflict."
+}

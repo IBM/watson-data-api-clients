@@ -1,0 +1,12 @@
+{
+  "resources": [
+    {
+      "path": "data_asset/names.csv",
+      "etag": "W/\"5d-1739ee10a26\"",
+      "size": 93,
+      "last_modifed": "Thu, 30 Jul 2020 08:40:15 GMT",
+      "type": "file",
+      "mime_type": "text/csv"
+    }
+  ]
+}

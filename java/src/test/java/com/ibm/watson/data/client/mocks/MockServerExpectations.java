@@ -32,8 +32,8 @@ public class MockServerExpectations implements PluginExpectationInitializer {
     public void initializeExpectations(MockServerClient mockServerClient) {
 
         new AccountManagementTest().init(mockServerClient);
-        //new AssetAttachmentsTest().init(mockServerClient);
-        //new AssetFilesTest().init(mockServerClient);
+        new AssetAttachmentsTest().init(mockServerClient);
+        new AssetFilesTest().init(mockServerClient);
         new AssetsTest().init(mockServerClient);
         new AssetTrashTest().init(mockServerClient);
         new AssetTypesTest().init(mockServerClient);
