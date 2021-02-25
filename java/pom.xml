@@ -21,7 +21,7 @@
     <artifactId>watson-data-api-client</artifactId>
     <packaging>jar</packaging>
     <name>watson-data-api-client</name>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.5</version>
     <url>https://github.com/IBM/watson-data-api-clients/java</url>
     <description>IBM Watson Data API Java Client</description>
     <scm>
