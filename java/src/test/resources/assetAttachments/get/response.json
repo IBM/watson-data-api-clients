@@ -1,0 +1,21 @@
+{
+  "attachment_id": "704347ba-0184-4bdc-84f5-9072992e6c1c",
+  "asset_type": "data_profile",
+  "is_partitioned": false,
+  "name": "data_profile_f4efc9d0-62f7-4600-9175-01bf983dd970",
+  "created_at": "2020-12-09T12:28:37Z",
+  "object_key": "data_profile_f4efc9d0-62f7-4600-9175-01bf983dd970",
+  "object_key_is_read_only": false,
+  "datasource_type": "81bafdbd-b7c6-45c5-a4fd-6ec135f66f4e",
+  "url": "/v2/asset_files/data_profile_f4efc9d0-62f7-4600-9175-01bf983dd970?catalog_id=92b84496-9961-47d8-ab1b-23212ab8a944&signature=Iw73yIrfibfNgf1SRhLdLQ%3D%3D%3ARgvG4Fisnb3SeCoZ5zjd6ItDkgTxzHa0AUDKM9H%2FI8UF82bus%2BMvnHs4PQIYx%2Brwckjf5CRZYYDjCPwiBn%2FUPLd0Z%2FBqeC7MSuAhL6cj8w71hX3iHsN93o5cyv%2BNiMC6B2%2F%2BrorXBYFDIbvjriW2DPIbCYPI26TMOvz8VtZKKZhPQItkiZV0ayxuGvezoHM2UaxDVJ5nYuW2dnvGxDAML2zxpywak4rxb7nnTcJJS9x7b9RIg00L9ph%2FxiALe%2BCbsquF0QuKh%2F3N1WM4usalW27SzrcIV%2BySzjbK4wida4lsGaKPevlcDxToi788azNBKTeSsI1fquU%3D",
+  "transfer_complete": true,
+  "size": 159322,
+  "user_data": {},
+  "creator_id": "icp4d-dev",
+  "usage": {
+    "access_count": 1,
+    "last_accessor_id": "1000331004",
+    "last_access_time": 1614185157962
+  },
+  "href": "/v2/assets/ec9f4f72-5af0-476e-a69c-3124a06fb6eb/attachments/704347ba-0184-4bdc-84f5-9072992e6c1c?catalog_id=92b84496-9961-47d8-ab1b-23212ab8a944"
+}

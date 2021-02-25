@@ -1,0 +1,15 @@
+{
+  "attachment_id": "4b79803f-e352-4eb6-843d-ec03421598d4",
+  "datasource_type": "193a97c1-4475-4a19-b90c-295c4fdc6517",
+  "asset_type": "data_asset",
+  "attachment_type": "remote",
+  "is_partitioned": false,
+  "name": "test_file.csv",
+  "description": "remote",
+  "mime": "text/csv",
+  "connection_id": "8cfc5370-355f-41ae-afd8-191e173e5695",
+  "connection_path": "/test_bucket/test_file.csv",
+  "user_data": {},
+  "href": "/v2/assets/3b31d275-bd17-4b02-8145-b40e1b97cabf/attachments/4b79803f-e352-4eb6-843d-ec03421598d4?project_id=f0bd7b72-f690-4b65-9edb-7a430fa658d9",
+  "asset_category": "USER"
+}

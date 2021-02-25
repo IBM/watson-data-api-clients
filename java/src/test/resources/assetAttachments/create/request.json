@@ -1,0 +1,10 @@
+{
+  "asset_type": "data_asset",
+  "name": "test_file.csv",
+  "description": "remote",
+  "mime": "text/csv",
+  "connection_id": "8cfc5370-355f-41ae-afd8-191e173e5695",
+  "connection_path": "/test_bucket/test_file.csv",
+  "object_key_is_read_only": false,
+  "is_partitioned": false
+}

@@ -15,6 +15,7 @@
  */
 package com.ibm.watson.data.client;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.watson.data.client.api.AuthorizationApi;
@@ -22,7 +23,10 @@ import com.ibm.watson.data.client.auth.Authentication;
 import com.ibm.watson.data.client.auth.HttpBearerAuth;
 
 import java.io.*;
+import java.net.URI;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.security.cert.X509Certificate;
@@ -41,6 +45,8 @@ import org.apache.commons.logging.LogFactory;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.*;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ClientHttpRequest;
@@ -90,8 +96,7 @@ public class ApiClient {
     }
 
     private final HttpHeaders defaultHeaders = new HttpHeaders();
-    private final MultiValueMap<String, String> defaultCookies =
-            new LinkedMultiValueMap<>();
+    private final MultiValueMap<String, String> defaultCookies = new LinkedMultiValueMap<>();
 
     private String basePath = "http://localhost";
 
@@ -104,6 +109,8 @@ public class ApiClient {
     private String apiKey;
 
     private Authentication authentication;
+
+    private final ObjectMapper mapper;
 
     /**
      * Constructs a base ApiClient
@@ -119,7 +126,7 @@ public class ApiClient {
      * @param bufferSizeInMb maximum size of buffer to allow for WebClient
      */
     public ApiClient(boolean disableSSLVerification, int bufferSizeInMb) {
-        ObjectMapper mapper = new ObjectMapper();
+        mapper = new ObjectMapper();
         mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -240,6 +247,36 @@ public class ApiClient {
         this.password = password;
         setBearerFromUsernameAndPassword();
         return this;
+    }
+
+    /**
+     * Save the contents of a DataBuffer into a file using the path provided.
+     * @param path of the file to write
+     * @param contents that should be written to the file
+     * @return Path that was written, or null if no file was written
+     */
+    public static Path saveBufferAsFile(String path, Mono<DataBuffer> contents) {
+        final Path location = FileSystems.getDefault().getPath(path);
+        DataBufferUtils.write(contents, location).block();
+        return location;
+    }
+
+    /**
+     * Retrieve the contents of a DataBuffer as an object of the specified type.
+     * Note: there is the potential for this to consume a very large amount of memory, depending on the size
+     * of the data buffer (object) being translated.
+     * @param contents that should be transformed into an object
+     * @param type of object into which to transform
+     * @param <T> of object into which to transform
+     * @return an object of the requested type
+     * @throws IOException if there is any problem during the transformation
+     */
+    public <T> T getBufferAsObject(Mono<DataBuffer> contents, TypeReference<T> type) throws IOException {
+        DataBuffer buffer = contents.block();
+        if (buffer != null) {
+            return mapper.readValue(buffer.asInputStream(true), type);
+        }
+        return null;
     }
 
     private void setBearerFromUsernameAndPassword() {
@@ -487,9 +524,39 @@ public class ApiClient {
             HttpHeaders headerParams, MultiValueMap<String, String> cookieParams,
             MultiValueMap<String, Object> formParams, List<MediaType> accept,
             MediaType contentType, ParameterizedTypeReference<T> returnType) throws RestClientException {
+        return invokeAPI(path, method, pathParams, queryParams, body,
+                headerParams, cookieParams, formParams, accept, contentType,
+                returnType, false);
+    }
+
+    /**
+     * Invoke API by sending HTTP request with the given options.
+     *
+     * @param <T> the return type to use
+     * @param path The sub-path of the HTTP URL
+     * @param method The request method
+     * @param pathParams The path parameters
+     * @param queryParams The query parameters
+     * @param body The request body object
+     * @param headerParams The header parameters
+     * @param cookieParams The cookie parameters
+     * @param formParams The form parameters
+     * @param accept The request's Accept header
+     * @param contentType The request's Content-Type header
+     * @param returnType The return type into which to deserialize the response
+     * @param encoded true if the parameters are already URL-encoded, false (default) otherwise
+     * @return The response body in chosen type
+     */
+    public <T> Mono<T> invokeAPI(
+            String path, HttpMethod method, Map<String, Object> pathParams,
+            MultiValueMap<String, String> queryParams, Object body,
+            HttpHeaders headerParams, MultiValueMap<String, String> cookieParams,
+            MultiValueMap<String, Object> formParams, List<MediaType> accept,
+            MediaType contentType, ParameterizedTypeReference<T> returnType,
+            boolean encoded) throws RestClientException {
         final WebClient.RequestBodySpec requestBuilder = prepareRequest(
                 path, method, pathParams, queryParams, body, headerParams, cookieParams,
-                formParams, accept, contentType);
+                formParams, accept, contentType, encoded);
         return requestBuilder.retrieve().bodyToMono(returnType);
     }
 
@@ -645,6 +712,16 @@ public class ApiClient {
             HttpHeaders headerParams, MultiValueMap<String, String> cookieParams,
             MultiValueMap<String, Object> formParams, List<MediaType> accept,
             MediaType contentType) {
+        return prepareRequest(path, method, pathParams, queryParams, body,
+                headerParams, cookieParams, formParams, accept, contentType, false);
+    }
+
+    private WebClient.RequestBodySpec prepareRequest(
+            String path, HttpMethod method, Map<String, Object> pathParams,
+            MultiValueMap<String, String> queryParams, Object body,
+            HttpHeaders headerParams, MultiValueMap<String, String> cookieParams,
+            MultiValueMap<String, Object> formParams, List<MediaType> accept,
+            MediaType contentType, boolean encoded) {
         updateParamsForAuth(queryParams, headerParams, cookieParams);
 
         final UriComponentsBuilder builder =
@@ -653,9 +730,18 @@ public class ApiClient {
             builder.queryParams(queryParams);
         }
 
-        final WebClient.RequestBodySpec requestBuilder =
-                webClient.method(method).uri(builder.build(false).toUriString(),
-                        pathParams);
+        // Spring / URL encoding handling is an absolute nightmare -- just expecting anyone that passes through
+        // already-encoded query parameters to have already done their own replacement of any path parameters, as
+        // mixing the two basically appears to be impossible without writing your own string parsing logic.
+        WebClient.RequestBodySpec requestBuilder;
+        if (encoded) {
+            URI uri = builder.build(true).toUri();
+            requestBuilder = webClient.method(method).uri(uri);
+        } else {
+            String uri = builder.build(false).toUriString();
+            requestBuilder = webClient.method(method).uri(uri, pathParams);
+        }
+
         if (accept != null) {
             requestBuilder.accept(accept.toArray(new MediaType[accept.size()]));
         }

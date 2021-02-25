@@ -1,0 +1,9 @@
+{
+  "trace": "5dmsn9jvc4eb7dt1jroa8d9ow",
+  "errors": [
+    {
+      "code": "unable_to_perform",
+      "message": "ATTSV3041E: Referenced or remote attachment -- transfer complete or resource operations are not applicable:  catalogId '2ea819ce-95b5-4e11-8d46-dd1ba8865f14' assetId '3b31d275-bd17-4b02-8145-b40e1b97cabf' attachmentId '4b79803f-e352-4eb6-843d-ec03421598d4'"
+    }
+  ]
+}
