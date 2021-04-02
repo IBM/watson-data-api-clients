@@ -57,7 +57,7 @@
         <reactor-version>3.4.3</reactor-version>
         <reactor-netty-version>1.0.4</reactor-netty-version>
         <reactor-netty-ipc-version>0.7.15.RELEASE</reactor-netty-ipc-version>
-        <netty-version>4.1.59.Final</netty-version>
+        <netty-version>4.1.63.Final</netty-version>
         <testng.version>7.3.0</testng.version>
         <mock-server.version>5.11.2</mock-server.version>
     </properties>
