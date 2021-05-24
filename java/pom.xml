@@ -48,16 +48,16 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-web-version>5.3.4</spring-web-version>
-        <jackson-version>2.12.1</jackson-version>
-        <jackson-databind-version>2.12.1</jackson-databind-version>
+        <spring-web-version>5.3.7</spring-web-version>
+        <jackson-version>2.12.3</jackson-version>
+        <jackson-databind-version>2.12.3</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.1</jackson-databind-nullable-version>
         <junit-version>4.13.2</junit-version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <reactor-version>3.4.3</reactor-version>
-        <reactor-netty-version>1.0.4</reactor-netty-version>
+        <reactor-version>3.4.6</reactor-version>
+        <reactor-netty-version>1.0.7</reactor-netty-version>
         <reactor-netty-ipc-version>0.7.15.RELEASE</reactor-netty-ipc-version>
-        <netty-version>4.1.59.Final</netty-version>
+        <netty-version>4.1.65.Final</netty-version>
         <testng.version>7.3.0</testng.version>
         <mock-server.version>5.11.2</mock-server.version>
     </properties>
@@ -158,7 +158,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -185,7 +185,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
