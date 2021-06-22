@@ -55,7 +55,7 @@
         <junit-version>4.13.2</junit-version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
         <reactor-version>3.4.6</reactor-version>
-        <reactor-netty-version>1.0.7</reactor-netty-version>
+        <reactor-netty-version>1.0.8</reactor-netty-version>
         <reactor-netty-ipc-version>0.7.15.RELEASE</reactor-netty-ipc-version>
         <netty-version>4.1.65.Final</netty-version>
         <testng.version>7.4.0</testng.version>
