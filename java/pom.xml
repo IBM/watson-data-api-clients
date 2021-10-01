@@ -50,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-web-version>5.3.7</spring-web-version>
         <jackson-version>2.12.3</jackson-version>
-        <jackson-databind-version>2.12.3</jackson-databind-version>
+        <jackson-databind-version>2.13.0</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.1</jackson-databind-nullable-version>
         <junit-version>4.13.2</junit-version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
