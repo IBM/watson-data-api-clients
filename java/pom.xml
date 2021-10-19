@@ -48,16 +48,15 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-web-version>5.3.7</spring-web-version>
-        <jackson-version>2.12.3</jackson-version>
-        <jackson-databind-version>2.12.3</jackson-databind-version>
+        <spring-web-version>5.3.11</spring-web-version>
+        <jackson-version>2.13.0</jackson-version>
+        <jackson-databind-version>2.13.0</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.1</jackson-databind-nullable-version>
         <junit-version>4.13.2</junit-version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <reactor-version>3.4.6</reactor-version>
-        <reactor-netty-version>1.0.7</reactor-netty-version>
-        <reactor-netty-ipc-version>0.7.15.RELEASE</reactor-netty-ipc-version>
-        <netty-version>4.1.65.Final</netty-version>
+        <reactor-version>3.4.11</reactor-version>
+        <reactor-netty-version>1.0.12</reactor-netty-version>
+        <netty-version>4.1.69.Final</netty-version>
         <testng.version>7.4.0</testng.version>
         <mock-server.version>5.11.2</mock-server.version>
     </properties>
@@ -71,6 +70,13 @@
             <version>3.0.2</version>
         </dependency>
 
+        <!-- @Generated annotation -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
@@ -82,12 +88,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webflux</artifactId>
             <version>${spring-web-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.projectreactor.ipc</groupId>
-            <artifactId>reactor-netty</artifactId>
-            <version>${reactor-netty-ipc-version}</version>
         </dependency>
 
         <dependency>
@@ -158,7 +158,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.3.0</version>
+                        <version>3.3.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
