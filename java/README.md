@@ -1,6 +1,10 @@
 # watson-data-api-java-client
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.ibm.watson.data/watson-data-api-client.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.ibm.watson.data%22%20AND%20a:%22watson-data-api-client%22) [![javadoc](https://javadoc.io/badge2/com.ibm.watson.data/watson-data-api-client/javadoc.svg)](https://javadoc.io/doc/com.ibm.watson.data/watson-data-api-client)
+[![License](https://img.shields.io/github/license/IBM/watson-data-api-clients)](LICENSE)
+[![Build](https://github.com/IBM/watson-data-api-clients/workflows/Build/badge.svg)](https://github.com/IBM/watson-data-api-clients/actions/workflows/maven-merge.yml?query=workflow%3ABuild)
+[![CodeQL](https://github.com/IBM/watson-data-api-clients/workflows/CodeQL/badge.svg)](https://github.com/IBM/watson-data-api-clients/actions/workflows/codeql-analysis.yml)
+[![Release](https://img.shields.io/maven-central/v/com.ibm.watson.data/watson-data-api-client?label=release)](http://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.ibm.watson.data&a=watson-data-api-client&v=RELEASE&c=jar-with-dependencies)
+[![Development](https://img.shields.io/nexus/s/com.ibm.watson.data/watson-data-api-client?label=development&server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/snapshots/com/ibm/watson/data/watson-data-api-client/)
 
 The Maven project contained in this directory of the repository provides a Java binding for
 the Watson Data REST APIs.
