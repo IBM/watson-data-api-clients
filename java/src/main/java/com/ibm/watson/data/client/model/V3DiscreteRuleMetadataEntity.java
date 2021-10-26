@@ -28,7 +28,7 @@ public class V3DiscreteRuleMetadataEntity {
 
     private List<String> businessTerms = new ArrayList<>();
     private List<String> tags = new ArrayList<>();
-    private List<String> dataClasses = new ArrayList<>();
+    private List<String> classifications = new ArrayList<>();
     private List<V3DiscreteRuleColumnMetadataEntity> columns = new ArrayList<>();
 
     public V3DiscreteRuleMetadataEntity businessTerms(List<String> businessTerms) {
@@ -79,28 +79,28 @@ public class V3DiscreteRuleMetadataEntity {
         this.tags = tags;
     }
 
-    public V3DiscreteRuleMetadataEntity dataClasses(List<String> dataClasses) {
-        this.dataClasses = dataClasses;
+    public V3DiscreteRuleMetadataEntity classifications(List<String> classifications) {
+        this.classifications = classifications;
         return this;
     }
 
-    public V3DiscreteRuleMetadataEntity addDataClassesItem(String dataClassesItem) {
-        this.dataClasses.add(dataClassesItem);
+    public V3DiscreteRuleMetadataEntity addClassificationsItem(String classificationsItem) {
+        this.classifications.add(classificationsItem);
         return this;
     }
 
     /**
-     * data classes metadata
-     * @return dataClasses
+     * classifications metadata
+     * @return classifications
      **/
     @javax.annotation.Nonnull
     @JsonProperty("data_classes")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public List<String> getDataClasses() {
-        return dataClasses;
+    public List<String> getClassifications() {
+        return classifications;
     }
-    public void setDataClasses(List<String> dataClasses) {
-        this.dataClasses = dataClasses;
+    public void setClassifications(List<String> classifications) {
+        this.classifications = classifications;
     }
 
     public V3DiscreteRuleMetadataEntity columns(List<V3DiscreteRuleColumnMetadataEntity> columns) {
@@ -134,13 +134,13 @@ public class V3DiscreteRuleMetadataEntity {
         V3DiscreteRuleMetadataEntity v3DiscreteRuleMetadataEntity = (V3DiscreteRuleMetadataEntity) o;
         return Objects.equals(this.businessTerms, v3DiscreteRuleMetadataEntity.businessTerms) &&
                 Objects.equals(this.tags, v3DiscreteRuleMetadataEntity.tags) &&
-                Objects.equals(this.dataClasses, v3DiscreteRuleMetadataEntity.dataClasses) &&
+                Objects.equals(this.classifications, v3DiscreteRuleMetadataEntity.classifications) &&
                 Objects.equals(this.columns, v3DiscreteRuleMetadataEntity.columns);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(businessTerms, tags, dataClasses, columns);
+        return Objects.hash(businessTerms, tags, classifications, columns);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class V3DiscreteRuleMetadataEntity {
         sb.append("class V3DiscreteRuleMetadataEntity {\n");
         sb.append("    businessTerms: ").append(toIndentedString(businessTerms)).append("\n");
         sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
-        sb.append("    dataClasses: ").append(toIndentedString(dataClasses)).append("\n");
+        sb.append("    classifications: ").append(toIndentedString(classifications)).append("\n");
         sb.append("    columns: ").append(toIndentedString(columns)).append("\n");
         sb.append("}");
         return sb.toString();

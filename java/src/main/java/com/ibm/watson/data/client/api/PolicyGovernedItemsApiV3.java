@@ -139,8 +139,8 @@ public class PolicyGovernedItemsApiV3 {
      * @return V3PolicyItemListResponse
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<V3PolicyItemListResponse> getAllItems(String resourcePrefix,
-                                                      Long since) throws WebClientResponseException {
+    public Mono<V3PolicyItemListResponse> listItems(String resourcePrefix,
+                                                    Long since) throws WebClientResponseException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();

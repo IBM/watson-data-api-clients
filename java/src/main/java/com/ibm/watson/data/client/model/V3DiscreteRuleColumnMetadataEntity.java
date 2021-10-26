@@ -26,10 +26,25 @@ import java.util.List;
  */
 public class V3DiscreteRuleColumnMetadataEntity {
 
+    private String columnName;
     private List<String> businessTerms = new ArrayList<>();
     private List<String> tags = new ArrayList<>();
     private List<String> dataClasses = new ArrayList<>();
-    private String classification;
+    private List<String> classifications;
+
+    /**
+     * column name that was targeted by the discrete rule
+     * @return columnName
+     **/
+    @javax.annotation.Nonnull
+    @JsonProperty("column_name")
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
+    public String getColumnName() {
+        return columnName;
+    }
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
 
     public V3DiscreteRuleColumnMetadataEntity businessTerms(List<String> businessTerms) {
         this.businessTerms = businessTerms;
@@ -103,23 +118,28 @@ public class V3DiscreteRuleColumnMetadataEntity {
         this.dataClasses = dataClasses;
     }
 
-    public V3DiscreteRuleColumnMetadataEntity classification(String classification) {
-        this.classification = classification;
+    public V3DiscreteRuleColumnMetadataEntity classifications(List<String> classifications) {
+        this.classifications = classifications;
+        return this;
+    }
+
+    public V3DiscreteRuleColumnMetadataEntity addClassificationsItem(String classificationsItem) {
+        this.classifications.add(classificationsItem);
         return this;
     }
 
     /**
-     * classification metadata
-     * @return classification
+     * classifications metadata
+     * @return classifications
      **/
     @javax.annotation.Nonnull
-    @JsonProperty("classification")
+    @JsonProperty("classifications")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getClassification() {
-        return classification;
+    public List<String> getClassifications() {
+        return classifications;
     }
-    public void setClassification(String classification) {
-        this.classification = classification;
+    public void setClassifications(List<String> classifications) {
+        this.classifications = classifications;
     }
 
     @Override
@@ -127,25 +147,27 @@ public class V3DiscreteRuleColumnMetadataEntity {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         V3DiscreteRuleColumnMetadataEntity v3DiscreteRuleColumnMetadataEntity = (V3DiscreteRuleColumnMetadataEntity) o;
-        return Objects.equals(this.businessTerms, v3DiscreteRuleColumnMetadataEntity.businessTerms) &&
+        return Objects.equals(this.columnName, v3DiscreteRuleColumnMetadataEntity.columnName) &&
+                Objects.equals(this.businessTerms, v3DiscreteRuleColumnMetadataEntity.businessTerms) &&
                 Objects.equals(this.tags, v3DiscreteRuleColumnMetadataEntity.tags) &&
                 Objects.equals(this.dataClasses, v3DiscreteRuleColumnMetadataEntity.dataClasses) &&
-                Objects.equals(this.classification, v3DiscreteRuleColumnMetadataEntity.classification);
+                Objects.equals(this.classifications, v3DiscreteRuleColumnMetadataEntity.classifications);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(businessTerms, tags, dataClasses, classification);
+        return Objects.hash(columnName, businessTerms, tags, dataClasses, classifications);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class V3DiscreteRuleColumnMetadataEntity {\n");
+        sb.append("    columnName: ").append(toIndentedString(columnName)).append("\n");
         sb.append("    businessTerms: ").append(toIndentedString(businessTerms)).append("\n");
         sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
         sb.append("    dataClasses: ").append(toIndentedString(dataClasses)).append("\n");
-        sb.append("    classification: ").append(toIndentedString(classification)).append("\n");
+        sb.append("    classification: ").append(toIndentedString(classifications)).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -86,7 +86,7 @@ public class PolicyGovernedItemsApiTest extends AbstractExpectations {
 
         String resourcePrefix = null;
         Long since = null;
-        V3PolicyItemListResponse response = api.getAllItems(resourcePrefix, since).block();
+        V3PolicyItemListResponse response = api.listItems(resourcePrefix, since).block();
         // TODO: test validations
 
     }

@@ -27,6 +27,7 @@ import java.util.List;
 public class V3DiscreteRulesResponse {
 
     private List<V3DiscreteRulesResponseResource> resources = new ArrayList<>();
+    private V3DiscreteRuleMetadataEntity metadata;
 
     public V3DiscreteRulesResponse resources(List<V3DiscreteRulesResponseResource> resources) {
         this.resources = resources;
@@ -52,17 +53,31 @@ public class V3DiscreteRulesResponse {
         this.resources = resources;
     }
 
+    /**
+     * metadata of the column that was targeted by the discrete rule
+     * @return metadata
+     */
+    @JsonProperty("metadata")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public V3DiscreteRuleMetadataEntity getMetadata() {
+        return metadata;
+    }
+    public void setMetadata(V3DiscreteRuleMetadataEntity metadata) {
+        this.metadata = metadata;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         V3DiscreteRulesResponse v3DiscreteRulesResponse = (V3DiscreteRulesResponse) o;
-        return Objects.equals(this.resources, v3DiscreteRulesResponse.resources);
+        return Objects.equals(this.resources, v3DiscreteRulesResponse.resources) &&
+                Objects.equals(this.metadata, v3DiscreteRulesResponse.metadata);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resources);
+        return Objects.hash(resources, metadata);
     }
 
     @Override
@@ -70,6 +85,7 @@ public class V3DiscreteRulesResponse {
         StringBuilder sb = new StringBuilder();
         sb.append("class V3DiscreteRulesResponse {\n");
         sb.append("    resources: ").append(toIndentedString(resources)).append("\n");
+        sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
         sb.append("}");
         return sb.toString();
     }
