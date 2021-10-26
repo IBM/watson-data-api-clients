@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
         name: Checkout source
         # Only for a merge
-        if: ${{ github.event_name == 'push' && github.repository == 'ibm/watson-data-api-client' }}
+        if: ${{ github.event_name == 'push' && github.repository == 'IBM/watson-data-api-clients' }}
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -33,9 +33,9 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       # Build and publish - but only for master
       - name: Build with Maven (Publish snapshots to maven central)
-        if: ${{ github.repository == 'ibm/watson-data-api-client' && github.ref == 'refs/heads/master'}}
+        if: ${{ github.repository == 'IBM/watson-data-api-clients' && github.ref == 'refs/heads/master'}}
         # See https://github.com/actions/toolkit/issues/231 requires parms using . to be quoted
-        run: 'cd java && mvn -B -DuseMavenCentral clean deploy'
+        run: 'mvn -B -DuseMavenCentral clean deploy --file java/pom.xml'
         # Needed for publishing -- note we push to a staging area, login to oss.sonatype.org to 
         # verify (close) the repository & release
         env:
@@ -44,6 +44,6 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           # Build and publish - but only for master
       - name: Build with Maven (no snapshots published)
-        if: ${{ github.repository != 'ibm/watson-data-api-client' || github.ref != 'refs/heads/master'}}
-        run: 'cd java && mvn -B clean verify'
+        if: ${{ github.repository != 'IBM/watson-data-api-clients' || github.ref != 'refs/heads/master'}}
+        run: 'mvn -B clean verify --file java/pom.xml'
 
