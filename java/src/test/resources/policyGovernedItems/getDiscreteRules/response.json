@@ -1,0 +1,100 @@
+{
+  "resources": [
+    {
+      "container_id": "6f15bce8-5456-4eac-aa3e-888b7d61600a",
+      "item_id": "dc85a901-c75b-48f4-aaff-2f363e5252fb",
+      "column_name": "Test4",
+      "rule": {
+        "action": {
+          "name": "Transform",
+          "subaction": {
+            "name": "redactColumns",
+            "parameters": [
+              {
+                "name": "column_names",
+                "value": "Test4"
+              }
+            ]
+          }
+        },
+        "governance_type": "Access",
+        "rule_id": "46651415-6436-4f56-9f01-d7144f951b74",
+        "trigger": [
+          [
+            [
+              [
+                "$Asset.CatalogId",
+                "EQUALS",
+                "6f15bce8-5456-4eac-aa3e-888b7d61600a"
+              ],
+              "AND",
+              [
+                "$Asset.Id",
+                "EQUALS",
+                "dc85a901-c75b-48f4-aaff-2f363e5252fb"
+              ]
+            ],
+            "AND",
+            [
+              "$Asset.ColumnName",
+              "EQUALS",
+              "Test4"
+            ]
+          ],
+          "AND",
+          [
+            "TRUE"
+          ]
+        ]
+      }
+    },
+    {
+      "container_id": "6f15bce8-5456-4eac-aa3e-888b7d61600a",
+      "item_id": "dc85a901-c75b-48f4-aaff-2f363e5252fb",
+      "column_name": "Test3",
+      "rule": {
+        "action": {
+          "name": "Transform",
+          "subaction": {
+            "name": "redactColumns",
+            "parameters": [
+              {
+                "name": "column_names",
+                "value": "Test3"
+              }
+            ]
+          }
+        },
+        "governance_type": "Access",
+        "rule_id": "46651415-6436-4f56-9f01-d7144f951b74",
+        "trigger": [
+          [
+            [
+              [
+                "$Asset.CatalogId",
+                "EQUALS",
+                "6f15bce8-5456-4eac-aa3e-888b7d61600a"
+              ],
+              "AND",
+              [
+                "$Asset.Id",
+                "EQUALS",
+                "dc85a901-c75b-48f4-aaff-2f363e5252fb"
+              ]
+            ],
+            "AND",
+            [
+              "$Asset.ColumnName",
+              "EQUALS",
+              " Test3"
+            ]
+          ],
+          "AND",
+          [
+            "TRUE"
+          ]
+        ]
+      }
+    }
+  ]
+}
