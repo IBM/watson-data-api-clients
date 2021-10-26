@@ -1,6 +1,6 @@
 # This workflow will publish an updated snapshot to Maven Central when any change is merged to master
 
-name: "Merge master"
+name: "Build"
 
 # Trigger after code is merged. only on main repo
 # - does not run on modification (may be just text)
