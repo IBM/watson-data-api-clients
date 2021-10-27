@@ -40,6 +40,7 @@ public class DataProfileEntity extends AbstractAssetEntity {
     private List<String> attributeClasses;
     private List<AttributeClassificationOverride> attributeClassificationManual;
     private List<DataClassificationOverride> dataClassificationManual;
+    private List<DataClassAssignment> attributeDataClass;
 
     @JsonIgnore
     public Map<String, DataProfile> getProfiles() { return profiles; }
@@ -63,6 +64,12 @@ public class DataProfileEntity extends AbstractAssetEntity {
     public List<DataClassificationOverride> getDataClassificationManual() { return dataClassificationManual; }
     public void setDataClassificationManual(List<DataClassificationOverride> dataClassificationManual) { this.dataClassificationManual = dataClassificationManual; }
 
+    @javax.annotation.Nullable
+    @JsonProperty("attribute_data_class")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<DataClassAssignment> getAttributeDataClass() { return attributeDataClass; }
+    public void setAttributeDataClass(List<DataClassAssignment> attributeDataClass) { this.attributeDataClass = attributeDataClass; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,12 +78,13 @@ public class DataProfileEntity extends AbstractAssetEntity {
         return Objects.equals(profiles, that.profiles) &&
                 Objects.equals(attributeClasses, that.attributeClasses) &&
                 Objects.equals(attributeClassificationManual, that.attributeClassificationManual) &&
-                Objects.equals(dataClassificationManual, that.dataClassificationManual);
+                Objects.equals(dataClassificationManual, that.dataClassificationManual) &&
+                Objects.equals(attributeDataClass, that.attributeDataClass);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(profiles, attributeClasses, attributeClassificationManual, dataClassificationManual);
+        return Objects.hash(profiles, attributeClasses, attributeClassificationManual, dataClassificationManual, attributeDataClass);
     }
 
     @Override
@@ -87,6 +95,7 @@ public class DataProfileEntity extends AbstractAssetEntity {
         sb.append("    attributeClasses: ").append(toIndentedString(attributeClasses)).append("\n");
         sb.append("    attributeClassificationManual: ").append(toIndentedString(attributeClassificationManual)).append("\n");
         sb.append("    dataClassificationManual: ").append(toIndentedString(dataClassificationManual)).append("\n");
+        sb.append("    attributeDataClass: ").append(toIndentedString(attributeDataClass)).append("\n");
         sb.append("}");
         return sb.toString();
     }

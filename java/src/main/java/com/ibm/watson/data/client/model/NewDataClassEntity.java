@@ -327,6 +327,7 @@ public class NewDataClassEntity extends DataClassEntity {
         return sb.toString();
     }
 
+    @Override
     protected void toString(StringBuilder sb) {
         super.toString(sb);
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
