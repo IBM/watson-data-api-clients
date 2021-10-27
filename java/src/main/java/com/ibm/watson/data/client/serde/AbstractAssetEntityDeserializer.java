@@ -77,6 +77,8 @@ public class AbstractAssetEntityDeserializer extends StdDeserializer<AbstractAss
                             dpe.setAttributeClassificationManual(p.getCodec().readValue(value.traverse(), new TypeReference<List<AttributeClassificationOverride>>() {}));
                         } else if (fieldName.equals("data_classification_manual")) {
                             dpe.setDataClassificationManual(p.getCodec().readValue(value.traverse(), new TypeReference<List<DataClassificationOverride>>() {}));
+                        } else if (fieldName.equals("attribute_data_class")) {
+                            dpe.setAttributeDataClass(p.getCodec().readValue(value.traverse(), new TypeReference<List<DataClassAssignment>>() {}));
                         } else {
                             DataProfile details = p.getCodec().treeToValue(value, DataProfile.class);
                             dpeProfiles.put(fieldName, details);
