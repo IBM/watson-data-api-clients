@@ -117,6 +117,11 @@ public class ErrorModel extends HashMap<String, Object> {
         return sb.toString();
     }
 
+    @Override
+    public Object clone() {
+        return super.clone();
+    }
+
     /**
      * Convert the given object to string with each line indented by 4 spaces
      * (except the first line).

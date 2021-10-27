@@ -64,7 +64,7 @@ public class MetadataUsage {
     public String getLastUpdaterId() { return lastUpdaterId; }
     public void setLastUpdaterId(String lastUpdaterId) { this.lastUpdaterId = lastUpdaterId; }
 
-    public MetadataUsage lastUpdateTime(Long lastAccessTime) {
+    public MetadataUsage lastUpdateTime(Long lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
         return this;
     }

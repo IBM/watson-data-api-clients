@@ -202,6 +202,7 @@ public class WriteableRuleEntity extends WriteableGlossaryObjectEntity {
         return sb.toString();
     }
 
+    @Override
     protected void toString(StringBuilder sb) {
         super.toString(sb);
         sb.append("    policies: ").append(toIndentedString(policies)).append("\n");

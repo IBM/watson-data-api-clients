@@ -45,12 +45,8 @@ public class CategoriesTest extends AbstractExpectations {
         super(CategoriesApiV3.BASE_API, "categories");
     }
 
-    private final Map<String, List<String>> categoryParams = new HashMap<>();
     private final Map<String, List<String>> relationshipParams = new HashMap<>();
     private void setupParams() {
-        List<String> categories = new ArrayList<>();
-        categories.add(NEW_CATEGORY_ID);
-        categoryParams.put("category_id", categories);
         List<String> relationships = new ArrayList<>();
         relationships.add("parent_category");
         relationshipParams.put("type", relationships);
