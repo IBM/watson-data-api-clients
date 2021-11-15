@@ -38,7 +38,7 @@ import java.util.Map;
 public class UserManagementApi {
 
     private ApiClient apiClient;
-    public static final String BASE_API = "/icp4d-api/v1/users";
+    public static final String BASE_API = "/usermgmt/v1";
 
     @Autowired
     public UserManagementApi(ApiClient apiClient) {
@@ -73,11 +73,13 @@ public class UserManagementApi {
 
         ParameterizedTypeReference<CreateUserSuccessResponse> localVarReturnType = new ParameterizedTypeReference<CreateUserSuccessResponse>() {};
         return apiClient.invokeAPI(
-                BASE_API, HttpMethod.POST, pathParams, queryParams, createUserParamsBody,
+                BASE_API + "/user", HttpMethod.POST, pathParams, queryParams, createUserParamsBody,
                 headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 
     }
+
+    // TODO: bulk creation API (requires new response object)
 
     /**
      * Delete a user from the cluster.
@@ -105,7 +107,7 @@ public class UserManagementApi {
 
         ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
-                BASE_API + "/{user_name}", HttpMethod.DELETE, pathParams, queryParams,
+                BASE_API + "/user/{user_name}", HttpMethod.DELETE, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 
@@ -134,7 +136,7 @@ public class UserManagementApi {
 
         ParameterizedTypeReference<GetAllUsersResponse> localVarReturnType = new ParameterizedTypeReference<GetAllUsersResponse>() {};
         return apiClient.invokeAPI(
-                BASE_API, HttpMethod.GET, pathParams, queryParams, null,
+                BASE_API + "/usermgmt/users", HttpMethod.GET, pathParams, queryParams, null,
                 headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 
@@ -147,7 +149,7 @@ public class UserManagementApi {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GetUserResponse> get(@NonNull String userName) throws RestClientException {
+    public Mono<GetUserResponse> getByName(@NonNull String userName) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -166,7 +168,39 @@ public class UserManagementApi {
 
         ParameterizedTypeReference<GetUserResponse> localVarReturnType = new ParameterizedTypeReference<GetUserResponse>() {};
         return apiClient.invokeAPI(
-                BASE_API + "/{user_name}", HttpMethod.GET, pathParams, queryParams,
+                BASE_API + "/user/{user_name}", HttpMethod.GET, pathParams, queryParams,
+                null, headerParams, cookieParams, formParams, localVarAccept,
+                localVarContentType, localVarReturnType);
+
+    }
+
+    /**
+     * Get details about one user.
+     * @param userId The user ID.
+     * @return GetUserResponse
+     * @throws RestClientException if an error occurs while attempting to invoke
+     *     the API
+     */
+    public Mono<GetUserResponse> getById(@NonNull String userId) throws RestClientException {
+
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<>();
+
+        pathParams.put("uid", userId);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
+
+        final String[] localVarAccepts = {"application/json", "*/*"};
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {};
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        ParameterizedTypeReference<GetUserResponse> localVarReturnType = new ParameterizedTypeReference<GetUserResponse>() {};
+        return apiClient.invokeAPI(
+                BASE_API + "/usermgmt/user/{uid}", HttpMethod.GET, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 
@@ -176,12 +210,14 @@ public class UserManagementApi {
      * Update information about one user.
      * @param userName The user name.
      * @param updateUserParamsBody The updated user information.
+     * @param addRoles An optional query parameter that, if true, the userRoles are added to the current roles. Otherwise, the user's roles will be overwritten by userRoles.
      * @return BaseResponse
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
     public Mono<BaseResponse> update(@NonNull String userName,
-                                     UpdateUserParamsBody updateUserParamsBody)
+                                     UpdateUserParamsBody updateUserParamsBody,
+                                     Boolean addRoles)
             throws RestClientException {
 
         // create path and map variables
@@ -194,6 +230,9 @@ public class UserManagementApi {
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
 
+        if (addRoles != null)
+            queryParams.putAll(apiClient.parameterToMultiValueMap(null, "add_roles", addRoles));
+
         final String[] localVarAccepts = {"application/json"};
         final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         final String[] localVarContentTypes = {"application/json"};
@@ -201,7 +240,7 @@ public class UserManagementApi {
 
         ParameterizedTypeReference<BaseResponse> localVarReturnType = new ParameterizedTypeReference<BaseResponse>() {};
         return apiClient.invokeAPI(
-                BASE_API + "/{user_name}", HttpMethod.PUT, pathParams, queryParams,
+                BASE_API + "/user/{user_name}", HttpMethod.PUT, pathParams, queryParams,
                 updateUserParamsBody, headerParams, cookieParams, formParams, localVarAccept,
                 localVarContentType, localVarReturnType);
 

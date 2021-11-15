@@ -42,12 +42,12 @@ public class UserManagementTest extends AbstractExpectations {
 
     @Override
     public void init(MockServerClient client) {
-        setupTest(client, "POST", "", "create");
-        setupTest(client, "DELETE", "/" + NEW_USER_NAME, "delete");
-        setupTest(client, "GET", "/" + NEW_USER_NAME, "get");
-        setupTest(client, "GET", "", "list");
+        setupTest(client, "POST", "/user", "create");
+        setupTest(client, "DELETE", "/user/" + NEW_USER_NAME, "delete");
+        setupTest(client, "GET", "/user/" + NEW_USER_NAME, "get");
+        setupTest(client, "GET", "/usermgmt/users", "list");
         // TODO: endpoint currently broken (results in 500)
-        setupTest(client, "PUT", "/" + NEW_USER_NAME, "update", 500);
+        setupTest(client, "PUT", "/user/" + NEW_USER_NAME, "update", 500);
     }
 
     private static final String createdName = "Jon Smith";
@@ -66,7 +66,7 @@ public class UserManagementTest extends AbstractExpectations {
 
     @Test
     public void testGet() {
-        GetUserResponse user = api.get(MockConstants.NEW_USER_NAME).block();
+        GetUserResponse user = api.getByName(MockConstants.NEW_USER_NAME).block();
         assertNotNull(user);
         assertEquals(user.getMessageCode(), "200");
         assertEquals(user.getMessage(), "User details fetched successfully.");
@@ -107,7 +107,7 @@ public class UserManagementTest extends AbstractExpectations {
     public void testUpdate() {
         UpdateUserParamsBody body = readRequestFromFile("update", new TypeReference<UpdateUserParamsBody>() {});
         // TODO: currently the API throws a 500 internal server error
-        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_USER_NAME, body).block());
+        assertThrows(WebClientResponseException.InternalServerError.class, () -> api.update(MockConstants.NEW_USER_NAME, body, null).block());
         /*BaseResponse response = api.update(MockConstants.NEW_USER_NAME, body).block();
         assertNotNull(response);
         assertEquals(response.getMessageCode(), "200");

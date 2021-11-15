@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,6 +31,8 @@ public class ExtendedUserInfo extends UserInfo {
     private Date firstFailedAttemptTimestamp;
     private BigDecimal recentNumberOfFailedAttempts;
     private Date releaseLockAtTimestamp;
+    private List<GroupInfo> groups;
+    private List<String> groupRoles;
 
     public ExtendedUserInfo firstFailedAttemptTimestamp(Date firstFailedAttemptTimestamp) {
         this.firstFailedAttemptTimestamp = firstFailedAttemptTimestamp;
@@ -78,6 +81,28 @@ public class ExtendedUserInfo extends UserInfo {
     public Date getReleaseLockAtTimestamp() { return releaseLockAtTimestamp; }
     public void setReleaseLockAtTimestamp(Date releaseLockAtTimestamp) { this.releaseLockAtTimestamp = releaseLockAtTimestamp; }
 
+    public ExtendedUserInfo groups(List<GroupInfo> groups) {
+        this.groups = groups;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("groups")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<GroupInfo> getGroups() { return groups; }
+    public void setGroups(List<GroupInfo> groups) { this.groups = groups; }
+
+    public ExtendedUserInfo groupRoles(List<String> groupRoles) {
+        this.groupRoles = groupRoles;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("group_roles")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public List<String> getGroupRoles() { return groupRoles; }
+    public void setGroupRoles(List<String> groupRoles) { this.groupRoles = groupRoles; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
@@ -85,13 +110,15 @@ public class ExtendedUserInfo extends UserInfo {
         ExtendedUserInfo getUserResponseAllOf1UserInfo = (ExtendedUserInfo)o;
         return super.equals(o) && Objects.equals(this.firstFailedAttemptTimestamp, getUserResponseAllOf1UserInfo.firstFailedAttemptTimestamp) &&
                 Objects.equals(this.recentNumberOfFailedAttempts, getUserResponseAllOf1UserInfo.recentNumberOfFailedAttempts) &&
-                Objects.equals(this.releaseLockAtTimestamp, getUserResponseAllOf1UserInfo.releaseLockAtTimestamp);
+                Objects.equals(this.releaseLockAtTimestamp, getUserResponseAllOf1UserInfo.releaseLockAtTimestamp) &&
+                Objects.equals(this.groups, getUserResponseAllOf1UserInfo.groups) &&
+                Objects.equals(this.groupRoles, getUserResponseAllOf1UserInfo.groupRoles);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), firstFailedAttemptTimestamp,
-                recentNumberOfFailedAttempts, releaseLockAtTimestamp);
+                recentNumberOfFailedAttempts, releaseLockAtTimestamp, groups, groupRoles);
     }
 
     @Override
@@ -102,6 +129,8 @@ public class ExtendedUserInfo extends UserInfo {
         sb.append("    firstFailedAttemptTimestamp: ").append(toIndentedString(firstFailedAttemptTimestamp)).append("\n");
         sb.append("    recentNumberOfFailedAttempts: ").append(toIndentedString(recentNumberOfFailedAttempts)).append("\n");
         sb.append("    releaseLockAtTimestamp: ").append(toIndentedString(releaseLockAtTimestamp)).append("\n");
+        sb.append("    groups: ").append(toIndentedString(groups)).append("\n");
+        sb.append("    groupRoles: ").append(toIndentedString(groupRoles)).append("\n");
         sb.append("}");
         return sb.toString();
     }

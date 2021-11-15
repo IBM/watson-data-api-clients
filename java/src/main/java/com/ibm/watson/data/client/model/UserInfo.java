@@ -39,6 +39,9 @@ public class UserInfo {
     private String uid;
     private List<String> userRoles = null;
     private String username;
+    private Boolean internalUser;
+    private Boolean deletable;
+    private Object misc;
 
     public UserInfo approvalStatus(String approvalStatus) {
         this.approvalStatus = approvalStatus;
@@ -236,6 +239,39 @@ public class UserInfo {
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
+    public UserInfo internalUser(Boolean internalUser) {
+        this.internalUser = internalUser;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("internal_user")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getInternalUser() { return internalUser; }
+    public void setInternalUser(Boolean internalUser) { this.internalUser = internalUser; }
+
+    public UserInfo deletable(Boolean deletable) {
+        this.deletable = deletable;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("deletable")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Boolean getDeletable() { return deletable; }
+    public void setDeletable(Boolean deletable) { this.deletable = deletable; }
+
+    public UserInfo misc(Object misc) {
+        this.misc = misc;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("misc")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public Object getMisc() { return misc; }
+    public void setMisc(Object misc) { this.misc = misc; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
@@ -252,7 +288,10 @@ public class UserInfo {
                 Objects.equals(this.role, getAllUsersResponseAllOf1UsersInfoItems.role) &&
                 Objects.equals(this.uid, getAllUsersResponseAllOf1UsersInfoItems.uid) &&
                 Objects.equals(this.userRoles, getAllUsersResponseAllOf1UsersInfoItems.userRoles) &&
-                Objects.equals(this.username, getAllUsersResponseAllOf1UsersInfoItems.username);
+                Objects.equals(this.username, getAllUsersResponseAllOf1UsersInfoItems.username) &&
+                Objects.equals(this.internalUser, getAllUsersResponseAllOf1UsersInfoItems.internalUser) &&
+                Objects.equals(this.deletable, getAllUsersResponseAllOf1UsersInfoItems.deletable) &&
+                Objects.equals(this.misc, getAllUsersResponseAllOf1UsersInfoItems.misc);
     }
 
     @Override
@@ -260,7 +299,7 @@ public class UserInfo {
         return Objects.hash(approvalStatus, authenticator, createdTimestamp,
                 currentAccountStatus, displayName, email,
                 lastModifiedTimestamp, permissions, role, uid,
-                userRoles, username);
+                userRoles, username, internalUser, deletable, misc);
     }
 
     @Override
@@ -285,6 +324,9 @@ public class UserInfo {
         sb.append("    uid: ").append(toIndentedString(uid)).append("\n");
         sb.append("    userRoles: ").append(toIndentedString(userRoles)).append("\n");
         sb.append("    username: ").append(toIndentedString(username)).append("\n");
+        sb.append("    internalUser: ").append(toIndentedString(internalUser)).append("\n");
+        sb.append("    deletable: ").append(toIndentedString(deletable)).append("\n");
+        sb.append("    misc: ").append(toIndentedString(misc)).append("\n");
     }
 
     /**
