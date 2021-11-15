@@ -149,7 +149,7 @@ public class UserManagementApi {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GetUserResponse> getByName(@NonNull String userName) throws RestClientException {
+    public Mono<ExtendedUserInfo> getByName(@NonNull String userName) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -166,7 +166,7 @@ public class UserManagementApi {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<GetUserResponse> localVarReturnType = new ParameterizedTypeReference<GetUserResponse>() {};
+        ParameterizedTypeReference<ExtendedUserInfo> localVarReturnType = new ParameterizedTypeReference<ExtendedUserInfo>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/user/{user_name}", HttpMethod.GET, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
@@ -181,7 +181,7 @@ public class UserManagementApi {
      * @throws RestClientException if an error occurs while attempting to invoke
      *     the API
      */
-    public Mono<GetUserResponse> getById(@NonNull String userId) throws RestClientException {
+    public Mono<ExtendedUserInfo> getById(@NonNull String userId) throws RestClientException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -198,7 +198,7 @@ public class UserManagementApi {
         final String[] localVarContentTypes = {};
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        ParameterizedTypeReference<GetUserResponse> localVarReturnType = new ParameterizedTypeReference<GetUserResponse>() {};
+        ParameterizedTypeReference<ExtendedUserInfo> localVarReturnType = new ParameterizedTypeReference<ExtendedUserInfo>() {};
         return apiClient.invokeAPI(
                 BASE_API + "/usermgmt/user/{uid}", HttpMethod.GET, pathParams, queryParams,
                 null, headerParams, cookieParams, formParams, localVarAccept,
