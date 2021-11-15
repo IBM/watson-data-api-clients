@@ -173,14 +173,16 @@ public class PolicyGovernedItemsApiV3 {
      * @param governanceTypeName the name of the governance type
      * @param itemId item ID
      * @param containerId container ID
-     * @param options options
+     * @param withoutDiscretePredicates whether to include non-contextual predicates (false) or exclude them (true)
+     * @param withMetadata whether to include metadata about the rule (true) or not (false)
      * @return V3DiscreteRulesResponse
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
     public Mono<V3DiscreteRulesResponse> getDiscreteRules(@NonNull String governanceTypeName,
                                                           @NonNull String itemId,
                                                           @NonNull String containerId,
-                                                          @NonNull String options) throws WebClientResponseException {
+                                                          @NonNull boolean withoutDiscretePredicates,
+                                                          @NonNull boolean withMetadata) throws WebClientResponseException {
 
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<>();
@@ -194,7 +196,10 @@ public class PolicyGovernedItemsApiV3 {
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<>();
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "containerId", containerId));
-        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "options", options));
+        if (withoutDiscretePredicates)
+            queryParams.putAll(apiClient.parameterToMultiValueMap(null, "without_discrete_predicates", "true"));
+        if (withMetadata)
+            queryParams.putAll(apiClient.parameterToMultiValueMap(null, "with_metadata", "true"));
 
         final String[] localVarAccepts = {"application/json"};
         final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
