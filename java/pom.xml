@@ -48,15 +48,15 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-web-version>5.3.11</spring-web-version>
+        <spring-web-version>5.3.13</spring-web-version>
         <jackson-version>2.13.0</jackson-version>
         <jackson-databind-version>2.13.0</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.1</jackson-databind-nullable-version>
         <junit-version>4.13.2</junit-version>
         <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <reactor-version>3.4.11</reactor-version>
-        <reactor-netty-version>1.0.12</reactor-netty-version>
-        <netty-version>4.1.69.Final</netty-version>
+        <reactor-version>3.4.12</reactor-version>
+        <reactor-netty-version>1.0.13</reactor-netty-version>
+        <netty-version>4.1.70.Final</netty-version>
         <testng.version>7.4.0</testng.version>
         <mock-server.version>5.11.2</mock-server.version>
     </properties>
