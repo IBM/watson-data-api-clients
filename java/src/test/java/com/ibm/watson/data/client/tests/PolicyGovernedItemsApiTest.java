@@ -49,9 +49,9 @@ public class PolicyGovernedItemsApiTest extends AbstractExpectations {
         List<String> container = new ArrayList<>();
         container.add(CONTAINER_GUID);
         params.put("containerId", container);
-        List<String> options = new ArrayList<>();
-        options.add("test");
-        params.put("options", options);
+        List<String> metadata = new ArrayList<>();
+        metadata.add("true");
+        params.put("with_metadata", metadata);
     }
 
     private static final String governanceType = GovernanceType.ACCESS.getValue();
@@ -94,8 +94,7 @@ public class PolicyGovernedItemsApiTest extends AbstractExpectations {
     @Test
     public void getDiscreteRulesTest()  {
 
-        String options = "test";
-        V3DiscreteRulesResponse response = api.getDiscreteRules(governanceType, GOVN_ITEM_GUID, CONTAINER_GUID, options).block();
+        V3DiscreteRulesResponse response = api.getDiscreteRules(governanceType, GOVN_ITEM_GUID, CONTAINER_GUID, false, true).block();
 
         assertNotNull(response);
         List<V3DiscreteRulesResponseResource> rules = response.getResources();
