@@ -29,7 +29,7 @@ public class CreateUserParamsBody {
 
     private String displayName;
     private String email;
-    private String userName;
+    private String username;
     private List<String> userRoles = new ArrayList<>();
 
     public CreateUserParamsBody displayName(String displayName) {
@@ -60,19 +60,19 @@ public class CreateUserParamsBody {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public CreateUserParamsBody userName(String userName) {
-        this.userName = userName;
+    public CreateUserParamsBody username(String username) {
+        this.username = username;
         return this;
     }
 
     /**
      * The user name.
-     * @return userName
+     * @return username
      **/
-    @JsonProperty("user_name")
+    @JsonProperty("username")
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
-    public String getUserName() { return userName; }
-    public void setUserName(String userName) { this.userName = userName; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
     public CreateUserParamsBody userRoles(List<String> userRoles) {
         this.userRoles = userRoles;
@@ -100,13 +100,13 @@ public class CreateUserParamsBody {
         CreateUserParamsBody createUserParamsBody = (CreateUserParamsBody)o;
         return Objects.equals(this.displayName, createUserParamsBody.displayName) &&
                 Objects.equals(this.email, createUserParamsBody.email) &&
-                Objects.equals(this.userName, createUserParamsBody.userName) &&
+                Objects.equals(this.username, createUserParamsBody.username) &&
                 Objects.equals(this.userRoles, createUserParamsBody.userRoles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(displayName, email, userName, userRoles);
+        return Objects.hash(displayName, email, username, userRoles);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class CreateUserParamsBody {
         sb.append("class CreateUserParamsBody {\n");
         sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    userName: ").append(toIndentedString(userName)).append("\n");
+        sb.append("    username: ").append(toIndentedString(username)).append("\n");
         sb.append("    userRoles: ").append(toIndentedString(userRoles)).append("\n");
         sb.append("}");
         return sb.toString();

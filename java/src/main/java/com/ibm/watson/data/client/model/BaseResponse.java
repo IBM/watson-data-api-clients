@@ -27,6 +27,7 @@ public class BaseResponse {
 
     private String messageCode;
     private String message;
+    private String uid;
 
     public BaseResponse messageCode(String messageCode) {
         this.messageCode = messageCode;
@@ -58,30 +59,43 @@ public class BaseResponse {
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
+    public BaseResponse uid(String uid) {
+        this.uid = uid;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("uid")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getUid() { return uid; }
+    public void setUid(String uid) { this.uid = uid; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         BaseResponse baseError = (BaseResponse)o;
         return Objects.equals(this.messageCode, baseError.messageCode) &&
-                Objects.equals(this.message, baseError.message);
+                Objects.equals(this.message, baseError.message) &&
+                Objects.equals(this.uid, baseError.uid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageCode, message);
+        return Objects.hash(messageCode, message, uid);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class BaseError {\n");
+        sb.append("class BaseResponse {\n");
         toString(sb);
         sb.append("}");
         return sb.toString();
     }
 
     protected void toString(StringBuilder sb) {
+        sb.append("    uid: ").append(toIndentedString(uid)).append("\n");
         sb.append("    messageCode: ").append(toIndentedString(messageCode)).append("\n");
         sb.append("    message: ").append(toIndentedString(message)).append("\n");
     }

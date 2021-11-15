@@ -16,7 +16,6 @@
 package com.ibm.watson.data.client.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.ibm.watson.data.client.model.enums.ApprovalStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,25 +26,32 @@ import java.util.Objects;
  */
 public class UpdateUserParamsBody {
 
-    private ApprovalStatus approvalStatus;
+    private String username;
+    private String password;
     private String displayName;
-    private String email;
     private List<String> userRoles = null;
 
-    public UpdateUserParamsBody approvalStatus(ApprovalStatus approvalStatus) {
-        this.approvalStatus = approvalStatus;
+    public UpdateUserParamsBody username(String username) {
+        this.username = username;
         return this;
     }
 
-    /**
-     * The status of the user's access to the web client.
-     * @return approvalStatus
-     **/
     @javax.annotation.Nullable
-    @JsonProperty("approval_status")
+    @JsonProperty("username")
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public ApprovalStatus getApprovalStatus() { return approvalStatus; }
-    public void setApprovalStatus(ApprovalStatus approvalStatus) { this.approvalStatus = approvalStatus; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public UpdateUserParamsBody password(String password) {
+        this.password = password;
+        return this;
+    }
+
+    @javax.annotation.Nullable
+    @JsonProperty("password")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
     public UpdateUserParamsBody displayName(String displayName) {
         this.displayName = displayName;
@@ -61,21 +67,6 @@ public class UpdateUserParamsBody {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public String getDisplayName() { return displayName; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
-
-    public UpdateUserParamsBody email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    /**
-     * The user's email address.
-     * @return email
-     **/
-    @javax.annotation.Nullable
-    @JsonProperty("email")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
 
     public UpdateUserParamsBody userRoles(List<String> userRoles) {
         this.userRoles = userRoles;
@@ -105,24 +96,24 @@ public class UpdateUserParamsBody {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         UpdateUserParamsBody updateUserParamsBody = (UpdateUserParamsBody)o;
-        return Objects.equals(this.approvalStatus, updateUserParamsBody.approvalStatus) &&
+        return Objects.equals(this.username, updateUserParamsBody.username) &&
+                Objects.equals(this.password, updateUserParamsBody.password) &&
                 Objects.equals(this.displayName, updateUserParamsBody.displayName) &&
-                Objects.equals(this.email, updateUserParamsBody.email) &&
                 Objects.equals(this.userRoles, updateUserParamsBody.userRoles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(approvalStatus, displayName, email, userRoles);
+        return Objects.hash(username, password, displayName, userRoles);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UpdateUserParamsBody {\n");
-        sb.append("    approvalStatus: ").append(toIndentedString(approvalStatus)).append("\n");
+        sb.append("    username: ").append(toIndentedString(username)).append("\n");
+        sb.append("    password: ").append(toIndentedString(password)).append("\n");
         sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    userRoles: ").append(toIndentedString(userRoles)).append("\n");
         sb.append("}");
         return sb.toString();
