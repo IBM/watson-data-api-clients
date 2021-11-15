@@ -66,11 +66,9 @@ public class UserManagementTest extends AbstractExpectations {
 
     @Test
     public void testGet() {
-        GetUserResponse user = api.getByName(MockConstants.NEW_USER_NAME).block();
+        ExtendedUserInfo user = api.getByName(MockConstants.NEW_USER_NAME).block();
         assertNotNull(user);
-        assertEquals(user.getMessageCode(), "200");
-        assertEquals(user.getMessage(), "User details fetched successfully.");
-        validateUser(user.getUserInfo());
+        validateUser(user);
     }
 
     private void validateUser(UserInfo userInfo) {
