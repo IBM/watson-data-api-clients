@@ -48,7 +48,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-web-version>5.3.13</spring-web-version>
+        <spring-web-version>6.0.4</spring-web-version>
         <jackson-version>2.13.0</jackson-version>
         <jackson-databind-version>2.13.0</jackson-databind-version>
         <jackson-databind-nullable-version>0.2.2</jackson-databind-nullable-version>
